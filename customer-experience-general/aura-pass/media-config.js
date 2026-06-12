@@ -49,7 +49,7 @@ window.AURA_MEDIA = {
   /*  9 · Customer 5 — H&M / shopping bag            (✓ opportunity) */
   see3: { type:"lottie", src:"lottie/HM.json" },
   /* 10 · Customer 6 — already has Aura / app phone  (✓ opportunity) */
-  see4: { type:"png", src:"lottie/Haveaura.png" },
+  see4: { type:"png", src:"images/Haveaura.png" },
 
   /* ---------- OBJECTION INTRO ---------- */
   /* 11 · Handling-objections intro   (square, ~344×344) */
