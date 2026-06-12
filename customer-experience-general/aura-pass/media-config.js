@@ -31,11 +31,11 @@ window.AURA_MEDIA = {
 
   /* ---------- INFO SCREEN ---------- */
   /*  3 · Info hero banner       (wide,  ~840×344) */
-  info:      { type:"placeholder", src:"images/info.png" },
+  info:      { type:"png", src:"images/INFOSCREEN.png" },
 
   /* ---------- SPOT INTRO ---------- */
   /*  4 · Spot-the-opportunity intro  (square, ~344×344) */
-  spotIntro: { type:"placeholder", src:"images/spot-intro.png" },
+  spotIntro: { type:"lottie", src:"lottie/Spot.json" },
 
   /* ---------- SPOT: 6 CUSTOMER CARDS (square, ~344×344) ---------- */
   /*  5 · Customer 1 — coffee / Starbucks            (✓ opportunity) */
