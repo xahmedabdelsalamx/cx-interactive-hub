@@ -489,7 +489,7 @@ const CONFIG = {
     {en:"Victoria's Secret",ar:"فيكتوريا سيكريت"},{en:"H&M",ar:"إتش آند إم"},
     {en:"Bath & Body Works",ar:"باث آند بودي ووركس"},{en:"Primark",ar:"برايمارك"},
     {en:"Charlotte Tilbury",ar:"شارلوت تيلبري"},{en:"& Other Stories",ar:"آند أذر ستوريز"},
-    {en:"alo",ar:"آلو"},{en:"Boots",ar:"بوتس"},{en:"Claire's",ar:"كليرز"},{en:"COS",ar:"كوس"},
+    {en:"Boots",ar:"بوتس"},{en:"Claire's",ar:"كليرز"},{en:"COS",ar:"كوس"},
     {en:"Disney Store",ar:"متجر ديزني"},{en:"Jo Malone London",ar:"جو مالون لندن"},
     {en:"MAC",ar:"ماك"},{en:"Mothercare",ar:"ماذركير"},{en:"MUJI",ar:"موجي"},
     {en:"New Balance",ar:"نيو بالانس"},{en:"Next",ar:"نكست"},
@@ -511,7 +511,7 @@ const CONFIG = {
      a:{en:"Customers in the UAE who love to <b>shop, dine, and earn</b> through Aura.",
         ar:"عملاء في الإمارات يحبون <b>التسوّق وتناول الطعام والكسب</b> عبر Aura."}},
     {q:{en:"WHEN?",ar:"متى؟"},
-     a:{en:"<b>15 June – 30 July</b>.",ar:"<b>15 يونيو – 30 يوليو</b>."}},
+     a:{en:"Sign up <b>17 June – 5 July 2026</b>. Your pass then stays valid until <b>December 2026</b>.",ar:"سجّل <b>من 17 يونيو إلى 5 يوليو 2026</b>. وتبقى بطاقتك صالحة حتى <b>ديسمبر 2026</b>."}},
     {q:{en:"WHERE?",ar:"أين؟"},
      a:{en:"Across participating Alshaya brands* and through the <b>Aura App</b>.",
         ar:"عبر علامات الشايع المشاركة* ومن خلال <b>تطبيق Aura</b>."}},
@@ -522,27 +522,27 @@ const CONFIG = {
 
   /* ---- STAGE 1: SPOT (6 scenarios) ---- opp:true = Opportunity ---- */
   spot: [
-    {emo:"☕", media:"see1", opp:true,
+    {emo:"☕", media:"see1", mediaExp:"see1d", opp:true,
      cust:{en:'"I just grabbed a coffee at Starbucks."',ar:'"أخذت للتو قهوة من ستاربكس."'},
      role:{en:"Then this might be worth a look. If Starbucks is part of your usual routine, the pass can start paying for itself pretty quickly.",
            ar:"إذًا قد يستحق هذا نظرة. إذا كانت ستاربكس جزءًا من روتينك اليومي، فقد تبدأ البطاقة بتغطية ثمنها بسرعة."}},
-    {emo:"🏷️", media:"see2", opp:true,
+    {emo:"🏷️", media:"see2", mediaExp:"see2d", opp:true,
      cust:{en:'"Do you have any offers on at the moment?"',ar:'"هل لديكم أي عروض حالياً؟"'},
      role:{en:"Yes — we have an exclusive limited-time offer. Get Aura Pass and unlock 30% off full-price items. If you shop with us often, it gives you much better value than a one-time offer.",
            ar:"نعم — لدينا عرض حصري لفترة محدودة. احصل على Aura Pass واحصل على خصم 30% على المنتجات بالسعر الكامل. إذا كنت تتسوّق معنا كثيرًا، فهو يمنحك قيمة أفضل بكثير من عرض لمرة واحدة."}},
-    {emo:"🛍️", media:"see3", opp:true,
+    {emo:"🛍️", media:"see3", mediaExp:"see3d", opp:true,
      cust:{en:'"I was just in H&M."',ar:'"كنت للتو في إتش آند إم."'},
      role:{en:"That's exactly where the value adds up. The more you shop across Alshaya brands, the faster you benefit from the pass.",
            ar:"هذا بالضبط حيث تتراكم القيمة. كلما تسوّقت أكثر عبر علامات الشايع، استفدت من البطاقة أسرع."}},
-    {emo:"📱", media:"see4", opp:true,
+    {emo:"📱", media:"see4", mediaExp:"see4d", opp:true,
      cust:{en:'"I already have Aura."',ar:'"لديّ Aura بالفعل."'},
      role:{en:"Perfect — you're already set up. The pass can be added directly through your Aura app in just a few taps.",
            ar:"ممتاز — أنت جاهز بالفعل. يمكن إضافة البطاقة مباشرة عبر تطبيق Aura في بضع نقرات فقط."}},
-    {emo:"⏱️", media:"see5", opp:false,
+    {emo:"⏱️", media:"see5", mediaExp:"see5d", opp:false,
      cust:{en:'"Sorry, I\'m in a rush, just grabbing one thing."',ar:'"عذراً، أنا مستعجل، سآخذ شيئاً واحداً فقط."'},
      role:{en:"No problem at all — let's get you sorted today. You can also check Aura Pass later in your Aura app when you have more time.",
            ar:"لا مشكلة على الإطلاق — دعنا ننهي طلبك اليوم. يمكنك أيضًا الاطلاع على Aura Pass لاحقًا في تطبيق Aura عندما يتوفر لديك وقت."}},
-    {emo:"😠", media:"see6", opp:false,
+    {emo:"😠", media:"see6", mediaExp:"see6d", opp:false,
      cust:{en:'"I\'m here to return this and I\'m not happy about it."',ar:'"جئت لإرجاع هذا ولست راضياً."'},
      role:{en:"Let me help resolve that for you first.",
            ar:"دعني أساعدك في حل ذلك أولاً."}}
@@ -577,8 +577,8 @@ const CONFIG = {
     {media:"obj4",
      obj:{en:'"How long does it last?"',ar:'"كم تدوم؟"'},
      opts:[
-       {en:"It's valid until December 2026 — plenty of time to enjoy the savings.",
-        ar:"صالحة حتى ديسمبر 2026 — وقت وفير للاستمتاع بالتوفير."},
+       {en:"You can sign up until 5 July 2026, and once you have it the pass stays valid until December 2026 — plenty of time to enjoy the savings.",
+        ar:"يمكنك التسجيل حتى 5 يوليو 2026، وبمجرد حصولك عليها تبقى البطاقة صالحة حتى ديسمبر 2026 — وقت وفير للاستمتاع بالتوفير."},
        {en:"About a month, I think.",ar:"حوالي شهر، على ما أظن."},
        {en:"Forever.",ar:"للأبد."}],
      correct:0}
@@ -615,6 +615,12 @@ const MEDIA = {
   see4:{type:"placeholder", src:"images/spot4.png", size:"md", label:{en:"Aura app phone · 344×344",ar:"تطبيق Aura · 344×344"}},
   see5:{type:"placeholder", src:"images/spot5.png", size:"md", label:{en:"In a rush / clock · 344×344",ar:"مستعجل / ساعة · 344×344"}},
   see6:{type:"placeholder", src:"images/spot6.png", size:"md", label:{en:"Return / unhappy · 344×344",ar:"إرجاع / غير راضٍ · 344×344"}},
+  see1d:{type:"placeholder", src:"images/spot1-exp.png", size:"md", label:{en:"Coffee — explanation · 344×344",ar:"قهوة — الشرح · 344×344"}},
+  see2d:{type:"placeholder", src:"images/spot2-exp.png", size:"md", label:{en:"Offers — explanation · 344×344",ar:"عروض — الشرح · 344×344"}},
+  see3d:{type:"placeholder", src:"images/spot3-exp.png", size:"md", label:{en:"H&M — explanation · 344×344",ar:"إتش آند إم — الشرح · 344×344"}},
+  see4d:{type:"placeholder", src:"images/spot4-exp.png", size:"md", label:{en:"Already Aura — explanation · 344×344",ar:"لديه Aura — الشرح · 344×344"}},
+  see5d:{type:"placeholder", src:"images/spot5-exp.png", size:"md", label:{en:"In a rush — explanation · 344×344",ar:"مستعجل — الشرح · 344×344"}},
+  see6d:{type:"placeholder", src:"images/spot6-exp.png", size:"md", label:{en:"Return — explanation · 344×344",ar:"إرجاع — الشرح · 344×344"}},
   objIntro:{type:"placeholder", src:"images/obj-intro.png", size:"md", label:{en:"Objections intro · 344×344",ar:"مقدمة الاعتراضات · 344×344"}},
   obj1:{type:"placeholder", src:"images/obj1.png", size:"sm", label:{en:"Price / 199 · 256×256",ar:"السعر / 199 · 256×256"}},
   obj2:{type:"placeholder", src:"images/obj2.png", size:"sm", label:{en:"Starbucks cup · 256×256",ar:"كوب ستاربكس · 256×256"}},
@@ -1049,11 +1055,13 @@ function showSpotExplanation(correct){
   const it=CONFIG.spot[seeIdx];
   const last=(seeIdx>=CONFIG.spot.length-1);
   const okClass = it.opp?"ok":"no";
+  const em=MEDIA[it.mediaExp];
+  const expKey=(em && em.type && em.type!=="placeholder") ? it.mediaExp : it.media;  // use separate image once set, else reuse question image
   const body=document.getElementById("stageBody");
   body.innerHTML = `
     <div class="stagetag">${T("tagSpot")}</div>
     <div class="swipe-counter">${T("spotCount")(seeIdx+1)}</div>
-    ${media(it.media)}
+    ${media(expKey)}
     <div class="exp-card ${okClass}">
       <span class="exp-verdict ${okClass}">${it.opp?T("verOk"):T("verNo")}</span>
       <div class="exp-role" style="color:${correct?'var(--good)':'var(--bad)'}">${correct?T("youOk"):T("youNo")}</div>
