@@ -59,7 +59,7 @@ window.AURA_MEDIA = {
   /* 12 · Objection 1 — price / "AED 199"        */
   obj1: { type:"lottie", src:"lottie/nopay.json" },
   /* 13 · Objection 2 — Starbucks cup            */
-  obj2: { type:"placeholder", src:"lottie/Starbuckswrk.json" },
+  obj2: { type:"lottie", src:"lottie/Starbuckswrk.json" },
   /* 14 · Objection 3 — download the app         */
   obj3: { type:"png", src:"images/noaurapp.png" },
   /* 15 · Objection 4 — calendar / valid 2026    */
