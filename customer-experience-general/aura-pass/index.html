@@ -914,9 +914,7 @@ async function beginFlow(){
   player.name=nm.value.trim();
   player.brand = br.value==="Other" ? ("Other: "+ot.value.trim()) : br.value;
 
-  let attempts=0, best=null, known=false;
-  const lh=getLocalHist(player.empId);
-  if(lh){ attempts=lh.attempts; best=lh.best; known=true; }
+  let attempts=0, best=null, known=false, backendOk=false;
 
   if(CONFIG.scriptUrl){
     showLoad(LANG==="en"?"Checking…":"جارٍ التحقق…");
@@ -925,11 +923,17 @@ async function beginFlow(){
       const d = await r.json();
       hideLoad();
       if(d && typeof d.attempts==="number"){
-        attempts = Math.max(attempts, d.attempts);
-        if(typeof d.bestScore==="number") best = (best==null) ? d.bestScore : Math.max(best, d.bestScore);
-        known = true;
+        attempts = d.attempts;                                   // Sheet is the source of truth
+        best = (typeof d.bestScore==="number") ? d.bestScore : null;
+        known = true; backendOk = true;
+        syncLocalHist(player.empId, attempts, best);             // keep device copy in step (so deletes reset)
       }
     }catch(e){ hideLoad(); }
+  }
+
+  if(!backendOk){                                                // only fall back to device when Sheet is unreachable
+    const lh=getLocalHist(player.empId);
+    if(lh){ attempts=lh.attempts; best=lh.best; known=true; }
   }
 
   attemptNo = attempts + 1;
@@ -1311,6 +1315,13 @@ function setLocalHist(emp, attempts, best){
     const cur=all[k]||{attempts:0,best:null};
     all[k]={ attempts:Math.max(cur.attempts, attempts),
              best:(best==null)?cur.best:(cur.best==null?best:Math.max(cur.best,best)) };
+    localStorage.setItem("aura_hist", JSON.stringify(all));
+  }catch(e){}
+}
+function syncLocalHist(emp, attempts, best){   // overwrite to match the Sheet exactly (resets when a row is deleted)
+  try{
+    const all=JSON.parse(localStorage.getItem("aura_hist")||"{}");
+    all[emp+"|"+localMonth()]={ attempts:attempts, best:best };
     localStorage.setItem("aura_hist", JSON.stringify(all));
   }catch(e){}
 }
