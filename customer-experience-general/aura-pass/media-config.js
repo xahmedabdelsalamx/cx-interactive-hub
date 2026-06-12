@@ -39,31 +39,31 @@ window.AURA_MEDIA = {
 
   /* ---------- SPOT: 6 CUSTOMER CARDS (square, ~344×344) ---------- */
   /*  5 · Customer 1 — coffee / Starbucks            (✓ opportunity) */
-  see1: { type:"lottie", src:"images/Starbucks.json" },
+  see1: { type:"lottie", src:"lottie/Starbucks.json" },
   /*  6 · Customer 2 — "in a rush" / clock           (✕ not yet)     */
-  see5: { type:"lottie", src:"images/rush.json" },
+  see5: { type:"lottie", src:"lottie/rush.json" },
   /*  7 · Customer 3 — any offers? / offer tag       (✓ opportunity) */
-  see2: { type:"lottie", src:"images/offer.json" },
+  see2: { type:"lottie", src:"lottie/offer.json" },
   /*  8 · Customer 4 — return / unhappy              (✕ not yet)     */
-  see6: { type:"lottie", src:"images/return.json" },
+  see6: { type:"lottie", src:"lottie/return.json" },
   /*  9 · Customer 5 — H&M / shopping bag            (✓ opportunity) */
-  see3: { type:"lottie", src:"images/HM.json" },
+  see3: { type:"lottie", src:"lottie/HM.json" },
   /* 10 · Customer 6 — already has Aura / app phone  (✓ opportunity) */
-  see4: { type:"png", src:"images/Haveaura.png" },
+  see4: { type:"png", src:"lottie/Haveaura.png" },
 
   /* ---------- OBJECTION INTRO ---------- */
   /* 11 · Handling-objections intro   (square, ~344×344) */
-  objIntro: { type:"lottie", src:"images/Objection.json" },
+  objIntro: { type:"lottie", src:"lottie/Objection.json" },
 
   /* ---------- OBJECTION: 4 QUESTIONS (square, ~256×256) ---------- */
   /* 12 · Objection 1 — price / "AED 199"        */
-  obj1: { type:"lottie", src:"images/nopay.json" },
+  obj1: { type:"lottie", src:"lottie/nopay.json" },
   /* 13 · Objection 2 — Starbucks cup            */
-  obj2: { type:"placeholder", src:"images/Starbuckswrk.json" },
+  obj2: { type:"placeholder", src:"lottie/Starbuckswrk.json" },
   /* 14 · Objection 3 — download the app         */
   obj3: { type:"png", src:"images/noaurapp.png" },
   /* 15 · Objection 4 — calendar / valid 2026    */
-  obj4: { type:"lottie", src:"images/calendar.json" },
+  obj4: { type:"lottie", src:"lottie/calendar.json" },
 
   /* ---------- REARRANGE: 4 APP SCREENS (portrait 9:16, e.g. 360×640) ---------- */
   /* 16 · Step 1 — Download the AURA App                     */
@@ -77,6 +77,6 @@ window.AURA_MEDIA = {
 
   /* ---------- BONUS ---------- */
   /* 20 · Savings slider — piggy / savings   (square, ~344×344) */
-  bonus: { type:"lottie", src:"images/savemoney.json" }
+  bonus: { type:"lottie", src:"lottie/savemoney.json" }
 
 };
