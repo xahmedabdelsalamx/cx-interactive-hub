@@ -221,6 +221,9 @@ html[dir=rtl] .arr-pos{transform:translateX(50%);}
 .info-q{font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--brand);margin-bottom:4px;}
 .info-a{font-size:14px;font-weight:600;color:var(--ink);line-height:1.5;}
 .info-a b{color:var(--brand-3);}
+.info-card.exc{background:#fff7ec;border-color:#f6d8a8;border-inline-start-color:#e8920c;}
+.info-card.exc .info-q{color:#c2740a;}
+.info-card.exc .info-a{font-weight:700;}
 
 /* ===== result ===== */
 .result-emo{font-size:64px;text-align:center;margin:4px 0;animation:bounce 1.4s ease infinite;}
@@ -517,7 +520,10 @@ const CONFIG = {
         ar:"عبر علامات الشايع المشاركة* ومن خلال <b>تطبيق Aura</b>."}},
     {q:{en:"HOW?",ar:"كيف؟"},
      a:{en:"Download the Aura App and <b>unlock your Aura Pass</b>.",
-        ar:"حمّل تطبيق Aura و<b>فعّل Aura Pass</b>."}}
+        ar:"حمّل تطبيق Aura و<b>فعّل Aura Pass</b>."}},
+    {exc:true, q:{en:"KEY EXCEPTIONS *",ar:"استثناءات مهمة *"},
+     a:{en:"• Starbucks — beverages only<br>• Primark — 2× Aura Points (not 30% off)<br>• Ulta — excludes electronics & luxury items<br>• Boots — excludes medicines<br>• H&M & NEXT — in-store only (not online)<br>• alo — not included",
+        ar:"• ستاربكس — المشروبات فقط<br>• برايمارك — ضعف نقاط Aura (وليس خصم 30%)<br>• ألتا — باستثناء الإلكترونيات والمنتجات الفاخرة<br>• بوتس — باستثناء الأدوية<br>• إتش آند إم ونكست — داخل المتجر فقط (وليس أونلاين)<br>• alo — غير مشمولة"}}
   ],
 
   /* ---- STAGE 1: SPOT (6 scenarios) ---- opp:true = Opportunity ---- */
@@ -970,7 +976,7 @@ function goPromo(){ setPromo(); showScreen("screen-promo"); }
 function setInfo(){
   document.getElementById("infoMedia").innerHTML = media("info");
   document.getElementById("infoGrid").innerHTML = CONFIG.info.map(i=>
-    `<div class="info-card"><div class="info-q">${i.q[LANG]}</div><div class="info-a">${i.a[LANG]}</div></div>`).join("");
+    `<div class="info-card${i.exc?' exc':''}"><div class="info-q">${i.q[LANG]}</div><div class="info-a">${i.a[LANG]}</div></div>`).join("");
 }
 function goInfo(){ setInfo(); showScreen("screen-info"); }
 
