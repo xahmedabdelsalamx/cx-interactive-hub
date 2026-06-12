@@ -9,6 +9,8 @@
 
      • A picture:     type:"png",    src:"images/yourfile.png"
      • An animation:  type:"lottie", src:"https://lottie.host/xxxx.json"
+                       (online) — or download the .json into the "lottie"
+                       folder and use src:"lottie/yourfile.json" for OFFLINE.
      • Nothing yet:   leave it as type:"placeholder" (shows a labelled box)
 
    PNG files go in an "images" folder beside the HTML.
@@ -29,11 +31,11 @@ window.AURA_MEDIA = {
 
   /* ---------- INFO SCREEN ---------- */
   /*  3 · Info hero banner       (wide,  ~840×344) */
-  info:      { type:"png", src:"images/INFOSCREEN.png" },
+  info:      { type:"placeholder", src:"images/info.png" },
 
   /* ---------- SPOT INTRO ---------- */
   /*  4 · Spot-the-opportunity intro  (square, ~344×344) */
-  spotIntro: { type:"lottie", src:"https://lottie.host/e51a5b10-c3ce-4798-80b5-2cd2795f2c4d/8KUEsOVRnH.json" },
+  spotIntro: { type:"placeholder", src:"images/spot-intro.png" },
 
   /* ---------- SPOT: 6 CUSTOMER CARDS (square, ~344×344) ---------- */
   /*  5 · Customer 1 — coffee / Starbucks            (✓ opportunity) */
