@@ -33,7 +33,7 @@ window.AURA_MEDIA = {
 
   /* ---------- SPOT INTRO ---------- */
   /*  4 · Spot-the-opportunity intro  (square, ~344×344) */
-  spotIntro: { type:"placeholder", src:"images/spot-intro.png" },
+  spotIntro: { type:"lottie", src:"https://lottie.host/e51a5b10-c3ce-4798-80b5-2cd2795f2c4d/8KUEsOVRnH.json" },
 
   /* ---------- SPOT: 6 CUSTOMER CARDS (square, ~344×344) ---------- */
   /*  5 · Customer 1 — coffee / Starbucks            (✓ opportunity) */
