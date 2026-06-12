@@ -464,6 +464,8 @@ html[dir=rtl] .arr-pos{transform:translateX(50%);}
 
 <div class="toast" id="toast"></div>
 
+<!-- Your media links live in media-config.js (edit that file, not the code). -->
+<script src="media-config.js"></script>
 <script>
 /* ============================================================
    AURA PASS CHALLENGE — engine
@@ -624,6 +626,19 @@ const MEDIA = {
   arrange4:{type:"placeholder", src:"images/step4.png", size:"thumb", label:{en:"Screen 4",ar:"شاشة 4"}},
   bonus:{type:"placeholder", src:"images/bonus.png", size:"md", label:{en:"Savings / piggy · 344×344",ar:"توفير / حصّالة · 344×344"}}
 };
+
+/* ----- OPTIONAL external override -----------------------------------
+   If a media-config.js file is present (loaded before this script) and
+   defines window.AURA_MEDIA, its entries are merged in here. That lets you
+   keep ALL your image / Lottie links in that one small file, so this code
+   can be regenerated without ever re-linking your media. -------------- */
+try{
+  if(window.AURA_MEDIA){
+    for(const k in window.AURA_MEDIA){
+      MEDIA[k] = Object.assign({}, MEDIA[k]||{}, window.AURA_MEDIA[k]);
+    }
+  }
+}catch(e){}
 
 /* media renderer — returns an animated slot.
    PNG falls back to the labelled placeholder if the file is missing. */
