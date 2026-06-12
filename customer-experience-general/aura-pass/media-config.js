@@ -55,12 +55,12 @@ window.AURA_MEDIA = {
      Shown on the ANSWER card after each customer line, so you can use a DIFFERENT
      image here than the question card. Leave any as "placeholder" to simply reuse
      that question's image. Listed in the same order as the cards above. */
-  see1d: { type:"placeholder", src:"images/spot1-exp.png" },   /*  5 · Coffee — explanation        */
-  see5d: { type:"placeholder", src:"images/spot5-exp.png" },   /*  6 · In a rush — explanation     */
-  see2d: { type:"placeholder", src:"images/spot2-exp.png" },   /*  7 · Offers — explanation        */
-  see6d: { type:"placeholder", src:"images/spot6-exp.png" },   /*  8 · Return — explanation        */
-  see3d: { type:"placeholder", src:"images/spot3-exp.png" },   /*  9 · H&M — explanation           */
-  see4d: { type:"placeholder", src:"images/spot4-exp.png" },   /* 10 · Already has Aura — explanation */
+  see1d: { type:"lottie", src:"lottie/Colleague.json" },   /*  5 · Coffee — explanation        */
+  see5d: { type:"lottie", src:"lottie/Colleague.json" },   /*  6 · In a rush — explanation     */
+  see2d: { type:"lottie", src:"lottie/Colleague.json" },   /*  7 · Offers — explanation        */
+  see6d: { type:"lottie", src:"lottie/Colleague.json" },   /*  8 · Return — explanation        */
+  see3d: { type:"lottie", src:"lottie/Colleague.json" },   /*  9 · H&M — explanation           */
+  see4d: { type:"lottie", src:"lottie/Colleague.json" },   /* 10 · Already has Aura — explanation */
 
   /* ---------- OBJECTION INTRO ---------- */
   /* 11 · Handling-objections intro   (square, ~344×344) */
