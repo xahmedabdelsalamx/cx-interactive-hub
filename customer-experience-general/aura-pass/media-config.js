@@ -29,7 +29,7 @@ window.AURA_MEDIA = {
 
   /* ---------- INFO SCREEN ---------- */
   /*  3 · Info hero banner       (wide,  ~840×344) */
-  info:      { type:"placeholder", src:"images/INFOSCREEN.jpg" },
+  info:      { type:"jpg", src:"images/INFOSCREEN.jpg" },
 
   /* ---------- SPOT INTRO ---------- */
   /*  4 · Spot-the-opportunity intro  (square, ~344×344) */
