@@ -268,7 +268,15 @@ html[dir=rtl] .arr-pos{transform:translateX(50%);}
 .loadtxt{color:#fff;font-weight:700;text-align:center;}
 
 /* ===== feedback widget ===== */
-.fbk{background:#faf8ff;border:2px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;text-align:center;}
+.fbk{background:#faf8ff;border:2px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;text-align:center;transition:box-shadow .3s,border-color .3s;}
+.fbk-nudge{display:block;width:100%;cursor:pointer;font-family:var(--font);font-weight:600;font-size:13.5px;
+  line-height:1.6;letter-spacing:.1px;color:var(--brand-3);text-align:center;
+  background:#f7f3fb;border:1px solid rgba(107,47,179,.16);border-radius:14px;padding:14px 18px;margin:2px 0 16px;
+  transition:background .2s ease,border-color .2s ease;text-wrap:balance;}
+.fbk-nudge:hover{background:#f1e9fa;border-color:rgba(107,47,179,.3);}
+.fbk-nudge:active{background:#ece0f7;}
+.fbk-flash{border-color:var(--brand)!important;box-shadow:0 0 0 4px rgba(228,60,80,.18);animation:fbkPulse 1.3s ease;}
+@keyframes fbkPulse{0%,100%{box-shadow:0 0 0 4px rgba(228,60,80,0);}30%{box-shadow:0 0 0 6px rgba(228,60,80,.22);}}
 .fbk-intro{display:flex;align-items:flex-start;gap:8px;justify-content:center;text-align:start;
   font-size:13.5px;line-height:1.5;font-weight:600;color:var(--ink-soft);
   background:linear-gradient(135deg,rgba(228,60,80,.07),rgba(107,47,179,.07));
@@ -410,6 +418,8 @@ html[dir=rtl] .arr-pos{transform:translateX(50%);}
 
       <div class="badge" id="resBadge"><span>🏅</span><span id="badgeTxt"></span></div>
 
+      <button class="fbk-nudge" onclick="scrollToFeedback()" data-i18n="fbkNudge">💬 Don't forget to rate the game and share your feedback ↓</button>
+
       <div id="badgeWrap" style="display:none;">
         <canvas id="badgeCanvas" aria-label="AURA Pass badge"></canvas>
         <button class="btn" id="dlBadge" onclick="downloadBadge()" data-i18n="dlBadge">⬇ Download my badge</button>
@@ -419,7 +429,6 @@ html[dir=rtl] .arr-pos{transform:translateX(50%);}
       <div id="refreshBox"></div>
 
       <div class="fbk" id="fbkBox">
-        <div class="fbk-intro"><span class="fbk-spark">✨</span><span data-i18n="fbkIntro">Before you go, don't forget to share your feedback below to help us improve your learning experience.</span></div>
         <div class="fbk-title" data-i18n="fbkTitle">How was this game? Share your feedback</div>
         <div class="stars" id="stars">
           <button class="star" data-v="1" onclick="setStars(1)">★</button>
@@ -500,10 +509,10 @@ const CONFIG = {
 
   brands: [
     {en:"American Eagle",ar:"أمريكان إيغل"},{en:"Foot Locker",ar:"فوت لوكر"},
-    {en:"Victoria's Secret",ar:"فيكتوريا سيكريت"},{en:"H&M",ar:"إتش آند إم"},
+    {en:"Victoria's Secret",ar:"فيكتوريا سيكريت"},{en:"H&M",ar:"اتش آند ام"},
     {en:"Bath & Body Works",ar:"باث آند بودي ووركس"},{en:"Primark",ar:"برايمارك"},
     {en:"Charlotte Tilbury",ar:"شارلوت تيلبري"},{en:"& Other Stories",ar:"آند أذر ستوريز"},
-    {en:"Boots",ar:"بوتس"},{en:"Claire's",ar:"كليرز"},{en:"COS",ar:"كوس"},
+    {en:"Boots",ar:"بووتس"},{en:"Claire's",ar:"كليرز"},{en:"COS",ar:"كوس"},
     {en:"Disney Store",ar:"متجر ديزني"},{en:"Jo Malone London",ar:"جو مالون لندن"},
     {en:"MAC",ar:"ماك"},{en:"Mothercare",ar:"ماذركير"},{en:"MUJI",ar:"موجي"},
     {en:"New Balance",ar:"نيو بالانس"},{en:"Next",ar:"نكست"},
@@ -515,26 +524,26 @@ const CONFIG = {
 
   /* ---- INFO SCREEN ---- */
   info: [
-    {q:{en:"WHAT'S AURA PASS?",ar:"ما هي AURA Pass؟"},
+    {q:{en:"WHAT'S AURA PASS?",ar:"ما هو أورا باس؟"},
      a:{en:"<b>30% off</b> full-price items across participating Alshaya brands for <b>AED 199</b>.",
         ar:"<b>خصم 30%</b> على المنتجات بالسعر الكامل عبر علامات الشايع المشاركة مقابل <b>199 درهم</b>."}},
     {q:{en:"WHY?",ar:"لماذا؟"},
      a:{en:"<b>Aura Pass pays for itself.</b> Unlock more value for our <b>customers</b>, and more transactions for <b>Alshaya</b>.",
-        ar:"<b>Aura Pass يغطّي ثمنه بنفسه.</b> قيمة أكبر <b>لعملائنا</b>، ومعاملات أكثر <b>للشايع</b>."}},
+        ar:"<b>أورا باس يغطي ثمنه بنفسه،</b> قيمة أكبر <b>لزبائننا</b> ومعاملات أكثر <b>للشايع</b>."}},
     {q:{en:"WHO?",ar:"لمن؟"},
      a:{en:"Customers in the UAE who love to <b>shop, dine, and earn</b> through Aura.",
-        ar:"عملاء في الإمارات يحبون <b>التسوّق وتناول الطعام والكسب</b> عبر Aura."}},
+        ar:"زبائننا في الإمارات الذين يحبون <b>التسوق وتناول الطعام والكسب</b> في نفس الوقت عبر أورا."}},
     {q:{en:"WHEN?",ar:"متى؟"},
-     a:{en:"<b>Limited time offer until 5 July 2026.</b> Enjoy the Aura Pass benefits until <b>31 December 2026</b>.",ar:"<b>عرض لفترة محدودة حتى 5 يوليو 2026.</b> استمتع بمزايا Aura Pass حتى <b>31 ديسمبر 2026</b>."}},
+     a:{en:"<b>Limited time offer until 5 July 2026.</b> Enjoy the Aura Pass benefits until <b>31 December 2026</b>.",ar:"<b>عرض لفترة محدودة حتى 5 يوليو 2026.</b> استمتع بمزايا أورا باس حتى <b>31 ديسمبر 2026</b>."}},
     {q:{en:"WHERE?",ar:"أين؟"},
      a:{en:"Across participating Alshaya brands* and through the <b>Aura App</b>.",
-        ar:"عبر علامات الشايع المشاركة* ومن خلال <b>تطبيق Aura</b>."}},
+        ar:"عبر علامات الشايع المشاركة* ومن خلال <b>تطبيق أورا</b>."}},
     {q:{en:"HOW?",ar:"كيف؟"},
      a:{en:"Download the Aura App and <b>unlock your Aura Pass</b>.",
-        ar:"حمّل تطبيق Aura و<b>فعّل Aura Pass</b>."}},
+        ar:"حمّل تطبيق أورا و<b>فعّل أورا باس</b>."}},
     {exc:true, q:{en:"KEY EXCEPTIONS *",ar:"استثناءات مهمة *"},
      a:{en:"• Starbucks: beverages only<br>• Primark: 2× Aura Points (not 30% off)<br>• Ulta: excludes electronics & luxury items<br>• Boots: excludes medicines<br>• H&M & NEXT: in-store only (not online)<br>• alo: not included",
-        ar:"• ستاربكس: المشروبات فقط<br>• برايمارك: ضعف نقاط Aura (وليس خصم 30%)<br>• ألتا: باستثناء الإلكترونيات والمنتجات الفاخرة<br>• بوتس: باستثناء الأدوية<br>• إتش آند إم ونكست: داخل المتجر فقط (وليس أونلاين)<br>• alo: غير مشمولة"}}
+        ar:"• ستاربكس: المشروبات فقط<br>• برايمارك: ضعف نقاط أورا (وليس خصم 30%)<br>• ألتا: باستثناء الإلكترونيات والمنتجات الفاخرة<br>• بووتس: باستثناء الأدوية<br>• اتش آند ام ونكست: داخل المحل فقط (وليس أونلاين)<br>• ألو يوغا: غير مشمولة"}}
   ],
 
   /* ---- STAGE 1: SPOT (6 scenarios) ---- opp:true = Opportunity ---- */
@@ -546,19 +555,19 @@ const CONFIG = {
     {emo:"🏷️", media:"see2", mediaExp:"see2d", opp:true,
      cust:{en:'"Do you accept Fazaa / Esaad / have any discounts at the moment?"',ar:'"هل تقبلون فزاع / إسعاد / لديكم أي خصومات حالياً؟"'},
      role:{en:"We have something even better! Say Hello to Aura Pass! For just 199 AED, enjoy 30% OFF full-priced items at over 30+ Alshaya brands until the end of the year! This is an exclusive limited time offer valid only until July 5. So hurry now!",
-           ar:"لدينا ما هو أفضل! تعرّف على Aura Pass! مقابل 199 درهماً فقط، استمتع بخصم 30% على المنتجات بالسعر الكامل في أكثر من 30 علامة من الشايع حتى نهاية العام! هذا عرض حصري لفترة محدودة وصالح فقط حتى 5 يوليو. فبادر الآن!"}},
+           ar:"لدينا ما هو أفضل! تعرّف على أورا باس! مقابل 199 درهماً فقط، استمتع بخصم 30% على المنتجات بالسعر الكامل في أكثر من 30 علامة من الشايع حتى نهاية العام! هذا عرض حصري لفترة محدودة وصالح فقط حتى 5 يوليو. فبادر الآن!"}},
     {emo:"🛍️", media:"see3", mediaExp:"see3d", opp:true,
-     cust:{en:'"I just bought something from H&M."',ar:'"اشتريت للتو شيئاً من إتش آند إم."'},
+     cust:{en:'"I just bought something from H&M."',ar:'"اشتريت للتو شيئاً من اتش آند ام."'},
      role:{en:"It's not too late to get Aura Pass. You can get 30% off full price items until the end of the year at over 30+ brands including our food brands like The Cheesecake Factory, Shake Shack and more. Hurry as it's a limited time offer for 199 AED.",
-           ar:"لم يفت الأوان للحصول على Aura Pass. يمكنك الحصول على خصم 30% على المنتجات بالسعر الكامل حتى نهاية العام في أكثر من 30 علامة بما في ذلك علاماتنا الغذائية مثل ذا تشيز كيك فاكتوري وشيك شاك وغيرها. بادر فهو عرض لفترة محدودة مقابل 199 درهماً."}},
+           ar:"لم يفت الأوان للحصول على أورا باس. يمكنك الحصول على خصم 30% على المنتجات بالسعر الكامل حتى نهاية العام في أكثر من 30 علامة بما في ذلك علاماتنا الغذائية مثل ذا تشيز كيك فاكتوري وشيك شاك وغيرها. بادر فهو عرض لفترة محدودة مقابل 199 درهماً."}},
     {emo:"📱", media:"see4", mediaExp:"see4d", opp:true,
-     cust:{en:'"I already have the Aura app."',ar:'"لديّ تطبيق Aura بالفعل."'},
+     cust:{en:'"I already have the Aura app."',ar:'"لديّ تطبيق أورا بالفعل."'},
      role:{en:"You are one step closer to unlocking Aura Pass. For a limited time only, enjoy 30% off Alshaya brands for 199 AED. Aura Pass pays for itself.",
-           ar:"أنت على بعد خطوة من تفعيل Aura Pass. ولفترة محدودة فقط، استمتع بخصم 30% على علامات الشايع مقابل 199 درهماً. Aura Pass يغطّي ثمنه بنفسه."}},
+           ar:"أنت على بعد خطوة من تفعيل أورا باس. ولفترة محدودة فقط، استمتع بخصم 30% على علامات الشايع مقابل 199 درهماً. أورا باس يغطّي ثمنه بنفسه."}},
     {emo:"⏱️", media:"see5", mediaExp:"see5d", opp:false,
      cust:{en:'"Sorry, I\'m in a rush!"',ar:'"عذراً، أنا مستعجل!"'},
      role:{en:"No problem, when you get a chance check out Aura Pass to unlock 30% off at 30+ Alshaya Brands.",
-           ar:"لا مشكلة، عندما تتاح لك الفرصة اطّلع على Aura Pass لتحصل على خصم 30% في أكثر من 30 علامة من الشايع."}},
+           ar:"لا مشكلة، عندما تتاح لك الفرصة اطّلع على أورا باس لتحصل على خصم 30% في أكثر من 30 علامة من الشايع."}},
     {emo:"😠", media:"see6", mediaExp:"see6d", opp:false,
      cust:{en:'"I\'m here to return this and I\'m not happy about it."',ar:'"جئت لإرجاع هذا ولست راضياً."'},
      role:{en:"Let me help resolve that for you first.",
@@ -571,12 +580,12 @@ const CONFIG = {
      obj:{en:'"I don\'t want to pay AED 199."',ar:'"لا أريد دفع 199 درهماً."'},
      opts:[
        {en:"Earn back your 199 AED in just two visits. Shop at H&M, grab lunch at The Cheesecake Factory, or indulge at Charlotte Tilbury. Aura Pass pays for itself instantly.",
-        ar:"استرجع 199 درهماً في زيارتين فقط. تسوّق في إتش آند إم، أو تناول الغداء في ذا تشيز كيك فاكتوري، أو دلّل نفسك في شارلوت تيلبري. Aura Pass يغطّي ثمنه فوراً."},
+        ar:"استرجع 199 درهماً في زيارتين فقط، تسوق في اتش آند ام، أو تناول الغداء في ذي تشيزكيك فاكتوري، أو دلل نفسك في شارلوت تيلبوري، أورا باس يغطي ثمنه فوراً."},
        {en:"It's only 199, that's nothing.",ar:"إنها 199 فقط، هذا لا شيء."},
        {en:"Okay, no problem then.",ar:"حسناً، لا مشكلة إذاً."}],
      correct:0},
     {media:"obj2",
-     obj:{en:'"Does Aura Pass work at Starbucks?"',ar:'"هل يعمل Aura Pass في ستاربكس؟"'},
+     obj:{en:'"Does Aura Pass work at Starbucks?"',ar:'"هل يعمل أورا باس في ستاربكس؟"'},
      opts:[
        {en:"Absolutely, enjoy 30% off your daily beverage at Starbucks and over 30+ Alshaya Brands.",
         ar:"بالتأكيد، استمتع بخصم 30% على مشروبك اليومي في ستاربكس وأكثر من 30 علامة من الشايع."},
@@ -584,10 +593,10 @@ const CONFIG = {
        {en:"No, only fashion brands.",ar:"لا، علامات الأزياء فقط."}],
      correct:0},
     {media:"obj3",
-     obj:{en:'"I don\'t have the AURA app."',ar:'"ليس لديّ تطبيق AURA."'},
+     obj:{en:'"I don\'t have the AURA app."',ar:'"ليس لديّ تطبيق أورا."'},
      opts:[
        {en:"Let me assist you. Download the Aura app and in 2 minutes you'll unlock your Aura Pass.",
-        ar:"دعني أساعدك. حمّل تطبيق Aura وفي دقيقتين ستفعّل Aura Pass."},
+        ar:"دعني أساعدك. حمّل تطبيق أورا وفي دقيقتين ستفعّل أورا باس."},
        {en:"Then you can't get it.",ar:"إذاً لا يمكنك الحصول عليها."},
        {en:"You don't need the app.",ar:"لا تحتاج التطبيق."}],
      correct:0},
@@ -595,7 +604,7 @@ const CONFIG = {
      obj:{en:'"I am travelling for the summer break. I don\'t think it makes sense to buy it now."',ar:'"سأسافر في عطلة الصيف. لا أعتقد أنه من المنطقي شراؤها الآن."'},
      opts:[
        {en:"It might be the perfect time to grab it! You can get the 30% discount instantly today for any last-minute travel essentials or summer clothes. Aura Pass doesn't expire until the end of the year, it will be ready and waiting to save you money on all your shopping when you return.",
-        ar:"قد يكون الوقت المثالي للحصول عليها! يمكنك الحصول على خصم 30% فوراً اليوم على مستلزمات السفر اللحظة الأخيرة أو ملابس الصيف. لا تنتهي صلاحية Aura Pass حتى نهاية العام، وستكون جاهزة بانتظارك لتوفّر لك المال على كل مشترياتك عند عودتك."},
+        ar:"قد يكون الوقت المثالي للحصول عليها! يمكنك الحصول على خصم 30% فوراً اليوم على مستلزمات السفر اللحظة الأخيرة أو ملابس الصيف. لا تنتهي صلاحية أورا باس حتى نهاية العام، وستكون جاهزة بانتظارك لتوفّر لك المال على كل مشترياتك عند عودتك."},
        {en:"You're right, better to wait until you're back.",ar:"معك حق، الأفضل الانتظار حتى تعود."},
        {en:"No problem, maybe pick it up next time.",ar:"لا مشكلة، ربما تحصل عليها في المرة القادمة."}],
      correct:0}
@@ -603,9 +612,9 @@ const CONFIG = {
 
   /* ---- STAGE 3: ARRANGE (4 steps, correct order) ---- */
   arrange: [
-    {media:"arrange1", cap:{en:"Download the AURA App",ar:"حمّل تطبيق AURA"}},
-    {media:"arrange2", cap:{en:"Tap the AURA Pass offer on the home screen",ar:"اضغط على عرض AURA Pass في الشاشة الرئيسية"}},
-    {media:"arrange3", cap:{en:"Top up your AURA Wallet for AED 199",ar:"اشحن محفظة AURA بمبلغ 199 درهماً"}},
+    {media:"arrange1", cap:{en:"Download the AURA App",ar:"حمّل تطبيق أورا"}},
+    {media:"arrange2", cap:{en:"Tap the AURA Pass offer on the home screen",ar:"اضغط على عرض أورا باس في الشاشة الرئيسية"}},
+    {media:"arrange3", cap:{en:"Top up your AURA Wallet for AED 199",ar:"اشحن محفظة أورا بمبلغ 199 درهماً"}},
     {media:"arrange4", cap:{en:"Enjoy the benefits",ar:"استمتع بالمزايا"}}
   ]
 };
@@ -629,13 +638,13 @@ const MEDIA = {
   see1:{type:"placeholder", src:"images/spot1.png", size:"md", label:{en:"Coffee / Starbucks · 344×344",ar:"قهوة / ستاربكس · 344×344"}},
   see2:{type:"placeholder", src:"images/spot2.png", size:"md", label:{en:"Offers tag · 344×344",ar:"وسم العروض · 344×344"}},
   see3:{type:"placeholder", src:"images/spot3.png", size:"md", label:{en:"H&M shopping bag · 344×344",ar:"كيس تسوّق · 344×344"}},
-  see4:{type:"placeholder", src:"images/spot4.png", size:"md", label:{en:"Aura app phone · 344×344",ar:"تطبيق Aura · 344×344"}},
+  see4:{type:"placeholder", src:"images/spot4.png", size:"md", label:{en:"Aura app phone · 344×344",ar:"تطبيق أورا · 344×344"}},
   see5:{type:"placeholder", src:"images/spot5.png", size:"md", label:{en:"In a rush / clock · 344×344",ar:"مستعجل / ساعة · 344×344"}},
   see6:{type:"placeholder", src:"images/spot6.png", size:"md", label:{en:"Return / unhappy · 344×344",ar:"إرجاع / غير راضٍ · 344×344"}},
   see1d:{type:"placeholder", src:"images/spot1-exp.png", size:"md", label:{en:"Coffee: explanation · 344×344",ar:"قهوة : الشرح · 344×344"}},
   see2d:{type:"placeholder", src:"images/spot2-exp.png", size:"md", label:{en:"Offers: explanation · 344×344",ar:"عروض : الشرح · 344×344"}},
-  see3d:{type:"placeholder", src:"images/spot3-exp.png", size:"md", label:{en:"H&M: explanation · 344×344",ar:"إتش آند إم : الشرح · 344×344"}},
-  see4d:{type:"placeholder", src:"images/spot4-exp.png", size:"md", label:{en:"Already Aura: explanation · 344×344",ar:"لديه Aura : الشرح · 344×344"}},
+  see3d:{type:"placeholder", src:"images/spot3-exp.png", size:"md", label:{en:"H&M: explanation · 344×344",ar:"اتش آند ام : الشرح · 344×344"}},
+  see4d:{type:"placeholder", src:"images/spot4-exp.png", size:"md", label:{en:"Already Aura: explanation · 344×344",ar:"لديه أورا : الشرح · 344×344"}},
   see5d:{type:"placeholder", src:"images/spot5-exp.png", size:"md", label:{en:"In a rush: explanation · 344×344",ar:"مستعجل : الشرح · 344×344"}},
   see6d:{type:"placeholder", src:"images/spot6-exp.png", size:"md", label:{en:"Return: explanation · 344×344",ar:"إرجاع : الشرح · 344×344"}},
   objIntro:{type:"placeholder", src:"images/obj-intro.png", size:"md", label:{en:"Objections intro · 344×344",ar:"مقدمة الاعتراضات · 344×344"}},
@@ -738,6 +747,7 @@ const I18N = {
     bSpot:"Spot the opportunity", bObj:"Handle the objection", bArrange:"Order the steps", bBonus:"Bonus",
     dialLbl:"SCORE",
     dlBadge:"⬇ Download my badge",
+    fbkNudge:"💬 Don't forget to share your feedback below to help us improve your learning experience ↓",
     fbkIntro:"Before you go, don't forget to share your feedback below to help us improve your learning experience.",
     fbkTitle:"How was this game? Share your feedback",
     fbkPh:"Anything you'd add or change? (optional)",
@@ -760,55 +770,56 @@ const I18N = {
     refFinal:`That was your last attempt this month. Revisit the <a href="${CONFIG.launchCardUrl}" target="_blank">AURA PASS Front-liner Guide</a> any time to keep sharp.`
   },
   ar:{
-    kicker:"مشروع الإمارات · AURA Pass",
-    introTitle:"اكتشف Aura Pass",
-    introLead:"انغمس في عالم Aura Pass. تعلّم كيف تلتقط لحظة البيع، وتتعامل مع الاعتراض، وتحوّل كل زيارة إلى معاملة.",
+    kicker:"مشروع الإمارات · أورا باس",
+    introTitle:"اكتشف أورا باس",
+    introLead:"اكتشف آفاقاً جديدة مع أورا باس. اتقن فن اقتناص فرص البيع، وتجاوز العقبات بذكاء، لتجعل من كل زيارة صفقة ناجحة لا تُنسى.",
     lblEmp:"رقم الموظف", phEmp:"مثال: 323999",
     empHint:"يرجى التأكد من إدخال رقمك بدقة لأغراض إعداد التقارير.",
     lblName:"اسمك", phName:"الاسم الكامل",
     lblBrand:"علامتك التجارية", lblOther:"أخبرنا بعلامتك", phOther:"اكتب علامتك",
     btnStart:"هيا بنا!",
     promoKicker:"العرض", promoTitle:"هذا ما تبيعه 💗",
-    promoSub:"ألقِ نظرة جيدة، إنه العرض الذي يريده كل عميل بمجرد سماعه.",
+    promoSub:"ألقِ نظرة جيدة، إنه بالضبط العرض الذي يتمنى كل زبون الحصول عليه.",
     promoNext:"أخبرني المزيد!",
-    infoKicker:"الأساسيات", infoTitle:"AURA Pass باختصار",
-    infoNext:"فهمت، لنلعب →",
-    siKicker:"الجولة 1", siTitle:"التقط الفرصة",
-    siSub:"لنرَ إن كنت تستطيع التقاط اللحظة المثالية لعرض Aura Pass.",
-    siR1:"سترى 6 لحظات سريعة مع العملاء.",
+    infoKicker:"الأساسيات", infoTitle:"أورا باس باختصار",
+    infoNext:"فهمت، لنلعب ←",
+    siKicker:"الجولة 1", siTitle:"انتهز الفرصة",
+    siSub:"لنرَ إن كنت تستطيع التقاط اللحظة المثالية لعرض أورا باس.",
+    siR1:"سترى 6 لحظات سريعة مع الزبائن.",
     siR2:"اسحب أو اضغط: هل هي <b>فرصة</b> أم <b>ليس بعد</b>؟",
     siR3:"بعد كل واحدة، شاهد كيف يردّ زميل متميّز.",
-    siOneBox:"من بين 6 لحظات للعملاء، اسحب: هل هي <b>فرصة</b> أم <b>ليس بعد</b>؟",
-    siGo:"نعم، رادي جاهز →",
+    siOneBox:"من بين 6 لحظات للزبائن، اسحب: هل هي <b>فرصة</b> أم <b>ليس بعد</b>؟",
+    siGo:"نعم، راداري جاهز ←",
     oiKicker:"الجولة 2", oiTitle:"التعامل مع الاعتراضات",
     oiSub:"بعد أن التقطت اللحظة المثالية. لنرَ كيف تتعامل مع الاعتراضات وتواصل الحديث.",
-    oiR1:"4 اعتراضات حقيقية يطرحها العملاء.",
+    oiR1:"4 اعتراضات حقيقية يطرحها الزبائن.",
     oiR2:"اختر الردّ الأقوى الذي يكسبهم.",
-    oiGo:"هيا بنا →",
-    tagSpot:"التقط الفرصة", tagObj:"تعامل مع الاعتراض",
-    tagArrange:"ساعد العميل", tagBonus:"الجولة الإضافية",
-    spotCount:c=>`العميل ${c} من 6`,
+    oiGo:"هيا بنا ←",
+    tagSpot:"انتهز الفرصة", tagObj:"تعامل مع الاعتراض",
+    tagArrange:"ساعد الزبون", tagBonus:"الجولة الإضافية",
+    spotCount:c=>`الزبون ${c} من 6`,
     objCount:c=>`الاعتراض ${c} من 4`,
     swipeYes:"✓ فرصة", swipeNo:"✕ ليس بعد",
     verOk:"فرصة", verNo:"ليس بعد",
     youOk:"التقاطة موفّقة!", youNo:"ليس تماماً",
-    roleLabel:"زميل المتجر", custLabel:"العميل",
-    expNext:"التالي →", expSeeWin:"اعرض نتيجتي →",
+    roleLabel:"موظف المحل", custLabel:"الزبون",
+    expNext:"التالي ←", expSeeWin:"اعرض نتيجتي ←",
     arrangeQ:"رتّب شاشات التطبيق بالترتيب الصحيح من اليسار إلى اليمين",
     arrangeHint:"اضغط على بطاقة ثم اضغط على أخرى لتبديلهما. من اليمين ← لليسار.",
     arrangeCheck:"تحقّق من ترتيبي", arrangeAttempt:n=>`المحاولة ${n} من 2`,
     arrangeGood:"رائع، ترتيب مثالي!", arrangePartial:"اقتربت! هذا هو الترتيب الصحيح.",
-    arrangeNext:"متابعة →",
-    bonusQ:"هل يغطّي Aura Pass ثمنه بنفسه؟",
-    bonusHint:"اسحب لتحديد إنفاق العميل الشهري بالسعر الكامل وشاهد توفير الـ30%.",
+    arrangeNext:"متابعة ←",
+    bonusQ:"هل يغطّي أورا باس ثمنه بنفسه؟",
+    bonusHint:"اسحب لتحديد إنفاق الزبون الشهري بالسعر الكامل وشاهد توفير الـ30%.",
     bonusSpend:"الإنفاق الشهري بالسعر الكامل", bonusSaved:"توفّر",
     bonusGo:"انتهت اللعبة",
     bonusWin:"تمّ تغطية ثمن البطاقة وأكثر! 🎉", bonusUnder:"استمر بالسحب لتُريهم التوفير.",
-    resPass:"أنت جاهز لـ AURA Pass!", resFail:"اقتربت كثيراً!",
-    badgePass:"بطل AURA Pass", badgeFail:"تابع التدرّب، أنت قادر!",
+    resPass:"أنت جاهز لـ أورا باس!", resFail:"اقتربت كثيراً!",
+    badgePass:"بطل أورا باس", badgeFail:"تابع التدرّب، أنت قادر!",
     bSpot:"التقط الفرصة", bObj:"تعامل مع الاعتراض", bArrange:"رتّب الخطوات", bBonus:"إضافي",
     dialLbl:"النتيجة",
     dlBadge:"⬇ نزّل شارتي",
+    fbkNudge:"💬 لا تنسَ مشاركة رأيك في الأسفل لمساعدتنا في تحسين تجربة تعلّمك ↓",
     fbkIntro:"قبل أن تغادر، لا تنسَ مشاركة رأيك أدناه لمساعدتنا في تحسين تجربة تعلّمك.",
     fbkTitle:"كيف كانت اللعبة؟ شاركنا رأيك",
     fbkPh:"هل تريد إضافة أو تغيير شيء؟ (اختياري)",
@@ -816,19 +827,19 @@ const I18N = {
     fbkThanks:"✅ شكراً لك! تم حفظ ملاحظاتك.",
     fbkThanksPreview:"✅ شكراً على ملاحظاتك!",
     fbkNeedStars:"يرجى اختيار تقييم بالنجوم أولاً ⭐",
-    btnLaunch:"افتح دليل موظفي الخطوط الأمامية لـ AURA PASS",
-    btnCx:"زُر مركز تجربة العملاء للمزيد",
+    btnLaunch:"افتح دليل موظفي الخطوط الأمامية لـ أورا باس",
+    btnCx:"زُر مركز تجربة الزبائن للمزيد",
     blockedTitle:"نراك الشهر القادم!",
-    wbGo:"هيا بنا →",
-    footLine1:"مشروع الإمارات · AURA Pass · © الشايع",
-    footLine2:'تم التطوير بواسطة فريق تجربة العملاء · 2026 · لأي استفسار؟ <a href="mailto:ahmed.abdelsalam@alshaya.com">تواصل هنا</a>',
+    wbGo:"هيا بنا ←",
+    footLine1:"مشروع الإمارات · أورا باس · © الشايع",
+    footLine2:'تم التطوير بواسطة فريق تجربة الزبائن · 2026 · لأي استفسار؟ <a href="mailto:ahmed.abdelsalam@alshaya.com">تواصل هنا</a>',
     snapHint:"التقط لقطة شاشة لمشاركة شارتك 📸",
     syncSaved:"✅ تم حفظ نتيجتك.",
     syncOffline:"⚠️ تم الحفظ على هذا الجهاز، وستتم المزامنة عند الاتصال.",
     syncPreview:"وضع المعاينة: لا يتم حفظ النتائج بعد.",
-    refRelaxed:m=>`هل تريد مراجعة سريعة؟ زُر <a href="${CONFIG.launchCardUrl}" target="_blank">دليل موظفي الخطوط الأمامية لـ AURA PASS</a>. لديك ${m} محاولة متبقية هذا الشهر.`,
-    refWarn:m=>`ألقِ نظرة أخرى على <a href="${CONFIG.launchCardUrl}" target="_blank">دليل موظفي الخطوط الأمامية لـ AURA PASS</a> قبل محاولتك التالية. لديك ${m} محاولة متبقية هذا الشهر.`,
-    refFinal:`كانت تلك محاولتك الأخيرة هذا الشهر. زُر <a href="${CONFIG.launchCardUrl}" target="_blank">دليل موظفي الخطوط الأمامية لـ AURA PASS</a> في أي وقت لتبقى متمكناً.`
+    refRelaxed:m=>`هل تريد مراجعة سريعة؟ زُر <a href="${CONFIG.launchCardUrl}" target="_blank">دليل موظفي الخطوط الأمامية لـ أورا باس</a>. لديك ${m} محاولة متبقية هذا الشهر.`,
+    refWarn:m=>`ألقِ نظرة أخرى على <a href="${CONFIG.launchCardUrl}" target="_blank">دليل موظفي الخطوط الأمامية لـ أورا باس</a> قبل محاولتك التالية. لديك ${m} محاولة متبقية هذا الشهر.`,
+    refFinal:`كانت تلك محاولتك الأخيرة هذا الشهر. زُر <a href="${CONFIG.launchCardUrl}" target="_blank">دليل موظفي الخطوط الأمامية لـ أورا باس</a> في أي وقت لتبقى متمكناً.`
   }
 };
 const T = k => I18N[LANG][k];
@@ -1392,6 +1403,11 @@ function visitCxHub(){ const u=CONFIG.cxHubUrl; if(!u){ showToast(T("snapHint"))
 
 /* ---- feedback ---- */
 let fbkRating=0, fbkSent=false;
+function scrollToFeedback(){
+  const el=document.getElementById("fbkBox"); if(!el) return;
+  el.scrollIntoView({behavior:"smooth", block:"center"});
+  el.classList.add("fbk-flash"); setTimeout(()=>el.classList.remove("fbk-flash"),1400);
+}
 function setStars(v){
   if(fbkSent) return; fbkRating=v;
   document.querySelectorAll("#stars .star").forEach(s=>s.classList.toggle("on",(+s.dataset.v)<=v));
@@ -1467,7 +1483,7 @@ async function drawBadge(){
   while(ctx.measureText(nm).width>560 && fs>26){ fs-=2; ctx.font='800 '+fs+'px Cairo, sans-serif'; }
   ctx.fillStyle='#fff'; ctx.fillText(nm, W/2, 666);
   ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font='700 27px Cairo, sans-serif';
-  ctx.fillText(ar?'بطل AURA Pass':'AURA Pass Champion', W/2, 714);
+  ctx.fillText(ar?'بطل أورا باس':'AURA Pass Champion', W/2, 714);
   ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='700 26px Cairo, sans-serif';
   ctx.fillText(ar?('النتيجة '+pct.toLocaleString('ar-EG')+'٪'):('Scored '+pct+'%'), W/2, 762);
   const d=new Date().toLocaleDateString(ar?'ar':'en',{month:'long',year:'numeric'});
