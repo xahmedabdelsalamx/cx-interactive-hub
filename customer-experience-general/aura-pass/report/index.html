@@ -668,8 +668,8 @@ $('#minToggle').onclick=function(){const on=this.classList.toggle('on');state.mi
      - repeat for the "Feedback" tab into FEEDBACK_CSV
    Leave blank to keep using the built-in snapshot + manual upload.
    ============================================================ */
-const SCORES_CSV   = "https://docs.google.com/spreadsheets/d/1-z8FYKXtB-F-C8XTku8_WdpjLi8l9PLY-ayQ4ef-i_Q/gviz/tq?tqx=out:csv&sheet=Scores";
-const FEEDBACK_CSV = "https://docs.google.com/spreadsheets/d/1-z8FYKXtB-F-C8XTku8_WdpjLi8l9PLY-ayQ4ef-i_Q/gviz/tq?tqx=out:csv&sheet=Feedback";
+const SCORES_CSV   = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQb5Pgm2ZYVrv_MPPdRU4WCET_t-km-_h12q0zrbwdin8eSStPfR3rwxvwoQ_asgZDW9PXAL2WjLiPP/pub?gid=361656992&single=true&output=csv";
+const FEEDBACK_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQb5Pgm2ZYVrv_MPPdRU4WCET_t-km-_h12q0zrbwdin8eSStPfR3rwxvwoQ_asgZDW9PXAL2WjLiPP/pub?gid=824611185&single=true&output=csv";
 
 function mapRows(sc,fb){
   const g=(o,...k)=>{for(const key of k){const f=Object.keys(o).find(x=>x&&x.toLowerCase().trim()===key);if(f!==undefined)return o[f];}return '';};
