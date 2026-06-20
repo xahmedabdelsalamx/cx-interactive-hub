@@ -400,8 +400,8 @@ section{margin-top:16px}
 <script>
 const SNAPSHOT=JSON.parse(document.getElementById('seed').textContent);
 /* live Google Sheets source */
-const SCORES_CSV   = "https://docs.google.com/spreadsheets/d/1-z8FYKXtB-F-C8XTku8_WdpjLi8l9PLY-ayQ4ef-i_Q/gviz/tq?tqx=out:csv&sheet=Scores";
-const FEEDBACK_CSV = "https://docs.google.com/spreadsheets/d/1-z8FYKXtB-F-C8XTku8_WdpjLi8l9PLY-ayQ4ef-i_Q/gviz/tq?tqx=out:csv&sheet=Feedback";
+const SCORES_CSV   = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQb5Pgm2ZYVrv_MPPdRU4WCET_t-km-_h12q0zrbwdin8eSStPfR3rwxvwoQ_asgZDW9PXAL2WjLiPP/pub?gid=361656992&single=true&output=csv";
+const FEEDBACK_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQb5Pgm2ZYVrv_MPPdRU4WCET_t-km-_h12q0zrbwdin8eSStPfR3rwxvwoQ_asgZDW9PXAL2WjLiPP/pub?gid=824611185&single=true&output=csv";
 let RAW = SCORES_CSV ? {scores:[],feedback:[]} : SNAPSHOT;   /* start empty so it shows zeros until the live sheet loads */
 let SOURCE = SCORES_CSV ? 'connecting to Google Sheets' : 'embedded snapshot';
 let state={view:'leader',mode:'emp',brand:'all',lang:'all',sort:'vol',min:3,critSearch:'',fb:'all',target:85};
@@ -698,8 +698,8 @@ function loadFromSheet(silent){
       RAW=mapRows(sc,fb);SOURCE='Google Sheets (live)';state.brand='all';state.lang='all';
       const ls=$('#fLang');if(ls)ls.value='all';renderBrandFilter();renderAll();return true;})
     .catch(err=>{
-      $('#updated').innerHTML='Live data unavailable. In the sheet, set Share to "Anyone with the link: Viewer", then press Refresh from Sheet.';
-      if(!silent)alert('Could not load from Google Sheets.\n\nMake sure the sheet is shared as "Anyone with the link: Viewer" and the tabs are named Scores and Feedback.\n\n'+err.message);
+      $('#updated').innerHTML='Live data unavailable. Check the sheet is still Published to the web, then press Refresh from Sheet.';
+      if(!silent)alert('Could not load from Google Sheets.\n\nMake sure the sheet is still Published to the web (File, Share, Publish to web) and the tabs are named Scores and Feedback.\n\n'+err.message);
       return false;})
     .finally(()=>{if(btn){btn.textContent='↻ Refresh from Sheet';btn.disabled=false;}});
 }
