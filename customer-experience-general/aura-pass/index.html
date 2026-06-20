@@ -494,7 +494,6 @@ html[dir=rtl] .arr-pos{transform:translateX(50%);}
 
 <div class="toast" id="toast"></div>
 
-<!-- Your media links live in media-config.js (edit that file, not the code). -->
 <script src="media-config.js"></script>
 <script>
 /* ============================================================
@@ -690,7 +689,7 @@ function media(key, sizeOverride, staticImg){
   const ph = phHTML(lbl);
   let inner;
   if(m.type==="lottie" && m.src){
-    inner = `<lottie-player class="media-lottie" src="${m.src}" autoplay loop speed="1"></lottie-player>`;
+    inner = `<lottie-player class="media-lottie" src="${m.src}" data-ph="${escAttr(lbl)}" autoplay loop speed="1"></lottie-player>`;
   } else if(m.type==="png" && m.src){
     inner = `<img class="media-img" src="${m.src}" alt="" data-ph="${escAttr(lbl)}" onerror="mediaFail(this)">`;
   } else {
@@ -701,6 +700,27 @@ function media(key, sizeOverride, staticImg){
 function phHTML(lbl){ return `<div class="media-ph"><span class="pe">🖼️</span><span>${lbl}</span><span class="ps">PNG / Lottie</span></div>`; }
 function escAttr(s){ return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function mediaFail(img){ const a=img.closest(".media-anim"); if(a) a.innerHTML = phHTML(img.getAttribute("data-ph")||""); }
+function lottieFallback(lp){ const a=lp.closest(".media-anim"); if(a) a.innerHTML = phHTML(lp.getAttribute("data-ph")||""); }
+function hookLottie(lp){
+  if(lp.__hooked) return; lp.__hooked=true;
+  let settled=false;
+  const fail=()=>{ if(settled) return; settled=true; lottieFallback(lp); };
+  const ok=()=>{ settled=true; };
+  lp.addEventListener("error", fail);
+  lp.addEventListener("data_fail", fail);
+  lp.addEventListener("load", ok);
+  lp.addEventListener("ready", ok);
+  // safety net: if nothing rendered shortly after, show the labelled placeholder
+  setTimeout(()=>{ if(settled) return; if(!lp.querySelector("svg,canvas")) fail(); }, 3000);
+}
+if(window.MutationObserver){
+  const _lmo=new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{
+    if(n.nodeType!==1) return;
+    if(n.tagName==="LOTTIE-PLAYER") hookLottie(n);
+    if(n.querySelectorAll) n.querySelectorAll("lottie-player").forEach(hookLottie);
+  })));
+  _lmo.observe(document.documentElement,{childList:true,subtree:true});
+}
 
 /* ============================================================
    I18N
