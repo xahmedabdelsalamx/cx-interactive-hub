@@ -1,36 +1,39 @@
 # CX Onboarding Challenge — KSA New Hires
 
 Bilingual (KSA-Arabic default) onboarding game. **One engine, many data files.**
-Built on the AURA PASS pattern. Retail is the working reference division.
+Retail is the working reference division.
 
 ## Run it
-Open `index.html` in a browser (or any static server). It runs **fully offline** until
-you add the backend URL. The footer CX Hub link and the breathing media slots work out of the box.
+Open `index.html`, or for the smoothest experience run `python3 -m http.server` in this
+folder and open the printed URL. Runs **fully offline** until you add the backend URL.
 
-> Tip: a quick local server avoids file:// quirks — `python3 -m http.server` then open the printed URL.
+## What's live now
+- Vibrant KSA-green (#005430) entry → brand-based routing → branded world gradient.
+- Header logos auto-swap: **white** over colored backgrounds, **colored** inside white cards.
+- Footer attached under the card (AURA-style): © Alshaya + Customer Experience team · 2026 + a
+  `contact here` mailto to ahmed.abdelsalam@alshaya.com.
+- **Game-style character select**: full-body figure on a stand, ‹ / › to browse one at a time.
+- **Navigable questions**: Previous / Next, no auto-advance, answers can be changed before finishing.
+- Two mechanics working (swipe + scenario); retry-until-pass; star feedback.
+- Full 30-brand list, all routed to retail / hospitality / starbucks.
 
-## What's live right now
-- Intake (KSA-Arabic) → brand-based world routing → world reveal → character select (breathing slots) → division intro → rounds → result → retry-until-pass → star feedback.
-- Two mechanics fully working: **swipe** (Round 1) and **scenario** (Round 4).
-- Retail content is **placeholder** (2 short rounds) so the loop plays end-to-end.
+## Assets
+- `assets/logos/` — transparent PNGs, `*-white.png` and `*-color.png` per logo.
+- `assets/characters/` — drop full-body character PNGs (portrait, transparent): `retail-1.png` … etc.
+- `assets/images/` — content PNGs referenced from `media/media-config.js`.
 
-## What's next (per the plan)
-- The other 6 mechanics: match, order, slider, speed, convo, hotspot (same `render*` pattern in `engine.js`).
-- Real Retail content (4 rounds × 5 Qs), then clone `divisions/retail.js` → hospitality / starbucks.
-- Character PNGs into `assets/characters/`.
-
-## Edit map (what to touch)
+## Edit map
 | You want to… | Edit |
 |---|---|
-| Add/change a question | `divisions/retail.js` (data only) |
+| Add/change a question | `divisions/retail.js` |
 | Set an image/animation | `media/media-config.js` |
-| Change world colors / floaters / characters | `config/worlds.js` |
-| Add a brand or set the backend URL | `config/shared.js` |
-| Change game logic / add a mechanic | `engine.js` |
+| World colors / floaters / characters / logos | `config/worlds.js` |
+| Brands, backend URL, footer, KSA-green | `config/shared.js` |
+| Game logic / add a mechanic | `engine.js` |
 
 ## Backend
-`AppsScript.gs` — deploy as a Web App, paste the `/exec` URL into `config/shared.js`.
-Stores `Scores` + `Feedback` tabs, division-aware, with a pass-once certification check.
+`AppsScript.gs` — deploy as Web App, paste `/exec` into `config/shared.js`. Division-aware
+Scores + Feedback tabs, pass-once certification check.
 
 ## Colors
-Retail `#e43c50` · Hospitality `#f15a24` · Starbucks `#006241`
+Entry KSA green `#005430` · Retail `#e43c50` · Hospitality `#f15a24` · Starbucks `#006241`
