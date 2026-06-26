@@ -1,13 +1,10 @@
 /* ============================================================
    WORLD REGISTRY · theme + branding per world
    ------------------------------------------------------------
-   color    = brand accent
-   gradient = header / hero gradient
-   floaters = faded elements drifting in the background
-              (emoji now; swap to SVG/lottie later if you like)
-   logo     = the "Art of ___" division logo
-   characters = 3 PNG slots (engine adds the breathing animation;
-                drop the PNGs into assets/characters/)
+   logoColor = transparent COLOR logo (use on white cards)
+   logoWhite = transparent WHITE logo (use over colored bg)
+   characters = full-body PNG slots (portrait, transparent bg)
+                drop files into assets/characters/
    ============================================================ */
 
 window.WORLDS = {
@@ -16,7 +13,8 @@ window.WORLDS = {
     color: "#f15a24",
     gradient: "linear-gradient(135deg,#f15a24 0%,#ff8a4a 55%,#ffb066 100%)",
     floaters: ["🍔", "🌮", "🍟", "🥤", "🍗", "🥗"],
-    logo: "assets/logos/art-of-guest-experience.jpg",
+    logoColor: "assets/logos/art-of-guest-experience-color.png",
+    logoWhite: "assets/logos/art-of-guest-experience-white.png",
     division: "hospitality",
     characters: [
       { id: "h1", png: "assets/characters/hosp-1.png" },
@@ -29,7 +27,8 @@ window.WORLDS = {
     color: "#e43c50",
     gradient: "linear-gradient(135deg,#e43c50 0%,#f06a7c 55%,#ff9bab 100%)",
     floaters: ["🛍️", "👗", "🏷️", "💄", "👜", "✨"],
-    logo: "assets/logos/art-of-selling.jpg",
+    logoColor: "assets/logos/art-of-selling-color.png",
+    logoWhite: "assets/logos/art-of-selling-white.png",
     division: "retail",
     characters: [
       { id: "r1", png: "assets/characters/retail-1.png" },
@@ -42,7 +41,8 @@ window.WORLDS = {
     color: "#006241",
     gradient: "linear-gradient(135deg,#006241 0%,#1e8a63 55%,#57b48b 100%)",
     floaters: ["☕", "🥤", "🌟", "🍵", "🫘", "✨"],
-    logo: "assets/logos/art-of-connection.jpg",
+    logoColor: "assets/logos/art-of-connection-color.png",
+    logoWhite: "assets/logos/art-of-connection-white.png",
     division: "starbucks",
     characters: [
       { id: "s1", png: "assets/characters/sbux-1.png" },
