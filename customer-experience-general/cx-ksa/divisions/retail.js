@@ -14,7 +14,7 @@
 window.DIVISION_retail = {
   id: "retail",
   world: "retail",
-  logo: "assets/logos/art-of-selling.jpg",
+  logo: "assets/logos/art-of-selling-color.png",
   title: { ar: "فن البيع", en: "Art of Selling" },
 
   rounds: [
