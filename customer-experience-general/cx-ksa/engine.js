@@ -17,6 +17,8 @@
     intakeSub:  { ar: "سجّل بياناتك عشان تبدأ", en: "Enter your details to begin" },
     empLabel:   { ar: "الرقم الوظيفي", en: "Employee ID" },
     nameLabel:  { ar: "الاسم", en: "Name" },
+    empPH:      { ar: "مثال ٣٢٣٩٩٩", en: "e.g. 323999" },
+    namePH:     { ar: "الاسم الكامل", en: "Full Name" },
     brandLabel: { ar: "علامتك التجارية", en: "Brand" },
     brandPH:    { ar: "اختر علامتك", en: "Choose your brand" },
     start:      { ar: "ابدأ", en: "Start" },
@@ -171,8 +173,14 @@
     $("#intakeTitle").textContent = u("appTitle");
     $("#intakeSub").textContent = u("intakeSub");
     var root = $("#intakeForm"); root.innerHTML = "";
-    root.appendChild(fieldText("empId", u("empLabel"), state.empId, "323999"));
-    root.appendChild(fieldText("name", u("nameLabel"), state.name, "—"));
+    root.appendChild(fieldText("empId", u("empLabel"), state.empId, u("empPH")));
+    root.appendChild(fieldText("name", u("nameLabel"), state.name, u("namePH")));
+    var emp = $("#empId");
+    emp.setAttribute("inputmode", "numeric"); emp.setAttribute("maxlength", "12"); emp.setAttribute("autocomplete", "off");
+    emp.addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); });
+    var nm = $("#name");
+    nm.setAttribute("autocomplete", "off");
+    nm.addEventListener("input", function () { this.value = this.value.replace(/[^A-Za-z\u0600-\u06FF\s'.\-]/g, ""); });
 
     var fb = el("div", "field");
     fb.appendChild(el("label", null, u("brandLabel")));
@@ -242,8 +250,8 @@
       var img = el("img", "char-figure"); img.src = chars[ci].png; img.alt = "";
       img.onerror = function () {
         var ph = el("div", "char-figure-ph");
-        ph.appendChild(el("div", "pe", "🧍"));
-        ph.appendChild(el("div", "ps", "character " + (ci + 1)));
+        ph.appendChild(el("div", "pe", w.floaters[0]));
+        ph.appendChild(el("div", "ps", state.world + " · " + (ci + 1)));
         figwrap.replaceChild(ph, img);
       };
       figwrap.appendChild(img);
@@ -442,7 +450,7 @@
     });
     c.appendChild(bd);
 
-    post({
+    var saveP = post({
       action: "score", division: state.division.id, brand: L(state.brand),
       empId: state.empId, name: state.name, character: state.character,
       scores: state.scores, total: total, passed: passed ? "yes" : "no", lang: state.lang
@@ -456,10 +464,14 @@
       c.appendChild(buildBadge(total));
       c.appendChild(buildFeedback());
       c.appendChild(learnButton());
-      var saved = el("div", "score-saved");
-      saved.appendChild(el("span", null, "✅"));
-      saved.appendChild(el("span", null, u("scoreSaved")));
-      c.appendChild(saved);
+      var saveNote = el("div", "score-saved");  // appended only on confirmed save
+      saveP.then(function (res) {
+        if (res && res.ok && !res.offline) {
+          saveNote.appendChild(el("span", null, "✅"));
+          saveNote.appendChild(el("span", null, u("scoreSaved")));
+          c.appendChild(saveNote);
+        }
+      });
       confetti();
     }
     showScreen("screen-result");
