@@ -16,7 +16,7 @@
 var SECRET_TOKEN = "CXHUBKSA";
 
 var SCORE_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Character",
-  "Round1%","Round2%","Round3%","Round4%","Total%","Passed","Lang","ClientTime"];
+  "Round1%","Round2%","Round3%","Round4%","Bonus%","Energy","Total%","Passed","Lang","ClientTime"];
 var FB_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Rating","Comment","Lang","ClientTime"];
 
 function setup() {
@@ -80,7 +80,7 @@ function doPost(e) {
   var s = d.scores || [];
   ensureTab(ss, "Scores", SCORE_HEADERS).appendRow([
     now, d.division || "", d.brand || "", d.empId || "", d.name || "", d.character || "",
-    num(s[0]), num(s[1]), num(s[2]), num(s[3]),
+    num(s[0]), num(s[1]), num(s[2]), num(s[3]), num(d.bonus), num(d.energy),
     d.total != null ? d.total : "", d.passed || "", d.lang || "", d.clientTime || ""
   ]);
   return json({ ok: true });

@@ -172,6 +172,29 @@ body{font-family:var(--font);color:var(--ink);
 .qnav{display:flex;gap:10px;margin-top:14px}
 .qnav .btn{margin-top:0}
 
+/* bonus tag */
+.ri-tag.bonus,.round-tag.bonus{color:#9a5b00;background:#fff7e6;border-color:#ffdf9e}
+.bd-row.bonus{background:linear-gradient(135deg,#fff7e6,#ffeccc);border:1px solid #ffdf9e}
+
+/* RUSH mode */
+.rush-hud{display:flex;align-items:center;gap:10px;margin:2px 0 8px}
+.rush-en-ico{font-size:18px}
+.rush-energy{flex:1;height:14px;border-radius:999px;background:#eee;overflow:hidden}
+.rush-energy-fill{height:100%;width:50%;background:linear-gradient(90deg,#ffba2e,#f15a24);transition:width .3s ease}
+.rush-streak{font-weight:800;font-size:13px;color:var(--brand);white-space:nowrap}
+.rush-count{text-align:center;font-weight:800;font-size:12px;color:var(--ink-soft);margin-bottom:6px}
+.rush-timer{height:8px;border-radius:999px;background:#eee;overflow:hidden;margin-bottom:12px}
+.rush-timer-fill{height:100%;width:100%;background:var(--grad);transition:width .08s linear}
+.rush-q{min-height:230px}
+.rush-prompt{font-weight:800;font-size:16.5px;text-align:center;margin:8px 0 14px;line-height:1.6}
+.rush-opts{display:flex;flex-direction:column;gap:10px}
+.rush-opt{font-family:var(--font);font-weight:800;font-size:15px;padding:14px;border:1.5px solid var(--line);
+  border-radius:14px;background:#fff;color:var(--ink);cursor:pointer;transition:.12s}
+.rush-opt:hover{border-color:var(--brand)}
+.rush-opt:disabled{cursor:default}
+.rush-opt.ok{background:#e8f8ef;border-color:#19b36b;color:#0c7a45}
+.rush-opt.no{background:#fdecef;border-color:#e43c50;color:#b02338}
+
 /* result */
 .badge{width:78px;height:78px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin:2px auto 8px;box-shadow:var(--shadow)}
 .badge.ok{background:linear-gradient(135deg,#caf3dd,#8fe5b8)}

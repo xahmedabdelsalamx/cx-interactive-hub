@@ -8,8 +8,9 @@
     lang: (window.CONFIG && CONFIG.defaultLang) || "ar",
     empId: "", name: "", brand: null, world: null,
     division: null, character: null,
-    roundIndex: 0, scores: [], certified: false
+    roundIndex: 0, scores: [], certified: false, bonus: null
   };
+  var rushTimer = null;
 
   /* ---------------- UI STRINGS (KSA Arabic + English) ---------------- */
   var UI = {
@@ -50,7 +51,11 @@
     scoredTxt:  { ar: "حقّق", en: "Scored" },
     orgFoot:    { ar: "تجربة الزبائن · CX Hub", en: "Customer Experience · CX Hub" },
     learnBtn:   { ar: "زر CX Hub للمزيد من التعلّم", en: "Visit the CX Hub for more learning" },
-    scoreSaved: { ar: "تم حفظ نتيجتك", en: "Your score was saved" }
+    scoreSaved: { ar: "تم حفظ نتيجتك", en: "Your score was saved" },
+    bonusRound: { ar: "جولة المكافأة ⚡", en: "Bonus Round ⚡" },
+    bonusLbl:   { ar: "مكافأة · سرعة الموسم", en: "Bonus · Peak Rush" },
+    rushGo:     { ar: "بسرعة!", en: "Go fast!" },
+    timeUp:     { ar: "انتهى الوقت!", en: "Time's up!" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -286,7 +291,7 @@
     d.rounds.forEach(function (rd) { list.appendChild(el("li", null, L(rd.title))); });
     c.appendChild(list);
     var btn = el("button", "btn", u("beginRounds"));
-    btn.onclick = function () { state.roundIndex = 0; state.scores = []; playRound(); };
+    btn.onclick = function () { state.roundIndex = 0; state.scores = []; state.bonus = null; playRound(); };
     c.appendChild(btn);
     showScreen("screen-intro");
   }
@@ -346,7 +351,9 @@
     rerenderCurrent = function () { showRoundIntro(round); };
     var c = $("#roundIntroCard"); c.innerHTML = "";
     var wrap = el("div", "round-intro");
-    wrap.appendChild(el("div", "ri-tag", u("roundOf") + " " + (state.roundIndex + 1) + " / " + state.division.rounds.length));
+    wrap.appendChild(el("div", "ri-tag" + (round.bonus ? " bonus" : ""),
+      round.bonus ? u("bonusRound")
+                  : (u("roundOf") + " " + (state.roundIndex + 1) + " / " + state.division.rounds.length)));
     wrap.appendChild(el("div", "ri-title", L(round.title)));
     wrap.appendChild(renderMedia(round.media || phMedia(), "media-md"));
     if (round.intro) wrap.appendChild(el("p", "ri-text", L(round.intro)));
@@ -358,15 +365,19 @@
   }
 
   function beginRound(round) {
-    $("#roundTag").textContent = u("roundOf") + " " + (state.roundIndex + 1) + " / " + state.division.rounds.length;
+    if (rushTimer) { clearInterval(rushTimer); rushTimer = null; }
+    $("#roundTag").textContent = round.bonus ? u("bonusRound")
+      : (u("roundOf") + " " + (state.roundIndex + 1) + " / " + state.division.rounds.length);
     $("#roundTitle").textContent = L(round.title);
     showScreen("screen-round");
-    rerenderCurrent = function () { $("#roundTitle").textContent = L(round.title); draw(); };
+    var mount = $("#roundMount");
 
+    if (round.mechanic === "rush") { rerenderCurrent = function () { beginRound(round); }; runRush(round, mount); return; }
+
+    rerenderCurrent = function () { $("#roundTitle").textContent = L(round.title); draw(); };
     var qs = round.questions, ad = ADAPTERS[round.mechanic];
     var answers = new Array(qs.length); for (var k = 0; k < qs.length; k++) answers[k] = null;
     var idx = 0;
-    var mount = $("#roundMount");
 
     function draw() {
       mount.innerHTML = "";
@@ -420,6 +431,78 @@
   }
 
   /* ---------------- RESULT ---------------- */
+  function advanceRound(pct) { state.scores.push(pct); state.roundIndex++; playRound(); }
+
+  /* ---------------- MECHANIC: RUSH (timed rapid-fire + energy meter) ---------------- */
+  function runRush(round, mount) {
+    var qs = round.questions, seconds = round.seconds || 8;
+    var idx = 0, correct = 0, streak = 0, best = 0, energy = 50;
+
+    function finish() {
+      if (rushTimer) { clearInterval(rushTimer); rushTimer = null; }
+      state.bonus = { score: Math.round(correct / qs.length * 100), energy: Math.round(energy), streak: best };
+      advanceRound(state.bonus.score);
+    }
+
+    function draw() {
+      if (rushTimer) { clearInterval(rushTimer); rushTimer = null; }
+      mount.innerHTML = "";
+      var q = qs[idx], locked = false;
+
+      // HUD: energy meter + streak
+      var hud = el("div", "rush-hud");
+      var en = el("div", "rush-energy"); var enf = el("div", "rush-energy-fill"); enf.style.width = energy + "%"; en.appendChild(enf);
+      hud.appendChild(el("div", "rush-en-ico", "⚡"));
+      hud.appendChild(en);
+      hud.appendChild(el("div", "rush-streak", "🔥 " + streak));
+      mount.appendChild(hud);
+
+      // progress + timer bar
+      mount.appendChild(el("div", "rush-count", (idx + 1) + " / " + qs.length));
+      var tbar = el("div", "rush-timer"); var tfill = el("div", "rush-timer-fill"); tbar.appendChild(tfill); mount.appendChild(tbar);
+
+      // question
+      var area = el("div", "rush-q");
+      area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
+      area.appendChild(el("div", "rush-prompt", L(q.prompt)));
+      var opts = el("div", "rush-opts");
+      q.options.forEach(function (op, i) {
+        var b = el("button", "rush-opt", L(op));
+        b.onclick = function () { answer(i); };
+        opts.appendChild(b);
+      });
+      area.appendChild(opts);
+      var fb = el("div", "fb"); area.appendChild(fb);
+      mount.appendChild(area);
+
+      var start = Date.now();
+      rushTimer = setInterval(function () {
+        var left = seconds - (Date.now() - start) / 1000;
+        tfill.style.width = Math.max(0, left / seconds * 100) + "%";
+        if (left <= 0) { clearInterval(rushTimer); rushTimer = null; if (!locked) lockAnswer(-1); }
+      }, 70);
+
+      function answer(i) { if (!locked) lockAnswer(i); }
+      function lockAnswer(i) {
+        locked = true;
+        if (rushTimer) { clearInterval(rushTimer); rushTimer = null; }
+        var fast = (Date.now() - start) / 1000 < seconds * 0.5;
+        var ok = i === q.correct;
+        Array.prototype.forEach.call(opts.children, function (c, ci) {
+          c.disabled = true;
+          if (ci === q.correct) c.classList.add("ok"); else if (ci === i) c.classList.add("no");
+        });
+        if (ok) { correct++; streak++; best = Math.max(best, streak); energy = Math.min(100, energy + (fast ? 16 : 10)); }
+        else { streak = 0; energy = Math.max(0, energy - 14); }
+        enf.style.width = energy + "%";
+        fb.className = "fb show " + (ok ? "ok" : "no");
+        fb.textContent = (i === -1 ? "⏱ " + u("timeUp") + " — " : (ok ? "✓ " : "✕ ")) + L(q.feedback);
+        setTimeout(function () { idx++; (idx >= qs.length) ? finish() : draw(); }, 1050);
+      }
+    }
+    draw();
+  }
+
   function showResult() {
     rerenderCurrent = showResult;
     setBg("world"); setHeaderLogos("world");
@@ -432,7 +515,9 @@
       showScreen("screen-result"); return;
     }
 
-    var total = state.scores.length ? Math.round(state.scores.reduce(function (a, b) { return a + b; }, 0) / state.scores.length) : 0;
+    var mainScores = [];
+    state.division.rounds.forEach(function (rd, i) { if (!rd.bonus && state.scores[i] != null) mainScores.push(state.scores[i]); });
+    var total = mainScores.length ? Math.round(mainScores.reduce(function (a, b) { return a + b; }, 0) / mainScores.length) : 0;
     var passed = total >= CONFIG.passMark;
 
     c.appendChild(el("div", "result-head", passed ? u("resultReady") : u("failed")));
@@ -443,9 +528,11 @@
 
     var bd = el("div", "breakdown");
     state.division.rounds.forEach(function (rd, idx) {
-      var row = el("div", "bd-row");
-      row.appendChild(el("span", null, L(rd.title)));
-      row.appendChild(el("strong", null, (state.scores[idx] != null ? state.scores[idx] : 0) + "%"));
+      var row = el("div", "bd-row" + (rd.bonus ? " bonus" : ""));
+      row.appendChild(el("span", null, rd.bonus ? u("bonusLbl") : L(rd.title)));
+      var val = (state.scores[idx] != null ? state.scores[idx] : 0) + "%";
+      if (rd.bonus && state.bonus) val += "  ⚡" + state.bonus.energy + "  🔥" + state.bonus.streak;
+      row.appendChild(el("strong", null, val));
       bd.appendChild(row);
     });
     c.appendChild(bd);
@@ -453,12 +540,13 @@
     var saveP = post({
       action: "score", division: state.division.id, brand: L(state.brand),
       empId: state.empId, name: state.name, character: state.character,
-      scores: state.scores, total: total, passed: passed ? "yes" : "no", lang: state.lang
+      scores: state.scores, total: total, passed: passed ? "yes" : "no", lang: state.lang,
+      bonus: state.bonus ? state.bonus.score : "", energy: state.bonus ? state.bonus.energy : ""
     });
 
     if (!passed) {
       var retry = el("button", "btn", u("retry"));
-      retry.onclick = function () { state.roundIndex = 0; state.scores = []; playRound(); };
+      retry.onclick = function () { state.roundIndex = 0; state.scores = []; state.bonus = null; playRound(); };
       c.appendChild(retry);
     } else {
       c.appendChild(buildBadge(total));
