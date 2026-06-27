@@ -77,14 +77,14 @@
     }
   }
   function setBg(mode) {
-    if (mode === "entry") document.body.style.background = CONFIG.entryColor;
-    else if (mode === "world") document.body.style.background = WORLDS[state.world].gradient;
+    var g = (mode === "entry") ? CONFIG.entryBgGrad : WORLDS[state.world].bgGradient;
+    document.body.style.backgroundImage = g;
   }
   function setHeaderLogos(mode) {
-    $("#cxLogoTop").src = "assets/logos/cx-hub-white.png"; // header always over colored bg
+    $("#cxLogoTop").src = "assets/logos/cx-hub-color.png"; // header lives inside the white window
     var dl = $("#divLogo");
     if (mode === "entry" || !state.world) { dl.style.display = "none"; }
-    else { dl.src = WORLDS[state.world].logoWhite; dl.style.display = "block"; }
+    else { dl.src = WORLDS[state.world].logoColor; dl.style.display = "block"; }
   }
 
   /* ---------------- I18N ---------------- */
@@ -214,8 +214,10 @@
 
     function draw() {
       mount.innerHTML = "";
-      mount.appendChild(el("h2", "h2 on-grad", u("pickChar")));
+      mount.appendChild(el("h2", "h2", u("pickChar")));
 
+      var hero = el("div", "stage-hero");
+      var hlogo = el("img", "hero-logo"); hlogo.src = w.logoWhite; hlogo.alt = ""; hero.appendChild(hlogo);
       var stage = el("div", "char-stage");
       var prev = el("button", "char-arrow prev", "‹");
       var nextB = el("button", "char-arrow next", "›");
@@ -234,15 +236,16 @@
       figwrap.appendChild(img);
 
       stage.appendChild(prev); stage.appendChild(figwrap); stage.appendChild(nextB);
-      mount.appendChild(stage);
+      hero.appendChild(stage);
 
-      mount.appendChild(el("div", "char-name", state.name || ""));
+      hero.appendChild(el("div", "char-name", state.name || ""));
 
       var dots = el("div", "char-dots");
       chars.forEach(function (_, i) { var d = el("span", i === ci ? "on" : ""); dots.appendChild(d); });
-      mount.appendChild(dots);
+      hero.appendChild(dots);
+      mount.appendChild(hero);
 
-      var sel = el("button", "btn light char-select", u("selectChar"));
+      var sel = el("button", "btn char-select", u("selectChar"));
       sel.onclick = function () { state.character = chars[ci].id; intro(); };
       mount.appendChild(sel);
       mount.appendChild(el("p", "muted small", u("charNote")));

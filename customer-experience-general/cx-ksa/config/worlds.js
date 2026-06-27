@@ -12,6 +12,7 @@ window.WORLDS = {
   hospitality: {
     color: "#f15a24",
     gradient: "linear-gradient(135deg,#f15a24 0%,#ff8a4a 55%,#ffb066 100%)",
+    bgGradient: "linear-gradient(135deg,#8f3208,#f15a24,#bf440f,#f15a24)",
     floaters: ["🍔", "🌮", "🍟", "🥤", "🍗", "🥗"],
     logoColor: "assets/logos/art-of-guest-experience-color.png",
     logoWhite: "assets/logos/art-of-guest-experience-white.png",
@@ -26,6 +27,7 @@ window.WORLDS = {
   retail: {
     color: "#e43c50",
     gradient: "linear-gradient(135deg,#e43c50 0%,#f06a7c 55%,#ff9bab 100%)",
+    bgGradient: "linear-gradient(135deg,#7a1525,#e43c50,#a81f38,#e43c50)",
     floaters: ["🛍️", "👗", "🏷️", "💄", "👜", "✨"],
     logoColor: "assets/logos/art-of-selling-color.png",
     logoWhite: "assets/logos/art-of-selling-white.png",
@@ -40,6 +42,7 @@ window.WORLDS = {
   starbucks: {
     color: "#006241",
     gradient: "linear-gradient(135deg,#006241 0%,#1e8a63 55%,#57b48b 100%)",
+    bgGradient: "linear-gradient(135deg,#00271a,#006241,#0a7d54,#004e34)",
     floaters: ["☕", "🥤", "🌟", "🍵", "🫘", "✨"],
     logoColor: "assets/logos/art-of-connection-color.png",
     logoWhite: "assets/logos/art-of-connection-white.png",

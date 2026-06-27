@@ -14,7 +14,8 @@ window.CONFIG = {
 
   /* Entry / intake background — vibrant KSA green */
   entryColor: "#005430",
-  entryGrad:  "linear-gradient(135deg,#003f24 0%,#005430 45%,#0a8a55 100%)",
+  entryGrad:  "linear-gradient(135deg,#005430 0%,#0a8a55 100%)",
+  entryBgGrad: "linear-gradient(135deg,#00351f,#005430,#00733f,#005430)",
 
   /* Footer (attached under the card, AURA-style) */
   footer: {

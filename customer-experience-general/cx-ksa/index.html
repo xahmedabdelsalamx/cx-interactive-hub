@@ -10,44 +10,51 @@
 <style>
 :root{
   --brand:#005430;
-  --grad:linear-gradient(135deg,#003f24 0%,#005430 45%,#0a8a55 100%);
+  --grad:linear-gradient(135deg,#005430 0%,#0a8a55 100%);
   --ink:#221b3a; --ink-soft:#6a6385;
-  --card:#fff; --line:#efeaf6;
-  --shadow:0 18px 50px -18px rgba(30,20,50,.45);
-  --radius:22px; --font:'Cairo',system-ui,-apple-system,sans-serif;
+  --card:#fff; --line:#eef1ef;
+  --shadow:0 22px 60px -22px rgba(10,20,15,.55);
+  --radius:26px; --font:'Cairo',system-ui,-apple-system,sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{font-family:var(--font);color:var(--ink);background:#005430;
+body{font-family:var(--font);color:var(--ink);
+  background-color:#005430;
+  background-image:linear-gradient(135deg,#00351f,#005430,#00733f,#005430);
+  background-size:230% 230%;animation:bgshift 17s ease infinite;
   min-height:100dvh;display:flex;flex-direction:column;align-items:center;
-  padding:14px;position:relative;overflow-x:hidden;transition:background .5s ease}
+  padding:16px 14px;position:relative;overflow-x:hidden}
+@keyframes bgshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media(prefers-reduced-motion:reduce){body{animation:none}}
 
 /* floaters */
 #floaters{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.floater{position:absolute;opacity:.18;animation:drift 18s ease-in-out infinite}
+.floater{position:absolute;opacity:.16;animation:drift 18s ease-in-out infinite}
 @keyframes drift{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-26px) rotate(8deg)}}
 @media(prefers-reduced-motion:reduce){.floater{animation:none}}
 
-.wrap{width:100%;max-width:460px;z-index:1;display:flex;flex-direction:column;gap:12px}
+.wrap{width:100%;max-width:500px;z-index:1;display:flex;flex-direction:column;gap:12px}
 
-/* header */
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 2px 0}
-.brand-logos{display:flex;align-items:center;gap:10px}
-.cx-logo{height:34px;width:auto}
-.div-logo{height:30px;width:auto;display:none}
-.langbtn{border:1.5px solid rgba(255,255,255,.6);border-radius:999px;background:rgba(255,255,255,.16);
-  color:#fff;font-family:var(--font);font-weight:800;font-size:13px;padding:6px 14px;cursor:pointer;transition:.15s}
-.langbtn:hover{background:rgba(255,255,255,.28)}
+/* ===== THE MAIN WINDOW (single big white card) ===== */
+.window{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:18px 20px 26px;min-height:548px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.win-head{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.win-logos{display:flex;align-items:center;gap:10px;min-height:34px}
+.cx-logo{height:32px;width:auto}
+.div-logo{height:28px;width:auto;display:none}
+.langbtn{border:1.5px solid var(--line);border-radius:999px;background:#f7faf8;color:var(--brand);
+  font-family:var(--font);font-weight:800;font-size:13px;padding:7px 15px;cursor:pointer;transition:.15s;flex:none}
+.langbtn:hover{border-color:var(--brand);transform:translateY(-1px)}
+.win-body{flex:1;display:flex;flex-direction:column;justify-content:center}
 
-/* cards / screens */
+/* screens */
 .screen{display:none;animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both}
 .screen.active{display:block}
-@keyframes pop{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 20px;position:relative;overflow:hidden}
+@keyframes pop{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
 .brandbar{height:6px;background:var(--grad);border-radius:6px;width:74px;margin:0 auto 16px}
-.h1{font-size:22px;font-weight:900;text-align:center;margin:2px 0 4px}
+.h1{font-size:23px;font-weight:900;text-align:center;margin:2px 0 4px}
 .h2{font-size:19px;font-weight:800;text-align:center;margin:6px 0}
-.h2.on-grad{color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.25)}
 .h3{font-size:16px;font-weight:800;text-align:center;margin:4px 0}
 .muted{color:var(--ink-soft);text-align:center;font-size:14px;line-height:1.6}
 .small{font-size:12.5px}
@@ -56,15 +63,25 @@ body{font-family:var(--font);color:var(--ink);background:#005430;
 .field{margin-bottom:14px;display:flex;flex-direction:column;gap:6px}
 .field label{font-weight:700;font-size:13px}
 .field input,.field select,.fbk-area{font-family:var(--font);font-size:15px;padding:12px 14px;
-  border:1.5px solid var(--line);border-radius:14px;background:#f8faf8;color:var(--ink);width:100%}
+  border:1.5px solid var(--line);border-radius:14px;background:#f7faf8;color:var(--ink);width:100%}
 .field input:focus,.field select:focus{outline:none;border-color:var(--brand)}
-.btn{font-family:var(--font);font-weight:800;font-size:16px;color:#fff;background:var(--grad);
-  border:none;border-radius:16px;padding:14px 18px;width:100%;cursor:pointer;margin-top:8px;
+
+.btn{position:relative;overflow:hidden;font-family:var(--font);font-weight:800;font-size:16px;color:#fff;
+  background:var(--grad);border:none;border-radius:16px;padding:14px 18px;width:100%;cursor:pointer;margin-top:8px;
   box-shadow:0 12px 26px -12px var(--brand);transition:transform .15s,filter .2s}
 .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
 .btn:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.3);transform:none}
+/* shine sweep */
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:42%;height:100%;
+  background:linear-gradient(110deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-18deg);animation:sweep 3.4s ease-in-out infinite;pointer-events:none}
+.btn:disabled::after{display:none}
+@keyframes sweep{0%{left:-60%}55%,100%{left:130%}}
+@media(prefers-reduced-motion:reduce){.btn::after{display:none}}
 .btn.ghost{background:#fff;color:var(--brand);border:1.5px solid var(--brand);box-shadow:none}
+.btn.ghost::after{background:linear-gradient(110deg,transparent,rgba(0,84,48,.10),transparent)}
 .btn.light{background:#fff;color:var(--brand);box-shadow:0 12px 26px -12px rgba(0,0,0,.4)}
+.btn.light::after{background:linear-gradient(110deg,transparent,rgba(0,0,0,.06),transparent)}
 .shake{animation:shake .35s}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
@@ -84,37 +101,39 @@ body{font-family:var(--font);color:var(--ink);background:#005430;
 .media-sm{width:128px;height:128px}.media-md{width:172px;height:172px}.media-swipe{width:150px;height:140px}
 
 /* world reveal */
-.world-logo{display:block;max-width:240px;width:80%;height:auto;margin:6px auto 14px}
+.world-logo{display:block;max-width:248px;width:82%;height:auto;margin:8px auto 16px}
 .round-list{margin:10px 4px;padding-inline-start:22px;line-height:2;font-weight:600}
 
-/* ===== CHARACTER STAGE (game-style, full body, one at a time) ===== */
-#charMount{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0 10px}
-.char-stage{position:relative;width:100%;display:flex;align-items:flex-end;justify-content:center;min-height:360px}
-.char-arrow{position:absolute;top:46%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:none;
-  background:#fff;color:var(--brand);font-size:22px;font-weight:900;box-shadow:var(--shadow);cursor:pointer;transition:.15s;z-index:4}
+/* ===== CHARACTER STAGE (game-style, gradient hero inside the window) ===== */
+.stage-hero{position:relative;overflow:hidden;background:var(--grad);background-size:180% 180%;
+  animation:bgshift 14s ease infinite;border-radius:20px;padding:12px 6px 14px;margin:6px 0 14px;
+  box-shadow:inset 0 2px 26px rgba(0,0,0,.18)}
+.hero-logo{display:block;height:26px;width:auto;margin:2px auto 2px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+.char-stage{position:relative;width:100%;display:flex;align-items:flex-end;justify-content:center;min-height:330px}
+.char-arrow{position:absolute;top:46%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:none;
+  background:#fff;color:var(--brand);font-size:22px;font-weight:900;box-shadow:0 8px 18px -6px rgba(0,0,0,.5);cursor:pointer;transition:.15s;z-index:4}
 .char-arrow:hover{transform:translateY(-50%) scale(1.08)}
-.char-arrow.prev{inset-inline-start:2px}
-.char-arrow.next{inset-inline-end:2px}
-.char-figwrap{position:relative;display:flex;align-items:flex-end;justify-content:center;height:340px}
-.pedestal{position:absolute;bottom:14px;width:190px;height:54px;border-radius:50%;z-index:1;
-  background:radial-gradient(ellipse at 50% 38%, rgba(255,255,255,.45), rgba(255,255,255,.08) 58%, transparent 72%);
-  box-shadow:0 26px 30px -10px rgba(0,0,0,.35)}
-.char-figure{position:relative;height:300px;width:auto;object-fit:contain;z-index:2;
-  filter:drop-shadow(0 18px 18px rgba(0,0,0,.3));animation:charFloat 4.2s ease-in-out infinite}
+.char-arrow.prev{inset-inline-start:4px}
+.char-arrow.next{inset-inline-end:4px}
+.char-figwrap{position:relative;display:flex;align-items:flex-end;justify-content:center;height:320px}
+.pedestal{position:absolute;bottom:14px;width:188px;height:52px;border-radius:50%;z-index:1;
+  background:radial-gradient(ellipse at 50% 38%, rgba(255,255,255,.5), rgba(255,255,255,.08) 58%, transparent 72%);
+  box-shadow:0 24px 28px -8px rgba(0,0,0,.4)}
+.char-figure{position:relative;height:284px;width:auto;object-fit:contain;z-index:2;
+  filter:drop-shadow(0 16px 16px rgba(0,0,0,.32));animation:charFloat 4.2s ease-in-out infinite}
 @keyframes charFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@media(prefers-reduced-motion:reduce){.char-figure,.char-figure-ph{animation:none}}
-.char-figure-ph{position:relative;z-index:2;height:280px;width:150px;border:2px dashed rgba(255,255,255,.85);border-radius:20px;
+@media(prefers-reduced-motion:reduce){.char-figure,.char-figure-ph,.stage-hero{animation:none}}
+.char-figure-ph{position:relative;z-index:2;height:266px;width:148px;border:2px dashed rgba(255,255,255,.85);border-radius:20px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;background:rgba(255,255,255,.14);animation:charFloat 4.2s ease-in-out infinite}
-.char-figure-ph .pe{font-size:60px}.char-figure-ph .ps{font-weight:800;font-size:12px;opacity:.9}
-.char-name{font-weight:900;font-size:22px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.3);margin-top:4px}
-.char-dots{display:flex;gap:8px;margin:8px 0 2px}
+.char-figure-ph .pe{font-size:58px}.char-figure-ph .ps{font-weight:800;font-size:12px;opacity:.9}
+.char-name{font-weight:900;font-size:22px;color:#fff;text-align:center;text-shadow:0 2px 12px rgba(0,0,0,.35);margin-top:2px}
+.char-dots{display:flex;justify-content:center;gap:8px;margin:8px 0 2px}
 .char-dots span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.45);transition:.2s}
 .char-dots span.on{background:#fff;transform:scale(1.25)}
-.char-select{max-width:260px}
 
 /* round chrome */
 .round-head{display:flex;align-items:center;justify-content:center;margin-bottom:6px}
-.round-tag{font-weight:800;font-size:12.5px;color:var(--brand);background:#fff;border:1.5px solid var(--line);padding:5px 12px;border-radius:999px}
+.round-tag{font-weight:800;font-size:12.5px;color:var(--brand);background:#f7faf8;border:1.5px solid var(--line);padding:5px 12px;border-radius:999px}
 .round-title{font-weight:900;font-size:17px;text-align:center;margin:8px 0 8px}
 
 /* progress dots */
@@ -125,7 +144,7 @@ body{font-family:var(--font);color:var(--ink);background:#005430;
 
 /* swipe */
 .q-area{min-height:230px}
-.swipe-card{background:#f8faf8;border:1.5px solid var(--line);border-radius:20px;padding:16px;width:100%;text-align:center}
+.swipe-card{background:#f7faf8;border:1.5px solid var(--line);border-radius:20px;padding:16px;width:100%;text-align:center}
 .swipe-prompt{font-weight:700;font-size:16px;line-height:1.6;margin:6px 0 0}
 .swipe-btns{display:flex;gap:10px;margin-top:14px}
 .choice{flex:1;font-family:var(--font);font-weight:800;font-size:15px;padding:13px;border:1.5px solid var(--line);
@@ -134,7 +153,7 @@ body{font-family:var(--font);color:var(--ink);background:#005430;
 .choice.sel{background:var(--brand);color:#fff;border-color:var(--brand)}
 
 /* scenario */
-.scn-bubble{background:#f8faf8;border:1.5px solid var(--line);border-radius:18px;padding:14px;font-weight:700;line-height:1.6;margin:8px 0 12px;text-align:center}
+.scn-bubble{background:#f7faf8;border:1.5px solid var(--line);border-radius:18px;padding:14px;font-weight:700;line-height:1.6;margin:8px 0 12px;text-align:center}
 .scn-opts{display:flex;flex-direction:column;gap:10px}
 .scn-opt{font-family:var(--font);font-weight:700;font-size:14.5px;text-align:start;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;transition:.15s;color:var(--ink)}
 .scn-opt:hover{border-color:var(--brand)}
@@ -157,16 +176,16 @@ body{font-family:var(--font);color:var(--ink);background:#005430;
 .badge.no{background:linear-gradient(135deg,#ffe0e6,#ffb3c0)}
 .score-big{font-size:40px;font-weight:900;text-align:center;color:var(--brand)}
 .breakdown{margin:14px 0;display:flex;flex-direction:column;gap:8px}
-.bd-row{display:flex;justify-content:space-between;background:#f8faf8;border-radius:12px;padding:10px 14px;font-weight:700;font-size:13.5px}
+.bd-row{display:flex;justify-content:space-between;background:#f7faf8;border-radius:12px;padding:10px 14px;font-weight:700;font-size:13.5px}
 .fbk{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
 .stars{display:flex;justify-content:center;gap:6px;margin:8px 0}
 .star{font-size:30px;background:none;border:none;cursor:pointer;color:#dcd3ea;transition:.12s}
 .star.on{color:#ffba2e}
 .fbk-area{margin:8px 0;resize:vertical}
 
-/* footer — attached under the card (AURA-style) */
-footer{margin-top:2px}
-.footcard{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:13px 16px;text-align:center}
+/* footer — attached just under the window */
+footer{margin-top:0}
+.footcard{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;text-align:center}
 .foot-logo{height:26px;margin-bottom:6px}
 .foot-copy{font-weight:800;font-size:13px;color:var(--ink)}
 .foot-dev{color:var(--ink-soft);font-size:11.5px;margin-top:3px;line-height:1.5}
@@ -180,47 +199,44 @@ footer{margin-top:2px}
 
 <div class="wrap">
 
-  <div class="topbar">
-    <div class="brand-logos">
-      <img id="cxLogoTop" class="cx-logo" src="assets/logos/cx-hub-white.png" alt="CX Hub">
-      <img id="divLogo" class="div-logo" alt="">
+  <!-- ===== MAIN WINDOW ===== -->
+  <div class="window">
+
+    <div class="win-head">
+      <div class="win-logos">
+        <img id="cxLogoTop" class="cx-logo" src="assets/logos/cx-hub-color.png" alt="CX Hub">
+        <img id="divLogo" class="div-logo" alt="">
+      </div>
+      <button id="langBtn" class="langbtn"><span id="langLabel">EN</span></button>
     </div>
-    <button id="langBtn" class="langbtn"><span id="langLabel">EN</span></button>
+
+    <div class="win-body">
+
+      <section class="screen active" id="screen-intake">
+        <div class="brandbar"></div>
+        <h1 class="h1" id="intakeTitle"></h1>
+        <p class="muted" id="intakeSub"></p>
+        <div id="intakeForm" style="margin-top:16px"></div>
+      </section>
+
+      <section class="screen" id="screen-world"><div id="worldCard"></div></section>
+
+      <section class="screen" id="screen-character"><div id="charMount"></div></section>
+
+      <section class="screen" id="screen-intro"><div id="introCard"></div></section>
+
+      <section class="screen" id="screen-round">
+        <div class="round-head"><span class="round-tag" id="roundTag"></span></div>
+        <div class="round-title" id="roundTitle"></div>
+        <div id="roundMount"></div>
+      </section>
+
+      <section class="screen" id="screen-result"><div id="resultCard"></div></section>
+
+    </div>
   </div>
 
-  <section class="screen active" id="screen-intake">
-    <div class="card">
-      <div class="brandbar"></div>
-      <h1 class="h1" id="intakeTitle"></h1>
-      <p class="muted" id="intakeSub"></p>
-      <div id="intakeForm" style="margin-top:16px"></div>
-    </div>
-  </section>
-
-  <section class="screen" id="screen-world">
-    <div class="card" id="worldCard"></div>
-  </section>
-
-  <section class="screen" id="screen-character">
-    <div id="charMount"></div>
-  </section>
-
-  <section class="screen" id="screen-intro">
-    <div class="card" id="introCard"></div>
-  </section>
-
-  <section class="screen" id="screen-round">
-    <div class="card">
-      <div class="round-head"><span class="round-tag" id="roundTag"></span></div>
-      <div class="round-title" id="roundTitle"></div>
-      <div id="roundMount"></div>
-    </div>
-  </section>
-
-  <section class="screen" id="screen-result">
-    <div class="card" id="resultCard"></div>
-  </section>
-
+  <!-- FOOTER (attached under the window) -->
   <footer><div id="footerMount"></div></footer>
 
 </div>
