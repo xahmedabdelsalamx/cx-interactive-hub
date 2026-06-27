@@ -13,7 +13,7 @@
 
   /* ---------------- UI STRINGS (KSA Arabic + English) ---------------- */
   var UI = {
-    appTitle:   { ar: "تحدّي تجربة الضيوف", en: "CX Onboarding Challenge" },
+    appTitle:   { ar: "تحدّي تجربة الزبائن", en: "CX Onboarding Challenge" },
     intakeSub:  { ar: "سجّل بياناتك عشان تبدأ", en: "Enter your details to begin" },
     empLabel:   { ar: "الرقم الوظيفي", en: "Employee ID" },
     nameLabel:  { ar: "الاسم", en: "Name" },
@@ -40,7 +40,15 @@
     thanks:     { ar: "شكراً لك! 🌟", en: "Thank you! 🌟" },
     soon:       { ar: "هذا العالم تحت الإعداد، قريباً.", en: "This world is coming soon." },
     charNote:   { ar: "شخصيتك بتمثّلك باسمك طول التحدّي", en: "Your character carries your name through the challenge" },
-    notBuilt:   { ar: "هذي الآلية تحت الإعداد", en: "This mechanic isn't built yet" }
+    notBuilt:   { ar: "هذي الآلية تحت الإعداد", en: "This mechanic isn't built yet" },
+    startRound: { ar: "ابدأ الجولة", en: "Start round" },
+    resultReady:{ ar: "أنت جاهز! 🎉", en: "You're ready! 🎉" },
+    mastery:    { ar: "تم تحقيق الإتقان", en: "Mastery Achieved" },
+    championOf: { ar: "بطل", en: "Champion" },
+    scoredTxt:  { ar: "حقّق", en: "Scored" },
+    orgFoot:    { ar: "تجربة الزبائن · CX Hub", en: "Customer Experience · CX Hub" },
+    learnBtn:   { ar: "زر CX Hub للمزيد من التعلّم", en: "Visit the CX Hub for more learning" },
+    scoreSaved: { ar: "تم حفظ نتيجتك", en: "Your score was saved" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -48,6 +56,7 @@
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function L(o) { if (!o) return ""; return o[state.lang] != null ? o[state.lang] : (o.en || o.ar || ""); }
   function u(k) { return L(UI[k]); }
+  function phMedia() { return { type: "placeholder", label: { ar: "صورة / أنيميشن", en: "image / lottie" } }; }
 
   function showScreen(id) {
     var s = document.querySelectorAll(".screen");
@@ -141,8 +150,12 @@
   function buildFooter() {
     var f = CONFIG.footer, m = $("#footerMount"); m.innerHTML = "";
     var card = el("div", "footcard");
-    var logo = el("img", "foot-logo"); logo.src = "assets/logos/cx-hub-color.png"; logo.alt = "CX Hub";
-    card.appendChild(logo);
+    var logos = el("div", "foot-logos");
+    var cx = el("img", "foot-cx"); cx.src = "assets/logos/cx-hub-color.png"; cx.alt = "CX Hub";
+    var divr = el("div", "foot-divider");
+    var al = el("img", "foot-alshaya"); al.src = "assets/logos/alshaya-group-color.png"; al.alt = "Alshaya Group";
+    logos.appendChild(cx); logos.appendChild(divr); logos.appendChild(al);
+    card.appendChild(logos);
     card.appendChild(el("div", "foot-copy", L(f.copyright)));
     var dev = el("div", "foot-dev");
     dev.appendChild(document.createTextNode(L(f.dev) + " "));
@@ -277,7 +290,7 @@
       correct: function (q, a) { return a === !!q.isOpportunity; },
       render: function (q, area, saved, onAnswer) {
         var card = el("div", "swipe-card");
-        if (q.media) card.appendChild(renderMedia(q.media, "media-swipe"));
+        card.appendChild(renderMedia(q.media || phMedia(), "media-swipe"));
         card.appendChild(el("p", "swipe-prompt", L(q.prompt)));
         area.appendChild(card);
         var btns = el("div", "swipe-btns");
@@ -294,7 +307,7 @@
       answered: function (a) { return a != null; },
       correct: function (q, a) { return a === q.correct; },
       render: function (q, area, saved, onAnswer) {
-        if (q.media) area.appendChild(renderMedia(q.media, "media-sm"));
+        area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
         area.appendChild(el("div", "scn-bubble", L(q.scenario)));
         var opts = el("div", "scn-opts");
         function paint(pick) {
@@ -318,8 +331,26 @@
   function playRound() {
     var d = state.division;
     if (state.roundIndex >= d.rounds.length) { showResult(); return; }
-    var round = d.rounds[state.roundIndex];
-    $("#roundTag").textContent = u("roundOf") + " " + (state.roundIndex + 1) + " / " + d.rounds.length;
+    showRoundIntro(d.rounds[state.roundIndex]);
+  }
+
+  function showRoundIntro(round) {
+    rerenderCurrent = function () { showRoundIntro(round); };
+    var c = $("#roundIntroCard"); c.innerHTML = "";
+    var wrap = el("div", "round-intro");
+    wrap.appendChild(el("div", "ri-tag", u("roundOf") + " " + (state.roundIndex + 1) + " / " + state.division.rounds.length));
+    wrap.appendChild(el("div", "ri-title", L(round.title)));
+    wrap.appendChild(renderMedia(round.media || phMedia(), "media-md"));
+    if (round.intro) wrap.appendChild(el("p", "ri-text", L(round.intro)));
+    var btn = el("button", "btn", u("startRound"));
+    btn.onclick = function () { beginRound(round); };
+    wrap.appendChild(btn);
+    c.appendChild(wrap);
+    showScreen("screen-roundintro");
+  }
+
+  function beginRound(round) {
+    $("#roundTag").textContent = u("roundOf") + " " + (state.roundIndex + 1) + " / " + state.division.rounds.length;
     $("#roundTitle").textContent = L(round.title);
     showScreen("screen-round");
     rerenderCurrent = function () { $("#roundTitle").textContent = L(round.title); draw(); };
@@ -331,7 +362,6 @@
 
     function draw() {
       mount.innerHTML = "";
-      if (round.intro) mount.appendChild(el("p", "muted", L(round.intro)));
 
       var prog = el("div", "progress");
       for (var i = 0; i < qs.length; i++) {
@@ -390,15 +420,18 @@
     if (state.certified) {
       c.appendChild(el("div", "badge ok", "✅"));
       c.appendChild(el("h2", "h2", u("certified")));
+      c.appendChild(learnButton());
       showScreen("screen-result"); return;
     }
 
     var total = state.scores.length ? Math.round(state.scores.reduce(function (a, b) { return a + b; }, 0) / state.scores.length) : 0;
     var passed = total >= CONFIG.passMark;
 
-    c.appendChild(el("div", "badge " + (passed ? "ok" : "no"), passed ? "🏅" : "💪"));
-    c.appendChild(el("div", "score-big", total + "%"));
-    c.appendChild(el("h2", "h2", passed ? u("passed") : u("failed")));
+    c.appendChild(el("div", "result-head", passed ? u("resultReady") : u("failed")));
+
+    var ring = el("div", "score-ring"); ring.style.setProperty("--p", total);
+    ring.appendChild(el("div", null, total + "%"));
+    c.appendChild(ring);
 
     var bd = el("div", "breakdown");
     state.division.rounds.forEach(function (rd, idx) {
@@ -420,9 +453,59 @@
       retry.onclick = function () { state.roundIndex = 0; state.scores = []; playRound(); };
       c.appendChild(retry);
     } else {
+      c.appendChild(buildBadge(total));
       c.appendChild(buildFeedback());
+      c.appendChild(learnButton());
+      var saved = el("div", "score-saved");
+      saved.appendChild(el("span", null, "✅"));
+      saved.appendChild(el("span", null, u("scoreSaved")));
+      c.appendChild(saved);
+      confetti();
     }
     showScreen("screen-result");
+  }
+
+  function learnButton() {
+    var a = el("a", "btn", u("learnBtn"));
+    a.href = WORLDS[state.world].learnUrl; a.target = "_blank"; a.rel = "noopener";
+    return a;
+  }
+
+  function buildBadge(total) {
+    var w = WORLDS[state.world], d = state.division;
+    var card = el("div", "badgecard");
+    card.style.backgroundImage = w.bgGradient;
+    var logo = el("img", "badge-logo"); logo.src = w.logoWhite; logo.alt = ""; card.appendChild(logo);
+    var medal = el("div", "badge-medal"); medal.appendChild(el("div", "badge-star", "★")); card.appendChild(medal);
+    card.appendChild(el("div", "badge-mastery", u("mastery")));
+    card.appendChild(el("div", "badge-name", state.name || ""));
+    var champ = state.lang === "ar" ? (u("championOf") + " " + L(d.title)) : (L(d.title) + " " + u("championOf"));
+    card.appendChild(el("div", "badge-sub", champ));
+    card.appendChild(el("div", "badge-score", u("scoredTxt") + " " + total + "%"));
+    card.appendChild(el("div", "badge-date", monthYear()));
+    card.appendChild(el("div", "badge-foot", u("orgFoot")));
+    return card;
+  }
+
+  function monthYear() {
+    var m = state.lang === "ar"
+      ? ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
+      : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var dt = new Date(); return m[dt.getMonth()] + " " + dt.getFullYear();
+  }
+
+  function confetti() {
+    var box = $("#confetti"); box.innerHTML = "";
+    var cols = ["#e43c50", "#f15a24", "#006241", "#ffba2e", "#7b61ff", "#19b36b"];
+    for (var i = 0; i < 70; i++) {
+      var p = el("i");
+      p.style.left = (Math.random() * 100) + "%";
+      p.style.background = cols[i % cols.length];
+      p.style.animationDuration = (Math.random() * 1.6 + 2.2) + "s";
+      p.style.animationDelay = (Math.random() * 0.5) + "s";
+      box.appendChild(p);
+    }
+    setTimeout(function () { box.innerHTML = ""; }, 4400);
   }
 
   function buildFeedback() {

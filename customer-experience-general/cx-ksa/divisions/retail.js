@@ -31,19 +31,19 @@ window.DIVISION_retail = {
       media: "retailIntro",
       questions: [
         {
-          prompt: { ar: "عميل يقف قدام الرف ويقلّب في المنتج أكثر من مرة.", en: "A customer keeps picking up and putting back the same product." },
+          prompt: { ar: "زبون يقف قدام الرف ويقلّب في المنتج أكثر من مرة.", en: "A customer keeps picking up and putting back the same product." },
           media: "retailR1_q1",
           isOpportunity: true,
           feedback: { ar: "فرصة! ترددهم إشارة إنهم محتاجين مساعدة أو معلومة.", en: "Opportunity — hesitation is a cue they need help or info." }
         },
         {
-          prompt: { ar: "عميل يمشي بسرعة وهو ماسك تلفونه على أذنه.", en: "A customer walks past quickly with a phone to their ear." },
+          prompt: { ar: "زبون يمشي بسرعة وهو ماسك تلفونه على أذنه.", en: "A customer walks past quickly with a phone to their ear." },
           media: "retailR1_q2",
           isOpportunity: false,
           feedback: { ar: "مو الوقت المناسب — احترم انشغالهم وكن جاهز لو احتاجوك.", en: "Not now — respect that they're busy, stay ready if needed." }
         },
         {
-          prompt: { ar: "عميل يسأل: 'فيه عروض هاليومين؟'", en: "A customer asks: 'Any offers these days?'" },
+          prompt: { ar: "زبون يسأل: 'فيه عروض هاليومين؟'", en: "A customer asks: 'Any offers these days?'" },
           isOpportunity: true,
           feedback: { ar: "فرصة واضحة لعرض القيمة والمنتجات المناسبة.", en: "Clear opening to present value and the right products." }
         }
@@ -62,7 +62,7 @@ window.DIVISION_retail = {
       media: "retailR4_q1",
       questions: [
         {
-          scenario: { ar: "عميلة رجّعت قطعة فيها عيب وهي منزعجة شوي.", en: "A customer returns a faulty item and seems a bit upset." },
+          scenario: { ar: "زبونة رجّعت قطعة فيها عيب وهي منزعجة شوي.", en: "A customer returns a faulty item and seems a bit upset." },
           options: [
             { ar: "آسف على الإزعاج، نبدلها لك حالاً ونتأكد إنها سليمة.", en: "I'm sorry for the trouble — let's swap it right away and check it's perfect." },
             { ar: "هذي سياسة الشركة، ما أقدر أسوي شي.", en: "That's company policy, nothing I can do." },
@@ -72,7 +72,7 @@ window.DIVISION_retail = {
           feedback: { ar: "الاعتذار + الحل الفوري يحوّل الموقف إلى ولاء.", en: "Apology + an immediate fix turns the moment into loyalty." }
         },
         {
-          scenario: { ar: "عميل دائم يسأل عن أي جديد عنده في المتجر.", en: "A regular customer asks what's new in store." },
+          scenario: { ar: "زبون دائم يسأل عن أي جديد عنده في المتجر.", en: "A regular customer asks what's new in store." },
           options: [
             { ar: "أعرفه على الجديد وأربطه بذوقه اللي أعرفه.", en: "Show the new arrivals and tie them to what I know he likes." },
             { ar: "أقول له شوف بنفسك.", en: "Tell him to have a look around." },

@@ -17,7 +17,7 @@ window.MEDIA = {
   retailR1_q1:   { type:"placeholder", label:{ en:"R1 · scene", ar:"الجولة ١ · مشهد" } },
   retailR1_q2:   { type:"placeholder", label:{ en:"R1 · scene", ar:"الجولة ١ · مشهد" } },
   retailR2_q1:   { type:"placeholder", label:{ en:"R2 · product", ar:"الجولة ٢ · منتج" } },
-  retailR4_q1:   { type:"placeholder", label:{ en:"R4 · guest", ar:"الجولة ٤ · عميل" } },
+  retailR4_q1:   { type:"placeholder", label:{ en:"R4 · guest", ar:"الجولة ٤ · زبون" } },
 
   /* ---- HOSPITALITY · Art of Guest Experience ---- */
   hospIntro:     { type:"placeholder", label:{ en:"Hospitality intro · 344×344", ar:"مقدمة · ٣٤٤×٣٤٤" } },

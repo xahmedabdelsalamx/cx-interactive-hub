@@ -19,8 +19,8 @@ window.CONFIG = {
 
   /* Footer (attached under the card, AURA-style) */
   footer: {
-    copyright: { ar: "© الشايع", en: "© Alshaya" },
-    dev:       { ar: "تم التطوير بواسطة فريق تجربة العملاء · ٢٠٢٦ · لأي استفسار؟", 
+    copyright: { ar: "© مجموعة الشايع", en: "© Alshaya Group" },
+    dev:       { ar: "تم التطوير بواسطة فريق تجربة الزبائن · ٢٠٢٦ · لأي استفسار؟", 
                  en: "Developed by the Customer Experience team · 2026 · Any queries?" },
     contact:   { ar: "تواصل معنا", en: "contact here" },
     email:     "ahmed.abdelsalam@alshaya.com"

@@ -17,6 +17,7 @@ window.WORLDS = {
     logoColor: "assets/logos/art-of-guest-experience-color.png",
     logoWhite: "assets/logos/art-of-guest-experience-white.png",
     division: "hospitality",
+    learnUrl: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/229096/art-of-guest-experience-hospitality?channelId=238821",
     characters: [
       { id: "h1", png: "assets/characters/hosp-1.png" },
       { id: "h2", png: "assets/characters/hosp-2.png" },
@@ -32,6 +33,7 @@ window.WORLDS = {
     logoColor: "assets/logos/art-of-selling-color.png",
     logoWhite: "assets/logos/art-of-selling-white.png",
     division: "retail",
+    learnUrl: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/228974/retail?channelId=230797",
     characters: [
       { id: "r1", png: "assets/characters/retail-1.png" },
       { id: "r2", png: "assets/characters/retail-2.png" },
@@ -47,6 +49,7 @@ window.WORLDS = {
     logoColor: "assets/logos/art-of-connection-color.png",
     logoWhite: "assets/logos/art-of-connection-white.png",
     division: "starbucks",
+    learnUrl: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/229098/art-of-connection-starbucks?channelId=238822",
     characters: [
       { id: "s1", png: "assets/characters/sbux-1.png" },
       { id: "s2", png: "assets/characters/sbux-2.png" },
