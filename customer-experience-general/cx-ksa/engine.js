@@ -17,11 +17,11 @@
     appTitle:   { ar: "تحدّي تجربة الزبائن", en: "CX Onboarding Challenge" },
     intakeSub:  { ar: "سجّل بياناتك عشان تبدأ", en: "Enter your details to begin" },
     empLabel:   { ar: "الرقم الوظيفي", en: "Employee ID" },
-    nameLabel:  { ar: "الاسم", en: "Name" },
+    nameLabel:  { ar: "الاسم بالكامل", en: "Full name" },
     empPH:      { ar: "مثال 323999", en: "e.g. 323999" },
-    namePH:     { ar: "الاسم الكامل", en: "Full Name" },
+    namePH:     { ar: "مثال: أحمد شعبان", en: "Example: Ahmed Shaaban" },
     brandLabel: { ar: "علامتك التجارية", en: "Brand" },
-    brandPH:    { ar: "اختر علامتك", en: "Choose your brand" },
+    brandPH:    { ar: "اختر علامتك التجارية", en: "Choose your brand" },
     start:      { ar: "ابدأ", en: "Start" },
     enterWorld: { ar: "ادخل عالمك", en: "Enter your world" },
     pickChar:   { ar: "اختر شخصيتك", en: "Choose your character" },
@@ -183,6 +183,7 @@
     ksaTheme(); setBg("entry"); setHeaderLogos("entry");
     $("#intakeTitle").textContent = u("appTitle");
     $("#intakeSub").textContent = u("intakeSub");
+    renderKsaFlag();
     var root = $("#intakeForm"); root.innerHTML = "";
     root.appendChild(fieldText("empId", u("empLabel"), state.empId, u("empPH")));
     root.appendChild(fieldText("name", u("nameLabel"), state.name, u("namePH")));
@@ -221,6 +222,25 @@
     f.appendChild(inp); return f;
   }
 
+  /* KSA flag on the entry screen: waving emoji now; upgrades to a gently waving
+     real flag automatically if assets/images/ksa-flag.png is present. */
+  function renderKsaFlag() {
+    var host = $("#ksaFlag"); if (!host) return;
+    host.innerHTML = "";
+    host.appendChild(el("span", "flag-emoji", "🇸🇦"));
+    var probe = new Image();
+    probe.onload = function () {
+      host.innerHTML =
+        '<svg class="ksa-flag-svg" viewBox="0 0 122 82" xmlns="http://www.w3.org/2000/svg">' +
+        '<defs><filter id="ksaWave"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.022" numOctaves="2" result="n">' +
+        '<animate attributeName="baseFrequency" dur="7s" values="0.012 0.022;0.018 0.026;0.012 0.022" repeatCount="indefinite"/>' +
+        '</feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="8"/></filter></defs>' +
+        '<image href="assets/images/ksa-flag.png" x="1" y="1" width="120" height="80" preserveAspectRatio="xMidYMid slice" filter="url(#ksaWave)"/>' +
+        '</svg>';
+    };
+    probe.src = "assets/images/ksa-flag.png";
+  }
+
   /* ---------------- WORLD REVEAL ---------------- */
   function enterWorld() {
     applyWorldTheme(state.world); setBg("world"); setHeaderLogos("world");
@@ -256,18 +276,16 @@
       prev.onclick = function () { ci = (ci - 1 + chars.length) % chars.length; draw(); };
       nextB.onclick = function () { ci = (ci + 1) % chars.length; draw(); };
 
-      var figwrap = el("div", "char-figwrap");
-      figwrap.appendChild(el("div", "pedestal"));
-      var img = el("img", "char-figure"); img.src = chars[ci].png; img.alt = "";
+      var circle = el("div", "char-bigcircle");
+      var img = el("img", "char-bigimg"); img.src = chars[ci].png; img.alt = "";
       img.onerror = function () {
-        var ph = el("div", "char-figure-ph");
-        ph.appendChild(el("div", "pe", w.floaters[0]));
-        ph.appendChild(el("div", "ps", state.world + " · " + (ci + 1)));
-        figwrap.replaceChild(ph, img);
+        circle.classList.add("ph");
+        if (img.parentNode) circle.removeChild(img);
+        circle.appendChild(el("div", "char-bigph", w.floaters[0]));
       };
-      figwrap.appendChild(img);
+      circle.appendChild(img);
 
-      stage.appendChild(prev); stage.appendChild(figwrap); stage.appendChild(nextB);
+      stage.appendChild(prev); stage.appendChild(circle); stage.appendChild(nextB);
       hero.appendChild(stage);
 
       hero.appendChild(el("div", "char-name", state.name || ""));

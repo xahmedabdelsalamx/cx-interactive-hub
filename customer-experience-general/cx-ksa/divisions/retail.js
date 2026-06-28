@@ -51,6 +51,18 @@ window.DIVISION_retail = {
           media: "retailR1_q5",
           isOpportunity: false,
           feedback: { ar: "مو وقتها، خلّك جاهز وحاضر، وتواصل معه لما يفضى.", en: "Not the moment, stay ready and present, and connect once they're free." }
+        },
+        {
+          prompt: { ar: "زبونة في Bath & Body Works تشمّ أكثر من عطر جسم وتقلّب بينهم بتردّد.", en: "A shopper at Bath & Body Works smells several body mists, hesitating between them." },
+          media: "retailR1_q6",
+          isOpportunity: true,
+          feedback: { ar: "لاحظي ترددها، اسأليها تحب الروائح المنعشة ولا الدافئة عشان توجّهيها.", en: "Notice the hesitation, ask if she prefers fresh or warm scents to guide her." }
+        },
+        {
+          prompt: { ar: "زبونة جرّبت درجة أحمر شفاه على يدها وكمّلت تتفرّج بصمت.", en: "A shopper swatched a lipstick shade on her hand and keeps browsing quietly." },
+          media: "retailR1_q7",
+          isOpportunity: false,
+          feedback: { ar: "أعطيها مساحة بعد التجربة، وخلّيك قريبة لو احتاجت رأيك بالدرجة.", en: "Give her space after the swatch, stay close in case she wants help with the shade." }
         }
       ]
     },
@@ -120,6 +132,28 @@ window.DIVISION_retail = {
             { left: { ar: "ما يبي إضافات", en: "Doesn't want extras" }, right: { ar: "تمام، اللي اخترته حلو وكافي", en: "Of course, what you chose is great as is" } }
           ],
           feedback: { ar: "لغة «النعم السهلة» ترشد بلطف وتحترم القرار، الاحترام يبني الثقة، والثقة تبني البيع.", en: "The 'easy yes' language guides gently and respects the decision, respect builds trust, trust builds the sale." }
+        },
+        {
+          instruction: { ar: "وصّلي كل ميزة في منتج تجميل بالإحساس اللي يوصل للزبونة.", en: "Match each beauty-product feature to the feeling it gives the customer." },
+          media: "retailR2_q6",
+          pairs: [
+            { left: { ar: "أحمر شفاه مرطّب", en: "Hydrating lipstick" }, right: { ar: "يحس مريح وما ينشّف الشفايف", en: "Comfortable, never dries your lips" } },
+            { left: { ar: "كريم جسم برائحة الفانيلا", en: "Vanilla body cream" }, right: { ar: "دفء وراحة يدوم طول اليوم", en: "Warmth and comfort that lasts all day" } },
+            { left: { ar: "أساس بتغطية خفيفة", en: "Light-coverage foundation" }, right: { ar: "مظهر طبيعي يخلّي البشرة تتنفّس", en: "A natural look that lets skin breathe" } },
+            { left: { ar: "عطر بالحمضيات", en: "Citrus fragrance" }, right: { ar: "انتعاش حيوي تبدأ به يومك", en: "A lively freshness to start your day" } }
+          ],
+          feedback: { ar: "حتى في التجميل، حوّلي الميزة لإحساس تعيشه الزبونة.", en: "Even in beauty, turn the feature into a feeling she lives." }
+        },
+        {
+          instruction: { ar: "وصّلي اختيار الزبونة بالإضافة الطبيعية اللي تكمّله.", en: "Match her choice to the natural add-on that completes it." },
+          media: "retailR2_q7",
+          pairs: [
+            { left: { ar: "اختارت عطر من Bath & Body Works", en: "Chose a Bath & Body Works mist" }, right: { ar: "لوشن بنفس الرائحة يثبّتها أطول", en: "A matching lotion that makes it last longer" } },
+            { left: { ar: "اختارت أحمر شفاه", en: "Chose a lipstick" }, right: { ar: "ملمّع أو مثبّت يكمّل الإطلالة", en: "A gloss or setter to complete the look" } },
+            { left: { ar: "اختارت كريم أساس", en: "Chose a foundation" }, right: { ar: "إسفنجة للتطبيق الأنعم", en: "A sponge for smoother application" } },
+            { left: { ar: "اختارت غسول وجه", en: "Chose a face wash" }, right: { ar: "مرطّب يكمّل الروتين", en: "A moisturizer to complete the routine" } }
+          ],
+          feedback: { ar: "الإضافة المرتبطة تكمّل الروتين وتضيف قيمة، مو مجرد تكديس.", en: "A linked add-on completes the routine and adds value, not clutter." }
         }
       ]
     },
@@ -192,6 +226,29 @@ window.DIVISION_retail = {
             { ar: "ودّعه بطاقة إيجابية", en: "Close with positive energy" }
           ],
           feedback: { ar: "من القرار للوداع: سلس، إنساني، ولا تنسى البيع والولاء حتى عند الدفع.", en: "From decision to goodbye: smooth, human, and don't forget selling and loyalty even at the till." }
+        },
+        {
+          instruction: { ar: "زبونة تشتري عطر هدية من Bath & Body Works، رتّبي تجربة الدفع.", en: "A shopper buys a Bath & Body Works gift fragrance, order the checkout." },
+          media: "retailR3_q6",
+          steps: [
+            { ar: "رحّبي باختيارها للهدية", en: "Acknowledge her gift choice" },
+            { ar: "اقترحي تغليف هدية أنيق", en: "Offer elegant gift wrapping" },
+            { ar: "اذكري مزايا أورا", en: "Mention Aura benefits" },
+            { ar: "غلّفيها بعناية", en: "Pack it with care" },
+            { ar: "ودّعيها بحرارة", en: "Send her off warmly" }
+          ],
+          feedback: { ar: "تجربة الهدية تبدأ من الكاشير، اجعليها مميزة من البداية للنهاية.", en: "The gift experience starts at the till, make it special from start to finish." }
+        },
+        {
+          instruction: { ar: "زبونة تسأل عن روتين بشرة بسيط، رتّبي خطوات توصيتك.", en: "A shopper asks for a simple skincare routine, order your recommendation." },
+          media: "retailR3_q7",
+          steps: [
+            { ar: "افهمي نوع بشرتها", en: "Understand her skin type" },
+            { ar: "اقترحي الغسول المناسب", en: "Suggest the right cleanser" },
+            { ar: "أضيفي المرطّب كخطوة طبيعية", en: "Add the moisturizer as a natural step" },
+            { ar: "اختمي بنصيحة استخدام بسيطة", en: "Finish with one simple usage tip" }
+          ],
+          feedback: { ar: "رتّبي الروتين خطوة بخطوة عشان القرار يكون أسهل وأوضح.", en: "Order the routine step by step so the decision is easier and clearer." }
         }
       ]
     },
@@ -261,6 +318,28 @@ window.DIVISION_retail = {
           ],
           correct: 0,
           feedback: { ar: "اللحظات الأخيرة تصنع الذكرى، شكر صادق + أورا + دعوة ترجع تبني الولاء.", en: "The final moments make the memory, sincere thanks + Aura + an invite build loyalty." }
+        },
+        {
+          scenario: { ar: "زبونة رجعت لأن درجة كريم الأساس ما ناسبت لون بشرتها.", en: "A shopper returns because the foundation shade didn't match her skin." },
+          media: "retailR4_q6",
+          options: [
+            { ar: "أعتذر، أساعدها تلاقي الدرجة الصح وأرشدها تجرّبها على الفك", en: "Apologize, help her find the right shade, and guide her to test it on the jaw" },
+            { ar: "أقول لها الدرجة صح وهي غلطت بالاختيار", en: "Tell her the shade is fine and she chose wrong" },
+            { ar: "أقول لها ما فيه استبدال", en: "Tell her there are no exchanges" }
+          ],
+          correct: 0,
+          feedback: { ar: "استعادة الخدمة بحل واضح للدرجة الصح يبني الثقة بالتجربة.", en: "Recovery with a clear fix for the right shade builds trust in the experience." }
+        },
+        {
+          scenario: { ar: "زبونة مترددة تجرّب تستر لأنها قلقانة من النظافة.", en: "A shopper hesitates to try a tester out of hygiene concern." },
+          media: "retailR4_q7",
+          options: [
+            { ar: "أطمّنها، وأوفّر لها عيّنة نظيفة أو أداة استخدام مرة وحدة", en: "Reassure her and offer a clean sample or a single-use applicator" },
+            { ar: "أقول لها التسترات نظيفة وخلاص", en: "Just tell her the testers are clean" },
+            { ar: "أتجاهل قلقها", en: "Ignore her concern" }
+          ],
+          correct: 0,
+          feedback: { ar: "النظافة جزء من الثقة بالتجربة، وطمأنتها تصنع راحة.", en: "Hygiene is part of trust in the experience, reassuring her creates comfort." }
         }
       ]
     },
@@ -306,6 +385,14 @@ window.DIVISION_retail = {
           media: "retailR5_q7",
           options: [ { ar: "أعرف عرضه بجملة وحدة واضحة وحماسية", en: "Know it in one clear, exciting line" }, { ar: "ما أذكره عشان أوفّر وقت", en: "Skip it to save time" } ],
           correct: 0, feedback: { ar: "الفخر بالمنتج يبيع بشكل طبيعي.", en: "Pride in the product sells naturally." } },
+        { prompt: { ar: "زبونة محتارة بين عطرين والوقت ضيق؟", en: "A shopper torn between two fragrances, time is tight?" },
+          media: "retailR5_q9",
+          options: [ { ar: "أسألها تحب المنعش ولا الدافئ وأرشّح بسرعة", en: "Ask fresh or warm and recommend fast" }, { ar: "أخليها تقرر لحالها", en: "Leave her to decide alone" } ],
+          correct: 0, feedback: { ar: "سؤال سريع واحد يوجّه القرار.", en: "One quick question guides the decision." } },
+        { prompt: { ar: "تستر خلص قدام الزبونة؟", en: "A tester runs out in front of the shopper?" },
+          media: "retailR5_q10",
+          options: [ { ar: "أبدّله بسرعة وأكمل بابتسامة", en: "Swap it fast and carry on with a smile" }, { ar: "أتجاهل وأكمل", en: "Ignore it and move on" } ],
+          correct: 0, feedback: { ar: "حل سريع يحافظ على التجربة.", en: "A quick fix protects the experience." } },
         { prompt: { ar: "ختام كل تفاعل بموسم الذروة؟", en: "Ending every peak-season interaction?" },
           media: "retailR5_q8",
           options: [ { ar: "فوز واحد وشكر واحد وابتسامة", en: "One win, one thank-you, one smile" }, { ar: "أنهي بسرعة بدون وداع", en: "End fast with no goodbye" } ],

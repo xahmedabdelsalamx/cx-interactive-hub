@@ -22,6 +22,8 @@ window.MEDIA = {
   retailR1_q3:   { type:"placeholder", label:{ en:"R1 · Q3", ar:"الجولة 1 · س3" } },
   retailR1_q4:   { type:"placeholder", label:{ en:"R1 · Q4", ar:"الجولة 1 · س4" } },
   retailR1_q5:   { type:"placeholder", label:{ en:"R1 · Q5", ar:"الجولة 1 · س5" } },
+  retailR1_q6:   { type:"placeholder", label:{ en:"R1 · Q6", ar:"الجولة 1 · س6" } },
+  retailR1_q7:   { type:"placeholder", label:{ en:"R1 · Q7", ar:"الجولة 1 · س7" } },
 
   /* R2 match — Storytelling & Recommendation */
   retailR2_intro:{ type:"placeholder", label:{ en:"R2 · intro", ar:"الجولة 2 · مقدمة" } },
@@ -30,6 +32,8 @@ window.MEDIA = {
   retailR2_q3:   { type:"placeholder", label:{ en:"R2 · Q3", ar:"الجولة 2 · س3" } },
   retailR2_q4:   { type:"placeholder", label:{ en:"R2 · Q4", ar:"الجولة 2 · س4" } },
   retailR2_q5:   { type:"placeholder", label:{ en:"R2 · Q5", ar:"الجولة 2 · س5" } },
+  retailR2_q6:   { type:"placeholder", label:{ en:"R2 · Q6", ar:"الجولة 2 · س6" } },
+  retailR2_q7:   { type:"placeholder", label:{ en:"R2 · Q7", ar:"الجولة 2 · س7" } },
 
   /* R3 order — Closing & Seamless Checkout */
   retailR3_intro:{ type:"placeholder", label:{ en:"R3 · intro", ar:"الجولة 3 · مقدمة" } },
@@ -38,6 +42,8 @@ window.MEDIA = {
   retailR3_q3:   { type:"placeholder", label:{ en:"R3 · Q3", ar:"الجولة 3 · س3" } },
   retailR3_q4:   { type:"placeholder", label:{ en:"R3 · Q4", ar:"الجولة 3 · س4" } },
   retailR3_q5:   { type:"placeholder", label:{ en:"R3 · Q5", ar:"الجولة 3 · س5" } },
+  retailR3_q6:   { type:"placeholder", label:{ en:"R3 · Q6", ar:"الجولة 3 · س6" } },
+  retailR3_q7:   { type:"placeholder", label:{ en:"R3 · Q7", ar:"الجولة 3 · س7" } },
 
   /* R4 scenario — Loyalty & Service Recovery */
   retailR4_intro:{ type:"placeholder", label:{ en:"R4 · intro", ar:"الجولة 4 · مقدمة" } },
@@ -46,6 +52,8 @@ window.MEDIA = {
   retailR4_q3:   { type:"placeholder", label:{ en:"R4 · Q3", ar:"الجولة 4 · س3" } },
   retailR4_q4:   { type:"placeholder", label:{ en:"R4 · Q4", ar:"الجولة 4 · س4" } },
   retailR4_q5:   { type:"placeholder", label:{ en:"R4 · Q5", ar:"الجولة 4 · س5" } },
+  retailR4_q6:   { type:"placeholder", label:{ en:"R4 · Q6", ar:"الجولة 4 · س6" } },
+  retailR4_q7:   { type:"placeholder", label:{ en:"R4 · Q7", ar:"الجولة 4 · س7" } },
 
   /* R5 rush — BONUS · Peak Season */
   retailR5_intro:{ type:"placeholder", label:{ en:"Bonus · intro", ar:"المكافأة · مقدمة" } },
@@ -57,6 +65,8 @@ window.MEDIA = {
   retailR5_q6:   { type:"placeholder", label:{ en:"Bonus · Q6", ar:"المكافأة · س6" } },
   retailR5_q7:   { type:"placeholder", label:{ en:"Bonus · Q7", ar:"المكافأة · س7" } },
   retailR5_q8:   { type:"placeholder", label:{ en:"Bonus · Q8", ar:"المكافأة · س8" } },
+  retailR5_q9:   { type:"placeholder", label:{ en:"Bonus · Q9", ar:"المكافأة · س9" } },
+  retailR5_q10:  { type:"placeholder", label:{ en:"Bonus · Q10", ar:"المكافأة · س10" } },
 
   /* ---- HOSPITALITY · Art of Guest Experience ---- */
   hospIntro:     { type:"placeholder", label:{ en:"Hospitality intro · 344×344", ar:"مقدمة · 344×344" } },
