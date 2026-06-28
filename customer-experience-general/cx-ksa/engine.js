@@ -64,6 +64,7 @@
   function L(o) { if (!o) return ""; return o[state.lang] != null ? o[state.lang] : (o.en || o.ar || ""); }
   function u(k) { return L(UI[k]); }
   function phMedia() { return { type: "placeholder", label: { ar: "صورة / أنيميشن", en: "image / lottie" } }; }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
 
   function showScreen(id) {
     var s = document.querySelectorAll(".screen");
@@ -336,6 +337,84 @@
         });
         area.appendChild(opts);
         if (saved != null) paint(saved);
+      }
+    },
+    /* MATCH — pair each left item with its correct right (rights shuffled) */
+    match: {
+      answered: function (a) { return a && a.length && a.every(function (x) { return x != null; }); },
+      correct: function (q, a) { return a && a.every(function (x, i) { return x === i; }); },
+      render: function (q, area, saved, onAnswer) {
+        var n = q.pairs.length;
+        var assign = saved ? saved.slice() : []; for (var z = 0; z < n; z++) if (assign[z] === undefined) assign[z] = null;
+        var active = null;
+        if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
+        area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
+        var grid = el("div", "match-grid");
+        var lc = el("div", "match-col"), rc = el("div", "match-col");
+        var rights = q.pairs.map(function (p, i) { return { text: p.right, pidx: i }; }); shuffle(rights);
+        var lChips = [], rChips = [];
+        q.pairs.forEach(function (p, i) {
+          var c = el("button", "match-chip"); c.appendChild(el("span", "match-badge")); c.appendChild(el("span", "match-txt", L(p.left)));
+          c.onclick = function () { leftClick(i); }; lChips.push(c); lc.appendChild(c);
+        });
+        rights.forEach(function (r) {
+          var c = el("button", "match-chip"); c.appendChild(el("span", "match-badge")); c.appendChild(el("span", "match-txt", L(r.text)));
+          c._pidx = r.pidx; c.onclick = function () { rightClick(r.pidx); }; rChips.push(c); rc.appendChild(c);
+        });
+        grid.appendChild(lc); grid.appendChild(rc); area.appendChild(grid);
+        function paint() {
+          lChips.forEach(function (c, i) {
+            c.querySelector(".match-badge").textContent = assign[i] != null ? (i + 1) : "";
+            c.classList.toggle("assigned", assign[i] != null); c.classList.toggle("active", active === i);
+          });
+          rChips.forEach(function (c) {
+            var li = assign.indexOf(c._pidx);
+            c.querySelector(".match-badge").textContent = li >= 0 ? (li + 1) : "";
+            c.classList.toggle("assigned", li >= 0);
+          });
+        }
+        function leftClick(i) { if (assign[i] != null) { assign[i] = null; active = i; onAnswer(assign.slice()); } else { active = i; } paint(); }
+        function rightClick(pidx) {
+          if (active == null) return;
+          var prev = assign.indexOf(pidx); if (prev >= 0) assign[prev] = null;
+          assign[active] = pidx; active = null; paint(); onAnswer(assign.slice());
+        }
+        paint();
+      }
+    },
+    /* ORDER — tap the steps in the correct sequence (display shuffled) */
+    order: {
+      answered: function (a) { return a && a.seq && a.seq.length === a.n; },
+      correct: function (q, a) { return a && a.seq && a.seq.length === q.steps.length && a.seq.every(function (o, k) { return o === k; }); },
+      render: function (q, area, saved, onAnswer) {
+        var n = q.steps.length;
+        var seq = saved && saved.seq ? saved.seq.slice() : [];
+        if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
+        area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
+        var list = el("div", "order-list");
+        var disp = q.steps.map(function (s, i) { return { text: s, oidx: i }; }); shuffle(disp);
+        var chips = [];
+        disp.forEach(function (d) {
+          var c = el("button", "order-chip"); c.appendChild(el("span", "order-badge")); c.appendChild(el("span", "order-text", L(d.text)));
+          c._oidx = d.oidx; c.onclick = function () { click(d.oidx); }; chips.push(c); list.appendChild(c);
+        });
+        area.appendChild(list);
+        var reset = el("button", "order-reset", L({ ar: "إعادة الترتيب", en: "Reset order" }));
+        reset.onclick = function () { seq = []; paint(); onAnswer({ seq: seq.slice(), n: n }); };
+        area.appendChild(reset);
+        function paint() {
+          chips.forEach(function (c) {
+            var pos = seq.indexOf(c._oidx);
+            c.querySelector(".order-badge").textContent = pos >= 0 ? (pos + 1) : "";
+            c.classList.toggle("ordered", pos >= 0);
+          });
+        }
+        function click(oidx) {
+          var pos = seq.indexOf(oidx);
+          if (pos >= 0) seq = seq.slice(0, pos); else if (seq.length < n) seq.push(oidx);
+          paint(); onAnswer({ seq: seq.slice(), n: n });
+        }
+        paint();
       }
     }
   };
