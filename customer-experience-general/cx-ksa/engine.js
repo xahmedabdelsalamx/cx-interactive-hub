@@ -18,7 +18,7 @@
     intakeSub:  { ar: "سجّل بياناتك عشان تبدأ", en: "Enter your details to begin" },
     empLabel:   { ar: "الرقم الوظيفي", en: "Employee ID" },
     nameLabel:  { ar: "الاسم", en: "Name" },
-    empPH:      { ar: "مثال ٣٢٣٩٩٩", en: "e.g. 323999" },
+    empPH:      { ar: "مثال 323999", en: "e.g. 323999" },
     namePH:     { ar: "الاسم الكامل", en: "Full Name" },
     brandLabel: { ar: "علامتك التجارية", en: "Brand" },
     brandPH:    { ar: "اختر علامتك", en: "Choose your brand" },
@@ -55,7 +55,12 @@
     bonusRound: { ar: "جولة المكافأة ⚡", en: "Bonus Round ⚡" },
     bonusLbl:   { ar: "مكافأة · سرعة الموسم", en: "Bonus · Peak Rush" },
     rushGo:     { ar: "بسرعة!", en: "Go fast!" },
-    timeUp:     { ar: "انتهى الوقت!", en: "Time's up!" }
+    timeUp:     { ar: "انتهى الوقت!", en: "Time's up!" },
+    check:      { ar: "تحقّق", en: "Check" },
+    tryAgain1:  { ar: "مو بالضبط، باقي لك محاولة وحدة", en: "Not quite, one attempt left" },
+    correctOrder:{ ar: "الترتيب الصحيح", en: "The correct order" },
+    correctMatch:{ ar: "التوصيل الصحيح", en: "The correct matches" },
+    moreLearn:  { ar: "تعلّم أكثر", en: "More learning" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -339,29 +344,42 @@
         if (saved != null) paint(saved);
       }
     },
-    /* MATCH — pair each left item with its correct right (rights shuffled) */
+    /* MATCH — pair each left item with its correct right. 2 trials, then reveal + explain. */
     match: {
-      answered: function (a) { return a && a.length && a.every(function (x) { return x != null; }); },
-      correct: function (q, a) { return a && a.every(function (x, i) { return x === i; }); },
+      answered: function (a) { return !!(a && a.locked); },
+      correct: function (q, a) { return !!(a && a.ok); },
       render: function (q, area, saved, onAnswer) {
         var n = q.pairs.length;
-        var assign = saved ? saved.slice() : []; for (var z = 0; z < n; z++) if (assign[z] === undefined) assign[z] = null;
-        var active = null;
-        if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
+        var assign = saved && saved.assign ? saved.assign.slice() : [];
+        for (var z = 0; z < n; z++) if (assign[z] === undefined) assign[z] = null;
+        var tries = saved && saved.tries ? saved.tries : 0;
+        var locked = !!(saved && saved.locked), okState = !!(saved && saved.ok), active = null;
+
         area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
+        if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
+
         var grid = el("div", "match-grid");
         var lc = el("div", "match-col"), rc = el("div", "match-col");
-        var rights = q.pairs.map(function (p, i) { return { text: p.right, pidx: i }; }); shuffle(rights);
+        var rights = q.pairs.map(function (p, i) { return { text: p.right, pidx: i }; });
+        if (!locked) shuffle(rights);
         var lChips = [], rChips = [];
         q.pairs.forEach(function (p, i) {
           var c = el("button", "match-chip"); c.appendChild(el("span", "match-badge")); c.appendChild(el("span", "match-txt", L(p.left)));
-          c.onclick = function () { leftClick(i); }; lChips.push(c); lc.appendChild(c);
+          if (!locked) c.onclick = function () { leftClick(i); };
+          lChips.push(c); lc.appendChild(c);
         });
         rights.forEach(function (r) {
           var c = el("button", "match-chip"); c.appendChild(el("span", "match-badge")); c.appendChild(el("span", "match-txt", L(r.text)));
-          c._pidx = r.pidx; c.onclick = function () { rightClick(r.pidx); }; rChips.push(c); rc.appendChild(c);
+          c._pidx = r.pidx; if (!locked) c.onclick = function () { rightClick(r.pidx); };
+          rChips.push(c); rc.appendChild(c);
         });
         grid.appendChild(lc); grid.appendChild(rc); area.appendChild(grid);
+
+        var msg = el("div", "trial-msg");
+        var checkBtn = el("button", "btn check-btn", u("check"));
+        area.appendChild(msg); area.appendChild(checkBtn);
+
+        function save() { return { assign: assign.slice(), tries: tries, locked: locked, ok: okState }; }
         function paint() {
           lChips.forEach(function (c, i) {
             c.querySelector(".match-badge").textContent = assign[i] != null ? (i + 1) : "";
@@ -372,48 +390,96 @@
             c.querySelector(".match-badge").textContent = li >= 0 ? (li + 1) : "";
             c.classList.toggle("assigned", li >= 0);
           });
+          checkBtn.disabled = !assign.every(function (x) { return x != null; });
         }
-        function leftClick(i) { if (assign[i] != null) { assign[i] = null; active = i; onAnswer(assign.slice()); } else { active = i; } paint(); }
-        function rightClick(pidx) {
-          if (active == null) return;
-          var prev = assign.indexOf(pidx); if (prev >= 0) assign[prev] = null;
-          assign[active] = pidx; active = null; paint(); onAnswer(assign.slice());
+        function leftClick(i) { if (assign[i] != null) { assign[i] = null; active = i; } else { active = i; } paint(); onAnswer(save()); }
+        function rightClick(pidx) { if (active == null) return; var prev = assign.indexOf(pidx); if (prev >= 0) assign[prev] = null; assign[active] = pidx; active = null; paint(); onAnswer(save()); }
+        function lockUI() { lChips.forEach(function (c) { c.disabled = true; }); rChips.forEach(function (c) { c.disabled = true; }); checkBtn.style.display = "none"; }
+        function revealSolution() {
+          lChips.forEach(function (c, i) { c.classList.add(assign[i] === i ? "right" : "wrong"); });
+          var sol = el("div", "solution");
+          sol.appendChild(el("div", "solution-h", u("correctMatch")));
+          q.pairs.forEach(function (p) {
+            var row = el("div", "sol-row");
+            row.appendChild(el("span", "sol-l", L(p.left)));
+            row.appendChild(el("span", "sol-arrow", "↔"));
+            row.appendChild(el("span", "sol-r", L(p.right)));
+            sol.appendChild(row);
+          });
+          area.appendChild(sol);
         }
+        checkBtn.onclick = function () {
+          if (assign.every(function (x, i) { return x === i; })) {
+            okState = true; locked = true; lChips.concat(rChips).forEach(function (c) { c.classList.add("right"); }); lockUI(); onAnswer(save());
+          } else {
+            tries++;
+            if (tries >= 2) { okState = false; locked = true; lockUI(); revealSolution(); onAnswer(save()); }
+            else { msg.className = "trial-msg show"; msg.textContent = u("tryAgain1"); onAnswer(save()); }
+          }
+        };
+        if (locked) { lockUI(); if (okState) lChips.concat(rChips).forEach(function (c) { c.classList.add("right"); }); else revealSolution(); }
         paint();
       }
     },
-    /* ORDER — tap the steps in the correct sequence (display shuffled) */
+    /* ORDER — tap the steps in sequence. 2 trials, then reveal + explain. */
     order: {
-      answered: function (a) { return a && a.seq && a.seq.length === a.n; },
-      correct: function (q, a) { return a && a.seq && a.seq.length === q.steps.length && a.seq.every(function (o, k) { return o === k; }); },
+      answered: function (a) { return !!(a && a.locked); },
+      correct: function (q, a) { return !!(a && a.ok); },
       render: function (q, area, saved, onAnswer) {
         var n = q.steps.length;
         var seq = saved && saved.seq ? saved.seq.slice() : [];
-        if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
+        var tries = saved && saved.tries ? saved.tries : 0;
+        var locked = !!(saved && saved.locked), okState = !!(saved && saved.ok);
+
         area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
+        if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
+
         var list = el("div", "order-list");
-        var disp = q.steps.map(function (s, i) { return { text: s, oidx: i }; }); shuffle(disp);
+        var disp = q.steps.map(function (s, i) { return { text: s, oidx: i }; });
+        if (!locked) shuffle(disp);
         var chips = [];
         disp.forEach(function (d) {
           var c = el("button", "order-chip"); c.appendChild(el("span", "order-badge")); c.appendChild(el("span", "order-text", L(d.text)));
-          c._oidx = d.oidx; c.onclick = function () { click(d.oidx); }; chips.push(c); list.appendChild(c);
+          c._oidx = d.oidx; if (!locked) c.onclick = function () { click(d.oidx); }; chips.push(c); list.appendChild(c);
         });
         area.appendChild(list);
+
         var reset = el("button", "order-reset", L({ ar: "إعادة الترتيب", en: "Reset order" }));
-        reset.onclick = function () { seq = []; paint(); onAnswer({ seq: seq.slice(), n: n }); };
-        area.appendChild(reset);
+        var msg = el("div", "trial-msg");
+        var checkBtn = el("button", "btn check-btn", u("check"));
+        if (!locked) area.appendChild(reset);
+        area.appendChild(msg); area.appendChild(checkBtn);
+
+        function save() { return { seq: seq.slice(), n: n, tries: tries, locked: locked, ok: okState }; }
         function paint() {
           chips.forEach(function (c) {
             var pos = seq.indexOf(c._oidx);
             c.querySelector(".order-badge").textContent = pos >= 0 ? (pos + 1) : "";
             c.classList.toggle("ordered", pos >= 0);
           });
+          checkBtn.disabled = seq.length !== n;
         }
-        function click(oidx) {
-          var pos = seq.indexOf(oidx);
-          if (pos >= 0) seq = seq.slice(0, pos); else if (seq.length < n) seq.push(oidx);
-          paint(); onAnswer({ seq: seq.slice(), n: n });
+        function click(oidx) { var pos = seq.indexOf(oidx); if (pos >= 0) seq = seq.slice(0, pos); else if (seq.length < n) seq.push(oidx); paint(); onAnswer(save()); }
+        reset.onclick = function () { seq = []; paint(); onAnswer(save()); };
+        function lockUI() { chips.forEach(function (c) { c.disabled = true; }); checkBtn.style.display = "none"; reset.style.display = "none"; }
+        function revealSolution() {
+          chips.forEach(function (c) { var pos = seq.indexOf(c._oidx); c.classList.add(pos === c._oidx ? "right" : "wrong"); });
+          var sol = el("div", "solution");
+          sol.appendChild(el("div", "solution-h", u("correctOrder")));
+          var ol = el("ol", "sol-order");
+          q.steps.forEach(function (s) { ol.appendChild(el("li", null, L(s))); });
+          sol.appendChild(ol); area.appendChild(sol);
         }
+        checkBtn.onclick = function () {
+          if (seq.length === n && seq.every(function (o, k) { return o === k; })) {
+            okState = true; locked = true; chips.forEach(function (c) { c.classList.add("right"); }); lockUI(); onAnswer(save());
+          } else {
+            tries++;
+            if (tries >= 2) { okState = false; locked = true; lockUI(); revealSolution(); onAnswer(save()); }
+            else { msg.className = "trial-msg show"; msg.textContent = u("tryAgain1"); onAnswer(save()); }
+          }
+        };
+        if (locked) { lockUI(); if (okState) chips.forEach(function (c) { c.classList.add("right"); }); else revealSolution(); }
         paint();
       }
     }
@@ -445,6 +511,7 @@
 
   function beginRound(round) {
     if (rushTimer) { clearInterval(rushTimer); rushTimer = null; }
+    var rp = $("#roundPlayer"); if (rp) { rp.innerHTML = ""; rp.appendChild(playerChip()); }
     $("#roundTag").textContent = round.bonus ? u("bonusRound")
       : (u("roundOf") + " " + (state.roundIndex + 1) + " / " + state.division.rounds.length);
     $("#roundTitle").textContent = L(round.title);
@@ -575,7 +642,7 @@
         else { streak = 0; energy = Math.max(0, energy - 14); }
         enf.style.width = energy + "%";
         fb.className = "fb show " + (ok ? "ok" : "no");
-        fb.textContent = (i === -1 ? "⏱ " + u("timeUp") + " — " : (ok ? "✓ " : "✕ ")) + L(q.feedback);
+        fb.textContent = (i === -1 ? "⏱ " + u("timeUp") + " " : (ok ? "✓ " : "✕ ")) + L(q.feedback);
         setTimeout(function () { idx++; (idx >= qs.length) ? finish() : draw(); }, 1050);
       }
     }
@@ -627,6 +694,7 @@
       var retry = el("button", "btn", u("retry"));
       retry.onclick = function () { state.roundIndex = 0; state.scores = []; state.bonus = null; playRound(); };
       c.appendChild(retry);
+      c.appendChild(learnButton(u("moreLearn"), "btn ghost"));
     } else {
       c.appendChild(buildBadge(total));
       c.appendChild(buildFeedback());
@@ -644,10 +712,26 @@
     showScreen("screen-result");
   }
 
-  function learnButton() {
-    var a = el("a", "btn", u("learnBtn"));
+  function learnButton(label, cls) {
+    var a = el("a", cls || "btn", label || u("learnBtn"));
     a.href = WORLDS[state.world].learnUrl; a.target = "_blank"; a.rel = "noopener";
     return a;
+  }
+
+  /* persistent player identity chip (avatar + name) shown on round screens */
+  function playerChip() {
+    var w = WORLDS[state.world];
+    var ch = (w.characters || []).filter(function (c) { return c.id === state.character; })[0];
+    var chip = el("div", "player-chip");
+    var av = el("div", "player-av");
+    if (ch && ch.png) {
+      var img = el("img"); img.src = ch.png; img.alt = "";
+      img.onerror = function () { av.classList.add("ph"); av.textContent = (w.floaters && w.floaters[0]) || "★"; if (img.parentNode) av.removeChild(img); };
+      av.appendChild(img);
+    } else { av.classList.add("ph"); av.textContent = (w.floaters && w.floaters[0]) || "★"; }
+    chip.appendChild(av);
+    chip.appendChild(el("span", "player-name", state.name || ""));
+    return chip;
   }
 
   function buildBadge(total) {
