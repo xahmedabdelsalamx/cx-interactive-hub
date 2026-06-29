@@ -362,7 +362,34 @@
         if (saved != null) paint(saved);
       }
     },
-    /* MATCH — pair each left item with its correct right. 2 trials, then reveal + explain. */
+    /* CONVO — guest chat bubble + tappable reply bubbles (curated conversations) */
+    convo: {
+      answered: function (a) { return a != null; },
+      correct: function (q, a) { return a === q.correct; },
+      render: function (q, area, saved, onAnswer) {
+        area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
+        var thread = el("div", "convo-thread");
+        var gline = el("div", "convo-guest");
+        gline.appendChild(el("div", "convo-av", "🙋"));
+        gline.appendChild(el("div", "convo-bubble", L(q.guest)));
+        thread.appendChild(gline);
+        area.appendChild(thread);
+        var opts = el("div", "convo-replies");
+        function paint(pick) {
+          Array.prototype.forEach.call(opts.children, function (c, ci) {
+            c.classList.remove("ok", "no", "sel");
+            if (pick != null) { if (ci === q.correct) c.classList.add("ok"); else if (ci === pick) c.classList.add("no"); }
+          });
+        }
+        q.replies.forEach(function (r, i) {
+          var b = el("button", "convo-reply", L(r));
+          b.onclick = function () { paint(i); onAnswer(i); };
+          opts.appendChild(b);
+        });
+        area.appendChild(opts);
+        if (saved != null) paint(saved);
+      }
+    },
     match: {
       answered: function (a) { return !!(a && a.locked); },
       correct: function (q, a) { return !!(a && a.ok); },

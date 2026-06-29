@@ -174,6 +174,20 @@ body{font-family:var(--font);color:var(--ink);
 .scn-opt.ok{background:#e8f8ef;border-color:#19b36b;color:#0c7a45}
 .scn-opt.no{background:#fdecef;border-color:#e43c50;color:#b02338}
 
+/* CONVO (chat-style) */
+.convo-thread{margin:8px 0 12px}
+.convo-guest{display:flex;align-items:flex-end;gap:8px}
+.convo-av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:18px;
+  background:var(--grad);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.16)}
+.convo-bubble{max-width:80%;background:#f3f5f9;border:1.5px solid var(--line);
+  border-radius:16px;border-bottom-inline-start-radius:4px;padding:12px 14px;font-weight:700;line-height:1.55;color:var(--ink)}
+.convo-replies{display:flex;flex-direction:column;gap:9px;align-items:flex-end}
+.convo-reply{font-family:var(--font);font-weight:700;font-size:14px;text-align:start;max-width:88%;padding:12px 15px;
+  border:1.5px solid var(--line);border-radius:16px;border-bottom-inline-end-radius:4px;background:#fff;cursor:pointer;transition:.15s;color:var(--ink)}
+.convo-reply:hover{border-color:var(--brand)}
+.convo-reply.ok{background:#e8f8ef;border-color:#19b36b;color:#0c7a45}
+.convo-reply.no{background:#fdecef;border-color:#e43c50;color:#b02338}
+
 /* feedback line */
 .fb{opacity:0;transition:.2s;text-align:center;font-weight:800;margin-top:12px;border-radius:12px;padding:0}
 .fb.show{opacity:1;padding:11px 14px}
@@ -371,7 +385,7 @@ a.btn{display:block;text-align:center;text-decoration:none;line-height:1.2}
 <script src="config/worlds.js"></script>
 <script src="media/media-config.js"></script>
 <script src="divisions/retail.js"></script>
-<!-- <script src="divisions/hospitality.js"></script> -->
+<script src="divisions/hospitality.js"></script>
 <!-- <script src="divisions/starbucks.js"></script> -->
 <script src="engine.js"></script>
 </body>

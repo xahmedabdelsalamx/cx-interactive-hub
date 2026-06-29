@@ -71,6 +71,49 @@ window.MEDIA = {
   /* ---- HOSPITALITY · Art of Guest Experience ---- */
   hospIntro:     { type:"placeholder", label:{ en:"Hospitality intro · 344×344", ar:"مقدمة · 344×344" } },
 
+  /* R1 convo — Warm Welcome & Curated Conversations */
+  hospR1_intro:  { type:"placeholder", label:{ en:"R1 · intro", ar:"الجولة 1 · مقدمة" } },
+  hospR1_q1:     { type:"placeholder", label:{ en:"R1 · Q1", ar:"الجولة 1 · س1" } },
+  hospR1_q2:     { type:"placeholder", label:{ en:"R1 · Q2", ar:"الجولة 1 · س2" } },
+  hospR1_q3:     { type:"placeholder", label:{ en:"R1 · Q3", ar:"الجولة 1 · س3" } },
+  hospR1_q4:     { type:"placeholder", label:{ en:"R1 · Q4", ar:"الجولة 1 · س4" } },
+  hospR1_q5:     { type:"placeholder", label:{ en:"R1 · Q5", ar:"الجولة 1 · س5" } },
+
+  /* R2 match — Culinary Storytelling & Thoughtful Pairings */
+  hospR2_intro:  { type:"placeholder", label:{ en:"R2 · intro", ar:"الجولة 2 · مقدمة" } },
+  hospR2_q1:     { type:"placeholder", label:{ en:"R2 · Q1", ar:"الجولة 2 · س1" } },
+  hospR2_q2:     { type:"placeholder", label:{ en:"R2 · Q2", ar:"الجولة 2 · س2" } },
+  hospR2_q3:     { type:"placeholder", label:{ en:"R2 · Q3", ar:"الجولة 2 · س3" } },
+  hospR2_q4:     { type:"placeholder", label:{ en:"R2 · Q4", ar:"الجولة 2 · س4" } },
+  hospR2_q5:     { type:"placeholder", label:{ en:"R2 · Q5", ar:"الجولة 2 · س5" } },
+
+  /* R3 order — Memorable Moments & Seamless Farewell */
+  hospR3_intro:  { type:"placeholder", label:{ en:"R3 · intro", ar:"الجولة 3 · مقدمة" } },
+  hospR3_q1:     { type:"placeholder", label:{ en:"R3 · Q1", ar:"الجولة 3 · س1" } },
+  hospR3_q2:     { type:"placeholder", label:{ en:"R3 · Q2", ar:"الجولة 3 · س2" } },
+  hospR3_q3:     { type:"placeholder", label:{ en:"R3 · Q3", ar:"الجولة 3 · س3" } },
+  hospR3_q4:     { type:"placeholder", label:{ en:"R3 · Q4", ar:"الجولة 3 · س4" } },
+  hospR3_q5:     { type:"placeholder", label:{ en:"R3 · Q5", ar:"الجولة 3 · س5" } },
+
+  /* R4 scenario — Genuine Gratitude & Service Recovery */
+  hospR4_intro:  { type:"placeholder", label:{ en:"R4 · intro", ar:"الجولة 4 · مقدمة" } },
+  hospR4_q1:     { type:"placeholder", label:{ en:"R4 · Q1", ar:"الجولة 4 · س1" } },
+  hospR4_q2:     { type:"placeholder", label:{ en:"R4 · Q2", ar:"الجولة 4 · س2" } },
+  hospR4_q3:     { type:"placeholder", label:{ en:"R4 · Q3", ar:"الجولة 4 · س3" } },
+  hospR4_q4:     { type:"placeholder", label:{ en:"R4 · Q4", ar:"الجولة 4 · س4" } },
+  hospR4_q5:     { type:"placeholder", label:{ en:"R4 · Q5", ar:"الجولة 4 · س5" } },
+
+  /* R5 rush — BONUS · Peak Service */
+  hospR5_intro:  { type:"placeholder", label:{ en:"Bonus · intro", ar:"المكافأة · مقدمة" } },
+  hospR5_q1:     { type:"placeholder", label:{ en:"Bonus · Q1", ar:"المكافأة · س1" } },
+  hospR5_q2:     { type:"placeholder", label:{ en:"Bonus · Q2", ar:"المكافأة · س2" } },
+  hospR5_q3:     { type:"placeholder", label:{ en:"Bonus · Q3", ar:"المكافأة · س3" } },
+  hospR5_q4:     { type:"placeholder", label:{ en:"Bonus · Q4", ar:"المكافأة · س4" } },
+  hospR5_q5:     { type:"placeholder", label:{ en:"Bonus · Q5", ar:"المكافأة · س5" } },
+  hospR5_q6:     { type:"placeholder", label:{ en:"Bonus · Q6", ar:"المكافأة · س6" } },
+  hospR5_q7:     { type:"placeholder", label:{ en:"Bonus · Q7", ar:"المكافأة · س7" } },
+  hospR5_q8:     { type:"placeholder", label:{ en:"Bonus · Q8", ar:"المكافأة · س8" } },
+
   /* ---- STARBUCKS · Art of Connection ---- */
   sbuxIntro:     { type:"placeholder", label:{ en:"Starbucks intro · 344×344", ar:"مقدمة · 344×344" } }
 
