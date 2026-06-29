@@ -21,7 +21,8 @@ window.WORLDS = {
     characters: [
       { id: "h1", png: "assets/characters/hosp-1.png" },
       { id: "h2", png: "assets/characters/hosp-2.png" },
-      { id: "h3", png: "assets/characters/hosp-3.png" }
+      { id: "h3", png: "assets/characters/hosp-3.png" },
+      { id: "h4", png: "assets/characters/hosp-4.png" }
     ]
   },
 
@@ -37,7 +38,8 @@ window.WORLDS = {
     characters: [
       { id: "r1", png: "assets/characters/retail-1.png" },
       { id: "r2", png: "assets/characters/retail-2.png" },
-      { id: "r3", png: "assets/characters/retail-3.png" }
+      { id: "r3", png: "assets/characters/retail-3.png" },
+      { id: "r4", png: "assets/characters/retail-4.png" }
     ]
   },
 
@@ -53,7 +55,8 @@ window.WORLDS = {
     characters: [
       { id: "s1", png: "assets/characters/sbux-1.png" },
       { id: "s2", png: "assets/characters/sbux-2.png" },
-      { id: "s3", png: "assets/characters/sbux-3.png" }
+      { id: "s3", png: "assets/characters/sbux-3.png" },
+      { id: "s4", png: "assets/characters/sbux-4.png" }
     ]
   }
 
