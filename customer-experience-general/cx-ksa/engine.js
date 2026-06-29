@@ -124,21 +124,29 @@
 
   /* ---------------- MEDIA SLOTS ---------------- */
   function renderMedia(ref, sizeCls) {
+    var keyName = typeof ref === "string" ? ref : "";
     var m = typeof ref === "string" ? (window.MEDIA && MEDIA[ref]) : ref;
     var wrap = el("div", "media-slot");
     var anim = el("div", "media-anim frame " + (sizeCls || "media-md"));
-    if (!m || m.type === "placeholder") {
+    function showPH() {
+      anim.innerHTML = "";
       var ph = el("div", "media-ph");
       ph.appendChild(el("div", "pe", "🖼️"));
-      ph.appendChild(el("div", "ps", m ? L(m.label) : "media"));
+      ph.appendChild(el("div", "ps", (m && m.label) ? L(m.label) : (keyName || "media")));
       anim.appendChild(ph);
+    }
+    if (!m || m.type === "placeholder") {
+      showPH();
     } else if (m.type === "png") {
-      var img = el("img", "media-img"); img.src = m.src; img.alt = ""; anim.appendChild(img);
+      var img = el("img", "media-img"); img.src = m.src; img.alt = ""; img.onerror = showPH; anim.appendChild(img);
     } else if (m.type === "lottie") {
       var lp = document.createElement("lottie-player");
       lp.className = "media-lottie"; lp.setAttribute("src", m.src);
       lp.setAttribute("autoplay", ""); lp.setAttribute("loop", "");
+      lp.addEventListener("error", showPH);
       anim.appendChild(lp);
+    } else {
+      showPH();
     }
     wrap.appendChild(anim); return wrap;
   }
