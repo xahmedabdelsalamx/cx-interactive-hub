@@ -472,60 +472,110 @@
       correct: function (q, a) { return !!(a && a.ok); },
       render: function (q, area, saved, onAnswer) {
         var n = q.steps.length;
-        var seq = saved && saved.seq ? saved.seq.slice() : [];
         var tries = saved && saved.tries ? saved.tries : 0;
         var locked = !!(saved && saved.locked), okState = !!(saved && saved.ok);
 
+        // current arrangement = array of original indices (oidx)
+        var arr;
+        if (saved && saved.order) arr = saved.order.slice();
+        else { arr = q.steps.map(function (s, i) { return i; }); shuffle(arr); }
+
         area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
         if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
+        if (!locked) area.appendChild(el("div", "order-hint", L({ ar: "اسحب العناصر لإعادة ترتيبها", en: "Drag the items to reorder them" })));
 
         var list = el("div", "order-list");
-        var disp = q.steps.map(function (s, i) { return { text: s, oidx: i }; });
-        if (!locked) shuffle(disp);
-        var chips = [];
-        disp.forEach(function (d) {
-          var c = el("button", "order-chip"); c.appendChild(el("span", "order-badge")); c.appendChild(el("span", "order-text", L(d.text)));
-          c._oidx = d.oidx; if (!locked) c.onclick = function () { click(d.oidx); }; chips.push(c); list.appendChild(c);
-        });
         area.appendChild(list);
-
-        var reset = el("button", "order-reset", L({ ar: "إعادة الترتيب", en: "Reset order" }));
         var msg = el("div", "trial-msg");
         var checkBtn = el("button", "btn check-btn", u("check"));
-        if (!locked) area.appendChild(reset);
         area.appendChild(msg); area.appendChild(checkBtn);
 
-        function save() { return { seq: seq.slice(), n: n, tries: tries, locked: locked, ok: okState }; }
-        function paint() {
-          chips.forEach(function (c) {
-            var pos = seq.indexOf(c._oidx);
-            c.querySelector(".order-badge").textContent = pos >= 0 ? (pos + 1) : "";
-            c.classList.toggle("ordered", pos >= 0);
+        function buildRows() {
+          list.innerHTML = "";
+          arr.forEach(function (oidx, idx) {
+            var row = el("div", "order-row");
+            row.appendChild(el("span", "order-grip", "⋮⋮"));
+            row.appendChild(el("span", "order-badge", String(idx + 1)));
+            row.appendChild(el("span", "order-text", L(q.steps[oidx])));
+            row._oidx = oidx;
+            if (!locked) { row.style.touchAction = "none"; row.addEventListener("pointerdown", function (e) { startDrag(e, row); }); }
+            list.appendChild(row);
           });
-          checkBtn.disabled = seq.length !== n;
         }
-        function click(oidx) { var pos = seq.indexOf(oidx); if (pos >= 0) seq = seq.slice(0, pos); else if (seq.length < n) seq.push(oidx); paint(); onAnswer(save()); }
-        reset.onclick = function () { seq = []; paint(); onAnswer(save()); };
-        function lockUI() { chips.forEach(function (c) { c.disabled = true; }); checkBtn.style.display = "none"; reset.style.display = "none"; }
+        function renumber() {
+          Array.prototype.forEach.call(list.children, function (row, idx) { row.querySelector(".order-badge").textContent = String(idx + 1); });
+        }
+        function syncArr() { arr = Array.prototype.map.call(list.children, function (r) { return r._oidx; }); }
+        function save() { return { order: arr.slice(), tries: tries, locked: locked, ok: okState }; }
+
+        var dragRow = null;
+        function startDrag(e, row) {
+          if (locked) return;
+          dragRow = row; row.classList.add("dragging");
+          document.addEventListener("pointermove", onMove);
+          document.addEventListener("pointerup", onUp);
+          e.preventDefault();
+        }
+        function onMove(e) {
+          if (!dragRow) return;
+          e.preventDefault();
+          var y = e.clientY, placed = false;
+          var others = Array.prototype.filter.call(list.children, function (r) { return r !== dragRow; });
+          for (var i = 0; i < others.length; i++) {
+            var rect = others[i].getBoundingClientRect();
+            if (y < rect.top + rect.height / 2) { list.insertBefore(dragRow, others[i]); placed = true; break; }
+          }
+          if (!placed) list.appendChild(dragRow);
+          renumber();
+        }
+        function onUp() {
+          if (!dragRow) return;
+          dragRow.classList.remove("dragging"); dragRow = null;
+          document.removeEventListener("pointermove", onMove);
+          document.removeEventListener("pointerup", onUp);
+          syncArr(); onAnswer(save());
+        }
+
+        function lockUI() {
+          locked = true;
+          Array.prototype.forEach.call(list.children, function (r) { r.style.touchAction = ""; });
+          checkBtn.style.display = "none";
+          var hint = area.querySelector(".order-hint"); if (hint) hint.style.display = "none";
+        }
+        function markRightWrong() {
+          Array.prototype.forEach.call(list.children, function (row, idx) {
+            row.classList.remove("dragging"); row.classList.add(row._oidx === idx ? "right" : "wrong");
+            var g = row.querySelector(".order-grip"); if (g) g.style.visibility = "hidden";
+          });
+        }
         function revealSolution() {
-          chips.forEach(function (c) { var pos = seq.indexOf(c._oidx); c.classList.add(pos === c._oidx ? "right" : "wrong"); });
           var sol = el("div", "solution");
           sol.appendChild(el("div", "solution-h", u("correctOrder")));
           var ol = el("ol", "sol-order");
           q.steps.forEach(function (s) { ol.appendChild(el("li", null, L(s))); });
           sol.appendChild(ol); area.appendChild(sol);
         }
+
         checkBtn.onclick = function () {
-          if (seq.length === n && seq.every(function (o, k) { return o === k; })) {
-            okState = true; locked = true; chips.forEach(function (c) { c.classList.add("right"); }); lockUI(); onAnswer(save());
+          syncArr();
+          var ok = arr.every(function (o, k) { return o === k; });
+          if (ok) {
+            okState = true; lockUI();
+            Array.prototype.forEach.call(list.children, function (r) { r.classList.add("right"); var g = r.querySelector(".order-grip"); if (g) g.style.visibility = "hidden"; });
+            onAnswer(save());
           } else {
             tries++;
-            if (tries >= 2) { okState = false; locked = true; lockUI(); revealSolution(); onAnswer(save()); }
+            if (tries >= 2) { okState = false; lockUI(); markRightWrong(); revealSolution(); onAnswer(save()); }
             else { msg.className = "trial-msg show"; msg.textContent = u("tryAgain1"); onAnswer(save()); }
           }
         };
-        if (locked) { lockUI(); if (okState) chips.forEach(function (c) { c.classList.add("right"); }); else revealSolution(); }
-        paint();
+
+        buildRows();
+        if (locked) {
+          lockUI();
+          if (okState) Array.prototype.forEach.call(list.children, function (r) { r.classList.add("right"); var g = r.querySelector(".order-grip"); if (g) g.style.visibility = "hidden"; });
+          else { markRightWrong(); revealSolution(); }
+        }
       }
     }
   };

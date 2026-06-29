@@ -96,7 +96,7 @@ window.DIVISION_hospitality = {
           instruction: { ar: "وصّل كل خطوة من خطوات سرد الطبق بالمثال الصح.", en: "Match each storytelling step to its example." },
           media: "hospR2_q1",
           pairs: [
-            { left: { ar: "ابدأ بالاسم", en: "Start with the name" }, right: { ar: "هذا طبقنا المميز: دجاج مشوي على الفحم", en: "Our signature charcoal-grilled chicken" } },
+            { left: { ar: "ابدأ بالاسم", en: "Start with the name" }, right: { ar: "هذا طبق الدجاج المشوي على الفحم", en: "This is the charcoal-grilled chicken dish" } },
             { left: { ar: "استخدم وصف حسّي", en: "Use sensory words" }, right: { ar: "ذهبي ومقرمش من برّا وطري من جوّا", en: "Golden and crispy outside, tender inside" } },
             { left: { ar: "وضّح المميز", en: "Say what makes it special" }, right: { ar: "متبّل ليلة كاملة بخلطة توابلنا الخاصة", en: "Marinated overnight in our signature spice" } },
             { left: { ar: "ادعه يجرّب", en: "Invite them to try" }, right: { ar: "أكيد بتعجبك، أجهّزها لك؟", en: "You'll love it, shall I get it for you?" } }
@@ -115,15 +115,15 @@ window.DIVISION_hospitality = {
           feedback: { ar: "شوف، طابق، اقترح، الاقتران المدروس يرفع النكهة ويزيد رضا الضيف.", en: "Look, match, suggest, a thoughtful pairing elevates flavour and guest satisfaction." }
         },
         {
-          instruction: { ar: "وصّل العبارة اللي تحس فيها ضغط بنسختها اللي تحس توجيه.", en: "Match the pushy line to its helpful rewrite." },
+          instruction: { ar: "وصّل العبارة اللي تحس فيها ضغط بنسختها اللي تحس توجيه (نفس الاقتراح).", en: "Match the pushy line to its helpful version (same suggestion)." },
           media: "hospR2_q3",
           pairs: [
-            { left: { ar: "تبي بطاطس ومشروب معاه؟", en: "Want fries and a drink with that?" }, right: { ar: "هذا الطبق دسم، أقترح شي خفيف بجنبه يوازنه", en: "This is rich, I'd suggest something light to balance it" } },
-            { left: { ar: "ضيف هذا للطلب", en: "Add this to the order" }, right: { ar: "أغلب ضيوفنا يحبون يضيفون هذا، يكمّل الطبق", en: "Most guests add this, it completes the dish" } },
-            { left: { ar: "لازم تجرب الحلى", en: "You have to try the dessert" }, right: { ar: "لو تحب تختم بشي حلو، عندنا اختيار خفيف يناسب", en: "If you'd like a sweet finish, we have a light option" } },
-            { left: { ar: "خذ الأكبر أحسن", en: "Get the large, it's better" }, right: { ar: "لو جوعان أكثر، الحجم الأكبر أوفر وأشبع", en: "If you're hungrier, the large is better value and more filling" } }
+            { left: { ar: "تبي بطاطس ومشروب معاه؟", en: "Want fries and a drink with that?" }, right: { ar: "البطاطس المقرمشة تكمّل البرجر، تحبها معاه؟", en: "Crispy fries complete the burger, want them with it?" } },
+            { left: { ar: "لازم تجرّب الحلى", en: "You have to try the dessert" }, right: { ar: "لو حاب تختم بشي حلو، حلانا خفيف ويناسب بعد الوجبة", en: "For a sweet finish, our dessert is light after a meal" } },
+            { left: { ar: "خذ الأكبر أحسن", en: "Get the large, it's better" }, right: { ar: "لو جوعان أكثر، الحجم الأكبر أوفر وأشبع لك", en: "If you're hungrier, the large is better value and more filling" } },
+            { left: { ar: "ضيف مشروب غازي بس", en: "Just add a soda" }, right: { ar: "مشروب الليمون المنعش يوازن التتبيلة الحارة، يناسبك؟", en: "A zesty lemonade balances the spicy marinade, sound good?" } }
           ],
-          feedback: { ar: "نفس التوصية تصير مفيدة لما تشرح السبب، التوجيه يبني الثقة مو الضغط.", en: "The same suggestion becomes helpful when you explain why, guidance builds trust, not pressure." }
+          feedback: { ar: "نفس التوصية تصير مفيدة لما تربطها بطلبه وتشرح السبب، التوجيه يبني الثقة مو الضغط.", en: "The same suggestion becomes helpful when you tie it to his order and explain why, guidance builds trust." }
         },
         {
           instruction: { ar: "وصّل حالة الضيف بأسلوب المحادثة المناسب.", en: "Match the guest's cue to the right conversation style." },
