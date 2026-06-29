@@ -508,10 +508,11 @@
         function syncArr() { arr = Array.prototype.map.call(list.children, function (r) { return r._oidx; }); }
         function save() { return { order: arr.slice(), tries: tries, locked: locked, ok: okState }; }
 
-        var dragRow = null;
+        var dragRow = null, grabOffsetY = 0;
         function startDrag(e, row) {
           if (locked) return;
-          dragRow = row; row.classList.add("dragging");
+          dragRow = row; grabOffsetY = e.clientY - row.getBoundingClientRect().top;
+          row.classList.add("dragging");
           document.addEventListener("pointermove", onMove);
           document.addEventListener("pointerup", onUp);
           e.preventDefault();
@@ -519,18 +520,23 @@
         function onMove(e) {
           if (!dragRow) return;
           e.preventDefault();
-          var y = e.clientY, placed = false;
+          dragRow.style.transform = "";                       // clear to measure true slots
+          var desiredTop = e.clientY - grabOffsetY;
+          var center = desiredTop + dragRow.offsetHeight / 2;
           var others = Array.prototype.filter.call(list.children, function (r) { return r !== dragRow; });
+          var placed = false;
           for (var i = 0; i < others.length; i++) {
             var rect = others[i].getBoundingClientRect();
-            if (y < rect.top + rect.height / 2) { list.insertBefore(dragRow, others[i]); placed = true; break; }
+            if (center < rect.top + rect.height / 2) { list.insertBefore(dragRow, others[i]); placed = true; break; }
           }
           if (!placed) list.appendChild(dragRow);
           renumber();
+          var slotTop = dragRow.getBoundingClientRect().top;   // slot after any reorder
+          dragRow.style.transform = "translateY(" + (desiredTop - slotTop) + "px) scale(1.03)";
         }
         function onUp() {
           if (!dragRow) return;
-          dragRow.classList.remove("dragging"); dragRow = null;
+          dragRow.style.transform = ""; dragRow.classList.remove("dragging"); dragRow = null;
           document.removeEventListener("pointermove", onMove);
           document.removeEventListener("pointerup", onUp);
           syncArr(); onAnswer(save());
