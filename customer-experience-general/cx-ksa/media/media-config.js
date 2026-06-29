@@ -2,7 +2,7 @@
    MEDIA CONFIG · the ONLY file you edit to set pictures/animations
    ------------------------------------------------------------
    For each key choose ONE:
-     • Picture:    { type:"png",    src:"assets/img/x.png" }
+     • Picture:    { type:"png",    src:"assets/images/x.png" }
      • Animation:  { type:"lottie", src:"assets/lottie/x.json" }
      • Nothing yet:{ type:"placeholder", label:{en:"...",ar:"..."} }
 
