@@ -18,12 +18,20 @@ window.WORLDS = {
     logoWhite: "assets/logos/art-of-guest-experience-white.png",
     division: "hospitality",
     learnUrl: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/229096/art-of-guest-experience-hospitality?channelId=238821",
-    characters: [
-      { id: "h1", png: "assets/characters/hosp-1.png" },
-      { id: "h2", png: "assets/characters/hosp-2.png" },
-      { id: "h3", png: "assets/characters/hosp-3.png" },
-      { id: "h4", png: "assets/characters/hosp-4.png" }
-    ]
+    characters: {
+      male: [
+        { id: "hosp-m1", png: "assets/characters/hosp-male-1.png" },
+        { id: "hosp-m2", png: "assets/characters/hosp-male-2.png" },
+        { id: "hosp-m3", png: "assets/characters/hosp-male-3.png" },
+        { id: "hosp-m4", png: "assets/characters/hosp-male-4.png" }
+      ],
+      female: [
+        { id: "hosp-f1", png: "assets/characters/hosp-female-1.png" },
+        { id: "hosp-f2", png: "assets/characters/hosp-female-2.png" },
+        { id: "hosp-f3", png: "assets/characters/hosp-female-3.png" },
+        { id: "hosp-f4", png: "assets/characters/hosp-female-4.png" }
+      ]
+    }
   },
 
   retail: {
@@ -35,12 +43,20 @@ window.WORLDS = {
     logoWhite: "assets/logos/art-of-selling-white.png",
     division: "retail",
     learnUrl: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/228974/retail?channelId=230797",
-    characters: [
-      { id: "r1", png: "assets/characters/retail-1.png" },
-      { id: "r2", png: "assets/characters/retail-2.png" },
-      { id: "r3", png: "assets/characters/retail-3.png" },
-      { id: "r4", png: "assets/characters/retail-4.png" }
-    ]
+    characters: {
+      male: [
+        { id: "retail-m1", png: "assets/characters/retail-male-1.png" },
+        { id: "retail-m2", png: "assets/characters/retail-male-2.png" },
+        { id: "retail-m3", png: "assets/characters/retail-male-3.png" },
+        { id: "retail-m4", png: "assets/characters/retail-male-4.png" }
+      ],
+      female: [
+        { id: "retail-f1", png: "assets/characters/retail-female-1.png" },
+        { id: "retail-f2", png: "assets/characters/retail-female-2.png" },
+        { id: "retail-f3", png: "assets/characters/retail-female-3.png" },
+        { id: "retail-f4", png: "assets/characters/retail-female-4.png" }
+      ]
+    }
   },
 
   starbucks: {
@@ -52,12 +68,20 @@ window.WORLDS = {
     logoWhite: "assets/logos/art-of-connection-white.png",
     division: "starbucks",
     learnUrl: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/229098/art-of-connection-starbucks?channelId=238822",
-    characters: [
-      { id: "s1", png: "assets/characters/sbux-1.png" },
-      { id: "s2", png: "assets/characters/sbux-2.png" },
-      { id: "s3", png: "assets/characters/sbux-3.png" },
-      { id: "s4", png: "assets/characters/sbux-4.png" }
-    ]
+    characters: {
+      male: [
+        { id: "sbux-m1", png: "assets/characters/sbux-male-1.png" },
+        { id: "sbux-m2", png: "assets/characters/sbux-male-2.png" },
+        { id: "sbux-m3", png: "assets/characters/sbux-male-3.png" },
+        { id: "sbux-m4", png: "assets/characters/sbux-male-4.png" }
+      ],
+      female: [
+        { id: "sbux-f1", png: "assets/characters/sbux-female-1.png" },
+        { id: "sbux-f2", png: "assets/characters/sbux-female-2.png" },
+        { id: "sbux-f3", png: "assets/characters/sbux-female-3.png" },
+        { id: "sbux-f4", png: "assets/characters/sbux-female-4.png" }
+      ]
+    }
   }
 
 };

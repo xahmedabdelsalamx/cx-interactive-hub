@@ -6,7 +6,7 @@
 
   var state = {
     lang: (window.CONFIG && CONFIG.defaultLang) || "ar",
-    empId: "", name: "", brand: null, world: null,
+    empId: "", name: "", gender: null, brand: null, world: null,
     division: null, character: null,
     roundIndex: 0, scores: [], certified: false, bonus: null
   };
@@ -22,6 +22,9 @@
     namePH:     { ar: "مثال: أحمد شعبان", en: "Example: Ahmed Shaaban" },
     brandLabel: { ar: "علامتك التجارية", en: "Brand" },
     brandPH:    { ar: "اختر علامتك التجارية", en: "Choose your brand" },
+    genderLabel:{ ar: "الجنس", en: "Gender" },
+    male:       { ar: "ذكر", en: "Male" },
+    female:     { ar: "أنثى", en: "Female" },
     start:      { ar: "ابدأ", en: "Start" },
     enterWorld: { ar: "ادخل عالمك", en: "Enter your world" },
     pickChar:   { ar: "اختر شخصيتك", en: "Choose your character" },
@@ -202,6 +205,21 @@
     nm.setAttribute("autocomplete", "off");
     nm.addEventListener("input", function () { this.value = this.value.replace(/[^A-Za-z\u0600-\u06FF\s'.\-]/g, ""); });
 
+    var fg = el("div", "field");
+    fg.appendChild(el("label", null, u("genderLabel")));
+    var seg = el("div", "seg");
+    [["male", u("male")], ["female", u("female")]].forEach(function (pair) {
+      var b = el("button", "seg-btn" + (state.gender === pair[0] ? " on" : ""), pair[1]);
+      b.type = "button";
+      b.onclick = function () {
+        state.gender = pair[0];
+        Array.prototype.forEach.call(seg.children, function (c) { c.classList.remove("on"); });
+        b.classList.add("on");
+      };
+      seg.appendChild(b);
+    });
+    fg.appendChild(seg); root.appendChild(fg);
+
     var fb = el("div", "field");
     fb.appendChild(el("label", null, u("brandLabel")));
     var sel = el("select"); sel.id = "brandSel";
@@ -213,7 +231,7 @@
     var btn = el("button", "btn", u("start"));
     btn.onclick = function () {
       var emp = $("#empId").value.trim(), nm = $("#name").value.trim(), bi = $("#brandSel").value;
-      if (!emp || !nm || bi === "") { root.classList.add("shake"); setTimeout(function () { root.classList.remove("shake"); }, 400); return; }
+      if (!emp || !nm || !state.gender || bi === "") { root.classList.add("shake"); setTimeout(function () { root.classList.remove("shake"); }, 400); return; }
       state.empId = emp; state.name = nm; state.brand = BRANDS[+bi]; state.world = state.brand.world;
       checkCertified(emp).then(function (res) {
         if (res && res.passed) { state.certified = true; showResult(); return; }
@@ -269,7 +287,7 @@
   function buildCharacter() {
     rerenderCurrent = buildCharacter;
     setBg("world"); setHeaderLogos("world");
-    var w = WORLDS[state.world], chars = w.characters, ci = 0;
+    var w = WORLDS[state.world], chars = (w.characters[state.gender] || w.characters.male || []), ci = 0;
     var mount = $("#charMount");
 
     function draw() {
@@ -794,7 +812,7 @@
 
     var saveP = post({
       action: "score", division: state.division.id, brand: L(state.brand),
-      empId: state.empId, name: state.name, character: state.character,
+      empId: state.empId, name: state.name, gender: state.gender || "", character: state.character,
       scores: state.scores, total: total, passed: passed ? "yes" : "no", lang: state.lang,
       bonus: state.bonus ? state.bonus.score : "", energy: state.bonus ? state.bonus.energy : ""
     });
@@ -830,7 +848,8 @@
   /* persistent player identity chip (avatar + name) shown on round screens */
   function playerChip() {
     var w = WORLDS[state.world];
-    var ch = (w.characters || []).filter(function (c) { return c.id === state.character; })[0];
+    var list = (w.characters && (w.characters[state.gender] || w.characters.male)) || [];
+    var ch = list.filter(function (c) { return c.id === state.character; })[0];
     var chip = el("div", "player-chip");
     var av = el("div", "player-av");
     if (ch && ch.png) {

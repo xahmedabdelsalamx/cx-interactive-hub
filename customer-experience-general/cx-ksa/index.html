@@ -67,6 +67,11 @@ body{font-family:var(--font);color:var(--ink);
 .field input,.field select,.fbk-area{font-family:var(--font);font-size:15px;padding:12px 14px;
   border:1.5px solid var(--line);border-radius:14px;background:#f7faf8;color:var(--ink);width:100%}
 .field input:focus,.field select:focus{outline:none;border-color:var(--brand)}
+.seg{display:flex;gap:8px}
+.seg-btn{flex:1;font-family:var(--font);font-weight:800;font-size:14.5px;padding:12px;border:1.5px solid var(--line);
+  border-radius:12px;background:#f7faf8;color:var(--ink);cursor:pointer;transition:.15s}
+.seg-btn:hover{border-color:var(--brand)}
+.seg-btn.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 6px 14px -6px rgba(0,0,0,.4)}
 
 .btn{position:relative;overflow:hidden;font-family:var(--font);font-weight:800;font-size:16px;color:#fff;
   background:var(--grad);border:none;border-radius:16px;padding:14px 18px;width:100%;cursor:pointer;margin-top:8px;
