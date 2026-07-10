@@ -5,6 +5,7 @@
 <title>The Art of the Warm Welcome & Curated Conversations · CX Interactive Hub</title>
 <link rel="icon" type="image/png" href="../../assets/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="../../assets/js/cxhub-sync.js"></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Inter',system-ui,sans-serif;color:#fff;min-height:100dvh;display:grid;place-items:center;padding:24px;
@@ -19,9 +20,12 @@
   .btns{display:flex;flex-direction:column;gap:10px;margin-top:22px}
   a.btn,button.btn{font-family:'Fredoka';font-weight:600;font-size:1rem;padding:13px;border-radius:14px;cursor:pointer;border:0;text-decoration:none;display:block}
   .btn.primary{background:#fff;color:#111}
+  .btn.primary:disabled{opacity:.6;cursor:default}
   .btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3)}
   .note{margin-top:18px;font-size:.76rem;opacity:.7;line-height:1.5}
   code{background:rgba(0,0,0,.25);padding:2px 6px;border-radius:6px;font-size:.72rem}
+  #saved{margin-top:12px;font-family:'Fredoka';font-weight:600;font-size:.9rem;opacity:0;transition:opacity .3s}
+  #saved.show{opacity:1}
 </style>
 </head>
 <body>
@@ -31,26 +35,28 @@
     <h1>The Art of the Warm Welcome & Curated Conversations</h1>
     <p>This module is in development. Build your game here — replace everything inside this folder's <code>index.html</code>.</p>
     <div class="btns">
-      <button class="btn primary" onclick="markComplete()">Mark complete (demo) →</button>
+      <button class="btn primary" id="mc" onclick="markComplete()">Mark complete (demo) →</button>
       <a class="btn ghost" href="../../index.html">‹ Back to the Hub</a>
     </div>
-    <p class="note">When your game finishes, record the result so the Hub shows this level as completed:<br>
-      <code>saveResult('hospitality','warm-welcome-curated-conversations',{stars:2,score:78})</code></p>
+    <div id="saved">✅ Saved to your record — returning…</div>
+    <p class="note">When your game finishes, record the result so the Hub + Google Sheet update:<br>
+      <code>CXHubSync.saveResult('hospitality','warm-welcome-curated-conversations',{score:0-100,stars:0-3,passed:true})</code></p>
   </div>
 <script>
-/* ---- shared-origin progress: the Hub reads localStorage 'cxhub_progress' ---- */
-function saveResult(world, levelId, res){
-  var key="cxhub_progress", p={};
-  try{ p=JSON.parse(localStorage.getItem(key))||{} }catch(e){}
-  p[world+":"+levelId]={stars:res.stars||0, score:res.score||0, date:new Date().toISOString()};
-  localStorage.setItem(key, JSON.stringify(p));
-}
-/* demo button: gives a random score/stars, then returns to the hub */
 function markComplete(){
+  var btn=document.getElementById('mc'); btn.disabled=true; btn.textContent='Saving…';
   var score=70+Math.floor(Math.random()*31);
   var stars=score>=90?3:score>=80?2:1;
-  saveResult("hospitality","warm-welcome-curated-conversations",{stars:stars,score:score});
-  window.location.href="../../index.html";
+  try{
+    if(window.CXHubSync){ CXHubSync.saveResult('hospitality','warm-welcome-curated-conversations',{score:score,stars:stars,passed:score>=80}); }
+    else {
+      var p={}; try{p=JSON.parse(localStorage.getItem('cxhub_progress'))||{}}catch(e){}
+      p['hospitality:warm-welcome-curated-conversations']={stars:stars,score:score,date:new Date().toISOString()};
+      localStorage.setItem('cxhub_progress',JSON.stringify(p));
+    }
+  }catch(e){}
+  document.getElementById('saved').classList.add('show');
+  setTimeout(function(){ window.location.href='../../index.html'; }, 900);
 }
 </script>
 </body>

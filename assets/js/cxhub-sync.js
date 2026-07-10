@@ -14,7 +14,7 @@
    ---- EDIT THESE TWO after you deploy the Apps Script (backend/AppsScript.gs) ----
 ============================================================================ */
 window.CXHUB_SYNC = window.CXHUB_SYNC || {
-  scriptUrl:   "https://script.google.com/macros/s/AKfycbzkwewEo806PQv7IZCXgbM9L-7LZt7VRH3KzbAtkjkG2Rty_dyWjMsjNuFrD5bXY1nBEg/exec",                       // paste your NEW Apps Script /exec URL (empty = local only)
+  scriptUrl:   "https://script.google.com/macros/s/AKfycbzkwewEo806PQv7IZCXgbM9L-7LZt7VRH3KzbAtkjkG2Rty_dyWjMsjNuFrD5bXY1nBEg/exec",   // live Apps Script /exec URL (empty = local only)
   secretToken: "cxinteractivehub2030"    // MUST match SECRET_TOKEN in backend/AppsScript.gs
 };
 
@@ -100,4 +100,8 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
 
     flush: flush
   };
+
+  /* drain anything queued while offline or before the live URL was set */
+  if(document.readyState==="complete") flush();
+  else window.addEventListener("load", flush);
 })();
