@@ -70,7 +70,7 @@ function cxhubSaveResult(world, levelId, res){
       p[key]={stars:res.stars||0, score:res.score||0, date:new Date().toISOString()};
     localStorage.setItem("cxhub_progress", JSON.stringify(p));
     // optional Google Sheet post (fill URL + token to match backend/AppsScript.gs)
-    var SCRIPT_URL="", TOKEN="CHANGE-ME-CXHUB-2026";
+    var SCRIPT_URL="https://script.google.com/macros/s/AKfycbzkwewEo806PQv7IZCXgbM9L-7LZt7VRH3KzbAtkjkG2Rty_dyWjMsjNuFrD5bXY1nBEg/exec", TOKEN="cxinteractivehub2030";
     if(SCRIPT_URL){
       var pr={}; try{pr=JSON.parse(localStorage.getItem("cxhub_profile"))||{}}catch(e){}
       var br={}; try{br=JSON.parse(localStorage.getItem("cxhub_brands"))||{}}catch(e){}
