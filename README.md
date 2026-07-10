@@ -1,8 +1,13 @@
 # CX Interactive Hub
 
-A gamified launcher for the Customer Experience learning modules. Players pick a
-**world** (division), enter their details and a character, then work through the
-**levels** (games). Progress is saved and shown with stars + scores.
+A gamified launcher for the Customer Experience learning modules. Players enter their
+details **once** at the hub's front door (name · employee ID · brand); their brand
+routes them straight to their division's journey. General games (AURA Pass, KSA Ready)
+are shown to everyone. Games never ask for details again — they read the saved profile.
+Progress is saved to a Google Sheet and shown with stars + scores.
+
+Identity is captured in one place, so adding SSO later (Azure Entra) is a drop-in:
+`resolveIdentity()` in `assets/js/app.js` already tries Azure's `/.auth/me`.
 
 ---
 
