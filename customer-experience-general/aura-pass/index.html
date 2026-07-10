@@ -313,6 +313,7 @@ html[dir=rtl] .arr-pos{transform:translateX(50%);}
 .devline a:hover{text-decoration:underline;}
 
 </style>
+<script src="../../assets/js/cxhub-sync.js"></script>
 </head>
 <body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
@@ -1436,6 +1437,25 @@ function refreshSyncNote(){
 }
 function submitScore(){
   setLocalHist(player.empId, attemptNo, corePct());
+  /* --- report to CX Interactive Hub: progress + central Google Sheet --- */
+  try{
+    var _pct=corePct(), _mt=(CONFIG&&CONFIG.masteryThreshold)||75;
+    var _stars=_pct>=90?3:(_pct>=_mt?2:1);
+    if(player && player.empId && !localStorage.getItem("cxhub_profile")){
+      localStorage.setItem("cxhub_profile", JSON.stringify({eid:player.empId, name:player.name||"", gender:"", character:""}));
+    }
+    if(player && player.brand){
+      var _br={}; try{ _br=JSON.parse(localStorage.getItem("cxhub_brands"))||{}; }catch(_e){}
+      _br["general"]=player.brand; localStorage.setItem("cxhub_brands", JSON.stringify(_br));
+    }
+    if(window.CXHubSync){
+      CXHubSync.saveResult("general","aura-pass",{score:_pct, stars:_stars, passed:_pct>=_mt, attempt:attemptNo});
+    } else {
+      var _hp={}; try{ _hp=JSON.parse(localStorage.getItem("cxhub_progress"))||{}; }catch(_e){}
+      _hp["general:aura-pass"]={stars:_stars, score:_pct, date:new Date().toISOString()};
+      localStorage.setItem("cxhub_progress", JSON.stringify(_hp));
+    }
+  }catch(_e){}
   const note=document.getElementById("syncNote");
   if(!CONFIG.scriptUrl){ if(note) note.textContent=T("syncPreview"); return; }
   enqueue({
