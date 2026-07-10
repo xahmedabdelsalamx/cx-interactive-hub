@@ -221,6 +221,7 @@ function finishOnboard(charId){
   profile={eid:state.ob.eid,name:state.ob.name,gender:state.ob.gender,character:charId};
   brands[state.world]=state.ob.brand;
   save("cxhub_profile",profile);save("cxhub_brands",brands);
+  if(window.CXHubSync) CXHubSync.register(state.world);
   state.screen="world";render();
 }
 
@@ -245,7 +246,7 @@ function renderBrandOnly(){
     <button class="cta" id="boCta" style="background:${w.grad}" disabled onclick="CXHub.brandOnlyGo()">${t("enterWorld")} ›</button>
   </div></div></div>`;
 }
-function brandOnlyGo(){const b=v("bo-brand");if(!b)return;brands[state.world]=b;save("cxhub_brands",brands);state.screen="world";render();}
+function brandOnlyGo(){const b=v("bo-brand");if(!b)return;brands[state.world]=b;save("cxhub_brands",brands);if(window.CXHubSync) CXHubSync.register(state.world);state.screen="world";render();}
 
 /* ---------------------------- WORLD MAP ---------------------------- */
 function renderWorld(){
