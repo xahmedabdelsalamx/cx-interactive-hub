@@ -51,7 +51,7 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
   function base(extra){
     var pr = profile() || {}, br = brands();
     var o = { token: CFG.secretToken, empId: pr.eid||"", name: pr.name||"", market: pr.market||"",
-      gender: pr.gender||"", character: pr.character||"", lang: lang(), clientTime: nowISO() };
+      lang: lang(), clientTime: nowISO() };
     if(extra) for(var k in extra) o[k] = extra[k];
     if(extra && extra.world && br[extra.world]) o.brand = br[extra.world];   // brand for that division
     return o;
@@ -67,7 +67,36 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     }catch(e){}
   }
 
+  /* Pull this player's results from the Sheet and REBUILD cxhub_progress from them.
+     Authoritative: the Sheet is the source of truth, so a row deleted there resets
+     the level locally. Runs flush() first so a just-finished level is sent before we
+     read back. Only overwrites local progress when the read succeeds. */
+  function hydrate(){
+    var pr=profile();
+    if(!CFG.scriptUrl || !pr || !pr.eid) return Promise.resolve(false);
+    return flush().then(function(){
+      return new Promise(function(res){ setTimeout(res, 700); });   // let the write settle
+    }).then(function(){
+      var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=results&empId="+encodeURIComponent(pr.eid);
+      return fetch(url).then(function(r){ return r.json(); }).then(function(d){
+        if(!d || !Array.isArray(d.results)) return false;   // read failed -> keep local
+        var rebuilt={};
+        d.results.forEach(function(row){
+          var world=row.World||row.world, lid=row.LevelID||row.levelId;
+          if(!world || !lid) return;
+          var score=parseInt(row.Score!=null?row.Score:row.score,10)||0;
+          var stars=parseInt(row.Stars!=null?row.Stars:row.stars,10)||0;
+          var key=world+":"+lid, prev=rebuilt[key];
+          if(!prev || score>prev.score) rebuilt[key]={stars:stars, score:score, date:row.Timestamp||row.ClientTime||new Date().toISOString()};
+        });
+        save("cxhub_progress", rebuilt);   // authoritative replace
+        return true;
+      });
+    }).catch(function(){ return false; });
+  }
+
   window.CXHubSync = {
+    hydrate: hydrate,
     config: CFG,
 
     /* returns the saved player, so a game never has to re-ask */

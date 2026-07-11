@@ -20,7 +20,7 @@ const STR={
    gateEyebrow:"Customer Experience Learning", gateTitle:"Welcome — let's get you set up",
    gateSub:"Enter your details once. Your brand takes you straight to your journey.",
    fName:"Full name", fEid:"Employee ID", fBrand:"Your brand", fMarket:"Your market", choose:"Choose your brand…", chooseMarket:"Choose your market…", enter:"Enter my journey",
-   ssoNote:"Signed in — just confirm your brand.",
+   ssoNote:"Signed in with your store — just add your name and ID.",
    worldsH:"Your journey", generalTag:"For everyone", generalH:"Customer Experience — General",
    levels:function(n){return n+" levels";}, cleared:function(a,b){return a+" / "+b+" cleared";},
    live:"Live", soon:"Coming soon", done:"Completed",
@@ -31,7 +31,7 @@ const STR={
    gateEyebrow:"تعلّم تجربة العملاء", gateTitle:"مرحبًا — لنجهّز حسابك",
    gateSub:"أدخل بياناتك مرة واحدة. علامتك التجارية تنقلك مباشرة إلى رحلتك.",
    fName:"الاسم الكامل", fEid:"الرقم الوظيفي", fBrand:"علامتك التجارية", fMarket:"سوقك", choose:"اختر علامتك…", chooseMarket:"اختر سوقك…", enter:"ادخل رحلتي",
-   ssoNote:"تم تسجيل الدخول — فقط أكّد علامتك.",
+   ssoNote:"تم تسجيل الدخول عبر متجرك — أضف اسمك ورقمك الوظيفي فقط.",
    worldsH:"رحلتك", generalTag:"للجميع", generalH:"تجربة العملاء — عام",
    levels:function(n){return n+" مستوى";}, cleared:function(a,b){return a+" / "+b+" مكتمل";},
    live:"مباشر", soon:"قريبًا", done:"مكتمل",
@@ -71,9 +71,13 @@ function resolveIdentity(){
   return fetch("/.auth/me",{credentials:"include"}).then(function(r){ return r.ok?r.json():null; }).then(function(j){
     var cp=j&&j.clientPrincipal; if(!cp)return null;
     var claims={}; (cp.claims||[]).forEach(function(c){claims[c.typ]=c.val;});
-    var name=claims["name"]||claims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]||cp.userDetails||"";
-    var eid =claims["employeeid"]||claims["extension_EmployeeId"]||claims["onpremisessamaccountname"]||"";
-    return {name:name, eid:eid, email:cp.userDetails||"", sso:true};
+    /* Store staff share ONE store login, so SSO identifies the STORE, not the person.
+       Pull only store-level attributes (brand + market) to pre-fill & lock; the
+       individual still types their own name + employee ID every session.
+       Adjust these claim names to match your Entra setup when SSO is enabled. */
+    var brand =claims["brand"]||claims["extension_Brand"]||"";
+    var market=claims["market"]||claims["country"]||claims["extension_Market"]||claims["ctry"]||"";
+    return { sso:true, brand:brand, market:market, storeEmail:cp.userDetails||"" };
   }).catch(function(){ return null; });
 }
 
@@ -87,6 +91,8 @@ function render(){
     document.getElementById("pcName").textContent=firstName()+" · "+profile.eid;
     document.getElementById("pcAv").textContent=(firstName()[0]||"?").toUpperCase(); }
   else pc.classList.remove("show");
+  var wb=document.getElementById("worldBg");
+  if(wb) wb.className = (state.screen==="world" && state.division) ? ("world-bg show "+state.division) : "world-bg";
 
   if(state.screen==="gate") renderGate(); else renderWorld();
   document.querySelectorAll("[data-t]").forEach(function(el){var k=el.getAttribute("data-t");if(STR[LANG][k])el.textContent=STR[LANG][k];});
@@ -100,7 +106,7 @@ function renderGate(){
     var opts=BRANDS[div].slice().sort().map(function(b){return '<option value="'+b+'" '+(g.brand===b?'selected':'')+'>'+b+'</option>';}).join("");
     return '<optgroup label="'+DIV_LABEL[div][LANG]+'">'+opts+'</optgroup>';
   }).join("");
-  var locked = state.sso&&state.sso.sso;
+  var isSso = state.sso&&state.sso.sso, lockBrand=state.sso&&state.sso.brand, lockMarket=state.sso&&state.sso.market;
   var markets=(C.MARKETS||[]).map(function(m){return '<option value="'+m.en+'" '+(g.market===m.en?'selected':'')+'>'+m[LANG]+'</option>';}).join("");
   app().innerHTML=
   '<div class="screen"><section class="gate-hero"><div class="gate-bg"></div><div class="gate-orbs">'+
@@ -109,12 +115,12 @@ function renderGate(){
     '<div class="gate-logo"><img src="assets/logos/cx-hub.png" alt="CX Hub"></div>'+
     '<span class="gate-eyebrow">'+t("gateEyebrow")+'</span>'+
     '<h2>'+t("gateTitle")+'</h2><p class="sub">'+t("gateSub")+'</p>'+
-    (locked?'<div class="sso-note">🔐 '+t("ssoNote")+'</div>':'')+
-    '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" '+(locked&&g.name?"disabled":"")+' oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
-    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" '+(locked&&g.eid?"disabled":"")+' oninput="CXHub.gateChange()" placeholder="e.g. 100234"></div>'+
-    '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" onchange="CXHub.gateChange()">'+
+    (isSso?'<div class="sso-note">🔐 '+t("ssoNote")+'</div>':'')+
+    '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
+    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" oninput="CXHub.gateChange()" placeholder="e.g. 100234"></div>'+
+    '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.gateChange()">'+
       '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
-    '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" onchange="CXHub.gateChange()">'+
+    '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.gateChange()">'+
       '<option value="" disabled '+(!g.market?'selected':'')+'>'+t("chooseMarket")+'</option>'+markets+'</select></div>'+
     '<button class="cta" id="gCta" style="background:var(--g-cx)" '+(gateValid()?'':'disabled')+' onclick="CXHub.gateSubmit()">'+t("enter")+' ›</button>'+
   '</div></div></section></div>';
@@ -131,17 +137,25 @@ function gateSubmit(){ gateChange(); if(!gateValid())return;
   save("cxhub_profile",profile); save("cxhub_brands",brands);
   if(window.CXHubSync) CXHubSync.register(div);         // log roster to the Sheet
   state.division=div; state.screen="world"; render();
+  hydrateAndRefresh();
 }
 function editDetails(){ if(!profile)return; state.gate={name:profile.name, eid:profile.eid, market:profile.market||"", brand:myBrand()}; state.screen="gate"; render(); }
 
 /* ---------------------------- WORLD / DIVISION JOURNEY ---------------------------- */
+function marketAllows(g){
+  var m=g.markets, mk=(profile&&profile.market)||"";
+  if(!m || m==="all" || m==="*") return true;
+  if(Array.isArray(m)) return m.indexOf("all")>=0 || m.indexOf("*")>=0 || m.indexOf(mk)>=0;
+  return true;
+}
 function generalHTML(){
-  var cards=GENERAL.games.map(function(g){
-    var done=progress["general:"+g.id], live=g.released;
-    var badge= done?'<span class="badge done">★ '+done.score+'%</span>'
-      : live?'<span class="badge live"><span class="dot live"></span>'+t("live")+'</span>'
+  var games=GENERAL.games.filter(marketAllows);
+  if(!games.length) return "";
+  var cards=games.map(function(g){
+    var live=g.released;
+    var badge= live?'<span class="badge live"><span class="dot live"></span>'+t("live")+'</span>'
       : '<span class="badge soon">'+t("soon")+'</span>';
-    var clickable=live||done, tag=clickable?"a":"div", attrs=clickable?'href="'+g.url+'"':'';
+    var clickable=live, tag=clickable?"a":"div", attrs=clickable?'href="'+g.url+'"':'';
     var box=g.icon.box==="grad"?"grad":(g.icon.box==="image"?"image":""), imgCls=g.icon.box==="image"?"ico-img contain":"ico-img pad";
     return '<'+tag+' class="ggame '+(clickable?'':'soon')+'" '+attrs+'><span class="ico '+box+'">'+media(g.icon,imgCls)+'</span>'+
       '<span class="gtext"><span class="gt">'+g[LANG]+'</span><br>'+badge+'</span>'+(clickable?'<span class="arr">›</span>':'')+'</'+tag+'>';
@@ -205,6 +219,11 @@ window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDeta
   openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld};
 
 /* ---------------------------- INIT ---------------------------- */
+function hydrateAndRefresh(){
+  if(profile && window.CXHubSync && CXHubSync.hydrate){
+    CXHubSync.hydrate().then(function(changed){ if(changed){ progress=load("cxhub_progress",{}); render(); } });
+  }
+}
 function decideAndRender(){
   if(profile && Object.keys(brands).length){ state.division=BRAND2DIV[myBrand()]||"retail"; state.screen="world"; }
   else { state.screen="gate"; }
@@ -212,7 +231,8 @@ function decideAndRender(){
 }
 resolveIdentity().then(function(sso){
   state.sso=sso;
-  if(!profile && sso){ state.gate.name=sso.name||""; state.gate.eid=sso.eid||""; }
+  if(!profile && sso){ if(sso.brand)state.gate.brand=sso.brand; if(sso.market)state.gate.market=sso.market; }
   decideAndRender();
+  hydrateAndRefresh();
 }).catch(decideAndRender);
 })();

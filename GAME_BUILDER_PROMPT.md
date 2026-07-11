@@ -78,7 +78,7 @@ function cxhubSaveResult(world, levelId, res){
       var br={}; try{br=JSON.parse(localStorage.getItem("cxhub_brands"))||{}}catch(e){}
       fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},
         body:JSON.stringify({token:TOKEN,action:"submit",world:world,division:world,levelId:levelId,
-          empId:pr.eid||"",name:pr.name||"",market:pr.market||"",brand:br[world]||"",gender:pr.gender||"",character:pr.character||"",
+          empId:pr.eid||"",name:pr.name||"",market:pr.market||"",brand:br[world]||"",
           score:res.score||0,stars:res.stars||0,passed:res.passed?"YES":"NO",
           lang:document.documentElement.lang||"en",clientTime:new Date().toISOString()})});
     }
@@ -110,4 +110,7 @@ I'll set that level's `released:true` to make it playable.
 **starbucks** (`art-of-connection`): `warm-welcome-connection` · `selling-starbucks-products` ·
 `sampling-handoff-speed` · `loyalty-service-recovery`
 
-**general** (`customer-experience-general`): `aura-pass` (done) · `ksa-ready` (in progress)
+**general** (`customer-experience-general`): standalone projects with their OWN entry
+screen and their OWN Google Sheet/Apps Script (e.g. AURA Pass, KSA Ready). **Do not
+build these with this prompt** — this environment is only for the three journey worlds
+above.

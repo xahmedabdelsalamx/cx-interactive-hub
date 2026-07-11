@@ -23,7 +23,7 @@
 
 var SECRET_TOKEN = "cxinteractivehub2030";   // matches scriptUrl/secretToken in cxhub-sync.js
 
-var PROFILE_HEADERS  = ["Timestamp","EmpID","Name","Market","Brand","Division","Gender","Character","Lang","ClientTime"];
+var PROFILE_HEADERS  = ["Timestamp","EmpID","Name","Market","Brand","Division","Lang","ClientTime"];
 var RESULT_HEADERS   = ["Timestamp","EmpID","Name","Market","Brand","Division","World","LevelID","Score","Stars","Passed","Attempt","DurationSec","Lang","ClientTime","Meta"];
 var FEEDBACK_HEADERS = ["Timestamp","EmpID","Name","Market","Brand","Division","World","LevelID","Rating","Comment","Lang","ClientTime"];
 
@@ -95,7 +95,7 @@ function upsertProfile(ss, d, now){
     var ids = sh.getRange(2, idCol+1, last-1, 1).getValues();
     for (var i=0; i<ids.length; i++){ if (String(ids[i][0]) === String(d.empId)){ row = i+2; break; } }
   }
-  var vals = [now, d.empId||"", d.name||"", d.market||"", d.brand||"", d.division||"", d.gender||"", d.character||"", d.lang||"", d.clientTime||""];
+  var vals = [now, d.empId||"", d.name||"", d.market||"", d.brand||"", d.division||"", d.lang||"", d.clientTime||""];
   if (row) sh.getRange(row, 1, 1, vals.length).setValues([vals]);
   else     sh.appendRow(vals);
 }

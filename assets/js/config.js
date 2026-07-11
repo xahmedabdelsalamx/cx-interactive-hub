@@ -118,14 +118,18 @@ window.CXHUB_CONFIG = {
     }
   },
 
-  /* Customer Experience — General: standalone games (not a journey). */
+  /* Customer Experience — General: standalone games with their OWN entry + backend.
+     markets: which markets see each project. Use a list for market-specific projects,
+     or "all" for every market. Values must match the MARKETS list above. */
   GENERAL: {
     folder: "customer-experience-general",
     games: [
-      { id:"aura-pass", released:true,  url:"customer-experience-general/aura-pass/", en:"AURA Pass",  ar:"بطاقة أورا",
-        icon:{ img:"assets/logos/aura-white.png", box:"grad" } },   // white logo on a gradient tile
-      { id:"ksa-ready", released:false, url:"customer-experience-general/ksa-ready/", en:"KSA Ready",  ar:"جاهزية السعودية",
-        icon:{ img:"assets/icons/ksa-flag.png",  box:"image" } }    // flag fills the tile
+      { id:"aura-pass", released:true,  markets:["United Arab Emirates"], url:"customer-experience-general/aura-pass/", en:"AURA Pass",  ar:"بطاقة أورا",
+        icon:{ img:"assets/logos/aura-white.png", box:"grad" } },
+      { id:"ksa-ready", released:false, markets:["Saudi Arabia"],         url:"customer-experience-general/ksa-ready/", en:"KSA Ready",  ar:"جاهزية السعودية",
+        icon:{ img:"assets/icons/ksa-flag.png",  box:"image" } }
+      /* example — a project for every market:
+      ,{ id:"cx-basics", released:true, markets:"all", url:"customer-experience-general/cx-basics/", en:"CX Basics", ar:"أساسيات تجربة العملاء", icon:{emoji:"🎓"} } */
     ]
   }
 };
