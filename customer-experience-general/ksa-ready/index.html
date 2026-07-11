@@ -396,30 +396,6 @@ a.btn{display:block;text-align:center;text-decoration:none;line-height:1.2}
 <script src="divisions/retail.js"></script>
 <script src="divisions/hospitality.js"></script>
 <!-- <script src="divisions/starbucks.js"></script> -->
-<script src="../../assets/js/cxhub-sync.js"></script>
 <script src="engine.js"></script>
-<script>
-/* CX Hub: prefill KSA's intake from the hub profile so returning players don't retype.
-   (KSA still asks gender/character while it's in development.) */
-(function(){
-  try{
-    var pr=JSON.parse(localStorage.getItem('cxhub_profile')||'null');
-    var brs=JSON.parse(localStorage.getItem('cxhub_brands')||'{}');
-    if(!pr||!pr.eid) return;
-    var brand=Object.keys(brs).map(function(k){return brs[k];})[0]||'';
-    var tries=0, iv=setInterval(function(){
-      tries++;
-      var emp=document.getElementById('empId'), nm=document.getElementById('name'), br=document.getElementById('brandSel');
-      if(emp&&nm){
-        if(!emp.value) emp.value=pr.eid;
-        if(!nm.value)  nm.value=pr.name||'';
-        if(br&&brand){ for(var i=0;i<br.options.length;i++){ if(br.options[i].textContent.trim()===brand){ br.value=br.options[i].value; break; } } }
-        clearInterval(iv);
-      }
-      if(tries>40) clearInterval(iv);
-    },100);
-  }catch(e){}
-})();
-</script>
 </body>
 </html>

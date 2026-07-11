@@ -793,24 +793,6 @@
     var total = mainScores.length ? Math.round(mainScores.reduce(function (a, b) { return a + b; }, 0) / mainScores.length) : 0;
     var passed = total >= CONFIG.passMark;
 
-    /* --- report to CX Interactive Hub: progress + central Google Sheet --- */
-    try {
-      var _stars = total >= 90 ? 3 : (passed ? 2 : 1);
-      var _brand = (state.brand && state.brand.en) ? state.brand.en : L(state.brand);
-      if (state.empId && !localStorage.getItem("cxhub_profile")) {
-        localStorage.setItem("cxhub_profile", JSON.stringify({ eid: state.empId, name: state.name || "", gender: state.gender || "", character: state.character || "" }));
-      }
-      var _br = {}; try { _br = JSON.parse(localStorage.getItem("cxhub_brands")) || {}; } catch (e) {}
-      _br["general"] = _brand; localStorage.setItem("cxhub_brands", JSON.stringify(_br));
-      if (window.CXHubSync) {
-        CXHubSync.saveResult("general", "ksa-ready", { score: total, stars: _stars, passed: passed });
-      } else {
-        var _hp = {}; try { _hp = JSON.parse(localStorage.getItem("cxhub_progress")) || {}; } catch (e) {}
-        _hp["general:ksa-ready"] = { stars: _stars, score: total, date: new Date().toISOString() };
-        localStorage.setItem("cxhub_progress", JSON.stringify(_hp));
-      }
-    } catch (e) {}
-
     c.appendChild(el("div", "result-head", passed ? u("resultReady") : u("failed")));
 
     var ring = el("div", "score-ring"); ring.style.setProperty("--p", total);
