@@ -137,7 +137,7 @@ function gateSubmit(){ gateChange(); if(!gateValid())return;
   save("cxhub_profile",profile); save("cxhub_brands",brands);
   if(window.CXHubSync) CXHubSync.register(div);         // log roster to the Sheet
   state.division=div; state.screen="world"; render();
-  hydrateAndRefresh();
+  hydrateAndRefresh(false);
 }
 function editDetails(){ if(!profile)return; state.gate={name:profile.name, eid:profile.eid, market:profile.market||"", brand:myBrand()}; state.screen="gate"; render(); }
 
@@ -215,14 +215,25 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()
 function setLang(l){LANG=l;render();}
 function goWorld(){ if(profile&&Object.keys(brands).length){state.screen="world";render();} }
 
+function confirmSignOut(){ var msg=LANG==="ar"?"تسجيل الخروج؟":"Sign out?"; if(window.confirm(msg)) signOut(); }
+
 window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails,
-  openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld};
+  openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld, signOut:signOut, confirmSignOut:confirmSignOut};
 
 /* ---------------------------- INIT ---------------------------- */
-function hydrateAndRefresh(){
+function hydrateAndRefresh(allowSignout){
   if(profile && window.CXHubSync && CXHubSync.hydrate){
-    CXHubSync.hydrate().then(function(changed){ if(changed){ progress=load("cxhub_progress",{}); render(); } });
+    CXHubSync.hydrate().then(function(r){
+      if(!r) return;
+      if(allowSignout && r.read && r.known===false){ signOut(); return; }   // deleted from Sheet -> sign out
+      if(r.changed){ progress=load("cxhub_progress",{}); render(); }
+    });
   }
+}
+function signOut(){
+  profile=null; brands={}; progress={};
+  try{ localStorage.removeItem("cxhub_profile"); localStorage.removeItem("cxhub_brands"); localStorage.removeItem("cxhub_progress"); }catch(e){}
+  state.division=null; state.gate={}; state.screen="gate"; render();
 }
 function decideAndRender(){
   if(profile && Object.keys(brands).length){ state.division=BRAND2DIV[myBrand()]||"retail"; state.screen="world"; }
@@ -233,6 +244,6 @@ resolveIdentity().then(function(sso){
   state.sso=sso;
   if(!profile && sso){ if(sso.brand)state.gate.brand=sso.brand; if(sso.market)state.gate.market=sso.market; }
   decideAndRender();
-  hydrateAndRefresh();
+  hydrateAndRefresh(true);
 }).catch(decideAndRender);
 })();

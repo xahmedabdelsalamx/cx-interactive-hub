@@ -73,13 +73,14 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
      read back. Only overwrites local progress when the read succeeds. */
   function hydrate(){
     var pr=profile();
-    if(!CFG.scriptUrl || !pr || !pr.eid) return Promise.resolve(false);
+    if(!CFG.scriptUrl || !pr || !pr.eid) return Promise.resolve({read:false, known:true, changed:false});
     return flush().then(function(){
       return new Promise(function(res){ setTimeout(res, 700); });   // let the write settle
     }).then(function(){
       var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=results&empId="+encodeURIComponent(pr.eid);
       return fetch(url).then(function(r){ return r.json(); }).then(function(d){
-        if(!d || !Array.isArray(d.results)) return false;   // read failed -> keep local
+        if(!d || !Array.isArray(d.results)) return {read:false, known:true, changed:false};   // read failed -> keep local
+        if(d.known===false) return {read:true, known:false, changed:false};                   // deleted from Sheet -> sign out
         var rebuilt={};
         d.results.forEach(function(row){
           var world=row.World||row.world, lid=row.LevelID||row.levelId;
@@ -90,9 +91,9 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
           if(!prev || score>prev.score) rebuilt[key]={stars:stars, score:score, date:row.Timestamp||row.ClientTime||new Date().toISOString()};
         });
         save("cxhub_progress", rebuilt);   // authoritative replace
-        return true;
+        return {read:true, known:true, changed:true};
       });
-    }).catch(function(){ return false; });
+    }).catch(function(){ return {read:false, known:true, changed:false}; });
   }
 
   window.CXHubSync = {
