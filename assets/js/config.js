@@ -31,6 +31,13 @@ window.CXHUB_CONFIG = {
     cxHub: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/181326/home"
   },
 
+  /* Certificate closing line per division (edit freely). */
+  CERT: {
+    retail:      "You've completed the full retail journey with excellence. Keep inspiring exceptional experiences every day!",
+    hospitality: "You've completed the full hospitality journey with excellence. Thank you for creating unforgettable experiences!",
+    starbucks:   "You've built meaningful connections and created moments that matter. Keep inspiring, one connection at a time!"
+  },
+
   /* Shared icons (used inside the level popup). Swap to img/lottie any time. */
   ICONS: {
     scenario: { emoji: "💬" },   // e.g. { lottie:"assets/lottie/scenario.json" }

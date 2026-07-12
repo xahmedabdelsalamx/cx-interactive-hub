@@ -204,55 +204,86 @@ function previewCert(){
   var nm=(profile&&profile.name)||"Sample Name", eid=(profile&&profile.eid)||"000000";
   buildCertificate(nm, eid, w, new Date().toISOString(), "open");
 }
-/* ---- Certificate (HTML5 canvas). All positions are plain numbers below, so they're
-   easy to nudge if you want to fine-tune the layout. Output: PNG download. ---- */
+/* ---- Certificate (HTML5 canvas, A4 landscape 2480x1754 for clean printing).
+   Artwork + wave on the left, world-coloured cream panel on the right. All text is
+   drawn here (never taken from images). Positions are plain numbers, easy to nudge. ---- */
 async function buildCertificate(name, eid, w, dateISO, mode){
-  var W=1600, H=1131, c=document.createElement("canvas"); c.width=W; c.height=H; var x=c.getContext("2d");
-  try{ await document.fonts.load('700 46px "Fredoka"'); await document.fonts.load('600 30px "Fredoka"'); await document.fonts.ready; }catch(e){}
+  var W=2480, H=1754, c=document.createElement("canvas"); c.width=W; c.height=H; var x=c.getContext("2d");
+  try{ await document.fonts.ready; }catch(e){}
+  var art   =await loadImg(w.art);
   var cxLogo=await loadImg("assets/logos/cx-hub.png");
   var wLogo =await loadImg(w.logo && w.logo.img);
-  var seal  =await loadImg("assets/badges/champion.png");
-  var accent=w.color||"#c11d77", gold="#c9a227", ink="#22314f", grey="#6b7280";
+  var alsh  =await loadImg("assets/logos/alshaya.png");
+  var accent=w.color||"#c11d77", gold="#c9a24a", navy="#1f3a63", ink="#2b3a55", grey="#6f7687", cream="#f7f1e4";
 
-  x.fillStyle=accent; x.fillRect(0,0,W,H);                                   // accent edge
-  var m=24, bg=x.createRadialGradient(W/2,H*0.42,120,W/2,H*0.42,W*0.9);
-  bg.addColorStop(0,"#fffdf8"); bg.addColorStop(1,"#f4ecdd");
-  x.fillStyle=bg; x.fillRect(m,m,W-2*m,H-2*m);                              // ivory panel
-  x.strokeStyle=gold; x.lineWidth=3;   x.strokeRect(48,48,W-96,H-96);       // gold frames
-  x.lineWidth=1.4; x.strokeRect(60,60,W-120,H-120);
-  function corner(cx,cy,sx,sy){ x.strokeStyle=gold; x.lineWidth=2.5; x.beginPath();
-    x.moveTo(cx,cy+sy*42); x.lineTo(cx,cy); x.lineTo(cx+sx*42,cy); x.stroke();
-    x.beginPath(); x.arc(cx+sx*15,cy+sy*15,5,0,7); x.fillStyle=gold; x.fill(); }
-  corner(84,84,1,1); corner(W-84,84,-1,1); corner(84,H-84,1,-1); corner(W-84,H-84,-1,-1);
+  function shade(hex,p){ var n=parseInt(hex.slice(1),16), r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+    r=Math.max(0,Math.min(255,r+p)); g=Math.max(0,Math.min(255,g+p)); b=Math.max(0,Math.min(255,b+p)); return "rgb("+r+","+g+","+b+")"; }
+  function cover(img,dx,dy,dw,dh){ if(!img)return; var ir=img.width/img.height, dr=dw/dh, sw,sh,sx,sy;
+    if(ir>dr){ sh=img.height; sw=sh*dr; sx=(img.width-sw)/2; sy=0; } else { sw=img.width; sh=sw/dr; sx=0; sy=(img.height-sh)/2; }
+    x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh); }
+  function fit(img,cx,cy,maxW,maxH){ if(!img)return; var s=Math.min(maxW/img.width,maxH/img.height), ww=img.width*s, hh=img.height*s; x.drawImage(img,cx-ww/2,cy-hh/2,ww,hh); }
+  function diamonds(cx,cy,hw,col){ x.strokeStyle=col; x.lineWidth=2; x.beginPath(); x.moveTo(cx-hw,cy); x.lineTo(cx-34,cy); x.stroke(); x.beginPath(); x.moveTo(cx+34,cy); x.lineTo(cx+hw,cy); x.stroke();
+    [-16,16].forEach(function(dx){ x.save(); x.translate(cx+dx,cy); x.rotate(Math.PI/4); x.fillStyle=col; x.fillRect(-7,-7,14,14); x.restore(); }); }
+  function wrap(t,maxW){ var wd=t.split(" "), ls=[], cur=""; for(var i=0;i<wd.length;i++){ var s=cur?cur+" "+wd[i]:wd[i]; if(x.measureText(s).width>maxW && cur){ ls.push(cur); cur=wd[i]; } else cur=s; } if(cur)ls.push(cur); return ls; }
+  function seal(cx,cy,r,col){
+    x.fillStyle=shade(col,-30);
+    [[-1],[1]].forEach(function(s){ var d=s[0]; x.beginPath(); x.moveTo(cx+d*r*0.42,cy+r*0.5); x.lineTo(cx+d*r*0.95,cy+r*1.75); x.lineTo(cx+d*r*0.5,cy+r*1.5); x.lineTo(cx+d*r*0.08,cy+r*0.95); x.closePath(); x.fill(); });
+    var pts=22; x.beginPath(); for(var i=0;i<pts*2;i++){ var rr=(i%2===0)?r*1.1:r*0.97, a=Math.PI*i/pts; x.lineTo(cx+rr*Math.cos(a),cy+rr*Math.sin(a)); } x.closePath(); x.fillStyle=gold; x.fill();
+    x.beginPath(); x.arc(cx,cy,r*0.92,0,7); x.fillStyle=col; x.fill();
+    x.beginPath(); x.arc(cx,cy,r*0.76,0,7); x.strokeStyle="rgba(255,255,255,.6)"; x.lineWidth=r*0.045; x.stroke();
+    x.strokeStyle="#fff"; x.lineWidth=r*0.15; x.lineCap="round"; x.lineJoin="round";
+    x.beginPath(); x.moveTo(cx-r*0.34,cy+r*0.02); x.lineTo(cx-r*0.06,cy+r*0.32); x.lineTo(cx+r*0.42,cy-r*0.34); x.stroke();
+  }
 
+  var m=16, waveX=Math.round(W*0.54), amp=74;
+  x.fillStyle=accent; x.fillRect(0,0,W,H);                    // accent outer edge
+  x.fillStyle=cream;  x.fillRect(m,m,W-2*m,H-2*m);            // cream panel
+  // left artwork with wavy right edge
+  x.save(); x.beginPath(); x.moveTo(m,m); x.lineTo(waveX,m);
+  x.bezierCurveTo(waveX-amp,H*0.3, waveX+amp,H*0.7, waveX,H-m); x.lineTo(m,H-m); x.closePath(); x.clip();
+  cover(art, m, m, waveX-m+amp, H-2*m);
+  var vg=x.createLinearGradient(0,0,0,H); vg.addColorStop(0,"rgba(0,0,0,.06)"); vg.addColorStop(1,"rgba(0,0,0,.28)"); x.fillStyle=vg; x.fillRect(m,m,waveX+amp,H);
+  x.restore();
+  // wave edge lines
+  x.beginPath(); x.moveTo(waveX,m); x.bezierCurveTo(waveX-amp,H*0.3, waveX+amp,H*0.7, waveX,H-m);
+  x.strokeStyle=cream; x.lineWidth=10; x.stroke(); x.strokeStyle=gold; x.lineWidth=3; x.stroke();
+  // gold ornamental border + corners
+  x.strokeStyle=gold; x.lineWidth=3; x.strokeRect(40,40,W-80,H-80); x.lineWidth=1.4; x.strokeRect(54,54,W-108,H-108);
+  [[54,54],[W-54,54],[54,H-54],[W-54,H-54]].forEach(function(pt){ x.beginPath(); x.arc(pt[0],pt[1],7,0,7); x.fillStyle=gold; x.fill(); });
+
+  var rx=waveX+Math.round((W-waveX)/2)-6, panelW=W-waveX-120;
   x.textAlign="center";
-  if(cxLogo){ var lw=210, lh=lw*cxLogo.height/cxLogo.width; x.drawImage(cxLogo,(W-lw)/2,84,lw,lh); }   // CX Hub logo (top)
-  x.fillStyle=gold; x.font='700 46px "Fredoka", Georgia, serif';
-  x.fillText("CERTIFICATE OF COMPLETION", W/2, 300);                        // title
-  x.strokeStyle=gold; x.lineWidth=2; x.beginPath(); x.moveTo(W/2-150,330); x.lineTo(W/2+150,330); x.stroke();
-  x.fillStyle=grey; x.font='italic 28px Georgia, serif'; x.fillText("This certificate is proudly presented to", W/2, 392);
-  x.fillStyle=ink;  x.font='700 78px Georgia, serif'; x.fillText(name, W/2, 480);                        // NAME
-  var nw=Math.min(760, x.measureText(name).width+80); x.strokeStyle=accent; x.lineWidth=3;
-  x.beginPath(); x.moveTo(W/2-nw/2,505); x.lineTo(W/2+nw/2,505); x.stroke();
-  x.fillStyle=grey; x.font='500 26px Georgia, serif'; x.fillText("Employee ID  ·  "+eid, W/2, 548);       // Emp ID
-  x.fillStyle=grey; x.font='italic 27px Georgia, serif'; x.fillText("for successfully completing", W/2, 606);
-  if(wLogo){ var wh=100, ww=wh*wLogo.width/wLogo.height; if(ww>420){ ww=420; wh=ww*wLogo.height/wLogo.width; } x.drawImage(wLogo,(W-ww)/2,626,ww,wh); }
-  x.fillStyle=accent; x.font='700 40px "Fredoka", Georgia, serif'; x.fillText(w.name.en, W/2, 782);        // world name
-  var sg=x.createRadialGradient(W/2,872,10,W/2,872,150); sg.addColorStop(0,"rgba(201,162,39,.18)"); sg.addColorStop(1,"rgba(201,162,39,0)");
-  x.fillStyle=sg; x.beginPath(); x.arc(W/2,872,150,0,7); x.fill();
-  if(seal){ var ss=118; x.drawImage(seal,(W-ss)/2,798,ss,ss); }                        // seal (Champion badge)
-
+  if(x.letterSpacing!==undefined) x.letterSpacing="0px";
+  fit(cxLogo, rx, 235, 340, 200);                                                        // CX Hub logo
+  x.fillStyle=accent; x.font='700 118px Georgia, "Times New Roman", serif';
+  if(x.letterSpacing!==undefined) x.letterSpacing="12px"; x.fillText("CERTIFICATE", rx, 490);
+  x.fillStyle=grey; x.font='600 44px Georgia, serif'; if(x.letterSpacing!==undefined) x.letterSpacing="18px"; x.fillText("OF COMPLETION", rx, 560);
+  if(x.letterSpacing!==undefined) x.letterSpacing="0px";
+  diamonds(rx, 612, 165, accent);
+  x.fillStyle=grey; x.font='italic 40px Georgia, serif'; x.fillText("This certificate is proudly presented to", rx, 712);
+  var nf=100; x.font='700 '+nf+'px Georgia, serif'; while(x.measureText(name).width>panelW && nf>52){ nf-=4; x.font='700 '+nf+'px Georgia, serif'; }
+  x.fillStyle=navy; x.fillText(name, rx, 838);                                            // NAME
+  diamonds(rx, 892, Math.min(320, x.measureText(name).width/2+60), accent);
+  x.fillStyle=grey; x.font='500 38px Georgia, serif'; x.fillText("Employee ID   ·   "+eid, rx, 966);
+  x.fillStyle=grey; x.font='italic 38px Georgia, serif'; x.fillText("for successfully completing", rx, 1052);
+  fit(wLogo, rx, 1170, Math.min(panelW,520), 150);                                        // Art of X logo
+  x.fillStyle=grey; x.font='italic 33px Georgia, serif';
+  var msg=(C.CERT&&C.CERT[state.division])||"Congratulations on completing your journey!";
+  var lines=wrap(msg, panelW-40), ly=1300; lines.forEach(function(ln){ x.fillText(ln, rx, ly); ly+=46; });
+  seal(waveX+150, 1430, 108, accent);                                                     // seal
   var dt=new Date(dateISO); if(isNaN(dt.getTime())) dt=new Date();
   var months=["January","February","March","April","May","June","July","August","September","October","November","December"];
   var dateStr=dt.getDate()+" "+months[dt.getMonth()]+" "+dt.getFullYear();
-  x.strokeStyle="#d8d2c4"; x.lineWidth=1.5; x.beginPath(); x.moveTo(W/2-175,952); x.lineTo(W/2+175,952); x.stroke();  // centered rule
-  x.fillStyle=ink;  x.font='700 27px "Fredoka", Georgia, serif'; x.fillText("Customer Experience Team", W/2, 986);
-  x.fillStyle=grey; x.font='500 22px Georgia, serif'; x.fillText("Alshaya Group   ·   Completed "+dateStr, W/2, 1020);
+  x.fillStyle=ink; x.font='500 34px Georgia, serif'; x.fillText("Completed on "+dateStr, rx, ly+26);
+  diamonds(rx, ly+46, 210, accent);
+  x.fillStyle=navy; x.font='700 42px Georgia, serif'; x.fillText("Customer Experience Team", rx, ly+112);
+  fit(alsh, rx, ly+210, 320, 140);                                                        // Alshaya logo
 
+  var fname=(name+" "+eid+" "+w.name.en).replace(/[\\/:*?"<>|]+/g,"").replace(/\s+/g," ").trim()+".png";
   try{
     c.toBlob(function(blob){ if(!blob) return; var url=URL.createObjectURL(blob);
       if(mode==="open"){ window.open(url,"_blank"); setTimeout(function(){ URL.revokeObjectURL(url); },15000); return; }
-      var a=document.createElement("a"); a.href=url; a.download="CX Certificate - "+name+" - "+w.name.en+".png";
+      var a=document.createElement("a"); a.href=url; a.download=fname;
       document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 120); }, "image/png");
   }catch(e){ alert("Certificate export needs the hosted site (open over https)."); }
 }
