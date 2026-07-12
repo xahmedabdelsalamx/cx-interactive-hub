@@ -270,7 +270,7 @@ async function buildCertificate(name, eid, w, dateISO, mode){
   x.fillStyle=grey; x.font='italic 33px Georgia, serif';
   var msg=(C.CERT&&C.CERT[state.division])||"Congratulations on completing your journey!";
   var lines=wrap(msg, panelW-40), ly=1300; lines.forEach(function(ln){ x.fillText(ln, rx, ly); ly+=46; });
-  seal(waveX+150, 1430, 108, accent);                                                     // seal
+  seal(waveX+130, ly+102, 90, accent);                                                    // seal (lower-left, below message)
   var dt=new Date(dateISO); if(isNaN(dt.getTime())) dt=new Date();
   var months=["January","February","March","April","May","June","July","August","September","October","November","December"];
   var dateStr=dt.getDate()+" "+months[dt.getMonth()]+" "+dt.getFullYear();
