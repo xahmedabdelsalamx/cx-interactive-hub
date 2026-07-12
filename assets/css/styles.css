@@ -522,3 +522,46 @@ html[dir="rtl"] .lm-arr{transform:scaleX(-1)}
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);animation:sweep 3s ease-in-out infinite}
 @keyframes finishBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @media (max-width:560px){ .fl-tape{max-width:60px} .finish-flag{font-size:1rem;padding:12px 20px} }
+
+/* ================= welcome-back popup (in the modal card, light bg) ================= */
+.wb{text-align:center;padding:4px 2px 2px;color:var(--ink)}
+.wb-badge{width:96px;height:96px;margin:2px auto 10px;filter:drop-shadow(0 10px 20px rgba(0,0,0,.35));animation:float 4s ease-in-out infinite}
+.wb-badge img,.wb-badge lottie-player{width:100%;height:100%;object-fit:contain}
+.wb-badge .emoji-ico{font-size:3.6rem}
+.wb-hi{font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1.12}
+.wb-rank{color:var(--ink-soft);font-size:.9rem;margin-top:4px}
+.wb-stats{display:flex;gap:10px;margin:16px 0 12px}
+.wb-stat{flex:1;background:rgba(0,0,0,.045);border:1px solid rgba(0,0,0,.07);border-radius:16px;padding:12px 6px}
+.wb-n{display:block;font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1}
+.wb-l{display:block;font-size:.72rem;color:var(--ink-soft);margin-top:4px}
+.wb-bar{height:10px;border-radius:99px;background:rgba(0,0,0,.09);overflow:hidden;margin:4px 0 16px}
+.wb-bar i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.wb-cta{width:100%;border:0;cursor:pointer;color:#fff;font-family:var(--display);font-weight:700;font-size:1.05rem;padding:15px;border-radius:16px;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);transition:transform .2s}
+.wb-cta:hover{transform:translateY(-2px)}
+
+/* ================= certificate reward teaser (locked) ================= */
+.cert-reward{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;max-width:470px;margin:16px auto 0;
+  padding:16px 20px;border-radius:20px;text-align:start;color:#fff;
+  background:linear-gradient(135deg,rgba(255,210,120,.20),rgba(255,255,255,.04));
+  border:1px solid rgba(255,205,120,.42);box-shadow:0 18px 40px -22px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.14)}
+.cr-shine{position:absolute;top:0;bottom:0;left:-60%;width:45%;transform:skewX(-18deg);z-index:0;
+  background:linear-gradient(100deg,transparent,rgba(255,225,150,.30),transparent);animation:sweep 4.5s ease-in-out infinite}
+.cr-ico{width:52px;height:52px;flex:none;display:grid;place-items:center;font-size:1.9rem;border-radius:14px;position:relative;z-index:1;
+  background:linear-gradient(135deg,#ffe08a,#ffb92e);color:#5a3d00;box-shadow:0 8px 18px -8px rgba(255,185,46,.9)}
+.cr-txt{flex:1;min-width:0;position:relative;z-index:1;display:flex;flex-direction:column}
+.cr-title{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#ffe9c0}
+.cr-sub{font-size:.85rem;opacity:.92}
+.cr-lock{font-size:1.2rem;flex:none;position:relative;z-index:1;opacity:.85}
+
+/* ================= fancy START marker ================= */
+.trail-cap{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px}
+.tc-tape{flex:1;max-width:88px;height:14px;border-radius:4px;opacity:.85;
+  background:repeating-linear-gradient(45deg,#252a3f 0 9px,#eef1f8 9px 18px);box-shadow:0 3px 9px rgba(0,0,0,.4)}
+.tc-badge{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;
+  font-size:1rem;letter-spacing:.12em;color:#fff;padding:11px 26px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.4);box-shadow:0 12px 28px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.3);
+  animation:startPulse 2.8s ease-in-out infinite}
+.tc-badge::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-18deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);animation:sweep 3.4s ease-in-out infinite}
+@keyframes startPulse{0%,100%{box-shadow:0 12px 28px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.3),0 0 0 0 rgba(255,255,255,.35)}50%{box-shadow:0 12px 28px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.3),0 0 0 9px rgba(255,255,255,0)}}
+@media(max-width:560px){.tc-tape{max-width:50px}}
