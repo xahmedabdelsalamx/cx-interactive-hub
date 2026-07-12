@@ -67,11 +67,56 @@ score — so when you release Module 2 later, the returning player still sees
 Module 1 as done. (Progress persists only when the site is hosted, not in a local
 preview.)
 
-## Adding a brand-new game
+## How to build a new game (mini-game inside a journey)
 
-1. Add a level object to the right world in `config.js` (`id`, `en`, `ar`, `url`, `released`).
-2. Create the folder `\<world-folder>/\<id>/` with an `index.html` (copy a placeholder).
-3. Make the game call `saveResult(...)` when the player finishes.
+The easiest path: open **`GAME_BUILDER_PROMPT.md`** in this project, fill in the short
+`>>> FILL THIS IN <<<` block (world, level id, title, your questions, pass mark), and
+paste the whole thing into a **new AI chat**. It hands that chat the entire environment
+so the game plugs in with no extra wiring. When it returns the finished `index.html`:
+
+1. Drop it at `\<world-folder>/\<level-id>/index.html` (the folder already exists as a
+   placeholder — replace its `index.html`).
+2. In `assets/js/config.js`, set that level's `released:true` to make it playable.
+
+That's it. If you'd rather build it yourself, the whole contract is just:
+
+- A **self-contained `index.html`** in the level folder.
+- It **never asks for identity** — it reads the saved player from `localStorage`
+  (`cxhub_profile` = `{eid,name,market}`, `cxhub_brands`), or calls
+  `CXHubSync.getProfile()`. The hub already captured everything at the front door.
+- **Bilingual EN/AR with RTL**, themed to the world's accent colour.
+- On finish, **one call** reports the result — it updates the hub's completion display
+  *and* writes a row to the journeys Google Sheet:
+  ```js
+  CXHubSync.saveResult("<world>", "<level-id>", { score: 0-100, stars: 0-3, passed: true });
+  ```
+  (`<world>` is `retail` | `hospitality` | `starbucks`.)
+
+### You are not limited on questions or interactivity
+
+The hub is the shell and the scoreboard; each game is a self-contained world you design
+however you like. You can use:
+
+- **Any number of questions** — 3, 30, or a branching path with no fixed count.
+- **Any interaction type** — multiple choice, drag-and-drop, sorting, matching,
+  hotspots, sliders, timed rounds, scenario/role-play branching, typing, memory games,
+  conversation simulations, character-led scenes, etc.
+- **Any rich media** — images, Lottie, audio narration, video.
+- **Any scoring model** — the only requirement is that at the end you convert performance
+  into a `score` (0–100) and `stars` (0–3). How you get there is entirely yours.
+
+Keep a **consistent pass mark and star rule** across games (suggested: pass at 80,
+2★ at pass, 3★ at 90+) so completion feels fair across divisions — a convention, not a
+technical limit.
+
+### Replays and records
+
+Players can **replay any released level as many times as they like** (the popup shows
+"Replay level" once done). Each attempt appends **one row** to the `Results` tab — that's
+intentional history (improvement over time, tries per level). The `Profiles` tab stays
+**one row per employee** (no duplicates). The hub always shows the player's **best** score
+per level, so replays only ever help. For a clean "best per person per level" report,
+use a pivot on `Results`.
 
 ---
 Developed by the Customer Experience team · 2026 · ahmed.abdelsalam@alshaya.com
