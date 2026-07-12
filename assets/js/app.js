@@ -29,7 +29,9 @@ const STR={
    yourBest:"Your best", playingAs:"Playing as", start2:"START", finish:"FINISH", lvl:"Level", edit:"Edit details",
    journeyProgress:"Journey progress", toNext:function(n,nm){return "+"+n+"% to "+nm;}, topRank:"Top rank reached 🎉", yourRank:"Your rank",
    learnTitle:"Want to go deeper?", learnSub:function(nm){return "Explore "+nm+" on the CX Hub";},
-   downloadCert:"Download your certificate", certLocked:"Finish all levels to unlock your certificate 🎓"},
+   downloadCert:"Download your certificate", certLocked:"Finish all levels to unlock your certificate 🎓",
+   welcomeBack:"Welcome back", wbLevels:"Levels done", wbProgress:"Progress", wbStars:"Stars earned", wbContinue:"Continue my journey",
+   certRewardTitle:"Your certificate awaits", certRewardSub:function(n){return n<=0?"You're one step away!":"Finish "+n+" more "+(n===1?"level":"levels")+" to unlock";}},
  ar:{brand:"مركز تجربة العملاء التفاعلي", f_dev:"تم التطوير بواسطة فريق تجربة العملاء", f_q:"أي استفسارات؟", f_contact:"تواصل هنا",
    gateEyebrow:"تعلّم تجربة العملاء", gateTitle:"مرحبًا — لنجهّز حسابك",
    gateSub:"أدخل بياناتك مرة واحدة. علامتك التجارية تنقلك مباشرة إلى رحلتك.",
@@ -43,7 +45,9 @@ const STR={
    yourBest:"أفضل نتيجة", playingAs:"تلعب كـ", start2:"البداية", finish:"النهاية", lvl:"المستوى", edit:"تعديل بياناتي",
    journeyProgress:"تقدّم الرحلة", toNext:function(n,nm){return "+"+n+"% إلى "+nm;}, topRank:"وصلت لأعلى رتبة 🎉", yourRank:"رتبتك",
    learnTitle:"هل تريد التعمّق أكثر؟", learnSub:function(nm){return "استكشف "+nm+" على منصّة CX Hub";},
-   downloadCert:"حمّل شهادتك", certLocked:"أكمل جميع المستويات لفتح شهادتك 🎓"}
+   downloadCert:"حمّل شهادتك", certLocked:"أكمل جميع المستويات لفتح شهادتك 🎓",
+   welcomeBack:"أهلاً بعودتك", wbLevels:"مستويات مكتملة", wbProgress:"التقدّم", wbStars:"النجوم", wbContinue:"متابعة رحلتي",
+   certRewardTitle:"شهادتك بانتظارك", certRewardSub:function(n){return n<=0?"بقيت خطوة واحدة!":"أكمل "+n+" مستوى إضافي للفتح";}}
 };
 
 /* storage */
@@ -178,7 +182,12 @@ function learnMoreHTML(){
 }
 function certHTML(pct){
   if(pct>=100) return '<div class="cert-cta"><button class="cert-btn" onclick="CXHub.downloadCert()">🎓 '+t("downloadCert")+'</button></div>';
-  return '<div class="cert-locked">🔒 '+t("certLocked")+'</div>';
+  var pr=worldProgress(state.division), left=Math.max(0, pr.total-pr.done);
+  return '<div class="cert-reward"><div class="cr-shine"></div>'+
+    '<div class="cr-ico">🎓</div>'+
+    '<div class="cr-txt"><span class="cr-title">'+t("certRewardTitle")+'</span>'+
+    '<span class="cr-sub">'+t("certRewardSub")(left)+'</span></div>'+
+    '<div class="cr-lock">🔒</div></div>';
 }
 function loadImg(src){ return new Promise(function(res){ if(!src){res(null);return;} var im=new Image(); im.onload=function(){res(im);}; im.onerror=function(){res(null);}; im.src=src; }); }
 function downloadCert(){
@@ -287,7 +296,7 @@ function renderWorld(){
         (profile?'<span class="wstat">👤 '+t("playingAs")+' '+firstName()+' · '+profile.eid+(myBrand()?' · '+myBrand():'')+'</span>':'')+'</div>'+
       '<div class="wprogress"><i style="width:'+p.pct+'%"></i></div>'+
     '</div><div class="wlogochip">'+media(w.logo,"")+'</div></div></div></div></div>'+
-    '<div class="wrap">'+rankHTML(p.pct)+'<div class="trail"><div class="trail-cap">▸ '+t("start2")+'</div>'+trail+
+    '<div class="wrap">'+rankHTML(p.pct)+'<div class="trail"><div class="trail-cap"><span class="tc-tape"></span><span class="tc-badge" style="background:'+w.grad+'">▶ '+t("start2")+'</span><span class="tc-tape"></span></div>'+trail+
       '<div class="finish-line"><span class="fl-tape"></span><span class="finish-flag"><span class="fl-glow"></span>🏁 '+t("finish")+' 🏁</span><span class="fl-tape"></span></div>'+certHTML(p.pct)+'</div>'+
       learnMoreHTML()+generalHTML()+'<div style="height:20px"></div></div>'+
   '</div>';
@@ -313,6 +322,28 @@ function openLevel(i){
   document.getElementById("modalBack").classList.add("show");
 }
 function closeModal(){document.getElementById("modalBack").classList.remove("show");}
+function showWelcome(){
+  if(!profile || state.screen!=="world" || !state.division) return;
+  var w=WORLDS[state.division], pr=worldProgress(state.division), RANKS=C.RANKS||[];
+  var idx=0; for(var i=0;i<RANKS.length;i++){ if(pr.pct>=RANKS[i].min) idx=i; } var rank=RANKS[idx]||{};
+  var stars=0; w.levels.forEach(function(l){ var d=progress[state.division+":"+l.id]; if(d)stars+=(d.stars||0); });
+  var first=((profile.name||"").trim().split(/\s+/)[0])||profile.name;
+  document.getElementById("modal").innerHTML=
+    '<button class="m-close" onclick="CXHub.closeModal()">×</button><div class="grip"></div>'+
+    '<div class="wb">'+
+      '<div class="wb-badge">'+media(rank.icon,"")+'</div>'+
+      '<div class="wb-hi">'+t("welcomeBack")+', '+first+'! 👋</div>'+
+      '<div class="wb-rank">'+w.name[LANG]+' · <b>'+(rank[LANG]||"")+'</b></div>'+
+      '<div class="wb-stats">'+
+        '<div class="wb-stat"><span class="wb-n">'+pr.done+'/'+pr.total+'</span><span class="wb-l">'+t("wbLevels")+'</span></div>'+
+        '<div class="wb-stat"><span class="wb-n">'+pr.pct+'%</span><span class="wb-l">'+t("wbProgress")+'</span></div>'+
+        '<div class="wb-stat"><span class="wb-n">'+stars+'</span><span class="wb-l">'+t("wbStars")+'</span></div>'+
+      '</div>'+
+      '<div class="wb-bar"><i style="width:'+pr.pct+'%;background:'+w.grad+'"></i></div>'+
+      '<button class="wb-cta" style="background:'+w.grad+'" onclick="CXHub.closeModal()">'+t("wbContinue")+' ›</button>'+
+    '</div>';
+  document.getElementById("modalBack").classList.add("show");
+}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
 
 function setLang(l){LANG=l;render();}
@@ -349,8 +380,13 @@ function decideAndRender(){
 }
 resolveIdentity().then(function(sso){
   state.sso=sso;
+  var returning = !!profile;   // had a saved profile before this load
   if(!profile && sso){ if(sso.brand)state.gate.brand=sso.brand; if(sso.market)state.gate.market=sso.market; }
   decideAndRender();
   hydrateAndRefresh(true);
+  if(returning && state.screen==="world"){
+    var seen=false; try{ seen=sessionStorage.getItem("cxhub_welcomed")==="1"; }catch(e){}
+    if(!seen){ try{ sessionStorage.setItem("cxhub_welcomed","1"); }catch(e){} setTimeout(showWelcome, 350); }
+  }
 }).catch(decideAndRender);
 })();
