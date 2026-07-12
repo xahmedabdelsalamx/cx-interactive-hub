@@ -27,7 +27,9 @@ const STR={
    start:"Start level", replay:"Replay level", comingSoon:"Coming soon",
    whatLearn:"What you'll learn", challenge:"Challenge preview", scenario:"Scenario", quiz:"Quiz", action:"Action",
    yourBest:"Your best", playingAs:"Playing as", start2:"START", finish:"FINISH", lvl:"Level", edit:"Edit details",
-   journeyProgress:"Journey progress", toNext:function(n,nm){return "+"+n+"% to "+nm;}, topRank:"Top rank reached 🎉", yourRank:"Your rank"},
+   journeyProgress:"Journey progress", toNext:function(n,nm){return "+"+n+"% to "+nm;}, topRank:"Top rank reached 🎉", yourRank:"Your rank",
+   learnTitle:"Want to go deeper?", learnSub:function(nm){return "Explore "+nm+" on the CX Hub";},
+   downloadCert:"Download your certificate", certLocked:"Finish all levels to unlock your certificate 🎓"},
  ar:{brand:"مركز تجربة العملاء التفاعلي", f_dev:"تم التطوير بواسطة فريق تجربة العملاء", f_q:"أي استفسارات؟", f_contact:"تواصل هنا",
    gateEyebrow:"تعلّم تجربة العملاء", gateTitle:"مرحبًا — لنجهّز حسابك",
    gateSub:"أدخل بياناتك مرة واحدة. علامتك التجارية تنقلك مباشرة إلى رحلتك.",
@@ -39,7 +41,9 @@ const STR={
    start:"ابدأ المستوى", replay:"أعِد المستوى", comingSoon:"قريبًا",
    whatLearn:"ماذا ستتعلّم", challenge:"معاينة التحدي", scenario:"سيناريو", quiz:"اختبار", action:"تطبيق",
    yourBest:"أفضل نتيجة", playingAs:"تلعب كـ", start2:"البداية", finish:"النهاية", lvl:"المستوى", edit:"تعديل بياناتي",
-   journeyProgress:"تقدّم الرحلة", toNext:function(n,nm){return "+"+n+"% إلى "+nm;}, topRank:"وصلت لأعلى رتبة 🎉", yourRank:"رتبتك"}
+   journeyProgress:"تقدّم الرحلة", toNext:function(n,nm){return "+"+n+"% إلى "+nm;}, topRank:"وصلت لأعلى رتبة 🎉", yourRank:"رتبتك",
+   learnTitle:"هل تريد التعمّق أكثر؟", learnSub:function(nm){return "استكشف "+nm+" على منصّة CX Hub";},
+   downloadCert:"حمّل شهادتك", certLocked:"أكمل جميع المستويات لفتح شهادتك 🎓"}
 };
 
 /* storage */
@@ -165,6 +169,81 @@ function generalHTML(){
   }).join("");
   return '<section class="sec"><div class="sec-h"><span class="tag">'+t("generalTag")+'</span><h2>'+t("generalH")+'</h2><span class="rule"></span></div><div class="gg-grid">'+cards+'</div></section>';
 }
+function learnMoreHTML(){
+  var w=WORLDS[state.division]; if(!w.hubUrl) return "";
+  return '<a class="learn-more" href="'+w.hubUrl+'" target="_blank" rel="noopener" style="--grad:'+w.grad+'">'+
+    '<span class="lm-ico">📚</span>'+
+    '<span class="lm-text"><span class="lm-title">'+t("learnTitle")+'</span><span class="lm-sub">'+t("learnSub")(w.name[LANG])+'</span></span>'+
+    '<span class="lm-arr">›</span></a>';
+}
+function certHTML(pct){
+  if(pct>=100) return '<div class="cert-cta"><button class="cert-btn" onclick="CXHub.downloadCert()">🎓 '+t("downloadCert")+'</button></div>';
+  return '<div class="cert-locked">🔒 '+t("certLocked")+'</div>';
+}
+function loadImg(src){ return new Promise(function(res){ if(!src){res(null);return;} var im=new Image(); im.onload=function(){res(im);}; im.onerror=function(){res(null);}; im.src=src; }); }
+function downloadCert(){
+  var w=WORLDS[state.division], p=worldProgress(state.division);
+  if(p.pct<100 || !profile) return;
+  var dates=[]; w.levels.forEach(function(l){ var d=progress[state.division+":"+l.id]; if(d&&d.date) dates.push(d.date); });
+  var last=dates.sort().slice(-1)[0] || new Date().toISOString();
+  buildCertificate(profile.name, profile.eid, w, last);
+}
+/* ---- Certificate (HTML5 canvas). All positions are plain numbers below, so they're
+   easy to nudge if you want to fine-tune the layout. Output: PNG download. ---- */
+async function buildCertificate(name, eid, w, dateISO){
+  var W=1600, H=1131, c=document.createElement("canvas"); c.width=W; c.height=H; var x=c.getContext("2d");
+  try{ await document.fonts.load('700 46px "Fredoka"'); await document.fonts.load('600 30px "Fredoka"'); await document.fonts.ready; }catch(e){}
+  var cxLogo=await loadImg("assets/logos/cx-hub.png");
+  var wLogo =await loadImg(w.logo && w.logo.img);
+  var seal  =await loadImg("assets/badges/champion.png");
+  var accent=w.color||"#c11d77", gold="#c9a227", ink="#22314f", grey="#6b7280";
+
+  x.fillStyle=accent; x.fillRect(0,0,W,H);                                   // accent edge
+  var m=24, bg=x.createRadialGradient(W/2,H*0.42,120,W/2,H*0.42,W*0.9);
+  bg.addColorStop(0,"#fffdf8"); bg.addColorStop(1,"#f4ecdd");
+  x.fillStyle=bg; x.fillRect(m,m,W-2*m,H-2*m);                              // ivory panel
+  x.strokeStyle=gold; x.lineWidth=3;   x.strokeRect(48,48,W-96,H-96);       // gold frames
+  x.lineWidth=1.4; x.strokeRect(60,60,W-120,H-120);
+  function corner(cx,cy,sx,sy){ x.strokeStyle=gold; x.lineWidth=2.5; x.beginPath();
+    x.moveTo(cx,cy+sy*42); x.lineTo(cx,cy); x.lineTo(cx+sx*42,cy); x.stroke();
+    x.beginPath(); x.arc(cx+sx*15,cy+sy*15,5,0,7); x.fillStyle=gold; x.fill(); }
+  corner(84,84,1,1); corner(W-84,84,-1,1); corner(84,H-84,1,-1); corner(W-84,H-84,-1,-1);
+
+  x.textAlign="center";
+  if(cxLogo){ var lw=210, lh=lw*cxLogo.height/cxLogo.width; x.drawImage(cxLogo,(W-lw)/2,84,lw,lh); }   // CX Hub logo (top)
+  x.fillStyle=gold; x.font='700 46px "Fredoka", Georgia, serif';
+  x.fillText("CERTIFICATE OF COMPLETION", W/2, 300);                        // title
+  x.strokeStyle=gold; x.lineWidth=2; x.beginPath(); x.moveTo(W/2-150,330); x.lineTo(W/2+150,330); x.stroke();
+  x.fillStyle=grey; x.font='italic 28px Georgia, serif'; x.fillText("This certificate is proudly presented to", W/2, 392);
+  x.fillStyle=ink;  x.font='700 78px Georgia, serif'; x.fillText(name, W/2, 480);                        // NAME
+  var nw=Math.min(760, x.measureText(name).width+80); x.strokeStyle=accent; x.lineWidth=3;
+  x.beginPath(); x.moveTo(W/2-nw/2,505); x.lineTo(W/2+nw/2,505); x.stroke();
+  x.fillStyle=grey; x.font='500 26px Georgia, serif'; x.fillText("Employee ID  ·  "+eid, W/2, 548);       // Emp ID
+  x.fillStyle=grey; x.font='italic 27px Georgia, serif'; x.fillText("for successfully completing", W/2, 606);
+  if(wLogo){ var wh=100, ww=wh*wLogo.width/wLogo.height; if(ww>420){ ww=420; wh=ww*wLogo.height/wLogo.width; } x.drawImage(wLogo,(W-ww)/2,626,ww,wh); }
+  x.fillStyle=accent; x.font='700 40px "Fredoka", Georgia, serif'; x.fillText(w.name.en, W/2, 782);        // world name
+  var sg=x.createRadialGradient(W/2,872,10,W/2,872,150); sg.addColorStop(0,"rgba(201,162,39,.18)"); sg.addColorStop(1,"rgba(201,162,39,0)");
+  x.fillStyle=sg; x.beginPath(); x.arc(W/2,872,150,0,7); x.fill();
+  if(seal){ var ss=120; x.drawImage(seal,(W-ss)/2,812,ss,ss); }                                            // seal (Champion badge)
+
+  var dt=new Date(dateISO); if(isNaN(dt.getTime())) dt=new Date();
+  var months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var dateStr=dt.getDate()+" "+months[dt.getMonth()]+" "+dt.getFullYear();
+  var yL=1000;
+  x.strokeStyle="#c9c3b5"; x.lineWidth=1.5;
+  x.beginPath(); x.moveTo(300,yL); x.lineTo(600,yL); x.stroke();
+  x.beginPath(); x.moveTo(W-600,yL); x.lineTo(W-300,yL); x.stroke();
+  x.fillStyle=ink; x.font='600 24px Georgia, serif';
+  x.fillText(dateStr, 450, yL-14); x.fillText("Customer Experience Team", W-450, yL-14);
+  x.fillStyle=grey; x.font='500 18px Georgia, serif';
+  x.fillText("Date completed", 450, yL+34); x.fillText("Alshaya Group", W-450, yL+34);
+
+  try{
+    c.toBlob(function(blob){ if(!blob) return; var url=URL.createObjectURL(blob); var a=document.createElement("a");
+      a.href=url; a.download="CX Certificate - "+name+" - "+w.name.en+".png"; document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 120); }, "image/png");
+  }catch(e){ alert("Certificate export needs the hosted site (open the hub over https). "); }
+}
 function rankHTML(pct){
   var RANKS=C.RANKS||[]; if(!RANKS.length) return "";
   var idx=0; for(var i=0;i<RANKS.length;i++){ if(pct>=RANKS[i].min) idx=i; }
@@ -206,8 +285,8 @@ function renderWorld(){
       '<div class="wprogress"><i style="width:'+p.pct+'%"></i></div>'+
     '</div><div class="wlogochip">'+media(w.logo,"")+'</div></div></div></div></div>'+
     '<div class="wrap">'+rankHTML(p.pct)+'<div class="trail"><div class="trail-cap">▸ '+t("start2")+'</div>'+trail+
-      '<div style="text-align:center"><span class="finish-flag">🏁 '+t("finish")+'</span></div></div>'+
-      generalHTML()+'<div style="height:20px"></div></div>'+
+      '<div style="text-align:center"><span class="finish-flag">🏁 '+t("finish")+'</span></div>'+certHTML(p.pct)+'</div>'+
+      learnMoreHTML()+generalHTML()+'<div style="height:20px"></div></div>'+
   '</div>';
 }
 
@@ -239,7 +318,12 @@ function goWorld(){ if(profile&&Object.keys(brands).length){state.screen="world"
 function confirmSignOut(){ var msg=LANG==="ar"?"تسجيل الخروج؟":"Sign out?"; if(window.confirm(msg)) signOut(); }
 
 window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails,
-  openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld, signOut:signOut, confirmSignOut:confirmSignOut};
+  openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld, signOut:signOut, confirmSignOut:confirmSignOut, downloadCert:downloadCert};
+
+/* point every CX Hub logo at the main hub */
+(function(){ var cx=(C.LINKS&&C.LINKS.cxHub)||"#";
+  var bm=document.getElementById("brandmark"); if(bm)bm.href=cx;
+  var fl=document.getElementById("footerLogo"); if(fl)fl.href=cx; })();
 
 /* ---------------------------- INIT ---------------------------- */
 function hydrateAndRefresh(allowSignout){

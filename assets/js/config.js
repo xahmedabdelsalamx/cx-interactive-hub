@@ -26,6 +26,11 @@ window.CXHUB_CONFIG = {
      While false, the hub never calls /.auth/me and simply shows the entry form. */
   SSO: false,
 
+  /* External links. cxHub = the main CX Hub site (every CX Hub logo opens this). */
+  LINKS: {
+    cxHub: "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/181326/home"
+  },
+
   /* Shared icons (used inside the level popup). Swap to img/lottie any time. */
   ICONS: {
     scenario: { emoji: "💬" },   // e.g. { lottie:"assets/lottie/scenario.json" }
@@ -73,6 +78,7 @@ window.CXHUB_CONFIG = {
       color: "#E94858", grad: "var(--g-selling)",
       logo:  { img:"assets/logos/art-of-selling.png" },
       art:   "assets/worlds/retail.jpg",
+      hubUrl:"https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/228974/retail?channelId=230797",
       name:    { en:"Art of Selling",  ar:"فن البيع" },
       journey: { en:"Retail Journey",  ar:"رحلة التجزئة" },
       action:  { emoji:"🛍️" },   // challenge "Action" icon — swap to img/lottie if you like
@@ -98,6 +104,7 @@ window.CXHUB_CONFIG = {
       color: "#F15A24", grad: "var(--g-guest)",
       logo:  { img:"assets/logos/art-of-guest-experience.png" },
       art:   "assets/worlds/hospitality.jpg",
+      hubUrl:"https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/229096/art-of-guest-experience-hospitality?channelId=238821",
       name:    { en:"Art of Guest Experience", ar:"فن تجربة الضيف" },
       journey: { en:"Hospitality Journey",     ar:"رحلة الضيافة" },
       action:  { emoji:"🍽️" },
@@ -118,6 +125,7 @@ window.CXHUB_CONFIG = {
       color: "#007042", grad: "var(--g-connection)",
       logo:  { img:"assets/logos/art-of-connection.png" },
       art:   "assets/worlds/starbucks.jpg",
+      hubUrl:"https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/229098/art-of-connection-starbucks?channelId=238822",
       name:    { en:"Art of Connection", ar:"فن التواصل" },
       journey: { en:"Starbucks Journey", ar:"رحلة ستاربكس" },
       action:  { emoji:"☕" },
