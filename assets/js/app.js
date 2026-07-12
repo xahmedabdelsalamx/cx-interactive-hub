@@ -128,7 +128,7 @@ function renderGate(){
     '<h2>'+t("gateTitle")+'</h2><p class="sub">'+t("gateSub")+'</p>'+
     (isSso?'<div class="sso-note">🔐 '+t("ssoNote")+'</div>':'')+
     '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
-    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" oninput="CXHub.gateChange()" placeholder="e.g. 100234"></div>'+
+    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" oninput="CXHub.gateChange()" placeholder="e.g. 323999"></div>'+
     '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.gateChange()">'+
       '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
     '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.gateChange()">'+
@@ -137,8 +137,8 @@ function renderGate(){
   '</div></div></section></div>';
 }
 function gateChange(){ state.gate.brand=v("g-brand"); state.gate.market=v("g-market");
-  var el=document.getElementById("g-name"); if(el&&!el.disabled)state.gate.name=el.value.trim();
-  var e2=document.getElementById("g-eid"); if(e2&&!e2.disabled)state.gate.eid=e2.value.trim();
+  var el=document.getElementById("g-name"); if(el&&!el.disabled){ var nv=el.value.replace(/[0-9]/g,""); if(nv!==el.value)el.value=nv; state.gate.name=nv.trim(); }
+  var e2=document.getElementById("g-eid"); if(e2&&!e2.disabled){ var ev=e2.value.replace(/\D/g,""); if(ev!==e2.value)e2.value=ev; state.gate.eid=ev.trim(); }
   var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid(); }
 function gateValid(){ return state.gate.name && state.gate.eid && state.gate.brand && state.gate.market && BRAND2DIV[state.gate.brand]; }
 function gateSubmit(){ gateChange(); if(!gateValid())return;
