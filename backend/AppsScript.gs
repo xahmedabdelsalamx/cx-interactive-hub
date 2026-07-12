@@ -96,14 +96,18 @@ function upsertProfile(ss, d, now){
   var sh = ensureTab(ss, "Profiles", PROFILE_HEADERS);
   var idCol = PROFILE_HEADERS.indexOf("EmpID");
   var last = sh.getLastRow();
-  var row = null;
+  var matches = [];
   if (last > 1){
     var ids = sh.getRange(2, idCol+1, last-1, 1).getValues();
-    for (var i=0; i<ids.length; i++){ if (String(ids[i][0]) === String(d.empId)){ row = i+2; break; } }
+    for (var i=0; i<ids.length; i++){ if (String(ids[i][0]) === String(d.empId)) matches.push(i+2); }
   }
   var vals = [now, d.empId||"", d.name||"", d.market||"", d.brand||"", d.division||"", d.lang||"", d.clientTime||""];
-  if (row) sh.getRange(row, 1, 1, vals.length).setValues([vals]);
-  else     sh.appendRow(vals);
+  if (matches.length){
+    sh.getRange(matches[0], 1, 1, vals.length).setValues([vals]);          // update the first
+    for (var j=matches.length-1; j>=1; j--){ sh.deleteRow(matches[j]); }   // remove any duplicates (bottom-up)
+  } else {
+    sh.appendRow(vals);
+  }
 }
 
 function attemptNumber(ss, empId, world, levelId){

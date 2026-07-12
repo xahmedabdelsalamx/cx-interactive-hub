@@ -177,7 +177,7 @@ function rankHTML(pct){
   }).join("");
   return '<section class="sec"><div class="rank-card" style="--grad:'+grad+'">'+
     '<div class="rank-badge">'+media(cur.icon,"")+'</div>'+
-    '<div class="rank-info"><div class="rank-name">'+cur[LANG]+'</div>'+
+    '<div class="rank-info"><div class="rank-eyebrow">'+t("yourRank")+'</div><div class="rank-name">'+cur[LANG]+'</div>'+
       '<div class="rank-sub">'+t("journeyProgress")+' · '+pct+'%</div>'+
       '<div class="rank-bar"><i style="width:'+pct+'%"></i></div>'+
       '<div class="rank-next">'+nextLine+'</div></div></div>'+
@@ -192,7 +192,7 @@ function renderWorld(){
     var check=st.s==="done"?'<span class="check">✓</span>':'';
     var badge=st.s==="done"?'<span class="score-badge">'+st.data.score+'%</span>':'';
     var conn=i<w.levels.length-1?'<div class="connector"></div>':'';
-    return '<div class="level '+st.s+'">'+starRow(stars,'stars')+
+    return '<div class="level '+st.s+'" style="--i:'+i+'">'+starRow(stars,'stars')+
       '<button class="node" onclick="CXHub.openLevel('+i+')">'+inside+check+badge+'</button>'+
       '<div class="lvtitle">'+lv[LANG]+'</div><div class="lvstate">'+label+'</div></div>'+conn;
   }).join("");

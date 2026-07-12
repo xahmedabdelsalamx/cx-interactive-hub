@@ -46,13 +46,17 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
       (document.head||document.documentElement).appendChild(s);
     });
   }
+  var flushing=false;
   async function flush(){
-    if(!CFG.scriptUrl) return;                    // preview / not deployed -> local only
-    if(navigator.onLine === false) return;
-    var q = outbox(); if(!q.length) return;
-    var rest = [];
-    for(var i=0;i<q.length;i++){ try{ await send(q[i]); }catch(e){ rest.push(q[i]); } }
-    setOutbox(rest);
+    if(!CFG.scriptUrl || navigator.onLine===false || flushing) return;
+    flushing=true;
+    try{
+      while(true){
+        var q=outbox(); if(!q.length) break;
+        try{ await send(q[0]); }catch(e){ break; }    // network fail -> stop, keep the rest for retry
+        var cur=outbox(); cur.shift(); setOutbox(cur); // remove only the item we just sent (FIFO)
+      }
+    } finally { flushing=false; }
   }
   function enqueue(p){ var q=outbox(); q.push(p); setOutbox(q); flush(); }
   window.addEventListener("online", flush);
