@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sync Test · CX Interactive Hub</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="assets/js/cxhub-sync.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;color:#fff;min-height:100dvh;display:grid;place-items:center;padding:24px;
+    background:linear-gradient(160deg,#0d1020,#191233 55%,#241640)}
+  .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:24px;
+    padding:28px 26px;max-width:560px;width:100%;box-shadow:0 30px 70px -30px rgba(0,0,0,.6)}
+  h1{font-family:'Fredoka';font-weight:700;font-size:1.5rem;margin-bottom:4px}
+  .sub{opacity:.75;font-size:.9rem;margin-bottom:18px}
+  .cfg{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px;font-size:.8rem;line-height:1.7;word-break:break-all;margin-bottom:18px}
+  .cfg b{font-family:'Fredoka';font-weight:600}
+  .ok{color:#7ff2bd}.bad{color:#ff9a9a}.warn{color:#ffd98a}
+  button{font-family:'Fredoka';font-weight:600;font-size:1.02rem;width:100%;padding:14px;border:0;border-radius:14px;cursor:pointer;
+    background:linear-gradient(135deg,#e43c50,#c11d77 50%,#7a2bb0);color:#fff;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)}
+  button:disabled{opacity:.6;cursor:default}
+  .log{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+  .step{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;line-height:1.5;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:11px 13px}
+  .step .ic{flex:none;font-size:1.05rem}
+  .result{margin-top:16px;border-radius:14px;padding:16px;font-size:.95rem;line-height:1.6;display:none}
+  .result.show{display:block}
+  .result.pass{background:rgba(47,213,138,.14);border:1px solid rgba(47,213,138,.4)}
+  .result.fail{background:rgba(255,90,90,.14);border:1px solid rgba(255,90,90,.4)}
+  .result h3{font-family:'Fredoka';font-weight:700;margin-bottom:6px}
+  .result ol{margin:8px 0 0 18px}
+  code{background:rgba(0,0,0,.3);padding:2px 6px;border-radius:6px;font-size:.78rem}
+  a{color:#fff}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Google Sheet sync test</h1>
+    <div class="sub">Sends one test row to your Apps Script, then reads it back to prove it saved.</div>
+
+    <div class="cfg">
+      <b>Script URL:</b> <span id="cfgUrl">—</span><br>
+      <b>Token:</b> <span id="cfgTok">—</span><br>
+      <b>Online:</b> <span id="cfgOn">—</span>
+    </div>
+
+    <button id="run" onclick="runTest()">▶ Run sync test</button>
+
+    <div class="log" id="log"></div>
+    <div class="result" id="result"></div>
+
+    <p style="margin-top:16px;font-size:.78rem;opacity:.65;line-height:1.6">
+      This writes a row with EmpID <code id="tid">TEST-…</code> to the <b>Results</b> tab.
+      Delete that row afterwards. Run this on your live <b>https</b> site, not a local file.
+    </p>
+  </div>
+
+<script>
+var CFG = window.CXHUB_SYNC || {scriptUrl:"", secretToken:""};
+var TEST_ID = "TEST-" + Math.random().toString(36).slice(2,7).toUpperCase();
+document.getElementById("cfgUrl").textContent = CFG.scriptUrl || "(empty — not set!)";
+document.getElementById("cfgUrl").className = CFG.scriptUrl ? "ok" : "bad";
+document.getElementById("cfgTok").textContent = CFG.secretToken || "(empty!)";
+document.getElementById("cfgOn").textContent = navigator.onLine ? "yes" : "no (offline)";
+document.getElementById("cfgOn").className = navigator.onLine ? "ok" : "bad";
+document.getElementById("tid").textContent = TEST_ID;
+
+function addStep(icon, text, cls){
+  var d=document.createElement("div"); d.className="step";
+  d.innerHTML='<span class="ic '+(cls||'')+'">'+icon+'</span><span>'+text+'</span>';
+  document.getElementById("log").appendChild(d); return d;
+}
+function showResult(pass, html){
+  var r=document.getElementById("result");
+  r.className="result show "+(pass?"pass":"fail"); r.innerHTML=html;
+}
+
+function jsonp(url){
+  return new Promise(function(resolve){
+    var cb="cb_"+Date.now()+"_"+Math.floor(Math.random()*1e6), s=document.createElement("script"), done=false;
+    var t=setTimeout(function(){ fin(null); }, 9000);
+    function fin(d){ if(done)return; done=true; try{delete window[cb];}catch(e){window[cb]=undefined;} if(s.parentNode)s.parentNode.removeChild(s); clearTimeout(t); resolve(d); }
+    window[cb]=function(d){ fin(d); }; s.onerror=function(){ fin(null); };
+    s.src=url+(url.indexOf("?")<0?"?":"&")+"callback="+cb; document.head.appendChild(s);
+  });
+}
+async function runTest(){
+  document.getElementById("log").innerHTML="";
+  document.getElementById("result").className="result";
+  var btn=document.getElementById("run"); btn.disabled=true; btn.textContent="Testing…";
+
+  if(!CFG.scriptUrl){
+    addStep("❌","No script URL configured in cxhub-sync.js","bad");
+    showResult(false,"<h3>Not configured</h3>Your <code>assets/js/cxhub-sync.js</code> has an empty <code>scriptUrl</code>. Paste your deployed <code>/exec</code> URL and re-upload it.");
+    btn.disabled=false; btn.textContent="▶ Run sync test"; return;
+  }
+
+  // 1) POST a test result
+  addStep("📤","Sending a test result for <code>"+TEST_ID+"</code>…");
+  var payload={ token:CFG.secretToken, action:"submit",
+    empId:TEST_ID, name:"Sync Test", brand:"—", division:"test", world:"test", levelId:"sync-test",
+    score:100, stars:3, passed:"YES", lang:"en", clientTime:new Date().toISOString() };
+  var posted=false;
+  try{
+    await fetch(CFG.scriptUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    posted=true; addStep("✅","Request sent.","ok");
+  }catch(e){
+    addStep("⚠️","Couldn't read the send response (normal for Apps Script) — the row may still have saved.","warn");
+    posted=true;
+  }
+
+  // 2) Read it back
+  addStep("🔎","Reading it back from the sheet…");
+  await new Promise(r=>setTimeout(r,1600));
+  var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=results&empId="+encodeURIComponent(TEST_ID);
+  var found=false, readOk=false;
+  var data=await jsonp(url);
+  if(data){ readOk=true; if(data.results && data.results.length){ found=true; } if(data.error){ addStep("❌","Server said: "+data.error,"bad"); } }
+  else { addStep("⚠️","Read-back timed out — check the sheet manually.","warn"); }
+
+  if(found){
+    addStep("✅","Found the test row in the sheet.","ok");
+    showResult(true,"<h3>✅ Sync works</h3>Data is reaching your Google Sheet. Open the <b>Results</b> tab and delete the <code>"+TEST_ID+"</code> row when you're done.");
+  } else if(readOk){
+    showResult(false,"<h3>❌ Sent, but not found in the sheet</h3>The request went out but no row came back. Most likely:<ol>"+
+      "<li><b>Re-deploy needed:</b> Apps Script → Deploy → Manage deployments → ✏️ → Version: <b>New version</b> → Deploy.</li>"+
+      "<li><b>Access:</b> the deployment's \"Who has access\" must be <b>Anyone</b>.</li>"+
+      "<li><b>Token mismatch:</b> <code>SECRET_TOKEN</code> in the script must equal <code>"+CFG.secretToken+"</code>.</li>"+
+      "<li><b>setup() not run:</b> the <b>Results</b> tab must exist.</li></ol>");
+  } else {
+    showResult(false,"<h3>⚠️ Couldn't auto-verify</h3>The row was sent but the read-back was blocked by the browser. Open your Google Sheet's <b>Results</b> tab and look for a row with EmpID <code>"+TEST_ID+"</code>.<br><br>If it's there → sync works. If not → re-deploy the script (New version) and set access to <b>Anyone</b>.");
+  }
+  btn.disabled=false; btn.textContent="▶ Run sync test again";
+}
+</script>
+</body>
+</html>

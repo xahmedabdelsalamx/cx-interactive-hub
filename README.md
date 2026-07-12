@@ -53,19 +53,31 @@ shows as *Coming soon* (its placeholder folder already exists).
 
 The Hub and every game live on the **same domain**, so they share `localStorage`:
 
-- `cxhub_profile`  — `{eid, name, gender, character}` (captured once at onboarding)
-- `cxhub_brands`   — `{retail, hospitality, starbucks}`
+- `cxhub_profile`  — `{eid, name, market}` (captured once at the entry gate)
+- `cxhub_brands`   — `{ "<division>": "<brand>" }` (the player's single brand)
 - `cxhub_progress` — `{ "<world>:<levelId>": {stars, score, date} }`
 
 When a **game** finishes, it records the result with one line (see any placeholder
 `index.html`):
 ```js
-saveResult("retail","driving-conversion",{stars:2, score:78});
+CXHubSync.saveResult("retail","driving-conversion",{stars:2, score:78, passed:true});
 ```
 The Hub reads that back and shows the level as **Completed** with its stars and
 score — so when you release Module 2 later, the returning player still sees
 Module 1 as done. (Progress persists only when the site is hosted, not in a local
 preview.)
+
+## Player rewards & extras (client-side, no backend)
+
+- **Ranks & badges** — journey completion % maps to a rank tier (Beginner → Champion),
+  shown as a rank card + badge ladder. Tiers/images in `config.RANKS`.
+- **Welcome-back popup** — returning players get a greeting with their stats once per session.
+- **Certificate** — at 100% a gold button downloads an **A4-landscape** PNG (world artwork +
+  world colour + official logos + seal), filename `[Name] [EmpID] [World].png`. Per-world
+  message in `config.CERT`. Preview in the console with `CXHub.previewCert()`. Only exports
+  on the hosted https site.
+- **"Learn more" / CX Hub links** — each world links to its CX Hub page (`WORLDS[x].hubUrl`);
+  the footer logo opens the main CX Hub (`config.LINKS.cxHub`).
 
 ## How to build a new game (mini-game inside a journey)
 
