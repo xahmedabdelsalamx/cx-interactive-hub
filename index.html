@@ -19,10 +19,10 @@
 <div class="world-bg" id="worldBg"><div class="base"></div><div class="orb a"></div><div class="orb b"></div></div>
 
 <div class="topbar"><div class="wrap">
-  <button class="brandmark" onclick="CXHub.goWorld()">
+  <a class="brandmark" id="brandmark" href="#" target="_blank" rel="noopener" title="Open the CX Hub">
     <span class="chip"><img src="assets/logos/cx-hub.png" alt="CX Hub"></span>
     <span class="bt" data-t="brand">CX Interactive Hub</span>
-  </button>
+  </a>
   <div class="tb-right">
     <div class="player-chip" id="playerChip">
       <button class="pc-main" onclick="CXHub.editDetails()"><span class="av" id="pcAv"></span><span class="nm" id="pcName"></span><span class="pc-edit">✎</span></button>
@@ -42,7 +42,7 @@
 </div>
 
 <footer><div class="wrap">
-  <div class="fx"><img src="assets/logos/cx-hub.png" alt="CX Hub"></div>
+  <a class="fx" id="footerLogo" href="#" target="_blank" rel="noopener"><img src="assets/logos/cx-hub.png" alt="CX Hub"></a>
   <p><span data-t="f_dev">Developed by the Customer Experience team</span> · 2026 · <span data-t="f_q">Any queries?</span>
      <a href="mailto:ahmed.abdelsalam@alshaya.com" data-t="f_contact">contact here</a></p>
 </div></footer>
