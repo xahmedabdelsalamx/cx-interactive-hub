@@ -1,27 +1,21 @@
-<!-- CX Assistant — bilingual (EN/AR) grounded chatbot demo -->
-<!-- Answers ONLY from the knowledge library below (from "Art of Driving Conversion"). -->
+<!-- CX Assistant (Search) — bilingual EN/AR, 100% offline, no API / no key -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   :root{
     --bg:#F6F7F9; --surface:#FFFFFF; --ink:#16181D; --muted:#5B6472;
     --line:#E7E9ED; --brand:#0C6E5E; --brand-ink:#0A5A4D; --brand-soft:#E7F2EF;
-    --user:#16181D; --warn:#8A6D1F; --warn-soft:#FBF3DE;
+    --user:#16181D; --warn-soft:#FBF3DE;
     --radius:16px; --shadow:0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
-  body{
-    background:var(--bg); color:var(--ink);
+  body{ background:var(--bg); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
+    -webkit-font-smoothing:antialiased; }
   body[dir="rtl"]{ font-family:"Segoe UI",Tahoma,"Geeza Pro",Arial,sans-serif; }
-
   .app{ max-width:720px; margin:0 auto; height:100vh; display:flex; flex-direction:column; background:var(--surface); }
-  @media(min-width:760px){ .app{ height:100vh; border-inline:1px solid var(--line); } }
-
-  /* Header */
+  @media(min-width:760px){ .app{ border-inline:1px solid var(--line); } }
   header{ padding:16px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px; }
   .logo{ width:40px;height:40px;border-radius:11px;background:var(--brand);color:#fff;
     display:grid;place-items:center;font-weight:700;font-size:15px;flex:none;letter-spacing:.5px; }
@@ -32,22 +26,20 @@
   .toggle button{ border:0;background:transparent;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;
     color:var(--muted);cursor:pointer;line-height:1; }
   .toggle button.on{ background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.08); }
-
-  /* Chat */
   .scroll{ flex:1; overflow-y:auto; padding:22px 20px; display:flex; flex-direction:column; gap:16px; }
-  .row{ display:flex; }
-  .row.me{ justify-content:flex-end; }
-  .bubble{ max-width:78%; padding:12px 15px; border-radius:var(--radius); font-size:14.5px; line-height:1.55; }
+  .row{ display:flex; } .row.me{ justify-content:flex-end; }
+  .bubble{ max-width:80%; padding:12px 15px; border-radius:var(--radius); font-size:14.5px; line-height:1.55; }
   .row.me .bubble{ background:var(--user); color:#fff; border-bottom-right-radius:6px; }
   body[dir="rtl"] .row.me .bubble{ border-bottom-right-radius:var(--radius); border-bottom-left-radius:6px; }
   .row.bot .bubble{ background:var(--surface); border:1px solid var(--line); color:var(--ink);
     border-bottom-left-radius:6px; box-shadow:var(--shadow); }
   body[dir="rtl"] .row.bot .bubble{ border-bottom-left-radius:var(--radius); border-bottom-right-radius:6px; }
   .bubble.warn{ background:var(--warn-soft); border-color:#EBDDB4; color:#5F4B14; }
+  .a-title{ font-weight:650; margin-bottom:5px; }
   .src{ margin-top:9px; padding-top:9px; border-top:1px dashed var(--line); font-size:12px; color:var(--muted); display:flex; gap:6px; align-items:center; }
   .src svg{ width:13px;height:13px;opacity:.7;flex:none }
-
-  /* Intro / chips */
+  .related{ margin-top:10px; display:flex; flex-direction:column; gap:6px; }
+  .related .lbl{ font-size:11.5px; color:var(--muted); }
   .intro{ text-align:center; padding:14px 8px 4px; color:var(--muted); }
   .intro .big{ color:var(--ink); font-weight:650; font-size:15px; margin-bottom:4px; }
   .intro .small{ font-size:13px; }
@@ -55,14 +47,10 @@
   .chip{ border:1px solid var(--line); background:var(--surface); color:var(--ink); padding:9px 13px;
     border-radius:999px; font-size:13px; cursor:pointer; transition:.15s; line-height:1.3; text-align:start; }
   .chip:hover{ border-color:var(--brand); color:var(--brand-ink); background:var(--brand-soft); }
-
-  /* typing */
   .dots{ display:inline-flex; gap:4px; padding:2px 0; }
   .dots i{ width:7px;height:7px;border-radius:50%;background:var(--muted);opacity:.5;animation:b 1.1s infinite; }
   .dots i:nth-child(2){animation-delay:.15s} .dots i:nth-child(3){animation-delay:.3s}
   @keyframes b{ 0%,60%,100%{transform:translateY(0);opacity:.35} 30%{transform:translateY(-4px);opacity:.9} }
-
-  /* Composer */
   .composer{ border-top:1px solid var(--line); padding:12px 16px 14px; }
   .field{ display:flex; align-items:flex-end; gap:9px; background:var(--bg); border:1px solid var(--line);
     border-radius:14px; padding:6px 6px 6px 14px; }
@@ -71,223 +59,261 @@
   textarea{ flex:1; border:0; background:transparent; resize:none; font:inherit; font-size:14.5px; color:var(--ink);
     padding:8px 0; max-height:120px; outline:none; }
   .send{ width:38px;height:38px;border-radius:10px;border:0;background:var(--brand);color:#fff;cursor:pointer;
-    display:grid;place-items:center;flex:none;transition:.15s; }
-  .send:disabled{ opacity:.4; cursor:default; }
+    display:grid;place-items:center;flex:none;transition:.15s; } .send:disabled{ opacity:.4;cursor:default; }
   .send svg{ width:18px;height:18px }
   .foot{ text-align:center; font-size:11.5px; color:var(--muted); margin-top:9px; }
 </style>
 
-<div class="app" id="app">
+<div class="app">
   <header>
     <div class="logo">CX</div>
-    <div class="htext">
-      <h1 id="title">CX Assistant</h1>
-      <p id="subtitle">Answers only from your CX training library</p>
-    </div>
+    <div class="htext"><h1 id="title">CX Assistant</h1><p id="subtitle">Finds the best match from your CX library</p></div>
     <div class="toggle" role="group" aria-label="language">
       <button id="btnEn" class="on" onclick="setLang('en')">EN</button>
       <button id="btnAr" onclick="setLang('ar')">عربي</button>
     </div>
   </header>
-
   <div class="scroll" id="scroll"></div>
-
   <div class="composer">
     <div class="field">
-      <textarea id="input" rows="1" placeholder="Ask about driving conversion…"
-        oninput="autoGrow(this)" onkeydown="onKey(event)"></textarea>
+      <textarea id="input" rows="1" placeholder="Ask about driving conversion…" oninput="autoGrow(this)" onkeydown="onKey(event)"></textarea>
       <button class="send" id="send" onclick="ask()" aria-label="send">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
       </button>
     </div>
-    <div class="foot" id="foot">Demo • grounded on the “Art of Driving Conversion” module</div>
+    <div class="foot" id="foot">Works offline • no AI, no internet needed • from “Art of Driving Conversion”</div>
   </div>
 </div>
 
 <script>
-/* ============ KNOWLEDGE LIBRARY (the chatbot's brain) ============ */
-/* Extracted from the Art of Driving Conversion module. Each card = EN + AR + source. */
+/* ================= KNOWLEDGE LIBRARY ================= */
+/* Each card carries EN + AR text, a source, and keyword hints (both languages) to improve matching. */
 const LIB = [
- {id:"definition", src:"Art of Driving Conversion — What is conversion",
-  en:{t:"What is a conversion rate?", b:"Conversion rate is the percentage of store visitors who make a purchase. Formula: Number of Sales ÷ Number of Visitors × 100. Example: if 100 people enter and 20 buy, your conversion rate is 20% — meaning 1 in every 5 visitors buys something."},
-  ar:{t:"ما هو معدل التحويل؟", b:"معدل التحويل هو نسبة الزوّار الذين يقومون بالشراء من إجمالي من دخل المتجر. المعادلة: عدد المبيعات ÷ عدد الزوّار × ١٠٠. مثال: إذا دخل ١٠٠ شخص واشترى ٢٠ منهم، فمعدل التحويل ٢٠٪ — أي أن زبوناً واحداً من كل ٥ زوّار يشتري."}},
+ {id:"definition", src:{en:"Art of Driving Conversion — What is conversion", ar:"فن رفع معدل التحويل — ما هو التحويل"},
+  en:{t:"What is a conversion rate?", b:"Conversion rate is the percentage of store visitors who make a purchase. Formula: Number of Sales ÷ Number of Visitors × 100. Example: if 100 people enter and 20 buy, your conversion rate is 20% — 1 in every 5 visitors buys something.",
+      k:"conversion rate convert percentage formula calculate what is meaning definition visitors buyers footfall"},
+  ar:{t:"ما هو معدل التحويل؟", b:"معدل التحويل هو نسبة الزوّار الذين يقومون بالشراء من إجمالي من دخل المتجر. المعادلة: عدد المبيعات ÷ عدد الزوّار × ١٠٠. مثال: إذا دخل ١٠٠ شخص واشترى ٢٠، فمعدل التحويل ٢٠٪ — أي واحد من كل ٥ زوّار يشتري.",
+      k:"معدل التحويل نسبة معادلة حساب تعريف يعني ما هو زوار مشترين"}},
 
- {id:"why", src:"Art of Driving Conversion — Why it matters",
-  en:{t:"Why does conversion rate matter?", b:"A higher conversion rate means more sales from the same footfall — you don't need more visitors, just more buyers. It also reflects customer satisfaction: if people leave without buying, something needs fixing. And it helps forecast demand and manage stock. Focus on converting the visitors you already have."},
-  ar:{t:"لماذا معدل التحويل مهم؟", b:"ارتفاع معدل التحويل يعني مبيعات أكثر من نفس عدد الزوّار — لست بحاجة لزوّار أكثر بل لمشترين أكثر. كما يعكس رضا العملاء: إذا غادروا دون شراء فهناك ما يجب تحسينه. ويساعد أيضاً في توقّع الطلب وإدارة المخزون. ركّز على تحويل الزوّار الموجودين لديك."}},
+ {id:"why", src:{en:"Art of Driving Conversion — Why it matters", ar:"فن رفع معدل التحويل — لماذا يهم"},
+  en:{t:"Why does conversion rate matter?", b:"A higher conversion rate means more sales from the same footfall — you don't need more visitors, just more buyers. It also reflects customer satisfaction: if people leave without buying, something needs fixing. And it helps forecast demand and manage stock.",
+      k:"why important matters reason revenue satisfaction demand stock"},
+  ar:{t:"لماذا معدل التحويل مهم؟", b:"ارتفاع معدل التحويل يعني مبيعات أكثر من نفس عدد الزوّار — لست بحاجة لزوّار أكثر بل لمشترين أكثر. كما يعكس رضا العملاء: إذا غادروا دون شراء فهناك ما يجب تحسينه. ويساعد في توقّع الطلب وإدارة المخزون.",
+      k:"لماذا مهم أهمية سبب إيراد رضا طلب مخزون"}},
 
- {id:"sales-math", src:"Art of Driving Conversion — Impact on sales",
-  en:{t:"How conversion impacts sales", b:"Sales = Footfall × Conversion × ATV (average transaction value). Example: 10,000 × 25% × 14 KD = 35,000 KD. If you raise conversion by just 1% (to 26%), sales become 36,400 KD — roughly a 4% increase in sales from a single 1% gain in conversion."},
-  ar:{t:"كيف يؤثّر التحويل على المبيعات", b:"المبيعات = عدد الزوّار × معدل التحويل × متوسط قيمة الفاتورة. مثال: ١٠٬٠٠٠ × ٢٥٪ × ١٤ د.ك = ٣٥٬٠٠٠ د.ك. وإذا رفعت التحويل ١٪ فقط (إلى ٢٦٪) تصبح المبيعات ٣٦٬٤٠٠ د.ك — أي زيادة نحو ٤٪ في المبيعات مقابل ١٪ في التحويل."}},
+ {id:"sales-math", src:{en:"Art of Driving Conversion — Impact on sales", ar:"فن رفع معدل التحويل — الأثر على المبيعات"},
+  en:{t:"How conversion impacts sales", b:"Sales = Footfall × Conversion × ATV (average transaction value). Example: 10,000 × 25% × 14 KD = 35,000 KD. If you raise conversion by just 1% (to 26%), sales become 36,400 KD — about a 4% increase in sales from a single 1% gain.",
+      k:"sales atv average transaction footfall one percent 1% increase impact revenue calculate math formula kd more sales"},
+  ar:{t:"كيف يؤثّر التحويل على المبيعات", b:"المبيعات = عدد الزوّار × معدل التحويل × متوسط قيمة الفاتورة. مثال: ١٠٬٠٠٠ × ٢٥٪ × ١٤ د.ك = ٣٥٬٠٠٠ د.ك. وإذا رفعت التحويل ١٪ فقط (إلى ٢٦٪) تصبح المبيعات ٣٦٬٤٠٠ د.ك — أي زيادة نحو ٤٪.",
+      k:"مبيعات متوسط الفاتورة زيادة تأثير حساب معادلة دينار واحد بالمئة مبيعات أكثر"}},
 
- {id:"personalized", src:"Art of Driving Conversion — Strategy: Personalized service",
-  en:{t:"Personalized service", b:"Understand each customer's needs. Greet warmly, ask open-ended questions, use their name if known, and tailor recommendations to what they're interested in. Example: a customer looking for skincare appreciates advice based on their skin type. Customers buy more when they feel understood and valued."},
-  ar:{t:"الخدمة الشخصية", b:"افهم احتياج كل عميل. رحّب به بحرارة، واطرح أسئلة مفتوحة، واستخدم اسمه إن عرفته، وقدّم توصيات تناسب اهتمامه. مثال: العميل الباحث عن العناية بالبشرة يقدّر نصيحة مبنية على نوع بشرته. العميل يشتري أكثر حين يشعر بأنه مفهوم وذو قيمة."}},
+ {id:"personalized", src:{en:"Art of Driving Conversion — Personalized service", ar:"فن رفع معدل التحويل — الخدمة الشخصية"},
+  en:{t:"Personalized service", b:"Understand each customer's needs. Greet warmly, ask open-ended questions, use their name if known, and tailor recommendations to what they're interested in. Example: a customer looking for skincare appreciates advice based on their skin type. Customers buy more when they feel understood.",
+      k:"personalized personal needs name tailor recommend recommendation skincare individual"},
+  ar:{t:"الخدمة الشخصية", b:"افهم احتياج كل عميل. رحّب به بحرارة، واطرح أسئلة مفتوحة، واستخدم اسمه إن عرفته، وقدّم توصيات تناسب اهتمامه. مثال: العميل الباحث عن العناية بالبشرة يقدّر نصيحة مبنية على نوع بشرته. العميل يشتري أكثر حين يشعر بأنه مفهوم.",
+      k:"شخصية احتياج اسم توصية تخصيص اهتمام"}},
 
- {id:"product-knowledge", src:"Art of Driving Conversion — Strategy: Product knowledge",
-  en:{t:"Product knowledge", b:"Be the expert. Know product features, benefits and uses, offer comparisons to help customers decide, and share tips or extra uses they may not know. Confidence in your knowledge builds trust — and trust leads to more sales."},
-  ar:{t:"المعرفة بالمنتج", b:"كن الخبير. اعرف مزايا المنتجات وفوائدها واستخداماتها، وقدّم مقارنات تساعد العميل على القرار، وشارك نصائح أو استخدامات إضافية قد لا يعرفها. ثقتك بمعرفتك تبني ثقة العميل — والثقة تقود إلى مبيعات أكثر."}},
+ {id:"product-knowledge", src:{en:"Art of Driving Conversion — Product knowledge", ar:"فن رفع معدل التحويل — المعرفة بالمنتج"},
+  en:{t:"Product knowledge", b:"Be the expert. Know product features, benefits and uses, offer comparisons to help customers decide, and share tips or extra uses they may not know. Confidence in your knowledge builds trust — and trust leads to more sales.",
+      k:"product knowledge expert features benefits compare comparison know products trust advice"},
+  ar:{t:"المعرفة بالمنتج", b:"كن الخبير. اعرف مزايا المنتجات وفوائدها واستخداماتها، وقدّم مقارنات تساعد العميل على القرار، وشارك نصائح قد لا يعرفها. ثقتك بمعرفتك تبني ثقة العميل — والثقة تقود إلى مبيعات أكثر.",
+      k:"معرفة المنتج خبير مزايا فوائد مقارنة ثقة نصيحة"}},
 
- {id:"upsell", src:"Art of Driving Conversion — Strategy: Upselling & cross-selling",
-  en:{t:"Upselling & cross-selling", b:"Upselling means suggesting a higher-end product and highlighting its added value (more features, longer durability). Cross-selling means suggesting items that go together (e.g. a t-shirt with new jeans). Keep it subtle and frame it as a benefit to the customer, not a sales push. Customers appreciate suggestions that complete their purchase."},
-  ar:{t:"البيع الأعلى والبيع المتقاطع", b:"البيع الأعلى هو اقتراح منتج أرقى مع إبراز قيمته المضافة (مزايا أكثر، متانة أطول). البيع المتقاطع هو اقتراح منتجات متكاملة (مثل قميص مع بنطال جينز جديد). اجعله لطيفاً وقدّمه كفائدة للعميل لا كضغط للبيع. العملاء يقدّرون الاقتراحات التي تكمّل مشترياتهم."}},
+ {id:"upsell", src:{en:"Art of Driving Conversion — Upselling & cross-selling", ar:"فن رفع معدل التحويل — البيع الأعلى والمتقاطع"},
+  en:{t:"Upselling & cross-selling", b:"Upselling means suggesting a higher-end product and highlighting its added value (more features, longer durability). Cross-selling means suggesting items that go together (e.g. a t-shirt with new jeans). Keep it subtle and frame it as a benefit to the customer, not a sales push.",
+      k:"upsell upselling cross sell crosssell add more higher premium complement bundle suggest push without pushy extra item"},
+  ar:{t:"البيع الأعلى والبيع المتقاطع", b:"البيع الأعلى هو اقتراح منتج أرقى مع إبراز قيمته المضافة (مزايا أكثر، متانة أطول). البيع المتقاطع هو اقتراح منتجات متكاملة (مثل قميص مع بنطال جينز). اجعله لطيفاً وقدّمه كفائدة للعميل لا كضغط للبيع.",
+      k:"بيع أعلى بيع متقاطع منتج أعلى إضافة يكمل اقتراح دون إلحاح ضغط"}},
 
- {id:"urgency", src:"Art of Driving Conversion — Strategy: Creating urgency",
-  en:{t:"Creating urgency", b:"Highlight limited-time offers or low stock to encourage action now. Use phrases like \"only a few left\" or \"offer ends today.\" Fear of missing out (FOMO) is a strong motivator. Example: \"This promotion is only available this weekend — don't miss out!\""},
-  ar:{t:"خلق شعور بالإلحاح", b:"أبرز العروض محدودة الوقت أو قلّة المخزون لتشجيع العميل على التصرّف الآن. استخدم عبارات مثل «بقيت قطع قليلة» أو «العرض ينتهي اليوم». الخوف من تفويت الفرصة محفّز قوي. مثال: «هذا العرض متاح هذا الأسبوع فقط — لا تفوّته!»"}},
+ {id:"urgency", src:{en:"Art of Driving Conversion — Creating urgency", ar:"فن رفع معدل التحويل — خلق الإلحاح"},
+  en:{t:"Creating urgency", b:"Highlight limited-time offers or low stock to encourage action now. Use phrases like \"only a few left\" or \"offer ends today.\" Fear of missing out (FOMO) is a strong motivator. Example: \"This promotion is only available this weekend — don't miss out!\"",
+      k:"urgency limited stock offer deal fomo hurry scarcity ends today promotion now quick"},
+  ar:{t:"خلق شعور بالإلحاح", b:"أبرز العروض محدودة الوقت أو قلّة المخزون لتشجيع العميل على التصرّف الآن. استخدم عبارات مثل «بقيت قطع قليلة» أو «العرض ينتهي اليوم». الخوف من تفويت الفرصة محفّز قوي. مثال: «هذا العرض متاح هذا الأسبوع فقط — لا تفوّته!»",
+      k:"إلحاح عرض محدود مخزون ينتهي ترويج الآن سرعة فرصة"}},
 
- {id:"followup", src:"Art of Driving Conversion — Strategy: Follow-up",
-  en:{t:"Follow-up", b:"Stay engaged through the whole shopping journey. After helping a customer, check back to see if they need anything else. Offer to follow up on out-of-stock items. Consistent engagement builds relationships and brings customers back."},
-  ar:{t:"المتابعة", b:"ابقَ متواصلاً طوال رحلة التسوّق. بعد مساعدة العميل، عُد إليه لتتأكد إن كان يحتاج شيئاً آخر. اعرض المتابعة بشأن المنتجات غير المتوفرة. التواصل المستمر يبني العلاقات ويعيد العملاء."}},
+ {id:"followup", src:{en:"Art of Driving Conversion — Follow-up", ar:"فن رفع معدل التحويل — المتابعة"},
+  en:{t:"Follow-up", b:"Stay engaged through the whole shopping journey. After helping a customer, check back to see if they need anything else. Offer to follow up on out-of-stock items. Consistent engagement builds relationships and brings customers back.",
+      k:"follow up followup check back engage out of stock return relationship loyalty come back"},
+  ar:{t:"المتابعة", b:"ابقَ متواصلاً طوال رحلة التسوّق. بعد مساعدة العميل، عُد إليه لتتأكد إن كان يحتاج شيئاً آخر. اعرض المتابعة بشأن المنتجات غير المتوفرة. التواصل المستمر يبني العلاقات ويعيد العملاء.",
+      k:"متابعة تواصل غير متوفر علاقة ولاء عودة"}},
 
- {id:"greeting", src:"Art of Driving Conversion — Communication: Greeting",
-  en:{t:"Warm greeting & first impressions", b:"First impressions set the tone. Smile genuinely, make eye contact, and use a warm, personal greeting — not a robotic one. Example: for an unsure customer, \"Hi! Let me know if there's anything specific you're looking for today.\""},
-  ar:{t:"الترحيب الحار والانطباع الأول", b:"الانطباع الأول يحدّد أجواء التعامل كله. ابتسم بصدق، وحافظ على التواصل البصري، واستخدم ترحيباً حاراً وشخصياً لا آلياً. مثال: لعميل متردد، «أهلاً! أخبرني إن كنت تبحث عن شيء محدد اليوم.»"}},
+ {id:"greeting", src:{en:"Art of Driving Conversion — Greeting", ar:"فن رفع معدل التحويل — الترحيب"},
+  en:{t:"Warm greeting & first impressions", b:"First impressions set the tone. Smile genuinely, make eye contact, and use a warm, personal greeting — not a robotic one. Example: for an unsure customer, \"Hi! Let me know if there's anything specific you're looking for today.\"",
+      k:"greet greeting hello welcome first impression smile eye contact approach start how to greet"},
+  ar:{t:"الترحيب الحار والانطباع الأول", b:"الانطباع الأول يحدّد أجواء التعامل كله. ابتسم بصدق، وحافظ على التواصل البصري، واستخدم ترحيباً حاراً وشخصياً لا آلياً. مثال: لعميل متردد، «أهلاً! أخبرني إن كنت تبحث عن شيء محدد اليوم.»",
+      k:"ترحيب تحية أهلا انطباع ابتسامة تواصل بصري استقبال كيف أرحب"}},
 
- {id:"listening", src:"Art of Driving Conversion — Communication: Active listening",
-  en:{t:"Active listening", b:"Listening shows you care and helps you assist better. Focus fully on the customer, use body language like nodding, and paraphrase their needs to confirm — \"So you're looking for a gift for someone who loves skincare?\" Avoid interrupting or jumping to solutions too early."},
-  ar:{t:"الإصغاء الفعّال", b:"الإصغاء يُظهر اهتمامك ويساعدك على تقديم خدمة أفضل. ركّز كلياً على العميل، واستخدم لغة الجسد مثل الإيماء، وأعد صياغة احتياجه للتأكد — «إذاً أنت تبحث عن هدية لمن يحب العناية بالبشرة؟» تجنّب المقاطعة أو التسرّع في تقديم الحلول."}},
+ {id:"listening", src:{en:"Art of Driving Conversion — Active listening", ar:"فن رفع معدل التحويل — الإصغاء الفعّال"},
+  en:{t:"Active listening", b:"Listening shows you care and helps you assist better. Focus fully on the customer, use body language like nodding, and paraphrase their needs to confirm — \"So you're looking for a gift for someone who loves skincare?\" Avoid interrupting or jumping to solutions too early.",
+      k:"listen listening active understand paraphrase interrupt body language attention"},
+  ar:{t:"الإصغاء الفعّال", b:"الإصغاء يُظهر اهتمامك ويساعدك على تقديم خدمة أفضل. ركّز كلياً على العميل، واستخدم لغة الجسد مثل الإيماء، وأعد صياغة احتياجه للتأكد — «إذاً أنت تبحث عن هدية لمن يحب العناية بالبشرة؟» تجنّب المقاطعة.",
+      k:"إصغاء استماع فهم مقاطعة لغة الجسد انتباه"}},
 
- {id:"open-questions", src:"Art of Driving Conversion — Communication: Open questions",
-  en:{t:"Open-ended questions", b:"Open-ended questions gather more detail than yes/no ones. Instead of \"Are you looking for a specific item?\" ask \"What brings you in today? Are you shopping for yourself or someone else?\" This makes the interaction feel like a conversation, not a transaction."},
-  ar:{t:"الأسئلة المفتوحة", b:"الأسئلة المفتوحة تجمع تفاصيل أكثر من أسئلة نعم/لا. بدل «هل تبحث عن منتج معيّن؟» اسأل «ما الذي أتى بك اليوم؟ هل تتسوّق لنفسك أم لشخص آخر؟» هذا يجعل التعامل حواراً لا مجرد معاملة."}},
+ {id:"open-questions", src:{en:"Art of Driving Conversion — Open questions", ar:"فن رفع معدل التحويل — الأسئلة المفتوحة"},
+  en:{t:"Open-ended questions", b:"Open-ended questions gather more detail than yes/no ones. Instead of \"Are you looking for a specific item?\" ask \"What brings you in today? Are you shopping for yourself or someone else?\" This makes the interaction feel like a conversation, not a transaction.",
+      k:"open ended questions ask questions conversation yes no what how engage talk"},
+  ar:{t:"الأسئلة المفتوحة", b:"الأسئلة المفتوحة تجمع تفاصيل أكثر من أسئلة نعم/لا. بدل «هل تبحث عن منتج معيّن؟» اسأل «ما الذي أتى بك اليوم؟ هل تتسوّق لنفسك أم لشخص آخر؟» هذا يجعل التعامل حواراً لا مجرد معاملة.",
+      k:"أسئلة مفتوحة سؤال حوار نعم لا محادثة تفاعل"}},
 
- {id:"closing", src:"Art of Driving Conversion — Communication: Closing",
-  en:{t:"Closing the sale", b:"Closing should feel natural and supportive, not pushy. Use assumptive phrases like \"Would you like to take this to the register?\" Highlight benefits — \"This is one of our most popular items because it's so versatile\" — and reassure hesitant customers: \"You can always exchange it if it's not the perfect fit.\""},
-  ar:{t:"إتمام البيع", b:"إتمام البيع يجب أن يكون طبيعياً وداعماً لا ملحّاً. استخدم عبارات افتراضية مثل «هل تودّ أخذه إلى الصندوق؟» أبرز الفوائد — «هذا من أكثر منتجاتنا رواجاً لأنه عملي جداً» — وطمئن العميل المتردد: «يمكنك دائماً استبداله إن لم يكن مناسباً.»"}},
+ {id:"closing", src:{en:"Art of Driving Conversion — Closing the sale", ar:"فن رفع معدل التحويل — إتمام البيع"},
+  en:{t:"Closing the sale", b:"Closing should feel natural and supportive, not pushy. Use assumptive phrases like \"Would you like to take this to the register?\" Highlight benefits, and reassure hesitant customers: \"You can always exchange it if it's not the perfect fit.\"",
+      k:"close closing seal deal hesitant unsure not sure doubt reassure register checkout guide buy convince undecided"},
+  ar:{t:"إتمام البيع", b:"إتمام البيع يجب أن يكون طبيعياً وداعماً لا ملحّاً. استخدم عبارات افتراضية مثل «هل تودّ أخذه إلى الصندوق؟» أبرز الفوائد، وطمئن العميل المتردد: «يمكنك دائماً استبداله إن لم يكن مناسباً.»",
+      k:"إتمام إغلاق متردد غير متأكد طمأنة إقناع صندوق توجيه شراء حائر"}},
 
- {id:"journey", src:"Art of Driving Conversion — Customer journey",
-  en:{t:"Where you impact conversion (the journey)", b:"You can influence conversion at four stages: Entry & Greeting, Product Browsing, Decision Making, and Checkout. Improve engagement at each stage — a good greeting at entry, helpful guidance while browsing, reassurance at decision time, and a smooth checkout."},
-  ar:{t:"أين تؤثّر على التحويل (رحلة العميل)", b:"يمكنك التأثير على التحويل في أربع مراحل: الدخول والترحيب، تصفّح المنتجات، اتخاذ القرار، والدفع. حسّن التفاعل في كل مرحلة — ترحيب جيد عند الدخول، إرشاد مفيد أثناء التصفّح، طمأنة عند القرار، ودفع سلس."}},
+ {id:"journey", src:{en:"Art of Driving Conversion — Customer journey", ar:"فن رفع معدل التحويل — رحلة العميل"},
+  en:{t:"Where you impact conversion", b:"You can influence conversion at four stages: Entry & Greeting, Product Browsing, Decision Making, and Checkout. Improve engagement at each stage — a good greeting at entry, helpful guidance while browsing, reassurance at decision time, and a smooth checkout.",
+      k:"journey stages entry browsing decision checkout touchpoints steps where impact stage"},
+  ar:{t:"أين تؤثّر على التحويل", b:"يمكنك التأثير على التحويل في أربع مراحل: الدخول والترحيب، تصفّح المنتجات، اتخاذ القرار، والدفع. حسّن التفاعل في كل مرحلة — ترحيب عند الدخول، إرشاد أثناء التصفّح، طمأنة عند القرار، ودفع سلس.",
+      k:"رحلة مراحل دخول تصفح قرار دفع خطوات أين مرحلة"}},
 
- {id:"measurement", src:"Art of Driving Conversion — Measurement (CCTV)",
-  en:{t:"How conversion is measured", b:"Stores use cameras and tools to measure conversion. Entrance cameras count footfall and filter out staff/non-target entries; floor cameras track engagement and wait times with heat mapping; POS cameras link transactions to actual customers. This data is combined with POS to give an accurate conversion rate."},
-  ar:{t:"كيف يُقاس التحويل", b:"تستخدم المتاجر الكاميرات والأدوات لقياس التحويل. كاميرات المدخل تحسب الزوّار وتستبعد الموظفين وغير المستهدفين؛ كاميرات الصالة تتابع التفاعل وأوقات الانتظار عبر الخرائط الحرارية؛ كاميرات الصندوق تربط المعاملات بالعملاء الفعليين. تُدمج هذه البيانات مع نظام نقاط البيع لإعطاء معدل تحويل دقيق."}},
+ {id:"measurement", src:{en:"Art of Driving Conversion — Measurement (CCTV)", ar:"فن رفع معدل التحويل — القياس (الكاميرات)"},
+  en:{t:"How conversion is measured", b:"Stores use cameras and tools to measure conversion. Entrance cameras count footfall and filter out staff/non-target entries; floor cameras track engagement and wait times with heat mapping; POS cameras link transactions to actual customers. This data is combined with POS for an accurate rate.",
+      k:"measure measured cctv camera count footfall pos heat map track tool sensor how measured tracking"},
+  ar:{t:"كيف يُقاس التحويل", b:"تستخدم المتاجر الكاميرات والأدوات لقياس التحويل. كاميرات المدخل تحسب الزوّار وتستبعد الموظفين؛ كاميرات الصالة تتابع التفاعل وأوقات الانتظار عبر الخرائط الحرارية؛ كاميرات الصندوق تربط المعاملات بالعملاء الفعليين.",
+      k:"قياس كاميرا عد زوار نقاط البيع خريطة حرارية أداة تتبع كيف يقاس"}},
 
- {id:"context", src:"Art of Driving Conversion — Business context",
-  en:{t:"Why this matters right now", b:"The numbers show the opportunity: in Q4, 80% of potential customers left without buying, only 15% engaged with more than one brand, and like-for-like transactions were down 26%. With conversion around 71%, nearly 1 in 3 customers still walks away without purchasing — so improving conversion is a clear priority."},
-  ar:{t:"لماذا هذا مهم الآن", b:"الأرقام تُظهر الفرصة: في الربع الأخير غادر ٨٠٪ من العملاء المحتملين دون شراء، وتفاعل ١٥٪ فقط مع أكثر من علامة تجارية، وانخفضت المعاملات المماثلة ٢٦٪. ومع معدل تحويل نحو ٧١٪، لا يزال قرابة عميل من كل ٣ يغادر دون شراء — لذا تحسين التحويل أولوية واضحة."}}
+ {id:"context", src:{en:"Art of Driving Conversion — Business context", ar:"فن رفع معدل التحويل — السياق"},
+  en:{t:"Why this matters right now", b:"The numbers show the opportunity: in Q4, 80% of potential customers left without buying, only 15% engaged with more than one brand, and like-for-like transactions were down 26%. With conversion around 71%, nearly 1 in 3 customers still walks away without purchasing.",
+      k:"numbers q4 lfl stats statistics benchmark current walk away left without buying 80 71 26 data opportunity"},
+  ar:{t:"لماذا هذا مهم الآن", b:"الأرقام تُظهر الفرصة: في الربع الأخير غادر ٨٠٪ من العملاء المحتملين دون شراء، وتفاعل ١٥٪ فقط مع أكثر من علامة، وانخفضت المعاملات المماثلة ٢٦٪. ومع معدل تحويل نحو ٧١٪، لا يزال قرابة عميل من كل ٣ يغادر دون شراء.",
+      k:"أرقام إحصاء معيار غادروا دون شراء بيانات فرصة الوضع الحالي"}}
 ];
 
-/* ============ UI STRINGS ============ */
+/* ================= SEARCH ENGINE (no AI) ================= */
+const STOP = new Set(("the a an is are do i to my of for and or in on at with how what why when who "+
+  "can you your it this that me we our us if not no yes some any as be قد "+
+  "في من ما هو هي كيف لماذا متى هل على عن مع او و أو ال إلى عند اذا إذا هذا هذه ان أن كي لكي").split(/\s+/));
+
+function normalize(s){
+  return (s||"").toLowerCase()
+    .replace(/[\u064B-\u0652\u0670]/g,"")     // Arabic diacritics
+    .replace(/\u0640/g,"")                     // tatweel
+    .replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/[ى]/g,"ي").replace(/ؤ/g,"و").replace(/ئ/g,"ي")
+    .replace(/[^a-z0-9\u0600-\u06FF]+/g," ")
+    .replace(/\s+/g," ").trim();
+}
+function stem(t){
+  if(/^[a-z0-9]+$/.test(t)){
+    return t.replace(/(ings?|edly|ed|es|ly|s)$/,"").replace(/^(.{3,}?)$/,"$1"); // light EN stem, keep >=3
+  }
+  // light Arabic stem: strip common prefixes/suffixes
+  let x=t.replace(/^(وال|فال|بال|كال|ال|و|ف|ب|ك|ل)/,"").replace(/(ات|ون|ين|ها|هم|ة|ه|ي)$/,"");
+  return x.length>=2?x:t;
+}
+function tokens(s){ return normalize(s).split(" ").filter(w=>w.length>=2 && !STOP.has(w)).map(stem); }
+function haystackSet(str){ return new Set(tokens(str)); }
+
+// Pre-index cards per language
+const INDEX = LIB.map(c=>({
+  card:c,
+  en:{ title:haystackSet(c.en.t), kw:haystackSet(c.en.k), body:haystackSet(c.en.t+" "+c.en.b+" "+c.en.k) },
+  ar:{ title:haystackSet(c.ar.t), kw:haystackSet(c.ar.k), body:haystackSet(c.ar.t+" "+c.ar.b+" "+c.ar.k) }
+}));
+
+function search(query, l){
+  const q = tokens(query);
+  if(!q.length) return {best:null, related:[]};
+  const scored = INDEX.map(ix=>{
+    const f = ix[l]; let s=0;
+    q.forEach(tok=>{
+      if(f.title.has(tok)) s+=3;
+      else if(f.kw.has(tok)) s+=3;
+      else if(f.body.has(tok)) s+=1;
+      else { // substring fallback for longer tokens
+        for(const h of f.body){ if(h.length>=4 && (h.includes(tok)||tok.includes(h))){ s+=1; break; } }
+      }
+    });
+    return {card:ix.card, score:s};
+  }).sort((a,b)=>b.score-a.score);
+  const best = scored[0].score>=2 ? scored[0] : null;
+  const related = scored.filter(x=>x!==scored[0] && x.score>=2).slice(0,2).map(x=>x.card);
+  return {best, related};
+}
+
+/* ================= UI ================= */
 const UI = {
-  en:{ title:"CX Assistant", subtitle:"Answers only from your CX training library",
-    ph:"Ask about driving conversion…", foot:"Demo • grounded on the “Art of Driving Conversion” module",
-    introBig:"How can I help on the floor today?", introSmall:"Ask anything about driving conversion — I answer only from your training content.",
-    src:"Source", err:"Something went wrong reaching the assistant. Please try again.",
+  en:{ title:"CX Assistant", subtitle:"Finds the best match from your CX library",
+    ph:"Ask about driving conversion…", foot:"Works offline • no AI, no internet needed • from “Art of Driving Conversion”",
+    introBig:"How can I help on the floor today?", introSmall:"Type your question — I find the right guidance from your training content.",
+    src:"Source", seeAlso:"Related:",
+    notFound:"I couldn't find that in the CX content yet. Please check with your line manager or area manager — and it's worth adding to the library.",
     chips:["What is conversion rate?","How do I upsell without being pushy?","A customer looks unsure — what should I say?","How does a 1% change affect our sales?"] },
-  ar:{ title:"مساعد تجربة العميل", subtitle:"يجيب فقط من مكتبة تدريب تجربة العميل",
-    ph:"اسأل عن رفع معدل التحويل…", foot:"نسخة تجريبية • مبنية على وحدة «فن رفع معدل التحويل»",
-    introBig:"كيف أساعدك في المتجر اليوم؟", introSmall:"اسأل عن أي شيء يخص رفع معدل التحويل — أجيب فقط من محتوى تدريبك.",
-    src:"المصدر", err:"حدث خطأ في الوصول إلى المساعد. حاول مرة أخرى.",
+  ar:{ title:"مساعد تجربة العميل", subtitle:"يجد أفضل إجابة من مكتبة تجربة العميل",
+    ph:"اسأل عن رفع معدل التحويل…", foot:"يعمل دون إنترنت • بلا ذكاء اصطناعي • من وحدة «فن رفع معدل التحويل»",
+    introBig:"كيف أساعدك في المتجر اليوم؟", introSmall:"اكتب سؤالك — أجد لك الإرشاد المناسب من محتوى تدريبك.",
+    src:"المصدر", seeAlso:"ذات صلة:",
+    notFound:"لم أجد هذا في محتوى تجربة العميل بعد. يُرجى مراجعة مديرك المباشر أو مدير المنطقة — ويُستحسن إضافته إلى المكتبة.",
     chips:["ما هو معدل التحويل؟","كيف أبيع منتجاً أعلى دون إلحاح؟","عميل يبدو متردداً — ماذا أقول له؟","كيف يؤثّر تغيير ١٪ على مبيعاتنا؟"] }
 };
-
-let lang = "en";
-const $ = id => document.getElementById(id);
-const scroll = $("scroll");
+let lang="en";
+const $=id=>document.getElementById(id), scroll=$("scroll");
 
 function setLang(l){
-  lang = l;
-  document.body.setAttribute("dir", l==="ar" ? "rtl":"ltr");
-  $("btnEn").classList.toggle("on", l==="en");
-  $("btnAr").classList.toggle("on", l==="ar");
-  const u = UI[l];
-  $("title").textContent=u.title; $("subtitle").textContent=u.subtitle;
-  $("input").placeholder=u.ph; $("foot").textContent=u.foot;
-  renderIntro();
+  lang=l; document.body.setAttribute("dir", l==="ar"?"rtl":"ltr");
+  $("btnEn").classList.toggle("on", l==="en"); $("btnAr").classList.toggle("on", l==="ar");
+  const u=UI[l]; $("title").textContent=u.title; $("subtitle").textContent=u.subtitle;
+  $("input").placeholder=u.ph; $("foot").textContent=u.foot; renderIntro();
 }
-
 function renderIntro(){
-  scroll.innerHTML="";
-  const u=UI[lang];
-  const wrap=document.createElement("div"); wrap.className="intro";
-  wrap.innerHTML=`<div class="big">${u.introBig}</div><div class="small">${u.introSmall}</div>`;
+  scroll.innerHTML=""; const u=UI[lang];
+  const w=document.createElement("div"); w.className="intro";
+  w.innerHTML=`<div class="big">${u.introBig}</div><div class="small">${u.introSmall}</div>`;
   const chips=document.createElement("div"); chips.className="chips";
-  u.chips.forEach(c=>{
-    const b=document.createElement("button"); b.className="chip"; b.textContent=c;
-    b.onclick=()=>{ $("input").value=c; ask(); };
-    chips.appendChild(b);
-  });
-  wrap.appendChild(chips); scroll.appendChild(wrap);
+  u.chips.forEach(c=>{ const b=document.createElement("button"); b.className="chip"; b.textContent=c;
+    b.onclick=()=>{ $("input").value=c; ask(); }; chips.appendChild(b); });
+  w.appendChild(chips); scroll.appendChild(w);
 }
+function dropIntro(){ const i=scroll.querySelector(".intro"); if(i) i.remove(); }
 
-function addBubble(text, who, source, warn){
-  const intro=scroll.querySelector(".intro"); if(intro) intro.remove();
-  const row=document.createElement("div"); row.className="row "+(who==="me"?"me":"bot");
-  const b=document.createElement("div"); b.className="bubble"+(warn?" warn":"");
-  b.textContent=text;
-  if(source){
-    const s=document.createElement("div"); s.className="src";
-    s.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg><span>${UI[lang].src}: ${source}</span>`;
-    b.appendChild(s);
+function addUser(text){
+  dropIntro();
+  const r=document.createElement("div"); r.className="row me";
+  const b=document.createElement("div"); b.className="bubble"; b.textContent=text;
+  r.appendChild(b); scroll.appendChild(r); scroll.scrollTop=scroll.scrollHeight;
+}
+function addAnswer(card, related){
+  const r=document.createElement("div"); r.className="row bot";
+  const b=document.createElement("div"); b.className="bubble";
+  const title=document.createElement("div"); title.className="a-title"; title.textContent=card[lang].t;
+  const body=document.createElement("div"); body.textContent=card[lang].b;
+  b.appendChild(title); b.appendChild(body);
+  const s=document.createElement("div"); s.className="src";
+  s.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg><span>${UI[lang].src}: ${card.src[lang]}</span>`;
+  b.appendChild(s);
+  if(related && related.length){
+    const rel=document.createElement("div"); rel.className="related";
+    const lbl=document.createElement("div"); lbl.className="lbl"; lbl.textContent=UI[lang].seeAlso; rel.appendChild(lbl);
+    related.forEach(rc=>{ const c=document.createElement("button"); c.className="chip"; c.textContent=rc[lang].t;
+      c.onclick=()=>{ $("input").value=rc[lang].t; ask(); }; rel.appendChild(c); });
+    b.appendChild(rel);
   }
-  row.appendChild(b); scroll.appendChild(row); scroll.scrollTop=scroll.scrollHeight;
-  return b;
+  r.appendChild(b); scroll.appendChild(r); scroll.scrollTop=scroll.scrollHeight;
 }
-
+function addWarn(text){
+  const r=document.createElement("div"); r.className="row bot";
+  const b=document.createElement("div"); b.className="bubble warn"; b.textContent=text;
+  r.appendChild(b); scroll.appendChild(r); scroll.scrollTop=scroll.scrollHeight;
+}
 function addTyping(){
-  const intro=scroll.querySelector(".intro"); if(intro) intro.remove();
-  const row=document.createElement("div"); row.className="row bot"; row.id="typing";
-  row.innerHTML=`<div class="bubble"><span class="dots"><i></i><i></i><i></i></span></div>`;
-  scroll.appendChild(row); scroll.scrollTop=scroll.scrollHeight;
+  const r=document.createElement("div"); r.className="row bot"; r.id="typing";
+  r.innerHTML=`<div class="bubble"><span class="dots"><i></i><i></i><i></i></span></div>`;
+  scroll.appendChild(r); scroll.scrollTop=scroll.scrollHeight;
 }
 function rmTyping(){ const t=$("typing"); if(t) t.remove(); }
-
 function autoGrow(el){ el.style.height="auto"; el.style.height=Math.min(el.scrollHeight,120)+"px"; }
-function onKey(e){ if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); ask(); } }
+function onKey(e){ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); ask(); } }
 
-/* Build the grounding prompt from the library */
-function libraryText(){
-  return LIB.map(c=>`• [${c.src}]\n  EN: ${c.en.t} — ${c.en.b}\n  AR: ${c.ar.t} — ${c.ar.b}`).join("\n\n");
-}
-
-let busy=false;
-async function ask(){
-  if(busy) return;
+function ask(){
   const q=$("input").value.trim(); if(!q) return;
-  $("input").value=""; autoGrow($("input"));
-  addBubble(q,"me");
-  busy=true; $("send").disabled=true; addTyping();
-
-  const langName = lang==="ar" ? "Arabic" : "English";
-  const system =
-`You are the CX Assistant for Alshaya retail store staff. You answer ONLY using the KNOWLEDGE LIBRARY below, which comes from the "Art of Driving Conversion" training module.
-
-Rules:
-- Answer in ${langName} only.
-- Keep it short and practical: 2–4 sentences a store associate can use immediately on the floor. Warm, plain language.
-- Base every answer strictly on the library. Never add outside facts or invent numbers.
-- If the question is NOT covered by the library, set "found" to false and, in the answer, kindly tell them this isn't in the CX content yet and to check with their line manager or area manager.
-- Pick the single most relevant library item and put its bracketed source in "source".
-- Reply with ONLY a raw JSON object, no markdown and no code fences:
-{"found": true or false, "answer": "…", "source": "…"}
-
-KNOWLEDGE LIBRARY:
-${libraryText()}`;
-
-  try{
-    const res = await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        model:"claude-sonnet-4-6", max_tokens:1000,
-        system, messages:[{role:"user", content:q}]
-      })
-    });
-    const data = await res.json();
-    const raw = (data.content||[]).filter(x=>x.type==="text").map(x=>x.text).join("").trim();
-    let parsed;
-    try{ parsed = JSON.parse(raw.replace(/```json|```/g,"").trim()); }
-    catch(_){ parsed = {found:true, answer:raw, source:""}; }
+  $("input").value=""; autoGrow($("input")); addUser(q); addTyping();
+  setTimeout(()=>{                       // tiny delay so it feels responsive
     rmTyping();
-    addBubble(parsed.answer||UI[lang].err, "bot", parsed.found?parsed.source:"", !parsed.found);
-  }catch(err){
-    rmTyping();
-    addBubble(UI[lang].err, "bot", "", true);
-  }finally{
-    busy=false; $("send").disabled=false; $("input").focus();
-  }
+    const {best, related} = search(q, lang);
+    if(best) addAnswer(best.card, related);
+    else addWarn(UI[lang].notFound);
+    $("input").focus();
+  }, 260);
 }
-
 setLang("en");
 </script>
