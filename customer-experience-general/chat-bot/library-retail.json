@@ -1,0 +1,1565 @@
+{
+  "meta": {
+    "division": "retail",
+    "title": "ATLAS Library — Retail (Art of Selling)",
+    "note": "Only edit this file to change RETAIL content. Each item in 'cards' is one topic. Copy a card, change the text. 'videos' and 'link' are optional.",
+    "videoTypes": "link (opens the video page — use for ConnectNow links needing sign-in) | youtube (video id) | stream (embed URL) | mp4 (direct file URL)"
+  },
+  "cards": [
+    {
+      "id": "definition",
+      "keywords_en": "conversion rate convert percentage formula calculate what is meaning definition visitors buyers footfall",
+      "keywords_ar": "معدل التحويل نسبة معادلة حساب تعريف يعني ما هو زوار مشترين عميل عملاء",
+      "en": {
+        "title": "What is a conversion rate?",
+        "body": "Conversion rate is the percentage of store visitors who make a purchase. Formula: Number of Sales ÷ Number of Visitors × 100. Example: if 100 people enter and 20 buy, your conversion rate is 20% — 1 in every 5 visitors buys something."
+      },
+      "ar": {
+        "title": "ما هو معدل التحويل؟",
+        "body": "معدل التحويل هو نسبة الزوّار الذين يقومون بالشراء من إجمالي من دخل المتجر. المعادلة: عدد المبيعات ÷ عدد الزوّار × ١٠٠. مثال: إذا دخل ١٠٠ شخص واشترى ٢٠، فمعدل التحويل ٢٠٪ — أي واحد من كل ٥ زوّار يشتري."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/275387/boosting-sales-through-conversion",
+          "title": {
+            "en": "Boosting Sales Through Conversion",
+            "ar": "رفع المبيعات عبر التحويل"
+          }
+        },
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286720/conversion",
+          "title": {
+            "en": "Conversion",
+            "ar": "التحويل"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/230871/the-art-of-driving-conversion?channelId=230797"
+    },
+    {
+      "id": "why",
+      "keywords_en": "why important matters reason revenue satisfaction demand stock",
+      "keywords_ar": "لماذا مهم أهمية سبب إيراد رضا طلب مخزون عميل عملاء",
+      "en": {
+        "title": "Why does conversion rate matter?",
+        "body": "A higher conversion rate means more sales from the same footfall — you don't need more visitors, just more buyers. It also reflects customer satisfaction: if people leave without buying, something needs fixing. And it helps forecast demand and manage stock."
+      },
+      "ar": {
+        "title": "لماذا معدل التحويل مهم؟",
+        "body": "ارتفاع معدل التحويل يعني مبيعات أكثر من نفس عدد الزوّار — لست بحاجة لزوّار أكثر بل لمشترين أكثر. كما يعكس رضا الزبائن: إذا غادروا دون شراء فهناك ما يجب تحسينه. ويساعد في توقّع الطلب وإدارة المخزون."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "sales-math",
+      "keywords_en": "sales atv average transaction footfall one percent 1% increase impact revenue calculate math formula kd more sales",
+      "keywords_ar": "مبيعات متوسط الفاتورة زيادة تأثير حساب معادلة دينار واحد بالمئة مبيعات أكثر عميل عملاء",
+      "en": {
+        "title": "How conversion impacts sales",
+        "body": "Sales = Footfall × Conversion × ATV (average transaction value). Example: 10,000 × 25% × 14 KD = 35,000 KD. If you raise conversion by just 1% (to 26%), sales become 36,400 KD — about a 4% increase in sales from a single 1% gain."
+      },
+      "ar": {
+        "title": "كيف يؤثّر التحويل على المبيعات",
+        "body": "المبيعات = عدد الزوّار × معدل التحويل × متوسط قيمة الفاتورة. مثال: ١٠٬٠٠٠ × ٢٥٪ × ١٤ د.ك = ٣٥٬٠٠٠ د.ك. وإذا رفعت التحويل ١٪ فقط (إلى ٢٦٪) تصبح المبيعات ٣٦٬٤٠٠ د.ك — أي زيادة نحو ٤٪."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "personalized",
+      "keywords_en": "personalized personal needs name tailor recommend recommendation skincare individual",
+      "keywords_ar": "شخصية احتياج اسم توصية تخصيص اهتمام عميل عملاء",
+      "en": {
+        "title": "Personalized service",
+        "body": "Understand each customer's needs. Greet warmly, ask open-ended questions, use their name if known, and tailor recommendations to what they're interested in. Customers buy more when they feel understood and valued."
+      },
+      "ar": {
+        "title": "الخدمة الشخصية",
+        "body": "افهم احتياج كل زبون. رحّب به بحرارة، واطرح أسئلة مفتوحة، واستخدم اسمه إن عرفته، وقدّم توصيات تناسب اهتمامه. الزبون يشتري أكثر حين يشعر بأنه مفهوم وذو قيمة."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "product-knowledge",
+      "keywords_en": "product knowledge expert features benefits compare comparison know products trust advice",
+      "keywords_ar": "معرفة المنتج خبير مزايا فوائد مقارنة ثقة نصيحة عميل عملاء",
+      "en": {
+        "title": "Product knowledge",
+        "body": "Be the expert. Know product features, benefits and uses, offer comparisons to help customers decide, and share tips or extra uses they may not know. Confidence in your knowledge builds trust — and trust leads to more sales."
+      },
+      "ar": {
+        "title": "المعرفة بالمنتج",
+        "body": "كن الخبير. اعرف مزايا المنتجات وفوائدها واستخداماتها، وقدّم مقارنات تساعد الزبون على القرار، وشارك نصائح قد لا يعرفها. ثقتك بمعرفتك تبني ثقة الزبون — والثقة تقود إلى مبيعات أكثر."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "upsell",
+      "keywords_en": "upsell upselling cross sell crosssell add more higher premium complement bundle suggest push without pushy extra item",
+      "keywords_ar": "بيع أعلى بيع متقاطع منتج أعلى إضافة يكمل اقتراح دون إلحاح ضغط عميل عملاء",
+      "en": {
+        "title": "Upselling & cross-selling",
+        "body": "Upselling means suggesting a higher-end product and highlighting its added value. Cross-selling means suggesting items that go together (e.g. a t-shirt with new jeans). Keep it subtle and frame it as a benefit to the customer, not a sales push."
+      },
+      "ar": {
+        "title": "البيع الأعلى والبيع المتقاطع",
+        "body": "البيع الأعلى هو اقتراح منتج أرقى مع إبراز قيمته المضافة. البيع المتقاطع هو اقتراح منتجات متكاملة (مثل قميص مع بنطال جينز). اجعله لطيفاً وقدّمه كفائدة للزبون لا كضغط للبيع."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "urgency",
+      "keywords_en": "urgency limited stock offer deal fomo hurry scarcity ends today promotion now quick",
+      "keywords_ar": "إلحاح عرض محدود مخزون ينتهي ترويج الآن سرعة فرصة عميل عملاء",
+      "en": {
+        "title": "Creating urgency",
+        "body": "Highlight limited-time offers or low stock to encourage action now. Use phrases like \"only a few left\" or \"offer ends today.\" Fear of missing out is a strong motivator. Example: \"This promotion is only available this weekend — don't miss out!\""
+      },
+      "ar": {
+        "title": "خلق شعور بالإلحاح",
+        "body": "أبرز العروض محدودة الوقت أو قلّة المخزون لتشجيع الزبون على التصرّف الآن. استخدم عبارات مثل «بقيت قطع قليلة» أو «العرض ينتهي اليوم». الخوف من تفويت الفرصة محفّز قوي. مثال: «هذا العرض متاح هذا الأسبوع فقط — لا تفوّته!»"
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "followup",
+      "keywords_en": "follow up followup check back engage out of stock return relationship loyalty come back",
+      "keywords_ar": "متابعة تواصل غير متوفر علاقة ولاء عودة عميل عملاء",
+      "en": {
+        "title": "Follow-up",
+        "body": "Stay engaged through the whole shopping journey. After helping a customer, check back to see if they need anything else. Offer to follow up on out-of-stock items. Consistent engagement builds relationships and brings customers back."
+      },
+      "ar": {
+        "title": "المتابعة",
+        "body": "ابقَ متواصلاً طوال رحلة التسوّق. بعد مساعدة الزبون، عُد إليه لتتأكد إن كان يحتاج شيئاً آخر. اعرض المتابعة بشأن المنتجات غير المتوفرة. التواصل المستمر يبني العلاقات ويعيد الزبائن."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "greeting",
+      "keywords_en": "greet greeting hello welcome smile eye contact approach start how to greet",
+      "keywords_ar": "ترحيب تحية أهلا ابتسامة تواصل بصري استقبال كيف أرحب عميل عملاء",
+      "en": {
+        "title": "Warm greeting",
+        "body": "Smile genuinely, make eye contact, and use a warm, personal greeting — not a robotic one. Example: for an unsure customer, \"Hi! Let me know if there's anything specific you're looking for today.\""
+      },
+      "ar": {
+        "title": "الترحيب الحار",
+        "body": "ابتسم بصدق، وحافظ على التواصل البصري، واستخدم ترحيباً حاراً وشخصياً لا آلياً. مثال: لزبون متردد، «أهلاً! أخبرني إن كنت تبحث عن شيء محدد اليوم.»"
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "listening",
+      "keywords_en": "listen listening active understand paraphrase interrupt body language attention",
+      "keywords_ar": "إصغاء استماع فهم مقاطعة لغة الجسد انتباه عميل عملاء",
+      "en": {
+        "title": "Active listening",
+        "body": "Focus fully on the customer, use body language like nodding, and paraphrase their needs to confirm — \"So you're looking for a gift for someone who loves skincare?\" Avoid interrupting or jumping to solutions too early."
+      },
+      "ar": {
+        "title": "الإصغاء الفعّال",
+        "body": "ركّز كلياً على الزبون، واستخدم لغة الجسد مثل الإيماء، وأعد صياغة احتياجه للتأكد — «إذاً أنت تبحث عن هدية لمن يحب العناية بالبشرة؟» تجنّب المقاطعة أو التسرّع في تقديم الحلول."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "open-questions",
+      "keywords_en": "open ended questions ask questions conversation yes no what how engage talk",
+      "keywords_ar": "أسئلة مفتوحة سؤال حوار نعم لا محادثة تفاعل عميل عملاء",
+      "en": {
+        "title": "Open-ended questions",
+        "body": "Open-ended questions gather more detail than yes/no ones. Instead of \"Are you looking for a specific item?\" ask \"What brings you in today? Are you shopping for yourself or someone else?\" This makes the interaction feel like a conversation, not a transaction."
+      },
+      "ar": {
+        "title": "الأسئلة المفتوحة",
+        "body": "الأسئلة المفتوحة تجمع تفاصيل أكثر من أسئلة نعم/لا. بدل «هل تبحث عن منتج معيّن؟» اسأل «ما الذي أتى بك اليوم؟ هل تتسوّق لنفسك أم لشخص آخر؟» هذا يجعل التعامل حواراً لا مجرد معاملة."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "closing",
+      "keywords_en": "close closing seal deal hesitant unsure not sure doubt reassure register checkout guide buy convince undecided",
+      "keywords_ar": "إتمام إغلاق متردد غير متأكد طمأنة إقناع صندوق توجيه شراء حائر عميل عملاء",
+      "en": {
+        "title": "Closing the sale",
+        "body": "Closing should feel natural and supportive, not pushy. Use assumptive phrases like \"Would you like to take this to the register?\" Highlight benefits, and reassure hesitant customers: \"You can always exchange it if it's not the perfect fit.\""
+      },
+      "ar": {
+        "title": "إتمام البيع",
+        "body": "إتمام البيع يجب أن يكون طبيعياً وداعماً لا ملحّاً. استخدم عبارات افتراضية مثل «هل تودّ أخذه إلى الصندوق؟» أبرز الفوائد، وطمئن الزبون المتردد: «يمكنك دائماً استبداله إن لم يكن مناسباً.»"
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "journey",
+      "keywords_en": "journey stages entry browsing decision checkout touchpoints steps where impact stage",
+      "keywords_ar": "رحلة مراحل دخول تصفح قرار دفع خطوات أين مرحلة عميل عملاء",
+      "en": {
+        "title": "Where you impact conversion",
+        "body": "You can influence conversion at four stages: Entry & Greeting, Product Browsing, Decision Making, and Checkout. Improve engagement at each stage — a good greeting at entry, helpful guidance while browsing, reassurance at decision time, and a smooth checkout."
+      },
+      "ar": {
+        "title": "أين تؤثّر على التحويل",
+        "body": "يمكنك التأثير على التحويل في أربع مراحل: الدخول والترحيب، تصفّح المنتجات، اتخاذ القرار، والدفع. حسّن التفاعل في كل مرحلة — ترحيب عند الدخول، إرشاد أثناء التصفّح، طمأنة عند القرار، ودفع سلس."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "measurement",
+      "keywords_en": "measure measured cctv camera count footfall pos heat map track tool sensor how measured tracking",
+      "keywords_ar": "قياس كاميرا عد زوار نقاط البيع خريطة حرارية أداة تتبع كيف يقاس عميل عملاء",
+      "en": {
+        "title": "How conversion is measured",
+        "body": "Stores use cameras and tools to measure conversion. Entrance cameras count footfall and filter out staff/non-target entries; floor cameras track engagement and wait times with heat mapping; POS cameras link transactions to actual customers. This data is combined with POS for an accurate rate."
+      },
+      "ar": {
+        "title": "كيف يُقاس التحويل",
+        "body": "تستخدم المتاجر الكاميرات والأدوات لقياس التحويل. كاميرات المدخل تحسب الزوّار وتستبعد الموظفين؛ كاميرات الصالة تتابع التفاعل وأوقات الانتظار عبر الخرائط الحرارية؛ كاميرات الصندوق تربط المعاملات بالزبائن الفعليين."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "context",
+      "keywords_en": "numbers q4 lfl stats statistics benchmark current walk away left without buying 80 71 26 data opportunity",
+      "keywords_ar": "أرقام إحصاء معيار غادروا دون شراء بيانات فرصة الوضع الحالي عميل عملاء",
+      "en": {
+        "title": "Why this matters right now",
+        "body": "The numbers show the opportunity: in Q4, 80% of potential customers left without buying, only 15% engaged with more than one brand, and like-for-like transactions were down 26%. With conversion around 71%, nearly 1 in 3 customers still walks away without purchasing."
+      },
+      "ar": {
+        "title": "لماذا هذا مهم الآن",
+        "body": "الأرقام تُظهر الفرصة: في الربع الأخير غادر ٨٠٪ من الزبائن المحتملين دون شراء، وتفاعل ١٥٪ فقط مع أكثر من علامة، وانخفضت المعاملات المماثلة ٢٦٪. ومع معدل تحويل نحو ٧١٪، لا يزال قرابة زبون من كل ٣ يغادر دون شراء."
+      },
+      "source": {
+        "en": "Art of Driving Conversion",
+        "ar": "فن رفع معدل التحويل"
+      }
+    },
+    {
+      "id": "fi-why",
+      "keywords_en": "first impression matter 7 seconds seven trust loyalty why important welcome new customer",
+      "keywords_ar": "الانطباع الأول سبع ثوان ثقة ولاء لماذا مهم ترحيب زبون جديد عميل عملاء",
+      "en": {
+        "title": "Why first impressions matter",
+        "body": "First impressions form in about 7 seconds — and 55% comes from body language, 38% from tone, only 7% from words. A warm first impression builds trust instantly, makes customers more likely to buy, encourages loyalty and repeat visits, sets you apart from competitors, and shapes what they tell others. You get one chance — make it count."
+      },
+      "ar": {
+        "title": "لماذا الانطباع الأول مهم",
+        "body": "يتكوّن الانطباع الأول خلال نحو ٧ ثوانٍ — و٥٥٪ منه من لغة الجسد، و٣٨٪ من نبرة الصوت، و٧٪ فقط من الكلمات. الانطباع الدافئ يبني الثقة فوراً، ويزيد احتمال الشراء، ويشجّع الولاء وتكرار الزيارة، ويميّزك عن المنافسين، ويؤثّر على ما يقوله الزبون للآخرين. لديك فرصة واحدة — استثمرها."
+      },
+      "source": {
+        "en": "Art of First Impression",
+        "ar": "فن الانطباع الأول"
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/233495/great-first-impression-art-of-selling-h-m",
+          "title": {
+            "en": "Great First Impression — Art of Selling (H&M)",
+            "ar": "انطباع أول رائع — فن البيع (إتش آند إم)"
+          }
+        },
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286721/first-impression",
+          "title": {
+            "en": "First Impression",
+            "ar": "الانطباع الأول"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/233474/the-power-of-first-impression?channelId=230797"
+    },
+    {
+      "id": "fi-nonverbal",
+      "keywords_en": "body language non verbal nonverbal posture eye contact smile tone signals 55 38 7 how you say",
+      "keywords_ar": "لغة الجسد غير لفظي وضعية تواصل بصري ابتسامة نبرة إشارات كيف تقول عميل عملاء",
+      "en": {
+        "title": "Body language & non-verbal cues",
+        "body": "Most of a first impression is non-verbal — 55% body language and 38% tone versus just 7% words. Smile genuinely, make eye contact, and keep an open, inviting posture. Read the customer's signals and adjust your approach. It's not just what you say, but how you say it."
+      },
+      "ar": {
+        "title": "لغة الجسد والإشارات غير اللفظية",
+        "body": "معظم الانطباع الأول غير لفظي — ٥٥٪ لغة جسد و٣٨٪ نبرة صوت مقابل ٧٪ فقط للكلمات. ابتسم بصدق، وتواصل بالعين، وحافظ على وضعية منفتحة ومرحّبة. اقرأ إشارات الزبون وعدّل أسلوبك. المهم ليس ما تقوله فقط، بل كيف تقوله."
+      },
+      "source": {
+        "en": "Art of First Impression",
+        "ar": "فن الانطباع الأول"
+      }
+    },
+    {
+      "id": "fi-loyal",
+      "keywords_en": "loyal returning guest repeat customer recognize acknowledge loyalty aura perks regular remember",
+      "keywords_ar": "زبون عائد مخلص متكرر ولاء أورا مزايا تعرف تذكر منتظم عميل عملاء",
+      "en": {
+        "title": "Recognizing loyal & returning guests",
+        "body": "Spot and acknowledge returning customers, and personalize the interaction based on their past visits and preferences. Use loyalty programmes and exclusive perks (like AURA) to make them feel recognised and strengthen the relationship. A returning guest who feels remembered comes back more often."
+      },
+      "ar": {
+        "title": "التعرّف على الزبائن العائدين",
+        "body": "تعرّف على الزبائن العائدين ورحّب بهم، وخصّص التعامل بناءً على زياراتهم السابقة وتفضيلاتهم. استخدم برامج الولاء والمزايا الحصرية (مثل AURA) ليشعروا بأنهم معروفون، ولتقوية العلاقة. الزبون العائد الذي يشعر بأنه متذكَّر يعود أكثر."
+      },
+      "source": {
+        "en": "Art of First Impression",
+        "ar": "فن الانطباع الأول"
+      }
+    },
+    {
+      "id": "disc-why",
+      "keywords_en": "discovery matter understand needs 82 percent uncover why trust emotions people not product",
+      "keywords_ar": "اكتشاف فهم احتياج ثمانين ثقة عاطفة لماذا الإنسان لا المنتج عميل عملاء",
+      "en": {
+        "title": "Why discovery matters",
+        "body": "Discovery means uncovering what the customer really needs before recommending. 82% of shoppers are more likely to buy from someone who understands their needs. It shifts the focus from product to people and builds trust, not just transactions — and since emotions drive most buying decisions, understanding them leads to loyalty and stronger sales."
+      },
+      "ar": {
+        "title": "لماذا الاكتشاف مهم",
+        "body": "الاكتشاف يعني فهم ما يحتاجه الزبون فعلاً قبل تقديم التوصية. ٨٢٪ من المتسوّقين أكثر ميلاً للشراء ممن يفهم احتياجهم. وهو ينقل التركيز من المنتج إلى الإنسان ويبني الثقة لا مجرد معاملة — ولأن العاطفة تقود معظم قرارات الشراء، فإن فهمها يقود إلى الولاء ومبيعات أقوى."
+      },
+      "source": {
+        "en": "Art of Discovery",
+        "ar": "فن الاكتشاف"
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/267659/art-of-discovery",
+          "title": {
+            "en": "Art of Discovery",
+            "ar": "فن الاكتشاف"
+          }
+        },
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/208860/let-s-hear-from-marina-bath-body-works-vendome-mall-qatar",
+          "title": {
+            "en": "Let's Hear from Marina — Bath & Body Works, Qatar",
+            "ar": "من مارينا — باث آند بودي ووركس، قطر"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/249416/m3-art-of-discovery?channelId=230797"
+    },
+    {
+      "id": "disc-listening",
+      "keywords_en": "active listening discovery listen understand empathy unsaid just looking feel heard tune in",
+      "keywords_ar": "إصغاء فعال اكتشاف استماع فهم تعاطف أتفرج مشاعر مسموع عميل عملاء",
+      "en": {
+        "title": "Active listening (the heart of discovery)",
+        "body": "Active listening is tuning in to what's said and unsaid — not waiting for your turn to talk. Listen to understand, ask with purpose and listen with empathy, and use the customer's own words and emotions in your recommendation. When someone says \"I'm just looking,\" stay with them. People buy confidence, comfort and pride — and they remember how you made them feel."
+      },
+      "ar": {
+        "title": "الإصغاء الفعّال (قلب الاكتشاف)",
+        "body": "الإصغاء الفعّال هو الانتباه لما يُقال وما لا يُقال — لا انتظار دورك في الكلام. أصغِ لتفهم، واسأل بهدف وأصغِ بتعاطف، واستخدم كلمات الزبون ومشاعره في توصيتك. حين يقول «أنا فقط أتفرّج»، ابقَ معه. الناس يشترون الثقة والراحة والفخر — ويتذكّرون كيف جعلتهم يشعرون."
+      },
+      "source": {
+        "en": "Art of Discovery",
+        "ar": "فن الاكتشاف"
+      }
+    },
+    {
+      "id": "disc-questions",
+      "keywords_en": "open ended questions closed doors what brings you in occasion mood ask discovery great questions floor",
+      "keywords_ar": "أسئلة مفتوحة مغلقة مناسبة مزاج ما أتى بك سؤال اكتشاف عميل عملاء",
+      "en": {
+        "title": "Questions that open doors",
+        "body": "Open-ended questions invite stories and reveal needs and emotions; closed yes/no questions shut conversation down. Use openers like \"What brings you in today?\", \"What's the occasion or mood you're shopping for?\", and \"How do you want this to feel?\" Avoid \"Do you need help?\" and \"Are you just browsing?\" Open questions spark connection."
+      },
+      "ar": {
+        "title": "أسئلة تفتح الأبواب",
+        "body": "الأسئلة المفتوحة تدعو للقصص وتكشف الاحتياجات والمشاعر؛ أما أسئلة نعم/لا المغلقة فتُنهي الحوار. استخدم عبارات مثل «ما الذي أتى بك اليوم؟» و«ما المناسبة أو المزاج الذي تتسوّق له؟» و«كيف تريد أن تشعر بهذا؟» وتجنّب «هل تحتاج مساعدة؟» و«هل تتفرّج فقط؟» الأسئلة المفتوحة تصنع تواصلاً."
+      },
+      "source": {
+        "en": "Art of Discovery",
+        "ar": "فن الاكتشاف"
+      }
+    },
+    {
+      "id": "disc-personalization",
+      "keywords_en": "personalization personalize mirror tone tailor lifestyle emotional cues browsing treat make them feel",
+      "keywords_ar": "تخصيص نبرة نمط حياة إشارات عاطفية أتفرج تدلل شعور عميل عملاء",
+      "en": {
+        "title": "Power of personalization",
+        "body": "Personalization turns a casual visit into a memorable experience. Four ways: mirror their tone and pace; stay curious even at \"just browsing\" (\"Anything you're treating yourself to today?\"); tailor recommendations to their world — lifestyle, mood, occasion; and use emotional cues in your language (\"This feels like something you'd love for unwinding after a long day\"). Reflect who they are, don't push what you like."
+      },
+      "ar": {
+        "title": "قوة التخصيص",
+        "body": "التخصيص يحوّل زيارة عابرة إلى تجربة تُذكر. أربع طرق: جارِ نبرتهم وإيقاعهم؛ ابقَ فضولياً حتى عند «أتفرّج فقط» («هل من شيء تدلّل به نفسك اليوم؟»)؛ خصّص التوصية لعالمهم — نمط الحياة والمزاج والمناسبة؛ واستخدم إشارات عاطفية («يبدو أنك ستحب هذا للاسترخاء بعد يوم طويل»). اعكس شخصيتهم لا تفرض ما يعجبك."
+      },
+      "source": {
+        "en": "Art of Discovery",
+        "ar": "فن الاكتشاف"
+      }
+    },
+    {
+      "id": "disc-resistance",
+      "keywords_en": "resistance just looking hesitant rejection space rephrase not pushy handle objection browsing wall cold",
+      "keywords_ar": "مقاومة أتفرج تردد رفض مساحة إعادة صياغة ملح اعتراض جدار عميل عملاء",
+      "en": {
+        "title": "Handling resistance (\"I'm just looking\")",
+        "body": "When a customer says \"I'm just looking\" or gives short answers, it's not rejection — it's hesitation. Don't break the wall, walk gently around it: rephrase your question more softly, give them space, or share a warm line like \"This one's been a favourite for people looking to unwind after work.\" Stay present, not pushy. Example: \"Of course — take your time! Anything you're in the mood for today?\""
+      },
+      "ar": {
+        "title": "التعامل مع التردّد («أنا فقط أتفرّج»)",
+        "body": "حين يقول الزبون «أنا فقط أتفرّج» أو يعطي إجابات قصيرة، فهذا ليس رفضاً بل تردّد. لا تكسر الجدار بل مُرّ حوله بلطف: أعد صياغة سؤالك بنعومة، أو امنحه مساحة، أو شارك عبارة دافئة مثل «هذا من المفضّل لمن يريد الاسترخاء بعد العمل». ابقَ حاضراً لا ملحّاً. مثال: «بالطبع — خذ وقتك! هل من شيء يناسب مزاجك اليوم؟»"
+      },
+      "source": {
+        "en": "Art of Discovery",
+        "ar": "فن الاكتشاف"
+      }
+    },
+    {
+      "id": "story-what",
+      "keywords_en": "product storytelling story what is features feeling picture life sell think about it take it",
+      "keywords_ar": "سرد قصة المنتج ما هو مزايا شعور تخيل حياة بيع عميل عملاء",
+      "en": {
+        "title": "What is product storytelling?",
+        "body": "Product storytelling means presenting a product through a short story and a moment, not a list of features. You bring it to life so the customer pictures it in their day. Customers don't fall in love with features — they fall in love with what life feels like with the product. A good story turns \"I'll think about it\" into \"I'll take it.\""
+      },
+      "ar": {
+        "title": "ما هو سرد قصة المنتج؟",
+        "body": "سرد قصة المنتج يعني تقديم المنتج عبر قصة قصيرة ولحظة، لا قائمة مزايا. تجعله حيّاً ليتخيّله الزبون في يومه. الزبائن لا يعشقون المزايا — بل يعشقون شعور الحياة مع المنتج. القصة الجيدة تحوّل «سأفكّر بالأمر» إلى «سآخذه»."
+      },
+      "source": {
+        "en": "Art of Product Storytelling",
+        "ar": "فن سرد قصة المنتج"
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/273549/art-of-product-storytelling-maclex-d-costa-h-m",
+          "title": {
+            "en": "Art of Product Storytelling — Maclex D'Costa (H&M)",
+            "ar": "فن سرد قصة المنتج — ماكليكس دي كوستا (إتش آند إم)"
+          }
+        },
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/276578/art-of-product-storytelling",
+          "title": {
+            "en": "Art of Product Storytelling",
+            "ar": "فن سرد قصة المنتج"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/267831/m4-art-of-product-storytelling?channelId=230797"
+    },
+    {
+      "id": "story-why",
+      "keywords_en": "why stories sell attention feeling picture conversion basket loyalty scene maybe later take it",
+      "keywords_ar": "لماذا القصص تبيع انتباه مشاعر تخيل تحويل سلة ولاء مشهد عميل عملاء",
+      "en": {
+        "title": "Why stories sell",
+        "body": "A quick scene grabs attention better than a spec (\"Picture stepping out after work in this top that breathes the heat away\"). Stories create feelings, and feelings drive choices; they help customers picture the product in their life, and they move people from \"maybe later\" to \"I'll take it.\" Stories lift conversion, basket size, and loyalty."
+      },
+      "ar": {
+        "title": "لماذا القصص تبيع",
+        "body": "المشهد السريع يجذب الانتباه أكثر من المواصفة («تخيّل خروجك بعد العمل بهذا القميص الذي يطرد الحر»). القصص تصنع مشاعر، والمشاعر تقود القرارات؛ وتساعد الزبون على تخيّل المنتج في حياته، وتنقله من «ربما لاحقاً» إلى «سآخذه». القصص ترفع التحويل وحجم السلة والولاء."
+      },
+      "source": {
+        "en": "Art of Product Storytelling",
+        "ar": "فن سرد قصة المنتج"
+      }
+    },
+    {
+      "id": "story-formula",
+      "keywords_en": "story formula moment sensory feel words personal tie close scene example how to tell",
+      "keywords_ar": "صيغة قصة لحظة حسي كلمات رابط شخصي مشهد مثال كيف عميل عملاء",
+      "en": {
+        "title": "The storytelling formula",
+        "body": "Use a simple four-part formula: Moment + simple sensory \"feel-it\" words + a personal tie-in + close with a scene they can live today. Example — instead of \"linen dress, breathable fabric,\" say: \"This linen dress is your easy win for warm days — light on the skin, easy to move in, perfect for chilly AC moments. You'll wear it from lunch to late coffee and still feel fresh.\""
+      },
+      "ar": {
+        "title": "صيغة سرد القصة",
+        "body": "استخدم صيغة بسيطة من أربعة أجزاء: لحظة + كلمات حسّية «تُشعرك» بسيطة + رابط شخصي + الختام بمشهد يعيشونه اليوم. مثال — بدل «فستان كتّان، قماش يتنفّس» قل: «هذا الفستان الكتّاني خيارك السهل للأيام الحارة — خفيف على البشرة، مريح في الحركة، مثالي لأجواء التكييف الباردة. سترتدينه من الغداء إلى قهوة المساء وتبقين منتعشة.»"
+      },
+      "source": {
+        "en": "Art of Product Storytelling",
+        "ar": "فن سرد قصة المنتج"
+      }
+    },
+    {
+      "id": "rec-why",
+      "keywords_en": "elevated recommendation add on why important atv ipt expertise trust upsell complete experience",
+      "keywords_ar": "توصية إضافة لماذا متوسط الفاتورة قطع خبرة ثقة تجربة عميل عملاء",
+      "en": {
+        "title": "Why elevated recommendations matter",
+        "body": "A good recommendation shows you understand the customer and turns a single purchase into a complete experience. Smart add-ons build trust, not pressure — you're showing care and expertise, not pushing. Done consistently, it lifts service quality and store results: better experiences, higher ATV and stronger IPT, because customers trust you more."
+      },
+      "ar": {
+        "title": "لماذا التوصية المتقنة مهمة",
+        "body": "التوصية الجيدة تُظهر أنك فهمت الزبون، وتحوّل عملية شراء واحدة إلى تجربة متكاملة. الإضافات الذكية تبني الثقة لا الضغط — فأنت تُظهر الاهتمام والخبرة لا الإلحاح. وحين تلتزم بها ترتفع جودة الخدمة ونتائج المتجر: تجربة أفضل، ومتوسط فاتورة أعلى، وعدد قطع أكبر، لأن الزبون يثق بك أكثر."
+      },
+      "source": {
+        "en": "Art of Elevated Recommendation",
+        "ar": "فن التوصية المتقنة"
+      }
+    },
+    {
+      "id": "rec-method",
+      "keywords_en": "spot link suggest confirm method steps recommend add on how technique complete pair matching",
+      "keywords_ar": "لاحظ اربط اقترح أكد طريقة خطوات توصية كيف يكمل مطابق عميل عملاء",
+      "en": {
+        "title": "Spot, Link, Suggest, Confirm",
+        "body": "Recommend naturally with four small steps. Spot: see what they're buying and find a clue (holding perfume? maybe matching lotion). Link: connect it to something they said or liked (\"You said she likes floral scents — this matches perfectly\"). Suggest: offer one product that completes it (\"Most people pair this candle with the matching diffuser so the scent lasts longer\"). Confirm: ask kindly (\"Would you like to add that too?\")."
+      },
+      "ar": {
+        "title": "لاحِظ، اربط، اقترح، أكّد",
+        "body": "أوصِ بطريقة طبيعية عبر أربع خطوات صغيرة. لاحِظ: انظر ما يشتريه وابحث عن إشارة (يحمل عطراً؟ ربما لوشن بنفس العطر). اربط: صِله بشيء قاله أو أحبّه («قلت إنها تحب العطور الزهرية — هذا يناسبها تماماً»). اقترح: قدّم منتجاً واحداً يُكمّله («معظم الناس يقرنون هذه الشمعة بالموزّع المطابق ليدوم العطر»). أكّد: اسأل بلطف («هل تودّ إضافته أيضاً؟»)."
+      },
+      "source": {
+        "en": "Art of Elevated Recommendation",
+        "ar": "فن التوصية المتقنة"
+      }
+    },
+    {
+      "id": "rec-natural",
+      "keywords_en": "natural effortless conversational not pushy pitch friend link empower awkward sound sales talk",
+      "keywords_ar": "طبيعي عفوي حوار ملح خطبة صديق ربط قرار محرج عميل عملاء",
+      "en": {
+        "title": "Making it sound effortless",
+        "body": "The best recommendations come from a real conversation, not a pitch. Speak like a person, keep it short and clear, and share tips as if helping a friend. Always link the suggestion back to what they already chose so it stays relevant, and let the choice feel like theirs. Say \"A lot of people who love what you picked also enjoy this one\" — not \"This is the best, you should get it.\""
+      },
+      "ar": {
+        "title": "اجعلها تبدو عفوية",
+        "body": "أفضل التوصيات تأتي من حوار حقيقي لا من خطبة بيع. تكلّم كإنسان، وأبقِ الكلام قصيراً واضحاً، وشارك النصيحة كأنك تساعد صديقاً. اربط الاقتراح دائماً بما اختاره ليبقى ملائماً، واجعل القرار يبدو قراره هو. قل «كثير ممن أحبّوا ما اخترته يحبّون هذا أيضاً» — لا «هذا الأفضل، عليك أخذه»."
+      },
+      "source": {
+        "en": "Art of Elevated Recommendation",
+        "ar": "فن التوصية المتقنة"
+      }
+    },
+    {
+      "id": "cr-intro",
+      "keywords_en": "conflict resolution complaint upset angry customer difficult situation overview why loyal",
+      "keywords_ar": "حل خلاف نزاع شكوى زبون غاضب منزعج موقف صعب لماذا وفي عميل عملاء",
+      "en": {
+        "title": "Handling conflict & complaints",
+        "body": "Every difficult situation is a chance to create a loyal customer. Customers rarely remember a perfect transaction, but they always remember how they were treated when something went wrong. Conflict resolution isn't about winning an argument — it's about understanding, resolving, and leaving the customer feeling respected."
+      },
+      "ar": {
+        "title": "التعامل مع الخلافات والشكاوى",
+        "body": "كل موقف صعب فرصة لكسب زبون وفيّ. نادراً ما يتذكّر الزبائن معاملة مثالية، لكنهم دائماً يتذكّرون كيف عوملوا حين حدث خطأ. حل الخلاف ليس ربح الجدال — بل الفهم والحل وترك الزبون يشعر بالاحترام."
+      },
+      "source": {
+        "en": "Conflict Resolution",
+        "ar": "حل الخلافات والتعامل مع الشكاوى"
+      }
+    },
+    {
+      "id": "cr-understand",
+      "keywords_en": "understand listen first heard acknowledge feelings interrupt receipt exchange calm before solve",
+      "keywords_ar": "فهم إصغاء مسموع اعتراف شعور مقاطعة فاتورة استبدال قبل الحل هدوء عميل عملاء",
+      "en": {
+        "title": "Understand before you solve",
+        "body": "Customers want to feel heard before they get answers. Before explaining policy or offering solutions: listen without interrupting, keep positive body language, let them finish, and acknowledge how they feel. People calm down when they believe someone genuinely understands them. Example: if a customer is upset they can't exchange without a receipt, listen and acknowledge the frustration first, then discuss options."
+      },
+      "ar": {
+        "title": "افهم قبل أن تحُل",
+        "body": "يريد الزبون أن يشعر بأنه مسموع قبل أن يحصل على إجابات. قبل شرح السياسة أو تقديم الحلول: أصغِ دون مقاطعة، وحافظ على لغة جسد إيجابية، ودعه يُكمل، واعترف بشعوره. يهدأ الناس حين يشعرون أن أحداً يفهمهم حقاً. مثال: إذا انزعج زبون لعدم إمكان الاستبدال دون فاتورة، أصغِ واعترف بإحباطه أولاً ثم ناقش الخيارات."
+      },
+      "source": {
+        "en": "Conflict Resolution",
+        "ar": "حل الخلافات والتعامل مع الشكاوى"
+      }
+    },
+    {
+      "id": "cr-calm",
+      "keywords_en": "stay calm pressure angry raised voice tone defensive argue blame frustrated shouting control emotions",
+      "keywords_ar": "هدوء ضغط غاضب صوت مرتفع نبرة دفاعي جدال لوم محبط صراخ عميل عملاء",
+      "en": {
+        "title": "Stay calm under pressure",
+        "body": "A customer's emotions should never control yours. When someone raises their voice, keep your tone calm, speak slowly and clearly, avoid defensive language, and never argue or blame — focus on solving, not proving who's right. Say things like \"I understand why this is frustrating,\" \"Let's see what we can do,\" and \"I'll help you find the best solution.\""
+      },
+      "ar": {
+        "title": "ابقَ هادئاً تحت الضغط",
+        "body": "لا يجب أن تتحكّم مشاعر الزبون بمشاعرك. حين يرفع أحدهم صوته، حافظ على هدوء نبرتك، وتحدّث ببطء ووضوح، وتجنّب اللغة الدفاعية، ولا تجادل أو تلُم — ركّز على الحل لا على إثبات من على حق. قل عبارات مثل «أتفهّم لماذا هذا محبط» و«لنرَ ما يمكننا فعله» و«سأساعدك في إيجاد أفضل حل»."
+      },
+      "source": {
+        "en": "Conflict Resolution",
+        "ar": "حل الخلافات والتعامل مع الشكاوى"
+      }
+    },
+    {
+      "id": "cr-empathy",
+      "keywords_en": "empathy genuine respect disappointing not our fault calm down feel understood recognise experience",
+      "keywords_ar": "تعاطف احترام مخيب ليس خطأنا اهدأ فهم اعتراف تجربة عميل عملاء",
+      "en": {
+        "title": "Show genuine empathy",
+        "body": "Empathy doesn't mean agreeing with every complaint — it means recognising the customer's experience. Instead of \"Calm down,\" say \"I can see why that would be disappointing.\" Instead of \"That's not our fault,\" say \"Let's work together to make this right.\" The goal is to make the customer feel respected."
+      },
+      "ar": {
+        "title": "أظهر تعاطفاً صادقاً",
+        "body": "التعاطف لا يعني الموافقة على كل شكوى — بل الاعتراف بتجربة الزبون. بدل «اهدأ» قل «أفهم لماذا قد يكون هذا مخيّباً». وبدل «هذا ليس خطأنا» قل «لنعمل معاً لإصلاح الأمر». الهدف أن يشعر الزبون بالاحترام."
+      },
+      "source": {
+        "en": "Conflict Resolution",
+        "ar": "حل الخلافات والتعامل مع الشكاوى"
+      }
+    },
+    {
+      "id": "cr-solutions",
+      "keywords_en": "solutions not excuses alternatives options ownership i dont know out of stock another store promise unavailable",
+      "keywords_ar": "حلول أعذار بدائل خيارات لا أعرف غير متوفر فرع آخر وعد عميل عملاء",
+      "en": {
+        "title": "Offer solutions, not excuses",
+        "body": "Whenever possible, offer available alternatives, explain options clearly, and keep ownership of the conversation. Avoid passing customers between colleagues, saying \"I don't know,\" or making promises you can't keep. If you don't know the answer, say \"I'll find out for you.\" Example: if a product is unavailable, check whether another Alshaya store has it or suggest a suitable alternative."
+      },
+      "ar": {
+        "title": "قدّم حلولاً لا أعذاراً",
+        "body": "كلما أمكن، اعرض بدائل متاحة، واشرح الخيارات بوضوح، وابقَ مالكاً للحوار. تجنّب تمرير الزبون بين الزملاء، أو قول «لا أعرف»، أو قطع وعود لا يمكنك الوفاء بها. إن لم تعرف الإجابة قل «سأعرف لك ذلك». مثال: إن كان المنتج غير متوفر، تحقّق إن كان متاحاً في فرع آخر لألشايا أو اقترح بديلاً مناسباً."
+      },
+      "source": {
+        "en": "Conflict Resolution",
+        "ar": "حل الخلافات والتعامل مع الشكاوى"
+      }
+    },
+    {
+      "id": "cr-recover",
+      "keywords_en": "recover recovery apologise apology mistake fix thank valued loyal formula service recovery",
+      "keywords_ar": "معالجة استرداد اعتذار خطأ حل شكر تقدير ولاء صيغة عميل عملاء",
+      "en": {
+        "title": "Recover the experience",
+        "body": "Mistakes happen — what matters is how quickly and professionally you recover. A great recovery: apologise sincerely, solve the issue, thank the customer for their patience, and leave them feeling valued. Customers often become more loyal after excellent service recovery than after a problem-free visit. The formula: Listen → Empathise → Solve → Confirm satisfaction → Thank the customer."
+      },
+      "ar": {
+        "title": "استعِد التجربة",
+        "body": "الأخطاء تحدث — والمهم سرعة ومهنية معالجتها. المعالجة الجيدة: اعتذر بصدق، وحُل المشكلة، واشكر الزبون على صبره، واتركه يشعر بالتقدير. غالباً ما يصبح الزبون أكثر ولاءً بعد معالجة خدمة ممتازة مقارنة بزيارة بلا مشاكل. الصيغة: أصغِ ← تعاطف ← حُل ← تأكّد من الرضا ← اشكر الزبون."
+      },
+      "source": {
+        "en": "Conflict Resolution",
+        "ar": "حل الخلافات والتعامل مع الشكاوى"
+      }
+    },
+    {
+      "id": "cr-escalate",
+      "keywords_en": "escalate escalation manager approval safety security when to escalate supervisor help policy",
+      "keywords_ar": "تصعيد مدير موافقة سلامة أمن مشرف مساعدة متى سياسة عميل عملاء",
+      "en": {
+        "title": "Know when to escalate",
+        "body": "Some situations need extra support. Escalate when the customer requests a manager, when policy requires approval, when safety or security is involved, when the situation keeps escalating, or when you can't confidently resolve it. Escalating isn't failing — it's making sure the customer gets the right support."
+      },
+      "ar": {
+        "title": "اعرف متى تُصعّد الأمر",
+        "body": "بعض المواقف تحتاج دعماً إضافياً. صعّد الأمر حين يطلب الزبون المدير، أو حين تتطلّب السياسة موافقة، أو حين تتعلّق المسألة بالسلامة أو الأمن، أو حين يستمر الموقف بالتصاعد، أو حين لا تستطيع حلّه بثقة. التصعيد ليس فشلاً — بل ضمان حصول الزبون على الدعم المناسب."
+      },
+      "source": {
+        "en": "Conflict Resolution",
+        "ar": "حل الخلافات والتعامل مع الشكاوى"
+      }
+    },
+    {
+      "id": "cl-what",
+      "keywords_en": "closing sale what means natural conclusion pressured confident yes helping",
+      "keywords_ar": "إتمام بيع ما يعني خاتمة طبيعية ضغط ثقة نعم مساعدة عميل عملاء",
+      "en": {
+        "title": "What closing the sale really means",
+        "body": "Closing is the natural conclusion of a great experience — it happens when the customer feels understood, their questions are answered, they trust your recommendation, and they feel confident deciding. It should never feel forced. They should leave thinking \"that was exactly what I needed,\" not \"I felt pressured.\" Great selling always begins with helping."
+      },
+      "ar": {
+        "title": "ما معنى إتمام البيع حقاً",
+        "body": "إتمام البيع هو الخاتمة الطبيعية لتجربة رائعة — يحدث حين يشعر الزبون بأنه مفهوم، وتُجاب أسئلته، ويثق بتوصيتك، ويشعر بالثقة في قراره. يجب ألا يبدو مفروضاً أبداً. يجب أن يغادر وهو يفكّر «هذا بالضبط ما احتجته» لا «شعرت بأنني مضغوط». البيع الرائع يبدأ دائماً بالمساعدة."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "cl-journey",
+      "keywords_en": "close starts before till checkout journey earlier welcome questions listening easy decision",
+      "keywords_ar": "إتمام يبدأ قبل الصندوق رحلة مبكر ترحيب أسئلة إصغاء قرار سهل عميل عملاء",
+      "en": {
+        "title": "The close doesn't start at the till",
+        "body": "Closing begins much earlier than checkout. Every stage contributes: a warm welcome, thoughtful questions, careful listening, understanding needs, demonstrating products, personalised recommendations, and building confidence. By the time the customer reaches the till, the decision should already feel easy."
+      },
+      "ar": {
+        "title": "الإتمام لا يبدأ عند الصندوق",
+        "body": "الإتمام يبدأ قبل الدفع بكثير. كل مرحلة تساهم: ترحيب دافئ، أسئلة مدروسة، إصغاء منتبه، فهم الاحتياج، عرض المنتجات، توصيات مخصّصة، وبناء الثقة. وحين يصل الزبون إلى الصندوق يكون القرار قد أصبح سهلاً."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "cl-signals",
+      "keywords_en": "buying signals recognise ready to buy questions size colour behaviour holding returning display trying",
+      "keywords_ar": "إشارات الشراء تعرف جاهز مقاس لون سلوك يحمل يعود يجرب عميل عملاء",
+      "en": {
+        "title": "Recognising buying signals",
+        "body": "Buying signals appear before the customer says \"I'll take it.\" Questions: does this come in another size or colour, how do I care for it, what's the difference between these two. Behaviour: looking at the product repeatedly, trying it more than once, holding it while browsing, asking someone's opinion, returning to the same display. These moments call for reassurance — not more information."
+      },
+      "ar": {
+        "title": "التعرّف على إشارات الشراء",
+        "body": "تظهر إشارات الشراء قبل أن يقول الزبون «سآخذه». الأسئلة: هل يتوفر بمقاس أو لون آخر، كيف أعتني به، ما الفرق بين هذين. السلوك: النظر للمنتج مراراً، تجربته أكثر من مرة، حمله أثناء التصفّح، سؤال رأي شخص آخر، العودة لنفس العرض. هذه اللحظات تحتاج طمأنة — لا مزيداً من المعلومات."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "cl-value",
+      "keywords_en": "upselling adding value expensive durable quality convenience pressure resistance costs more",
+      "keywords_ar": "بيع أعلى قيمة مضافة غالي متانة جودة راحة ضغط مقاومة يكلف أكثر عميل عملاء",
+      "en": {
+        "title": "Upselling vs adding value",
+        "body": "Customers recognise when they're being sold to — and when someone genuinely wants to help. Upselling becomes valuable when it improves quality, saves time, adds convenience, extends product life, or creates a better experience. Instead of \"this one costs more,\" explain: \"many customers choose this option because it's more durable and offers additional features that suit everyday use.\" Value creates confidence; pressure creates resistance."
+      },
+      "ar": {
+        "title": "البيع الأعلى مقابل إضافة القيمة",
+        "body": "يميّز الزبون حين يُباع له، ويميّز حين يريد أحدهم مساعدته فعلاً. البيع الأعلى يصبح قيّماً حين يحسّن الجودة أو يوفّر الوقت أو يزيد الراحة أو يطيل عمر المنتج أو يصنع تجربة أفضل. بدل «هذا أغلى» اشرح: «كثير من الزبائن يختارون هذا لأنه أمتن ويوفّر مزايا إضافية تناسب الاستخدام اليومي». القيمة تصنع الثقة، والضغط يصنع المقاومة."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "cl-hesitation",
+      "keywords_en": "hesitation hesitant not no price quality size fit colour value time reassurance rushing patience",
+      "keywords_ar": "تردد ليس رفضاً سعر جودة مقاس لون قيمة وقت طمأنة تسرع صبر عميل عملاء",
+      "en": {
+        "title": "Handling hesitation",
+        "body": "Not every hesitation means \"no.\" Sometimes customers just need more information, more confidence, more time, or reassurance. Common concerns: price, quality, size or fit, colour, suitability, value for money. Understand the concern before offering solutions, and avoid rushing the customer — patience often builds confidence."
+      },
+      "ar": {
+        "title": "التعامل مع التردّد",
+        "body": "ليس كل تردّد يعني «لا». أحياناً يحتاج الزبون فقط معلومات أكثر، أو ثقة أكبر، أو وقتاً، أو طمأنة. المخاوف الشائعة: السعر، الجودة، المقاس، اللون، الملاءمة، القيمة مقابل المال. افهم المخاوف قبل تقديم الحلول، وتجنّب استعجال الزبون — الصبر غالباً يبني الثقة."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "cl-confidence",
+      "keywords_en": "confidence without pressure guidance persuasion you should buy everyone buys regret suits your needs",
+      "keywords_ar": "ثقة دون ضغط إرشاد إقناع عليك أن تشتري الجميع يشتري ستندم يناسب احتياجك عميل عملاء",
+      "en": {
+        "title": "Confidence without pressure",
+        "body": "Confidence comes from product knowledge, calm communication, positive body language, genuine recommendations and active listening. Pressure sounds like \"you should buy it today,\" \"everyone buys this,\" \"you'll regret it.\" Confidence sounds like: \"based on what you've shared, I think this would suit your needs very well.\" Customers prefer guidance over persuasion."
+      },
+      "ar": {
+        "title": "ثقة بلا ضغط",
+        "body": "الثقة تأتي من معرفة المنتج، والتواصل الهادئ، ولغة الجسد الإيجابية، والتوصيات الصادقة، والإصغاء الفعّال. الضغط يبدو هكذا: «عليك شراؤه اليوم»، «الجميع يشتري هذا»، «ستندم». أما الثقة فتبدو: «بناءً على ما ذكرته، أعتقد أن هذا يناسب احتياجك تماماً». الزبائن يفضّلون الإرشاد على الإقناع."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "cl-time",
+      "keywords_en": "need time not ready today decide later leave positively invite return thank future visit",
+      "keywords_ar": "يحتاج وقتاً غير جاهز لاحقاً قرار يغادر بإيجابية دعوة للعودة شكر زيارة عميل عملاء",
+      "en": {
+        "title": "When customers need time",
+        "body": "Some customers aren't ready to decide immediately — that's perfectly normal. A positive experience today can become a purchase tomorrow. Leave the conversation positively: thank them for visiting, invite them to return, offer additional help if needed, and leave a lasting positive impression. Every interaction builds the relationship."
+      },
+      "ar": {
+        "title": "حين يحتاج الزبون وقتاً",
+        "body": "بعض الزبائن ليسوا جاهزين للقرار فوراً — وهذا طبيعي تماماً. تجربة إيجابية اليوم قد تصبح عملية شراء غداً. أنهِ الحوار بإيجابية: اشكره على الزيارة، وادعُه للعودة، واعرض مساعدة إضافية، واترك انطباعاً إيجابياً يدوم. كل تفاعل يبني العلاقة."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "cl-mistakes",
+      "keywords_en": "common mistakes avoid talking more than listening jargon assumptions rushing overwhelming options declined",
+      "keywords_ar": "أخطاء شائعة تجنب الكلام أكثر من الإصغاء مصطلحات افتراضات استعجال خيارات كثيرة رفض عميل عملاء",
+      "en": {
+        "title": "Common closing mistakes",
+        "body": "Avoid: talking more than listening; recommending before understanding needs; overwhelming customers with too many options; focusing only on price; using jargon instead of simple language; making assumptions; rushing the decision; ignoring hesitation; continuing to sell after the customer has clearly declined; and forgetting to thank the customer, whether or not they bought."
+      },
+      "ar": {
+        "title": "أخطاء شائعة عند الإتمام",
+        "body": "تجنّب: الكلام أكثر من الإصغاء؛ التوصية قبل فهم الاحتياج؛ إغراق الزبون بخيارات كثيرة؛ التركيز على السعر فقط؛ استخدام مصطلحات معقّدة بدل لغة بسيطة؛ الافتراضات؛ استعجال القرار؛ تجاهل التردّد؛ الاستمرار في البيع بعد رفض واضح؛ ونسيان شكر الزبون سواء اشترى أم لا."
+      },
+      "source": {
+        "en": "Closing the Sale",
+        "ar": "إتمام البيع"
+      }
+    },
+    {
+      "id": "ck-why",
+      "keywords_en": "checkout why matters last impression final moments remember leave loyalty till",
+      "keywords_ar": "الدفع لماذا مهم الانطباع الأخير لحظات أخيرة يتذكر يغادر ولاء صندوق عميل عملاء",
+      "en": {
+        "title": "Why the checkout matters",
+        "body": "Customers remember three moments most: their first impression, how they were treated during the visit, and how they felt when they left. The checkout is your final chance to shape that memory. A positive ending strengthens trust, encourages repeat visits, increases loyalty, creates positive word of mouth, and reinforces confidence in the brand. Great experiences finish as strongly as they begin."
+      },
+      "ar": {
+        "title": "لماذا لحظة الدفع مهمة",
+        "body": "يتذكّر الزبائن ثلاث لحظات أكثر من غيرها: الانطباع الأول، وكيف عوملوا أثناء الزيارة، وكيف شعروا عند المغادرة. الدفع فرصتك الأخيرة لتشكيل تلك الذاكرة. النهاية الإيجابية تقوّي الثقة، وتشجّع تكرار الزيارة، وترفع الولاء، وتصنع كلاماً إيجابياً، وتعزّز الثقة بالعلامة. التجارب الرائعة تنتهي بقوة كما تبدأ."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-accuracy",
+      "keywords_en": "accuracy accurate scanned quantities prices promotions payment receipt mistakes efficiency first",
+      "keywords_ar": "دقة مسح كميات أسعار عروض دفع إيصال أخطاء كفاءة عميل عملاء",
+      "en": {
+        "title": "Accuracy creates confidence",
+        "body": "Customers expect every transaction to be accurate. Check the correct products are scanned, quantities are right, prices match expectations, promotions are applied, payment is processed correctly, and receipts are provided. Working efficiently matters, but accuracy always comes first — correcting mistakes after payment creates frustration for everyone."
+      },
+      "ar": {
+        "title": "الدقة تصنع الثقة",
+        "body": "يتوقّع الزبائن دقة كل معاملة. تأكّد من مسح المنتجات الصحيحة، وصحة الكميات، ومطابقة الأسعار للتوقّعات، وتطبيق العروض، ومعالجة الدفع بشكل صحيح، وتسليم الإيصال. الكفاءة مهمة، لكن الدقة تأتي أولاً دائماً — تصحيح الأخطاء بعد الدفع يسبّب إحباطاً للجميع."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-efficiency",
+      "keywords_en": "efficiency without rushed fast pace attentive hurried professional organised friendly hospitality",
+      "keywords_ar": "كفاءة دون استعجال سريع إيقاع منتبه مهني منظم ودود ضيافة عميل عملاء",
+      "en": {
+        "title": "Efficiency without feeling rushed",
+        "body": "A fast checkout is appreciated — a rushed customer experience is not. Work efficiently while staying attentive. Customers should never feel hurried through the transaction. Aim for a pace that feels professional, organised, friendly and confident. Efficiency and hospitality should always go together."
+      },
+      "ar": {
+        "title": "كفاءة دون شعور بالاستعجال",
+        "body": "الدفع السريع محل تقدير — أما التجربة المستعجلة فلا. اعمل بكفاءة مع بقائك منتبهاً. يجب ألا يشعر الزبون بأنه يُستعجل خلال المعاملة. اجعل الإيقاع مهنياً ومنظّماً وودوداً وواثقاً. الكفاءة والضيافة يجب أن تسيرا معاً دائماً."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-aura",
+      "keywords_en": "aura loyalty introduce naturally points rewards member benefits do you have aura sign up collect",
+      "keywords_ar": "أورا ولاء تقديم طبيعي نقاط مكافآت عضو مزايا هل لديك اشتراك جمع عميل عملاء",
+      "en": {
+        "title": "Introducing AURA naturally",
+        "body": "Every eligible customer should get the chance to enjoy AURA. Rather than asking \"Do you have AURA?\", create curiosity by highlighting value: \"Are you already enjoying the benefits of AURA?\" or \"May I help you collect your AURA points today?\" or \"If you're not yet a member, I'd be happy to explain how you can enjoy exclusive rewards across Alshaya brands.\" It should feel like offering a benefit — not asking another question."
+      },
+      "ar": {
+        "title": "تقديم أورا بشكل طبيعي",
+        "body": "كل زبون مؤهّل يستحق فرصة الاستفادة من أورا. بدل سؤال «هل لديك أورا؟» أثر الفضول بإبراز القيمة: «هل تستمتع بالفعل بمزايا أورا؟» أو «هل أساعدك في جمع نقاط أورا اليوم؟» أو «إن لم تكن عضواً بعد، يسعدني أن أشرح كيف تحصل على مكافآت حصرية عبر علامات ألشايا». يجب أن يبدو الأمر عرضاً لميزة — لا سؤالاً إضافياً."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-aura-benefits",
+      "keywords_en": "aura benefits points redeem exclusive offers personalised birthday rewards early access value",
+      "keywords_ar": "مزايا أورا نقاط استبدال عروض حصرية مخصصة عيد ميلاد مكافآت وصول مبكر عميل عملاء",
+      "en": {
+        "title": "Helping customers discover AURA",
+        "body": "Many customers don't realise how much value AURA offers. Depending on the programme and eligibility, you can mention: collecting points on purchases, redeeming rewards across participating Alshaya brands, exclusive member offers, personalised promotions, birthday rewards and surprises, early access to selected campaigns, and a more personalised shopping journey. The aim isn't sign-ups — it's making customers aware of benefits that genuinely improve their future shopping."
+      },
+      "ar": {
+        "title": "مساعدة الزبائن على اكتشاف أورا",
+        "body": "كثير من الزبائن لا يدركون قيمة أورا. حسب البرنامج والأهلية يمكنك ذكر: جمع النقاط على المشتريات، واستبدال المكافآت عبر علامات ألشايا المشاركة، وعروض حصرية للأعضاء، وترويجات مخصّصة، ومكافآت عيد الميلاد والمفاجآت، والوصول المبكر لحملات مختارة، ورحلة تسوّق أكثر تخصيصاً. الهدف ليس زيادة الاشتراكات — بل توعية الزبون بمزايا تحسّن تسوّقه مستقبلاً."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-queues",
+      "keywords_en": "queue queues waiting busy line manage calm organised acknowledge eye contact support patience",
+      "keywords_ar": "طابور انتظار ازدحام صف إدارة هدوء تنظيم تواصل بصري دعم صبر عميل عملاء",
+      "en": {
+        "title": "Managing queues professionally",
+        "body": "Busy stores create busy checkouts, and customers understand waiting happens — what matters is how the wait is managed. Reduce frustration by staying calm and positive, keeping the checkout area organised, acknowledging waiting customers with eye contact or a smile, calling for support when appropriate, and keeping conversations focused while still being welcoming. Customers are more patient when they know they're being looked after."
+      },
+      "ar": {
+        "title": "إدارة الطوابير باحترافية",
+        "body": "المتاجر المزدحمة تعني صناديق مزدحمة، والزبائن يتفهّمون الانتظار — المهم كيف يُدار. قلّل الإحباط بالبقاء هادئاً وإيجابياً، وإبقاء منطقة الدفع منظّمة، وملاحظة المنتظرين بنظرة أو ابتسامة، وطلب الدعم عند الحاجة، وإبقاء الحوار مركّزاً مع الحفاظ على الترحيب. الزبائن أكثر صبراً حين يعلمون أنهم موضع اهتمام."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-packaging",
+      "keywords_en": "packaging bags folding fragile gift wrap presentation care details protecting",
+      "keywords_ar": "تغليف أكياس طي هش هدية عرض عناية تفاصيل حماية عميل عملاء",
+      "en": {
+        "title": "Packaging is part of the experience",
+        "body": "Presentation reflects the quality of the brand. Take care folding garments neatly, protecting fragile items, organising multiple purchases, preparing gift items where available, and presenting shopping bags professionally. Customers notice the details — care shown during packaging communicates respect for both the product and the customer."
+      },
+      "ar": {
+        "title": "التغليف جزء من التجربة",
+        "body": "العرض يعكس جودة العلامة. اعتنِ بطيّ الملابس بترتيب، وحماية القطع الهشّة، وتنظيم المشتريات المتعددة، وتجهيز الهدايا حين يتوفر ذلك، وتقديم الأكياس باحترافية. الزبائن يلاحظون التفاصيل — والعناية بالتغليف تعبّر عن احترام المنتج والزبون معاً."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-farewell",
+      "keywords_en": "farewell goodbye ending next thank you enjoy purchase pleasure welcome again lasting words",
+      "keywords_ar": "وداع نهاية التالي شكراً استمتع بمشترياتك سعدنا نرحب مجدداً كلمات أخيرة عميل عملاء",
+      "en": {
+        "title": "Ending every transaction positively",
+        "body": "The final words customers hear often become their lasting memory. Rather than ending with \"Next,\" create a genuine farewell: \"Thank you for shopping with us,\" \"We hope you enjoy your purchase,\" \"It was a pleasure assisting you today,\" \"We look forward to welcoming you again soon,\" \"Have a wonderful day.\" A sincere goodbye completes the customer journey."
+      },
+      "ar": {
+        "title": "أنهِ كل معاملة بإيجابية",
+        "body": "آخر الكلمات التي يسمعها الزبون غالباً ما تصبح ذكراه الباقية. بدل إنهاء الأمر بكلمة «التالي»، اصنع وداعاً صادقاً: «شكراً لتسوّقك معنا»، «نتمنى أن تستمتع بمشترياتك»، «سعدت بخدمتك اليوم»، «نتطلّع للترحيب بك قريباً»، «أتمنى لك يوماً رائعاً». الوداع الصادق يُكمل رحلة الزبون."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "ck-mistakes",
+      "keywords_en": "checkout mistakes avoid payment terminal only distracted colleagues ignoring rushing careless forgetting thank",
+      "keywords_ar": "أخطاء الدفع تجنب جهاز الدفع فقط مشتت زملاء تجاهل استعجال إهمال نسيان الشكر عميل عملاء",
+      "en": {
+        "title": "Common checkout mistakes",
+        "body": "Avoid: focusing only on the payment; speaking to the payment terminal instead of the customer; forgetting to mention relevant benefits such as AURA; rushing because of queues; looking distracted; continuing conversations with colleagues while serving; ignoring waiting customers; handling products carelessly; and forgetting to thank the customer. Small habits make the biggest difference."
+      },
+      "ar": {
+        "title": "أخطاء شائعة عند الدفع",
+        "body": "تجنّب: التركيز على الدفع فقط؛ مخاطبة جهاز الدفع بدل الزبون؛ نسيان ذكر مزايا مهمة مثل أورا؛ الاستعجال بسبب الطابور؛ الظهور بمظهر المشتّت؛ مواصلة الحديث مع الزملاء أثناء الخدمة؛ تجاهل المنتظرين؛ التعامل بإهمال مع المنتجات؛ ونسيان شكر الزبون. العادات الصغيرة تصنع أكبر فرق."
+      },
+      "source": {
+        "en": "The Seamless Checkout",
+        "ar": "الدفع السلس"
+      }
+    },
+    {
+      "id": "li-what",
+      "keywords_en": "lasting impression what is feeling take with them remember welcomed listened respected thanked",
+      "keywords_ar": "انطباع باق ما هو شعور يأخذه معه يتذكر ترحيب إصغاء احترام شكر عميل عملاء",
+      "en": {
+        "title": "What is a lasting impression?",
+        "body": "A lasting impression is the feeling customers take with them after leaving the store. It's not created by expensive products or offers — it's created by how customers are treated. They remember feeling genuinely welcomed, being listened to, receiving helpful advice, feeling respected, being thanked sincerely, and leaving confident in their purchase. When customers leave feeling good, they're far more likely to return."
+      },
+      "ar": {
+        "title": "ما هو الانطباع الباقي؟",
+        "body": "الانطباع الباقي هو الشعور الذي يحمله الزبون معه بعد مغادرة المتجر. لا تصنعه المنتجات الغالية ولا العروض — بل طريقة معاملة الزبون. هو يتذكّر شعوره بالترحيب الصادق، وأنه أُصغي إليه، وأنه تلقّى نصيحة مفيدة، وأنه احتُرم، وأنه شُكر بصدق، وأنه غادر واثقاً بشرائه. حين يغادر الزبون بشعور جيد يعود غالباً."
+      },
+      "source": {
+        "en": "The Power of Lasting Impressions",
+        "ar": "قوة الانطباعات الباقية"
+      }
+    },
+    {
+      "id": "li-feel",
+      "keywords_en": "remember how you made them feel emotions comfortable understood appreciated recognised loyalty discounts",
+      "keywords_ar": "يتذكرون كيف جعلتهم يشعرون مشاعر مرتاح مفهوم مقدر ولاء خصومات عميل عملاء",
+      "en": {
+        "title": "People remember how you made them feel",
+        "body": "Products solve needs; experiences create emotions. Customers often return because they remember feeling comfortable, understood, appreciated, confident and recognised. Positive emotions create stronger loyalty than discounts alone — and every conversation is an opportunity to create those emotions."
+      },
+      "ar": {
+        "title": "الناس يتذكّرون كيف جعلتهم يشعرون",
+        "body": "المنتجات تلبّي الاحتياج، أما التجارب فتصنع المشاعر. غالباً ما يعود الزبون لأنه يتذكّر شعوره بالراحة، والفهم، والتقدير، والثقة، والتميّز. المشاعر الإيجابية تصنع ولاءً أقوى من الخصومات وحدها — وكل حوار فرصة لصنع تلك المشاعر."
+      },
+      "source": {
+        "en": "The Power of Lasting Impressions",
+        "ar": "قوة الانطباعات الباقية"
+      }
+    },
+    {
+      "id": "li-beyond",
+      "keywords_en": "going beyond expectations walk to product instead pointing alternatives compare check another store styling advice",
+      "keywords_ar": "تجاوز التوقعات مرافقة للمنتج بدل الإشارة بدائل مقارنة فرع آخر نصيحة عميل عملاء",
+      "en": {
+        "title": "Going beyond expectations",
+        "body": "Exceptional experiences come from small, unexpected moments: walking customers to the product instead of pointing, offering alternatives when an item isn't available, helping compare products, checking another Alshaya store, giving styling or product care advice, and introducing relevant services or benefits. These thoughtful actions show genuine care — customers notice effort."
+      },
+      "ar": {
+        "title": "تجاوز التوقّعات",
+        "body": "التجارب الاستثنائية تأتي من لحظات صغيرة غير متوقّعة: مرافقة الزبون إلى المنتج بدل الإشارة إليه، وعرض بدائل عند عدم توفّر الصنف، والمساعدة في المقارنة، والتحقق من فرع ألشايا آخر، وتقديم نصيحة تنسيق أو عناية، وتعريفه بخدمات أو مزايا مناسبة. هذه اللفتات تُظهر اهتماماً صادقاً — والزبون يلاحظ الجهد."
+      },
+      "source": {
+        "en": "The Power of Lasting Impressions",
+        "ar": "قوة الانطباعات الباقية"
+      }
+    },
+    {
+      "id": "li-consistency",
+      "keywords_en": "consistency across brands alshaya family same experience fashion beauty home reputation multiple brands day",
+      "keywords_ar": "اتساق عبر العلامات عائلة ألشايا نفس التجربة أزياء تجميل منزل سمعة عميل عملاء",
+      "en": {
+        "title": "Consistency across every Alshaya brand",
+        "body": "Whether a customer visits a fashion store, beauty destination, health retailer, lifestyle brand or home concept, they should experience the same commitment to excellence. Every Alshaya colleague contributes to one shared reputation. Customers may visit several Alshaya brands in the same day — a consistently positive experience strengthens trust across the whole family."
+      },
+      "ar": {
+        "title": "الاتساق عبر كل علامات ألشايا",
+        "body": "سواء زار الزبون متجر أزياء أو وجهة تجميل أو متجر صحة أو علامة نمط حياة أو مفهوم منزل، يجب أن يجد نفس الالتزام بالتميّز. كل زميل في ألشايا يساهم في سمعة واحدة مشتركة. وقد يزور الزبون عدة علامات في اليوم نفسه — والتجربة الإيجابية المتّسقة تقوّي الثقة بالمجموعة كلها."
+      },
+      "source": {
+        "en": "The Power of Lasting Impressions",
+        "ar": "قوة الانطباعات الباقية"
+      }
+    },
+    {
+      "id": "li-habits",
+      "keywords_en": "habits weaken impression abruptly robotic rehearsed language distracted ignoring after payment follow through little things",
+      "keywords_ar": "عادات تضعف الانطباع إنهاء مفاجئ لغة آلية محفوظة مشتت تجاهل بعد الدفع متابعة عميل عملاء",
+      "en": {
+        "title": "Habits that weaken lasting impressions",
+        "body": "Avoid: ending conversations abruptly; focusing only on completing the sale; using rehearsed or robotic language; forgetting to thank customers; looking distracted; talking with colleagues while serving; ignoring customers after payment; and failing to follow through on commitments. Customers notice the little things — often those are the moments they remember most."
+      },
+      "ar": {
+        "title": "عادات تُضعف الانطباع الباقي",
+        "body": "تجنّب: إنهاء الحوار فجأة؛ التركيز على إتمام البيع فقط؛ استخدام لغة محفوظة أو آلية؛ نسيان شكر الزبون؛ الظهور بمظهر المشتّت؛ الحديث مع الزملاء أثناء الخدمة؛ تجاهل الزبون بعد الدفع؛ وعدم الوفاء بما وعدت به. الزبائن يلاحظون التفاصيل الصغيرة — وغالباً هي ما يتذكّرونه أكثر."
+      },
+      "source": {
+        "en": "The Power of Lasting Impressions",
+        "ar": "قوة الانطباعات الباقية"
+      }
+    },
+    {
+      "id": "sr-what",
+      "keywords_en": "service recovery what is restore confidence blame right making things right honesty perfection",
+      "keywords_ar": "معالجة الخدمة ما هي استعادة الثقة لوم على حق إصلاح صدق كمال عميل عملاء",
+      "en": {
+        "title": "What is service recovery?",
+        "body": "Service recovery is restoring a customer's confidence after something has gone wrong. It isn't about assigning blame or proving who is right — it's about making things right whenever possible. Customers don't expect perfection; they expect honesty, empathy, and a genuine effort to help. Every challenge is a chance to show our commitment to exceptional experience."
+      },
+      "ar": {
+        "title": "ما هي معالجة الخدمة؟",
+        "body": "معالجة الخدمة هي استعادة ثقة الزبون بعد حدوث خطأ. لا تتعلّق بتحديد اللوم ولا بإثبات من على حق — بل بإصلاح الأمر قدر الإمكان. الزبائن لا يتوقّعون الكمال؛ بل يتوقّعون الصدق والتعاطف وجهداً حقيقياً للمساعدة. كل تحدٍّ فرصة لإظهار التزامنا بتجربة استثنائية."
+      },
+      "source": {
+        "en": "The Art of Service Recovery",
+        "ar": "فن معالجة الخدمة"
+      }
+    },
+    {
+      "id": "sr-complaint",
+      "keywords_en": "complaint valuable feedback dissatisfied never complain dont return learning opportunity improve speak up",
+      "keywords_ar": "شكوى قيمة ملاحظات غير راض لا يشتكي لا يعود فرصة تعلم تحسين عميل عملاء",
+      "en": {
+        "title": "Every complaint is valuable feedback",
+        "body": "When customers speak up, they're giving us a chance to improve. Many dissatisfied customers never complain — they simply choose not to return. Customers who share concerns are giving us an opportunity to rebuild their trust. View complaints as feedback, learning opportunities, chances to strengthen relationships, and ways to improve future experiences."
+      },
+      "ar": {
+        "title": "كل شكوى ملاحظة قيّمة",
+        "body": "حين يتكلّم الزبون فهو يمنحنا فرصة للتحسّن. كثير من الزبائن غير الراضين لا يشتكون أبداً — بل يختارون ببساطة عدم العودة. أما من يشارك مخاوفه فهو يمنحنا فرصة لإعادة بناء ثقته. انظر للشكاوى كملاحظات، وفرص تعلّم، وفرص لتقوية العلاقة، وطرق لتحسين التجارب القادمة."
+      },
+      "source": {
+        "en": "The Art of Service Recovery",
+        "ar": "فن معالجة الخدمة"
+      }
+    },
+    {
+      "id": "sr-ownership",
+      "keywords_en": "take ownership responsibility another department connect right person passing frustration guiding not my fault",
+      "keywords_ar": "تحمل المسؤولية ملكية قسم آخر توصيل الشخص المناسب تمرير إحباط ليس خطئي عميل عملاء",
+      "en": {
+        "title": "Take ownership",
+        "body": "Customers shouldn't feel responsible for solving the problem. Take ownership by guiding the conversation — this doesn't always mean the issue was your fault; it means taking responsibility for helping find the best available solution. Instead of \"that's another department,\" say \"let me help connect you with the right person.\" Ownership builds confidence; passing responsibility creates frustration."
+      },
+      "ar": {
+        "title": "تحمّل المسؤولية",
+        "body": "يجب ألا يشعر الزبون بأنه مسؤول عن حل المشكلة. تحمّل المسؤولية بقيادة الحوار — وهذا لا يعني دائماً أن الخطأ خطؤك، بل أنك مسؤول عن المساعدة في إيجاد أفضل حل متاح. بدل «هذا قسم آخر» قل «دعني أوصلك بالشخص المناسب». تحمّل المسؤولية يبني الثقة، وتمريرها يصنع الإحباط."
+      },
+      "source": {
+        "en": "The Art of Service Recovery",
+        "ar": "فن معالجة الخدمة"
+      }
+    },
+    {
+      "id": "sr-communicate",
+      "keywords_en": "communicate clearly transparency explain what why next how long keep informed uncertainty waiting",
+      "keywords_ar": "تواصل بوضوح شفافية شرح ماذا لماذا التالي كم يستغرق إبقاء على اطلاع غموض انتظار عميل عملاء",
+      "en": {
+        "title": "Communicate clearly",
+        "body": "Customers appreciate transparency. Explain what you're doing, why you're doing it, what will happen next, and how long it may take. If more time is needed, keep customers informed — uncertainty often creates more frustration than the waiting itself. Clear communication builds confidence."
+      },
+      "ar": {
+        "title": "تواصل بوضوح",
+        "body": "الزبائن يقدّرون الشفافية. اشرح ما الذي تفعله، ولماذا تفعله، وما الذي سيحدث بعد ذلك، وكم قد يستغرق. وإن احتجت وقتاً إضافياً فأبقِ الزبون على اطلاع — الغموض غالباً يسبّب إحباطاً أكبر من الانتظار نفسه. التواصل الواضح يبني الثقة."
+      },
+      "source": {
+        "en": "The Art of Service Recovery",
+        "ar": "فن معالجة الخدمة"
+      }
+    },
+    {
+      "id": "sr-follow",
+      "keywords_en": "following through promise kept check another store speak manager follow up reliability integrity",
+      "keywords_ar": "الوفاء بالوعد التزام تحقق فرع آخر التحدث مع المدير متابعة موثوقية نزاهة عميل عملاء",
+      "en": {
+        "title": "Following through",
+        "body": "A promise only builds trust when it's kept. If you tell a customer you'll check another store, speak with a manager, follow up, or find more information — make sure it happens. Reliability strengthens customer confidence, and following through demonstrates integrity."
+      },
+      "ar": {
+        "title": "الوفاء بما وعدت",
+        "body": "الوعد لا يبني ثقة إلا إذا نُفّذ. إن قلت للزبون إنك ستتحقّق من فرع آخر، أو ستتحدّث مع المدير، أو ستتابع الأمر، أو ستجد معلومات إضافية — فتأكّد أن ذلك يحدث فعلاً. الموثوقية تقوّي ثقة الزبون، والوفاء يُظهر النزاهة."
+      },
+      "source": {
+        "en": "The Art of Service Recovery",
+        "ar": "فن معالجة الخدمة"
+      }
+    },
+    {
+      "id": "sr-mistakes",
+      "keywords_en": "recovery mistakes avoid interrupting defensive blaming negative language promises rushing policy only ending early",
+      "keywords_ar": "أخطاء المعالجة تجنب مقاطعة دفاعي لوم لغة سلبية وعود استعجال سياسة فقط عميل عملاء",
+      "en": {
+        "title": "Common service recovery mistakes",
+        "body": "Avoid: interrupting the customer; becoming defensive; blaming colleagues or other departments; using negative language; making promises you can't keep; rushing the conversation; ignoring customer emotions; focusing only on policy instead of possible solutions; and ending the conversation before confirming satisfaction. Customers remember how challenges were handled."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في معالجة الخدمة",
+        "body": "تجنّب: مقاطعة الزبون؛ الدفاع عن النفس؛ لوم الزملاء أو الأقسام الأخرى؛ اللغة السلبية؛ قطع وعود لا يمكنك الوفاء بها؛ استعجال الحوار؛ تجاهل مشاعر الزبون؛ التركيز على السياسة فقط بدل الحلول الممكنة؛ وإنهاء الحوار قبل التأكّد من الرضا. الزبائن يتذكّرون كيف عولجت التحديات."
+      },
+      "source": {
+        "en": "The Art of Service Recovery",
+        "ar": "فن معالجة الخدمة"
+      }
+    },
+    {
+      "id": "ac-why",
+      "keywords_en": "angry customer emotions why frustrated reasons expectations delays miscommunication personal stress not personal",
+      "keywords_ar": "زبون غاضب مشاعر لماذا محبط أسباب توقعات تأخير سوء تفاهم ضغط شخصي ليس شخصياً عميل عملاء",
+      "en": {
+        "title": "Understanding customer anger",
+        "body": "Customers rarely become angry without a reason — it may be unmet expectations, delays or waiting, product concerns, miscommunication, confusion about policies, previous experiences, or personal stress unrelated to the store. Remember: the frustration is usually directed at the situation, not at you personally. Understanding this helps you respond professionally instead of emotionally."
+      },
+      "ar": {
+        "title": "فهم غضب الزبون",
+        "body": "نادراً ما يغضب الزبون بلا سبب — قد يكون توقّعات لم تُلبَّ، أو تأخيراً وانتظاراً، أو مخاوف بشأن المنتج، أو سوء تفاهم، أو التباساً في السياسات، أو تجارب سابقة، أو ضغطاً شخصياً لا علاقة له بالمتجر. تذكّر: الإحباط غالباً موجّه للموقف لا لك شخصياً. فهم ذلك يساعدك على الرد بمهنية لا بانفعال."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "ac-calm",
+      "keywords_en": "stay calm first attitude tone voice steady body language mirror contagious defending upset shouting",
+      "keywords_ar": "ابق هادئاً أولاً نبرة صوت ثابت لغة الجسد يعكس معدٍ دفاع منزعج صراخ عميل عملاء",
+      "en": {
+        "title": "Stay calm first",
+        "body": "Your attitude sets the tone. When customers become upset: take a moment before responding, keep your voice calm and steady, maintain positive body language, avoid showing frustration, and focus on helping rather than defending. Customers often begin to mirror your calm behaviour — professionalism is contagious."
+      },
+      "ar": {
+        "title": "ابقَ هادئاً أولاً",
+        "body": "موقفك يحدّد أجواء الحوار. حين ينزعج الزبون: خذ لحظة قبل الرد، وحافظ على هدوء صوتك وثباته، والزم لغة جسد إيجابية، وتجنّب إظهار الانزعاج، وركّز على المساعدة لا على الدفاع. غالباً ما يبدأ الزبون بمحاكاة هدوئك — فالمهنية مُعدية."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "ac-language",
+      "keywords_en": "positive language words instead i dont know impossible you cant its policy let me find out options",
+      "keywords_ar": "لغة إيجابية كلمات بدل لا أعرف مستحيل لا تستطيع إنها السياسة دعني أتحقق خيارات عميل عملاء",
+      "en": {
+        "title": "Choose positive language",
+        "body": "The words you use influence how customers feel. Instead of \"I don't know,\" \"that's impossible,\" \"you can't,\" or \"it's policy,\" try: \"let me find out,\" \"here's what we can do,\" \"let's explore the available options,\" \"I'll explain how this works.\" Positive language creates hope without making unrealistic promises."
+      },
+      "ar": {
+        "title": "اختر لغة إيجابية",
+        "body": "الكلمات التي تستخدمها تؤثّر على شعور الزبون. بدل «لا أعرف» أو «هذا مستحيل» أو «لا تستطيع» أو «هذه هي السياسة»، جرّب: «دعني أتحقّق»، «إليك ما يمكننا فعله»، «لنستكشف الخيارات المتاحة»، «سأشرح لك كيف يعمل هذا». اللغة الإيجابية تصنع أملاً دون وعود غير واقعية."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "ac-policy",
+      "keywords_en": "explaining policy thats our policy empathy reason alternatives outcome hoping not the answer wanted",
+      "keywords_ar": "شرح السياسة هذه سياستنا تعاطف سبب بدائل نتيجة يأمل ليست الإجابة عميل عملاء",
+      "en": {
+        "title": "When policies need explaining",
+        "body": "Sometimes the answer isn't the one the customer hoped for. Start with empathy, then explain the reason clearly, then explore any available alternatives. Instead of \"that's our policy,\" try: \"I understand this isn't the outcome you were hoping for. Let me explain how our policy works and see what options are available.\" Customers accept more when they understand both the reason and the choices."
+      },
+      "ar": {
+        "title": "حين تحتاج السياسة إلى شرح",
+        "body": "أحياناً لا تكون الإجابة هي ما تمنّاه الزبون. ابدأ بالتعاطف، ثم اشرح السبب بوضوح، ثم استكشف البدائل المتاحة. بدل «هذه سياستنا» جرّب: «أتفهّم أن هذه ليست النتيجة التي تمنّيتها. دعني أشرح كيف تعمل سياستنا ونرى الخيارات المتاحة». الزبائن يتقبّلون أكثر حين يفهمون السبب والخيارات معاً."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "ac-escalating",
+      "keywords_en": "escalating situation emotions rising space one issue at a time slowly arguing raising voice manager",
+      "keywords_ar": "تصاعد الموقف مشاعر مساحة مسألة واحدة ببطء جدال رفع الصوت مدير عميل عملاء",
+      "en": {
+        "title": "Managing escalating situations",
+        "body": "If emotions keep rising: remain calm, speak slowly, avoid arguing, avoid raising your voice, give the customer space if appropriate, and focus on one issue at a time. If the situation continues to escalate, involve your manager or the appropriate colleague according to store procedures. Seeking support demonstrates professionalism."
+      },
+      "ar": {
+        "title": "إدارة المواقف المتصاعدة",
+        "body": "إذا استمرّت المشاعر بالتصاعد: ابقَ هادئاً، وتحدّث ببطء، وتجنّب الجدال، وتجنّب رفع صوتك، وامنح الزبون مساحة إن كان مناسباً، وركّز على مسألة واحدة في كل مرة. وإن استمر التصاعد فأشرك مديرك أو الزميل المناسب حسب إجراءات المتجر. طلب الدعم دليل مهنية."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "ac-space",
+      "keywords_en": "personal space body language distance pointing open posture eye contact non verbal comfortable",
+      "keywords_ar": "مساحة شخصية لغة الجسد مسافة إشارة وضعية منفتحة تواصل بصري غير لفظي راحة عميل عملاء",
+      "en": {
+        "title": "Respect personal space",
+        "body": "Body language matters. Maintain an appropriate distance, avoid pointing, keep an open posture, maintain appropriate eye contact, and allow customers enough personal space to feel comfortable. Your non-verbal communication often speaks louder than your words."
+      },
+      "ar": {
+        "title": "احترم المساحة الشخصية",
+        "body": "لغة الجسد مهمة. حافظ على مسافة مناسبة، وتجنّب الإشارة بالإصبع، والزم وضعية منفتحة، وحافظ على تواصل بصري مناسب، وامنح الزبون مساحة شخصية كافية ليشعر بالراحة. تواصلك غير اللفظي غالباً أعلى صوتاً من كلماتك."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "ac-winning",
+      "keywords_en": "never about winning right prove argument blaming defensive matching tone technically correct treated",
+      "keywords_ar": "ليس فوزاً على حق إثبات جدال لوم دفاع محاكاة النبرة صحيح تقنياً معاملة عميل عملاء",
+      "en": {
+        "title": "Never make it about winning",
+        "body": "The objective is not to prove who is right — it's to create the best possible customer experience. Avoid arguing, interrupting, blaming, becoming defensive, or matching the customer's tone. Instead focus on understanding, respect, solutions and professionalism. Customers remember how they were treated far more than who was technically correct."
+      },
+      "ar": {
+        "title": "لا تجعلها معركة تُربح",
+        "body": "الهدف ليس إثبات من على حق — بل صنع أفضل تجربة ممكنة للزبون. تجنّب الجدال، والمقاطعة، واللوم، والدفاع عن النفس، ومحاكاة نبرة الزبون. وركّز بدلاً من ذلك على الفهم والاحترام والحلول والمهنية. الزبائن يتذكّرون كيف عوملوا أكثر بكثير ممن كان على صواب تقنياً."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "ac-mistakes",
+      "keywords_en": "angry mistakes avoid interrupting raising voice personally calm down blaming policy arguing walking away",
+      "keywords_ar": "أخطاء الغضب تجنب مقاطعة رفع الصوت شخصياً اهدأ لوم السياسة جدال الانصراف عميل عملاء",
+      "en": {
+        "title": "Common mistakes with angry customers",
+        "body": "During difficult conversations avoid: interrupting; raising your voice; taking comments personally; saying \"calm down\"; blaming company policy; arguing about facts; promising outcomes you cannot deliver; speaking negatively about colleagues or other departments; walking away without explanation; and forgetting to thank the customer. These behaviours increase frustration rather than reduce it."
+      },
+      "ar": {
+        "title": "أخطاء شائعة مع الزبون الغاضب",
+        "body": "في الحوارات الصعبة تجنّب: المقاطعة؛ رفع الصوت؛ أخذ الكلام على محمل شخصي؛ قول «اهدأ»؛ لوم سياسة الشركة؛ الجدال حول الوقائع؛ الوعد بنتائج لا يمكنك تحقيقها؛ التحدّث سلباً عن الزملاء أو الأقسام؛ الانصراف دون توضيح؛ ونسيان شكر الزبون. هذه السلوكيات تزيد الإحباط بدل أن تخفّفه."
+      },
+      "source": {
+        "en": "Handling Angry Customers",
+        "ar": "التعامل مع الزبائن الغاضبين"
+      }
+    },
+    {
+      "id": "gs-atv",
+      "keywords_en": "atv average transaction value what is spend more complete handbag wallet trainers socks measures",
+      "keywords_ar": "متوسط قيمة الفاتورة ما هو إنفاق أكثر مكمل حقيبة محفظة حذاء جوارب مقاييس عميل عملاء",
+      "en": {
+        "title": "What is ATV (Average Transaction Value)?",
+        "body": "ATV is simply the average amount a customer spends in one purchase. It doesn't mean encouraging customers to spend unnecessarily — it means helping them discover products that genuinely improve their purchase. A customer buying a handbag may appreciate a matching wallet or care product; someone buying trainers may benefit from suitable socks or shoe care. The goal is a more complete shopping experience."
+      },
+      "ar": {
+        "title": "ما هو متوسط قيمة الفاتورة؟",
+        "body": "متوسط قيمة الفاتورة هو ببساطة المبلغ الوسطي الذي ينفقه الزبون في عملية شراء واحدة. لا يعني تشجيع الزبون على الإنفاق بلا داعٍ — بل مساعدته على اكتشاف منتجات تحسّن شراءه فعلاً. من يشتري حقيبة قد يقدّر محفظة مطابقة أو منتج عناية؛ ومن يشتري حذاءً رياضياً قد يستفيد من جوارب مناسبة أو عناية بالأحذية. الهدف تجربة تسوّق أكمل."
+      },
+      "source": {
+        "en": "The Art of Growing Every Sale",
+        "ar": "فن تنمية كل عملية بيع"
+      }
+    },
+    {
+      "id": "gs-solutions",
+      "keywords_en": "recommend solutions not products problems anything else make purchase better outfit routine coordinating",
+      "keywords_ar": "أوصِ بحلول لا منتجات مشاكل أي شيء آخر تحسين الشراء إطلالة روتين تنسيق عميل عملاء",
+      "en": {
+        "title": "Recommend solutions, not products",
+        "body": "Customers aren't simply buying products — they're solving problems. Instead of asking \"would you like anything else?\", think \"what would make this purchase even better for this customer?\" Fashion: complete the outfit with accessories. Beauty: recommend products that work together as a routine. Home: suggest coordinating or practical items. Health: recommend products that support their goals. Recommendations should always feel helpful."
+      },
+      "ar": {
+        "title": "أوصِ بحلول لا بمنتجات",
+        "body": "الزبائن لا يشترون منتجات فحسب — بل يحلّون مشكلات. بدل سؤال «هل تريد شيئاً آخر؟» فكّر «ما الذي يجعل هذا الشراء أفضل لهذا الزبون؟» الأزياء: أكمل الإطلالة بالإكسسوارات. التجميل: أوصِ بمنتجات تعمل معاً كروتين. المنزل: اقترح قطعاً منسّقة أو عملية. الصحة: أوصِ بما يدعم أهدافه. يجب أن تبدو التوصية مفيدة دائماً."
+      },
+      "source": {
+        "en": "The Art of Growing Every Sale",
+        "ar": "فن تنمية كل عملية بيع"
+      }
+    },
+    {
+      "id": "gs-timing",
+      "keywords_en": "timing when recommend moments ask questions compare try on advice deciding checkout interrupting browsing",
+      "keywords_ar": "التوقيت متى توصي لحظات أسئلة مقارنة تجربة نصيحة قرار دفع مقاطعة تصفح عميل عملاء",
+      "en": {
+        "title": "Timing makes the difference",
+        "body": "Customers are more open to recommendations at certain moments — when they ask questions, compare products, try something on, ask for advice, decide between options, or prepare to check out. Avoid interrupting customers while they're still browsing independently. Good timing makes recommendations feel natural."
+      },
+      "ar": {
+        "title": "التوقيت يصنع الفرق",
+        "body": "الزبائن أكثر تقبّلاً للتوصيات في لحظات معيّنة — حين يسألون، أو يقارنون المنتجات، أو يجرّبون شيئاً، أو يطلبون النصيحة، أو يوازنون بين خيارين، أو يستعدّون للدفع. تجنّب مقاطعتهم أثناء تصفّحهم المستقل. التوقيت الجيد يجعل التوصية تبدو طبيعية."
+      },
+      "source": {
+        "en": "The Art of Growing Every Sale",
+        "ar": "فن تنمية كل عملية بيع"
+      }
+    },
+    {
+      "id": "gs-choices",
+      "keywords_en": "offer choices not pressure many customers choose you may also like works well with obligated trust",
+      "keywords_ar": "قدم خيارات لا ضغطاً كثير من الزبائن يختارون قد يعجبك يعمل جيداً مع إلزام ثقة عميل عملاء",
+      "en": {
+        "title": "Offer choices, not pressure",
+        "body": "Customers enjoy making informed decisions. Present options confidently: \"Many customers choose this because…\", \"You may also like…\", \"This works really well with…\" Avoid making customers feel obligated. Helpful recommendations build trust; pressure damages it."
+      },
+      "ar": {
+        "title": "قدّم خيارات لا ضغطاً",
+        "body": "الزبائن يستمتعون باتخاذ قرارات مبنية على معرفة. اعرض الخيارات بثقة: «كثير من الزبائن يختارون هذا لأن…»، «قد يعجبك أيضاً…»، «هذا يتناسب جيداً مع…». وتجنّب أن تجعل الزبون يشعر بالإلزام. التوصيات المفيدة تبني الثقة، والضغط يهدمها."
+      },
+      "source": {
+        "en": "The Art of Growing Every Sale",
+        "ar": "فن تنمية كل عملية بيع"
+      }
+    },
+    {
+      "id": "gs-complete",
+      "keywords_en": "complete journey didnt realise need garment care travel size matching replacement protective gift packaging",
+      "keywords_ar": "إكمال الرحلة لم يدرك حاجته عناية بالملابس حجم سفر مطابق بديل واقي تغليف هدايا عميل عملاء",
+      "en": {
+        "title": "Complete the customer's journey",
+        "body": "Sometimes customers don't realise they need something until you mention it. Helpful examples: a garment care product with clothing, a travel-size product for frequent travellers, matching accessories, replacement items, protective products, and gift packaging where appropriate. These suggestions often improve convenience for the customer."
+      },
+      "ar": {
+        "title": "أكمل رحلة الزبون",
+        "body": "أحياناً لا يدرك الزبون حاجته لشيء حتى تذكره له. أمثلة مفيدة: منتج عناية بالأقمشة مع الملابس، أو حجم سفر لكثيري التنقّل، أو إكسسوارات مطابقة، أو قطع بديلة، أو منتجات حماية، أو تغليف هدايا عند الحاجة. هذه الاقتراحات غالباً تزيد راحة الزبون."
+      },
+      "source": {
+        "en": "The Art of Growing Every Sale",
+        "ar": "فن تنمية كل عملية بيع"
+      }
+    },
+    {
+      "id": "gs-different",
+      "keywords_en": "every customer different level assistance conversation independence cues adapt flexible personalisation",
+      "keywords_ar": "كل زبون مختلف مستوى المساعدة حوار استقلالية إشارات تكيف مرونة تخصيص عميل عملاء",
+      "en": {
+        "title": "Every customer is different",
+        "body": "Not every customer wants the same level of assistance — some enjoy conversation, some prefer independence. Observe customer cues and adapt your approach. Exceptional service is flexible, and personalisation creates stronger connections."
+      },
+      "ar": {
+        "title": "كل زبون مختلف",
+        "body": "ليس كل زبون يريد نفس مستوى المساعدة — بعضهم يستمتع بالحوار، وبعضهم يفضّل الاستقلالية. راقب إشارات الزبون وكيّف أسلوبك. الخدمة الاستثنائية مرنة، والتخصيص يصنع تواصلاً أقوى."
+      },
+      "source": {
+        "en": "The Art of Growing Every Sale",
+        "ar": "فن تنمية كل عملية بيع"
+      }
+    },
+    {
+      "id": "on-onebrand",
+      "keywords_en": "online in store one brand ecommerce app website same experience seamless channel click collect",
+      "keywords_ar": "إلكتروني متجر علامة واحدة تطبيق موقع نفس التجربة سلس قناة استلام عميل عملاء",
+      "en": {
+        "title": "One brand, one customer experience",
+        "body": "Customers don't separate \"online\" from \"in-store\" — to them it's one brand. Whether they bought through a website, app, or in store, they expect the same warm welcome, helpful advice, professional support, respect and clear communication. Even if the store can't directly resolve every online issue, every colleague can help customers take the next step."
+      },
+      "ar": {
+        "title": "علامة واحدة، تجربة واحدة",
+        "body": "الزبائن لا يفصلون بين «الإلكتروني» و«المتجر» — فهي عندهم علامة واحدة. سواء اشتروا عبر الموقع أو التطبيق أو من المتجر، يتوقّعون نفس الترحيب الدافئ والنصيحة المفيدة والدعم المهني والاحترام والتواصل الواضح. وحتى إن لم يستطع المتجر حل كل مسألة إلكترونية، يستطيع كل زميل مساعدة الزبون على الخطوة التالية."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-questions",
+      "keywords_en": "common online questions order status delivery delay returns exchanges missing damaged refund click collect",
+      "keywords_ar": "أسئلة إلكترونية شائعة حالة الطلب تأخير توصيل إرجاع استبدال مفقود تالف استرداد عميل عملاء",
+      "en": {
+        "title": "Common online questions",
+        "body": "Customers may visit the store asking about: order status, delivery delays, returns, exchanges, missing items, damaged products, incorrect items received, payment enquiries, refund updates, Click & Collect (where available), and product availability. Knowing these common enquiries helps you respond with confidence."
+      },
+      "ar": {
+        "title": "الأسئلة الإلكترونية الشائعة",
+        "body": "قد يزور الزبون المتجر ليسأل عن: حالة الطلب، أو تأخير التوصيل، أو الإرجاع، أو الاستبدال، أو قطع مفقودة، أو منتجات تالفة، أو أصناف خاطئة، أو استفسارات الدفع، أو تحديثات الاسترداد، أو الاستلام من المتجر (حيثما توفّر)، أو توفّر المنتج. معرفة هذه الاستفسارات تساعدك على الرد بثقة."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-listen",
+      "keywords_en": "listen before answer online when placed which brand confirmation delivered delivery payment product",
+      "keywords_ar": "أصغِ قبل الإجابة إلكتروني متى الطلب أي علامة تأكيد تم التوصيل دفع منتج عميل عملاء",
+      "en": {
+        "title": "Listen before giving an answer",
+        "body": "Before suggesting a solution, understand the situation. Ask simple questions: When was the order placed? Which brand was ordered? Has the customer received an order confirmation? Has the item already been delivered? Is the enquiry about delivery, payment, or the product itself? Taking time to understand avoids unnecessary confusion."
+      },
+      "ar": {
+        "title": "أصغِ قبل أن تجيب",
+        "body": "قبل اقتراح حل، افهم الموقف. اطرح أسئلة بسيطة: متى تم الطلب؟ أي علامة تجارية؟ هل وصل الزبون تأكيد الطلب؟ هل تم التوصيل فعلاً؟ هل الاستفسار عن التوصيل أم الدفع أم المنتج نفسه؟ أخذ الوقت للفهم يمنع الالتباس."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-returns",
+      "keywords_en": "online returns exchanges policy vary brand unused packaging proof purchase hygiene cosmetics lingerie swimwear",
+      "keywords_ar": "إرجاع إلكتروني استبدال سياسة تختلف علامة غير مستخدم تغليف إثبات شراء صحية مستحضرات عميل عملاء",
+      "en": {
+        "title": "Online returns and exchanges",
+        "body": "Many Alshaya brands allow online purchases to be returned or exchanged if the brand's conditions are met. In general: policies may vary between brands; items are usually expected to be unused with original packaging and proof of purchase; hygiene-sensitive products such as cosmetics, earrings, lingerie or swimwear may only be returnable if faulty or permitted by the brand's policy; and some returns may need to go through online customer support rather than in-store. Always confirm the latest policy for that specific brand before advising."
+      },
+      "ar": {
+        "title": "الإرجاع والاستبدال الإلكتروني",
+        "body": "تسمح كثير من علامات ألشايا بإرجاع أو استبدال المشتريات الإلكترونية عند استيفاء شروط العلامة. عموماً: السياسات قد تختلف بين العلامات؛ ويُتوقّع عادة أن تكون القطعة غير مستخدمة مع تغليفها الأصلي وإثبات الشراء؛ والمنتجات الحسّاسة صحياً مثل مستحضرات التجميل والأقراط والملابس الداخلية وملابس السباحة قد لا تُرجع إلا إذا كانت معيبة أو سمحت سياسة العلامة؛ وبعض الإرجاعات قد تتم عبر دعم العملاء الإلكتروني لا من المتجر. تأكّد دائماً من أحدث سياسة للعلامة قبل نصح الزبون."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-refund",
+      "keywords_en": "refund enquiries anxious waiting processing times payment method original approved track status promise date",
+      "keywords_ar": "استفسارات الاسترداد قلق انتظار مدة المعالجة طريقة الدفع الأصلية موافقة تتبع حالة وعد بتاريخ عميل عملاء",
+      "en": {
+        "title": "Supporting refund enquiries",
+        "body": "Customers sometimes become anxious waiting for a refund — stay reassuring. Explain that refund processing times vary depending on payment method and brand; that once a return is approved the refund is normally processed back to the original payment method; and that they can track or enquire through the official support channels. Never promise a specific refund date unless it's confirmed by the relevant brand policy."
+      },
+      "ar": {
+        "title": "دعم استفسارات الاسترداد",
+        "body": "قد يقلق الزبون أثناء انتظار الاسترداد — كن مطمئناً. اشرح أن مدة معالجة الاسترداد تختلف حسب طريقة الدفع والعلامة؛ وأن الاسترداد يُعاد عادة إلى طريقة الدفع الأصلية بعد الموافقة على الإرجاع؛ وأنه يمكنه التتبّع أو الاستفسار عبر قنوات الدعم الرسمية. لا تعِد أبداً بتاريخ استرداد محدّد إلا إذا أكّدته سياسة العلامة."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-delivery",
+      "keywords_en": "delivery questions delayed late acknowledge stock availability location busy periods courier track order",
+      "keywords_ar": "أسئلة التوصيل تأخر اعتراف توفر المخزون الموقع مواسم الازدحام شركة الشحن تتبع عميل عملاء",
+      "en": {
+        "title": "Delivery questions",
+        "body": "If a customer asks about a delayed delivery, first acknowledge their concern. Then explain that delivery times may vary depending on stock availability, delivery location, busy shopping periods, and courier operations. Encourage them to check their order status via the brand's website, app, or support channels if further updates are needed."
+      },
+      "ar": {
+        "title": "أسئلة التوصيل",
+        "body": "إذا سأل الزبون عن تأخّر التوصيل، اعترف بقلقه أولاً. ثم اشرح أن مدد التوصيل قد تختلف حسب توفّر المخزون، وموقع التوصيل، ومواسم الازدحام، وعمليات شركة الشحن. وشجّعه على متابعة حالة طلبه عبر موقع العلامة أو تطبيقها أو قنوات الدعم إن أراد تحديثات إضافية."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-wrongstore",
+      "keywords_en": "wrong store online issue not our department cannot process here point right team resolve guidance",
+      "keywords_ar": "متجر خاطئ مسألة إلكترونية ليس قسمنا لا يمكن المعالجة هنا الفريق المناسب إرشاد عميل عملاء",
+      "en": {
+        "title": "When customers visit the wrong store",
+        "body": "Sometimes customers expect immediate help with an online order that can't be processed in store. Never simply say \"this is an online issue.\" Instead try: \"I'll explain the best way to get this resolved and point you to the right team.\" Helping customers find the correct solution is part of exceptional service."
+      },
+      "ar": {
+        "title": "حين يأتي الزبون إلى المكان الخطأ",
+        "body": "أحياناً يتوقّع الزبون مساعدة فورية بشأن طلب إلكتروني لا يمكن معالجته في المتجر. لا تقل أبداً «هذه مسألة إلكترونية» فحسب. جرّب بدلاً من ذلك: «سأشرح لك أفضل طريقة لحل هذا وأدلّك على الفريق المناسب». مساعدة الزبون على إيجاد الحل الصحيح جزء من الخدمة الاستثنائية."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-digital",
+      "keywords_en": "digital support tools track order start return live chat faq guide access self service",
+      "keywords_ar": "دعم رقمي أدوات تتبع الطلب بدء الإرجاع دردشة مباشرة أسئلة شائعة إرشاد عميل عملاء",
+      "en": {
+        "title": "Helping customers use digital support",
+        "body": "Many Alshaya brands provide online support tools. Depending on the brand, customers may be able to track their order, start a return request, follow refund progress, contact customer support through Live Chat, and find answers to frequently asked questions. Where appropriate, guide customers on how to access these services rather than expecting them to figure it out alone."
+      },
+      "ar": {
+        "title": "مساعدة الزبون على استخدام الدعم الرقمي",
+        "body": "توفّر كثير من علامات ألشايا أدوات دعم إلكترونية. وحسب العلامة، قد يتمكّن الزبون من تتبّع طلبه، أو بدء طلب إرجاع، أو متابعة تقدّم الاسترداد، أو التواصل مع الدعم عبر الدردشة المباشرة، أو إيجاد إجابات للأسئلة الشائعة. وحين يكون ذلك مناسباً، أرشده لكيفية الوصول لهذه الخدمات بدل تركه يكتشفها وحده."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    },
+    {
+      "id": "on-mistakes",
+      "keywords_en": "online mistakes avoid guessing policies promising dates assuming brands identical negative online team sending away",
+      "keywords_ar": "أخطاء إلكترونية تجنب تخمين السياسات الوعد بتواريخ افتراض تطابق العلامات سلبية الفريق الإلكتروني عميل عملاء",
+      "en": {
+        "title": "Common mistakes with online enquiries",
+        "body": "Avoid: guessing online policies; promising delivery or refund dates; assuming all Alshaya brands follow identical procedures; speaking negatively about the online team; saying \"it's an online problem\"; sending customers away without guidance; and using complicated technical language. Customers value clear, confident and honest communication — it's better to verify than to guess."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في الاستفسارات الإلكترونية",
+        "body": "تجنّب: تخمين السياسات الإلكترونية؛ الوعد بتواريخ توصيل أو استرداد؛ افتراض أن كل علامات ألشايا تتبع نفس الإجراءات؛ التحدّث سلباً عن الفريق الإلكتروني؛ قول «هذه مشكلة إلكترونية»؛ صرف الزبون دون إرشاد؛ واستخدام لغة تقنية معقّدة. الزبائن يقدّرون التواصل الواضح الواثق الصادق — والتحقّق أفضل من التخمين."
+      },
+      "source": {
+        "en": "Supporting Online Customers",
+        "ar": "دعم زبائن التسوّق الإلكتروني"
+      }
+    }
+  ]
+}

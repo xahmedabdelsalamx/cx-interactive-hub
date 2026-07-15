@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "division": "shared",
+    "title": "ATLAS Library — Shared (all divisions)",
+    "note": "OPTIONAL. Cards here appear in EVERY division. Use only for genuinely brand-neutral content. Prefer division-specific wording where the voice matters. Leave 'cards' empty if unused."
+  },
+  "cards": []
+}

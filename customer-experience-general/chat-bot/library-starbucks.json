@@ -1,0 +1,979 @@
+{
+  "meta": {
+    "division": "starbucks",
+    "title": "ATLAS Library — Starbucks (Art of Connection)",
+    "note": "Only edit this file to change STARBUCKS content. Replace the example card with real topics.",
+    "videoTypes": "link | youtube | stream | mp4"
+  },
+  "cards": [
+    {
+      "id": "sb-3cs",
+      "keywords_en": "3cs three cs connect care contribute meaningful connection framework model seen served value",
+      "keywords_ar": "الثلاثة سي تواصل اهتمام إضافة نموذج إطار مرئي خدمة قيمة زبون عميل ضيف",
+      "en": {
+        "title": "The 3Cs of meaningful connection",
+        "body": "Great service is expected — connection is what customers remember. CONNECT: make the customer feel seen, not just served. CARE: show empathy, curiosity and genuine warmth. CONTRIBUTE: add value to their day, not just their order. When you do all three, the experience becomes more than a transaction — it becomes a reason to return."
+      },
+      "ar": {
+        "title": "الـ 3Cs للتواصل الحقيقي",
+        "body": "الخدمة الجيدة أمر متوقّع — أما التواصل فهو ما يتذكّره الزبون. التواصل (Connect): اجعل الزبون يشعر بأنه مرئي لا مجرد مخدوم. الاهتمام (Care): أظهر التعاطف والفضول والدفء الصادق. الإضافة (Contribute): أضف قيمة ليومه لا لطلبه فقط. حين تفعل الثلاثة معاً، تتحوّل التجربة من معاملة إلى سبب للعودة."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-connect",
+      "keywords_en": "connect first c name notice order repeat back regular drink welcome back warm tone eye contact trust",
+      "keywords_ar": "تواصل السي الأول اسم ملاحظة الطلب تكرار مشروب معتاد أهلاً بعودتك نبرة دافئة تواصل بصري ثقة زبون عميل ضيف",
+      "en": {
+        "title": "CONNECT — rebuild trust, one customer at a time",
+        "body": "Learn and use their name — remind them they're not just another order. Notice their order or cues and repeat it back to show you're present. Remember their regular drink — it shows you were really listening. Welcome them back to rebuild familiarity one visit at a time. Use a warm tone and eye contact to create a space that feels safe, not rushed. Ask yourself: would this customer say \"they know me here\"?"
+      },
+      "ar": {
+        "title": "التواصل — إعادة بناء الثقة زبوناً تلو الآخر",
+        "body": "اعرف اسمه واستخدمه — ذكّره بأنه ليس مجرد طلب آخر. لاحظ طلبه أو إشاراته وكرّرها لتُظهر أنك حاضر. تذكّر مشروبه المعتاد — فهذا يُظهر أنك كنت تصغي فعلاً. رحّب بعودته لتبني الألفة زيارة بعد زيارة. استخدم نبرة دافئة وتواصلاً بصرياً لتصنع مساحة آمنة لا مستعجلة. اسأل نفسك: هل سيقول هذا الزبون «إنهم يعرفونني هنا»؟"
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-care",
+      "keywords_en": "care second c open ended questions mood energy tone pace culturally aware empathy not script transaction",
+      "keywords_ar": "اهتمام السي الثاني أسئلة مفتوحة مزاج طاقة نبرة إيقاع وعي ثقافي تعاطف ليس نصاً معاملة زبون عميل ضيف",
+      "en": {
+        "title": "CARE — show real interest in your customer",
+        "body": "Ask open-ended questions to invite a real moment. Notice mood and energy, and adjust your tone and pace. Be culturally aware and appropriate — what feels warm in one context might feel off in another. React with empathy, not a script — a human reaction, not a rehearsed line. Don't treat your customers as a transaction. When we care enough to notice, we create moments that last."
+      },
+      "ar": {
+        "title": "الاهتمام — أظهر اهتماماً حقيقياً بزبونك",
+        "body": "اطرح أسئلة مفتوحة تدعو للحظة حقيقية. لاحظ المزاج والطاقة، وعدّل نبرتك وإيقاعك. كن واعياً ثقافياً ولائقاً — فما يبدو دافئاً في سياق قد يبدو غريباً في آخر. تفاعل بتعاطف لا بنص محفوظ — رد إنساني لا جملة مكرّرة. لا تعامل زبونك كمعاملة. حين نهتم بما يكفي لنلاحظ، نصنع لحظات تبقى."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-contribute",
+      "keywords_en": "contribute third c add value add ons tips pairing suggestions memorable moments upselling personal not pushy",
+      "keywords_ar": "إضافة السي الثالث قيمة إضافات نصائح اقتراحات متناغمة لحظات تذكر بيع أعلى شخصي غير ملح زبون عميل ضيف",
+      "en": {
+        "title": "CONTRIBUTE — make it memorable, not transactional",
+        "body": "Add value to the experience, not just the order. Recommend relevant add-ons based on what they enjoy. Offer helpful tips and pairing suggestions like a friend would. Create memorable little moments they'll talk about later. Try \"Since you liked that, would you enjoy this?\" or \"Most guests love pairing this with…\" When it feels personal, not pushy — that's when upselling becomes loyalty-building."
+      },
+      "ar": {
+        "title": "الإضافة — اجعلها تُذكر لا مجرد معاملة",
+        "body": "أضف قيمة للتجربة لا للطلب فقط. أوصِ بإضافات مناسبة بناءً على ما يحبّه. قدّم نصائح واقتراحات متناغمة كما يفعل الصديق. اصنع لحظات صغيرة تُذكر يتحدّث عنها لاحقاً. جرّب «بما أنك أحببت ذاك، هل يعجبك هذا؟» أو «معظم الزبائن يحبّون تناول هذا مع…». حين تبدو شخصية لا ملحّة — عندها يتحوّل البيع الأعلى إلى بناء ولاء."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-trust",
+      "keywords_en": "builds trust vs breaks 3 seconds greet name present listen smile thank you robotic bored sighing colleague pushy",
+      "keywords_ar": "يبني الثقة مقابل يكسرها ثلاث ثوان تحية اسم حاضر إصغاء ابتسامة شكر آلي ملل تنهد زميل ملح زبون عميل ضيف",
+      "en": {
+        "title": "What builds trust vs what breaks it",
+        "body": "BUILDS TRUST: greet warmly within 3 seconds anywhere in the store; use the customer's name if known; be present and listen without rushing; finish with a smile and a thank you; make voice and body language match your words. BREAKS TRUST: ignoring or delaying acknowledgement; complaining, sighing or showing frustration; talking to a colleague during the interaction; sounding robotic or bored or jumping straight to process; overstepping by being too personal or too pushy."
+      },
+      "ar": {
+        "title": "ما يبني الثقة وما يكسرها",
+        "body": "يبني الثقة: الترحيب الحار خلال ٣ ثوانٍ في أي مكان بالمتجر؛ استخدام اسم الزبون إن عرفته؛ الحضور والإصغاء دون استعجال؛ الختام بابتسامة وشكر؛ توافق صوتك ولغة جسدك مع كلماتك. ويكسر الثقة: تجاهل الزبون أو تأخير الترحيب؛ التذمّر أو التنهّد أو إظهار الانزعاج؛ التحدّث مع زميل أثناء التعامل؛ الصوت الآلي أو الممل أو القفز مباشرة للإجراء؛ تجاوز الحدود بالإفراط في الشخصنة أو الإلحاح."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-why",
+      "keywords_en": "why customers return not just coffee how you make them feel welcomed heard inspired recognized ipt loyalty",
+      "keywords_ar": "لماذا يعود الزبائن ليست القهوة فقط كيف تجعلهم يشعرون ترحيب مسموع إلهام تقدير ولاء زبون عميل ضيف",
+      "en": {
+        "title": "Why customers return (or don't)",
+        "body": "It's not just the coffee — it's how you make them feel. Customers return when they feel genuinely welcomed, heard and understood, inspired to try something new tailored for them, and recognised and valued as regulars. The product can be perfect, but if the experience lacks heart they won't remember it and they won't return. Consistent connection means higher IPT and stronger loyalty."
+      },
+      "ar": {
+        "title": "لماذا يعود الزبائن (أو لا يعودون)",
+        "body": "ليست القهوة وحدها — بل كيف تجعلهم يشعرون. يعود الزبائن حين يشعرون بترحيب صادق، وبأنهم مسموعون ومفهومون، وملهَمون لتجربة شيء جديد مخصّص لهم، ومقدَّرون كزبائن منتظمين. قد يكون المنتج مثالياً، لكن إن خلت التجربة من القلب فلن يتذكّروها ولن يعودوا. التواصل المستمر يعني عدد قطع أعلى وولاءً أقوى."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-smile",
+      "keywords_en": "smile first body language before words eye contact facing open posture distractions hospitality begins",
+      "keywords_ar": "ابتسم أولاً لغة الجسد قبل الكلمات تواصل بصري مواجهة وضعية منفتحة مشتتات ضيافة زبون عميل ضيف",
+      "en": {
+        "title": "Smile first",
+        "body": "Hospitality begins before words — positive body language communicates warmth immediately. Simple habits: smiling naturally, making appropriate eye contact, facing the customer, maintaining an open posture, and avoiding distractions. Customers often remember how we welcomed them long after they've finished their drink."
+      },
+      "ar": {
+        "title": "ابتسم أولاً",
+        "body": "الضيافة تبدأ قبل الكلمات — لغة الجسد الإيجابية تنقل الدفء فوراً. عادات بسيطة: ابتسامة طبيعية، وتواصل بصري مناسب، ومواجهة الزبون، ووضعية منفتحة، وتجنّب المشتتات. غالباً ما يتذكّر الزبائن كيف رحّبنا بهم بعد فترة طويلة من انتهاء مشروبهم."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-returning",
+      "keywords_en": "recognising returning customers name familiar beverage welcome back great to see you again belonging regulars",
+      "keywords_ar": "التعرف على الزبائن العائدين اسم مشروب مألوف أهلاً بعودتك سعدنا برؤيتك انتماء منتظمين زبون عميل ضيف",
+      "en": {
+        "title": "Recognising returning customers",
+        "body": "One of the most memorable Starbucks experiences is being recognised. Whenever possible: welcome returning customers warmly, remember their name where appropriate, recognise familiar beverage choices, and thank them for coming back. Even a simple \"Welcome back! Great to see you again\" can make a customer feel valued. Recognition creates belonging."
+      },
+      "ar": {
+        "title": "التعرّف على الزبائن العائدين",
+        "body": "من أكثر تجارب ستاربكس بقاءً في الذاكرة أن يُتعرَّف عليك. وحين يكون ممكناً: رحّب بالزبائن العائدين بحرارة، وتذكّر اسمه حين يكون مناسباً، وتعرّف على خياراته المعتادة من المشروبات، واشكره على عودته. حتى عبارة بسيطة مثل «أهلاً بعودتك! سعدنا برؤيتك مجدداً» تكفي ليشعر بالتقدير. التقدير يصنع الانتماء."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-busy-connect",
+      "keywords_en": "connection during busy times peak greeting while waiting eye contact thanking patience speed essential",
+      "keywords_ar": "التواصل في أوقات الذروة ترحيب أثناء الانتظار تواصل بصري شكر صبر سرعة أساسي زبون عميل ضيف",
+      "en": {
+        "title": "Connection during busy times",
+        "body": "Busy cafés create fast-paced environments, but even during peak periods customers still appreciate feeling acknowledged. Simple actions: greeting customers while they wait, making eye contact, thanking them for their patience, and keeping communication friendly and positive. Speed is important — connection remains essential."
+      },
+      "ar": {
+        "title": "التواصل في أوقات الازدحام",
+        "body": "المقاهي المزدحمة تخلق بيئة سريعة الإيقاع، لكن حتى في أوقات الذروة يقدّر الزبائن الشعور بأنهم ملحوظون. أفعال بسيطة: تحية الزبائن أثناء انتظارهم، والتواصل البصري، وشكرهم على صبرهم، وإبقاء التواصل ودوداً وإيجابياً. السرعة مهمة — والتواصل يبقى أساسياً."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-rewards",
+      "keywords_en": "starbucks rewards aura introduce naturally collecting points member benefits not sales pitch value",
+      "keywords_ar": "مكافآت ستاربكس أورا تقديم طبيعي جمع نقاط مزايا العضوية ليست خطبة بيع قيمة زبون عميل ضيف",
+      "en": {
+        "title": "Introducing Starbucks Rewards or AURA naturally",
+        "body": "Where applicable, loyalty programmes should always feel like a benefit — not a sales conversation. For example: \"Are you collecting your Rewards today?\", \"Let's make sure you receive your AURA points,\" or \"If you're not yet a member, I'd be happy to explain the benefits.\" Focus on the value customers receive rather than encouraging sign-ups."
+      },
+      "ar": {
+        "title": "تقديم مكافآت ستاربكس أو أورا بشكل طبيعي",
+        "body": "حين ينطبق الأمر، يجب أن تبدو برامج الولاء ميزة دائماً — لا حواراً بيعياً. مثلاً: «هل تجمع مكافآتك اليوم؟»، «لنتأكّد من حصولك على نقاط أورا»، أو «إن لم تكن عضواً بعد، يسعدني أن أشرح لك المزايا». ركّز على القيمة التي يحصل عليها الزبون لا على تشجيع الاشتراك."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sb-welcome-mistakes",
+      "keywords_en": "welcome mistakes avoid without enthusiasm distracted mechanically ignoring returning talking more listening sales pitch",
+      "keywords_ar": "أخطاء الترحيب تجنب دون حماس مشتت آلي تجاهل العائدين الكلام أكثر من الإصغاء خطبة بيع زبون عميل ضيف",
+      "en": {
+        "title": "Common connection mistakes",
+        "body": "Avoid: greeting customers without enthusiasm; looking distracted; speaking mechanically; ignoring returning customers; talking more than listening; forgetting to acknowledge waiting customers; treating loyalty conversations as sales pitches; and focusing only on making beverages instead of making connections. Customers remember how we make them feel."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في التواصل",
+        "body": "تجنّب: تحية الزبائن دون حماس؛ الظهور بمظهر المشتّت؛ الكلام الآلي؛ تجاهل الزبائن العائدين؛ الكلام أكثر من الإصغاء؛ نسيان ملاحظة الزبائن المنتظرين؛ التعامل مع حوارات الولاء كخطب بيع؛ والتركيز على تحضير المشروبات بدل صنع التواصل. الزبائن يتذكّرون كيف جعلناهم يشعرون."
+      },
+      "source": {
+        "en": "Warm Welcome & The Power of Connection",
+        "ar": "الترحيب الحار وقوة التواصل"
+      }
+    },
+    {
+      "id": "sp-understand",
+      "keywords_en": "selling starts understanding questions mood hot iced refreshing indulgent usual order something new",
+      "keywords_ar": "البيع يبدأ بالفهم أسئلة مزاج ساخن مثلج منعش دسم الطلب المعتاد شيء جديد زبون عميل ضيف",
+      "en": {
+        "title": "Selling starts with understanding",
+        "body": "The best recommendation begins with a question. Instead of immediately suggesting products, take time to understand the customer: \"What are you in the mood for today?\", \"Would you like something hot or iced?\", \"Are you looking for something refreshing or more indulgent?\", \"Is this your usual order, or would you like to try something new?\" The better you understand the customer, the more helpful your recommendation becomes."
+      },
+      "ar": {
+        "title": "البيع يبدأ بالفهم",
+        "body": "أفضل توصية تبدأ بسؤال. بدل اقتراح المنتجات فوراً، خذ وقتاً لفهم الزبون: «ما الذي يناسب مزاجك اليوم؟»، «تفضّله ساخناً أم مثلجاً؟»، «تبحث عن شيء منعش أم أكثر دسامة؟»، «هل هذا طلبك المعتاد أم تودّ تجربة شيء جديد؟» كلما فهمت الزبون أكثر، كانت توصيتك أنفع."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-story",
+      "keywords_en": "every beverage story flavour aroma texture seasonal ingredients popular unique caramel smooth coffee",
+      "keywords_ar": "لكل مشروب قصة نكهة رائحة قوام مكونات موسمية رائج فريد كراميل قهوة ناعمة زبون عميل ضيف",
+      "en": {
+        "title": "Every beverage has a story",
+        "body": "Customers enjoy hearing what makes a beverage special. Rather than reading the menu, describe the experience — talk about flavour, aroma, texture, seasonal ingredients, popular favourites, and what makes it unique. Instead of \"this is our new beverage,\" try: \"If you enjoy smooth coffee with a hint of caramel, many customers have been loving this seasonal favourite.\" Your enthusiasm creates curiosity."
+      },
+      "ar": {
+        "title": "لكل مشروب قصة",
+        "body": "يستمتع الزبائن بمعرفة ما يجعل المشروب مميزاً. بدل القراءة من القائمة، صف التجربة — تحدّث عن النكهة والرائحة والقوام والمكوّنات الموسمية والخيارات المفضّلة وما يجعله فريداً. بدل «هذا مشروبنا الجديد» جرّب: «إن كنت تحب القهوة الناعمة بلمسة كراميل، فكثير من الزبائن يعشقون هذا الخيار الموسمي». حماسك يصنع الفضول."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-fits",
+      "keywords_en": "recommend what fits energy boost comforting refreshing treat mood time of day weather taste dietary",
+      "keywords_ar": "أوصِ بما يناسب دفعة طاقة مريح منعش تدليل مزاج وقت اليوم طقس ذوق غذائي زبون عميل ضيف",
+      "en": {
+        "title": "Recommend what fits the customer",
+        "body": "Every customer visits for a different reason — some need an energy boost, some want a comforting drink, some are looking for something refreshing, others simply want to treat themselves. Adapt your recommendations based on mood, time of day, weather, taste preferences, dietary requirements, and familiarity with the menu. Personalised recommendations always feel more meaningful."
+      },
+      "ar": {
+        "title": "أوصِ بما يناسب الزبون",
+        "body": "كل زبون يزورنا لسبب مختلف — بعضهم يحتاج دفعة طاقة، وبعضهم يريد مشروباً مريحاً، وبعضهم يبحث عن شيء منعش، وآخرون يريدون تدليل أنفسهم فحسب. كيّف توصياتك حسب المزاج، ووقت اليوم، والطقس، وتفضيلات الذوق، والمتطلبات الغذائية، ومدى معرفته بالقائمة. التوصيات المخصّصة تبدو دائماً أكثر معنى."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-seasonal",
+      "keywords_en": "seasonal favourites limited time flavours new launches featured bakery exclusive promotions excitement discover",
+      "keywords_ar": "الخيارات الموسمية وقت محدود نكهات إطلاقات جديدة مخبوزات مميزة عروض حصرية حماس اكتشاف زبون عميل ضيف",
+      "en": {
+        "title": "Introduce seasonal favourites",
+        "body": "Seasonal beverages create excitement. Where available, confidently introduce limited-time beverages, seasonal flavours, new menu launches, featured bakery items and exclusive promotions. Customers often enjoy discovering something new, especially when it's recommended with genuine enthusiasm."
+      },
+      "ar": {
+        "title": "قدّم الخيارات الموسمية",
+        "body": "المشروبات الموسمية تصنع حماساً. وحيثما توفّرت، قدّم بثقة المشروبات محدودة الوقت، والنكهات الموسمية، وإطلاقات القائمة الجديدة، والمخبوزات المميزة، والعروض الحصرية. غالباً ما يستمتع الزبائن باكتشاف الجديد، خاصة حين يُقدَّم بحماس صادق."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-custom",
+      "keywords_en": "power customisation milk choices espresso strength syrups foam temperature size decaf make it their own",
+      "keywords_ar": "قوة التخصيص خيارات الحليب قوة الإسبريسو شراب رغوة حرارة حجم منزوع الكافيين زبون عميل ضيف",
+      "en": {
+        "title": "The power of customisation",
+        "body": "One of the things customers love most about Starbucks is making a beverage their own. Help them personalise by suggesting options such as milk choices, espresso strength, syrups, foam preferences, temperature, drink size, and decaffeinated options where available. Customisation isn't about making the order more complicated — it's about helping customers enjoy a drink that's perfect for them."
+      },
+      "ar": {
+        "title": "قوة التخصيص",
+        "body": "من أكثر ما يحبّه الزبائن في ستاربكس أن يصنعوا مشروبهم على ذوقهم. ساعدهم على التخصيص باقتراح خيارات مثل نوع الحليب، وقوة الإسبريسو، والشراب المنكّه، وتفضيلات الرغوة، ودرجة الحرارة، وحجم المشروب، والخيارات منزوعة الكافيين حيث تتوفر. التخصيص ليس تعقيداً للطلب — بل مساعدة الزبون على الاستمتاع بمشروب مثالي له."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-pairings",
+      "keywords_en": "thoughtful pairings pastry morning coffee sandwich lunch cake dessert afternoon light snack why works",
+      "keywords_ar": "اقتراحات متناغمة معجنات قهوة الصباح ساندويتش غداء كيك حلوى بعد الظهر وجبة خفيفة زبون عميل ضيف",
+      "en": {
+        "title": "Thoughtful pairings",
+        "body": "A great beverage is often even better with the right food. Recommend pairings that naturally complement the customer's choice: a pastry with a morning coffee, a sandwich for lunchtime, a cake or dessert with an afternoon beverage, or a light snack alongside a refreshing drink. Explain why the pairing works — recommendations should always enhance the experience."
+      },
+      "ar": {
+        "title": "الاقتراحات المتناغمة",
+        "body": "المشروب الرائع يصبح أفضل غالباً مع الطعام المناسب. أوصِ بما يكمّل اختيار الزبون طبيعياً: معجنات مع قهوة الصباح، أو ساندويتش لوقت الغداء، أو كيك أو حلوى مع مشروب بعد الظهر، أو وجبة خفيفة مع مشروب منعش. واشرح لماذا يتناغم الاثنان — فالتوصية يجب أن تُثري التجربة دائماً."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-value",
+      "keywords_en": "adding value not pressure anything else many customers enjoy pairing freshly baked helpful not persuasive",
+      "keywords_ar": "إضافة قيمة لا ضغطاً أي شيء آخر كثير من الزبائن يستمتعون طازج مفيد لا إقناعي زبون عميل ضيف",
+      "en": {
+        "title": "Adding value, not pressure",
+        "body": "Customers appreciate honest recommendations — focus on improving their visit rather than increasing the size of the order. Instead of asking \"Would you like anything else?\", try: \"Many customers enjoy pairing this drink with one of our freshly baked pastries, if you're looking for a little something alongside it.\" Recommendations should feel helpful — not persuasive."
+      },
+      "ar": {
+        "title": "إضافة قيمة لا ضغطاً",
+        "body": "الزبائن يقدّرون التوصيات الصادقة — ركّز على تحسين زيارتهم لا على تكبير الطلب. بدل السؤال «هل تريد شيئاً آخر؟» جرّب: «كثير من الزبائن يستمتعون بهذا المشروب مع إحدى معجناتنا الطازجة، إن كنت تودّ شيئاً بجانبه». يجب أن تبدو التوصية مفيدة — لا إقناعية."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-premium",
+      "keywords_en": "premium choices natural larger size extra espresso shot bean selection whole bean home explain benefit expensive",
+      "keywords_ar": "خيارات مميزة طبيعي حجم أكبر جرعة إسبريسو إضافية اختيار حبوب حبوب كاملة للمنزل اشرح الفائدة غالي زبون عميل ضيف",
+      "en": {
+        "title": "Premium choices should feel natural",
+        "body": "Some customers appreciate exploring premium options: a larger size for longer enjoyment, an additional espresso shot, a premium coffee bean selection, a featured handcrafted beverage, or a speciality whole bean coffee for home. Always explain the benefit — and never assume customers want the most expensive option."
+      },
+      "ar": {
+        "title": "الخيارات المميزة يجب أن تبدو طبيعية",
+        "body": "بعض الزبائن يقدّرون استكشاف الخيارات المميزة: حجم أكبر للاستمتاع لوقت أطول، أو جرعة إسبريسو إضافية، أو اختيار حبوب قهوة مميزة، أو مشروب مصنوع يدوياً مميز، أو قهوة حبوب كاملة مختصة للمنزل. اشرح الفائدة دائماً — ولا تفترض أبداً أن الزبون يريد الخيار الأغلى."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-confidence",
+      "keywords_en": "recommend confidence know menu ingredients flavour profiles brewing methods pairings launches customisations knowledge",
+      "keywords_ar": "التوصية بثقة معرفة القائمة مكونات ملامح النكهة طرق التحضير اقتراحات إطلاقات تخصيصات معرفة زبون عميل ضيف",
+      "en": {
+        "title": "Recommend with confidence",
+        "body": "Customers trust partners who know the menu. Build confidence by understanding beverage ingredients, flavour profiles, brewing methods, food pairings, seasonal launches, and popular customisations. Knowledge creates confidence, and confidence builds trust."
+      },
+      "ar": {
+        "title": "أوصِ بثقة",
+        "body": "الزبائن يثقون بالشركاء الذين يعرفون القائمة. ابنِ ثقتك بفهم مكوّنات المشروبات، وملامح النكهات، وطرق التحضير، والاقتران بالطعام، والإطلاقات الموسمية، والتخصيصات الشائعة. المعرفة تصنع الثقة، والثقة تبني الاطمئنان."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sp-mistakes",
+      "keywords_en": "selling mistakes avoid same beverage everyone too quickly reading menu without understanding coffee terminology declined script",
+      "keywords_ar": "أخطاء البيع تجنب نفس المشروب للجميع بسرعة القراءة من القائمة دون فهم مصطلحات القهوة رفض نص زبون عميل ضيف",
+      "en": {
+        "title": "Common selling mistakes",
+        "body": "Avoid: recommending the same beverage to every customer; speaking too quickly; reading directly from the menu; suggesting products without understanding preferences; using complicated coffee terminology; continuing to recommend after the customer has declined; and treating recommendations like a sales script. Customers appreciate guidance — not pressure."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في البيع",
+        "body": "تجنّب: التوصية بنفس المشروب لكل زبون؛ التحدّث بسرعة؛ القراءة مباشرة من القائمة؛ اقتراح منتجات دون فهم التفضيلات؛ استخدام مصطلحات قهوة معقّدة؛ مواصلة التوصية بعد رفض الزبون؛ والتعامل مع التوصيات كنص بيع. الزبائن يقدّرون الإرشاد — لا الضغط."
+      },
+      "source": {
+        "en": "The Art of Selling Starbucks Products",
+        "ar": "فن بيع منتجات ستاربكس"
+      }
+    },
+    {
+      "id": "sh-sampling",
+      "keywords_en": "sampling curiosity taste invitation discover seasonal new flavour roast confident pushy inspire",
+      "keywords_ar": "تذوق فضول عينة دعوة اكتشاف موسمي نكهة جديدة تحميص ثقة إلحاح إلهام زبون عميل ضيف",
+      "en": {
+        "title": "Every sample creates curiosity",
+        "body": "Sampling is more than offering a taste — it's an invitation to discover something new. A thoughtfully offered sample helps customers try a seasonal beverage, discover a new flavour, experience a different roast, explore new food items, and feel more confident trying something different. Sampling should always feel welcoming, never pushy. The goal is to inspire curiosity."
+      },
+      "ar": {
+        "title": "كل عيّنة تصنع فضولاً",
+        "body": "التذوّق أكثر من تقديم طعم — إنه دعوة لاكتشاف شيء جديد. العيّنة المقدّمة بعناية تساعد الزبون على تجربة مشروب موسمي، واكتشاف نكهة جديدة، وتذوّق تحميص مختلف، واستكشاف أصناف طعام جديدة، والشعور بثقة أكبر لتجربة شيء مختلف. يجب أن يبدو التذوّق مرحّباً دائماً لا ملحّاً. الهدف إثارة الفضول."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-offer",
+      "keywords_en": "offer samples enthusiasm smile eye contact explain tasting why you enjoy invite sharing seasonal today",
+      "keywords_ar": "قدم العينات بحماس ابتسامة تواصل بصري اشرح التذوق لماذا تحبه دعوة مشاركة موسمي اليوم زبون عميل ضيف",
+      "en": {
+        "title": "Offer samples with enthusiasm",
+        "body": "When offering samples: smile, make eye contact, briefly explain what customers are tasting, share why you enjoy it, and invite customers to discover something new. For example: \"We're sharing samples of our new seasonal beverage today if you'd like to try it.\" A friendly invitation often creates a memorable moment."
+      },
+      "ar": {
+        "title": "قدّم العينات بحماس",
+        "body": "عند تقديم العينات: ابتسم، وتواصل بالعين، واشرح باختصار ما يتذوّقونه، وشارك سبب حبّك له، وادعُ الزبائن لاكتشاف شيء جديد. مثلاً: «نقدّم اليوم عينات من مشروبنا الموسمي الجديد إن أحببت تجربته». الدعوة الودودة غالباً تصنع لحظة تُذكر."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-handoff",
+      "keywords_en": "hand off more than delivering drink personal moment call name clearly smile eye contact confidently thank",
+      "keywords_ar": "التسليم أكثر من تقديم مشروب لحظة شخصية نداء الاسم بوضوح ابتسامة تواصل بصري بثقة شكر زبون عميل ضيف",
+      "en": {
+        "title": "The hand-off is more than delivering a drink",
+        "body": "The hand-off is one of the most personal moments of the customer journey — it's when preparation becomes connection. Whenever possible: call the customer's name clearly, smile, make eye contact, hand over the beverage confidently, and thank the customer sincerely. A simple interaction can leave a lasting impression."
+      },
+      "ar": {
+        "title": "التسليم أكثر من تقديم مشروب",
+        "body": "التسليم من أكثر لحظات رحلة الزبون شخصية — إنه اللحظة التي يتحوّل فيها التحضير إلى تواصل. وحين يكون ممكناً: نادِ اسم الزبون بوضوح، وابتسم، وتواصل بالعين، وسلّم المشروب بثقة، واشكر الزبون بصدق. تفاعل بسيط قد يترك انطباعاً باقياً."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-confirm",
+      "keywords_en": "confirm every beverage before handing correct name customisations followed presentation standards accuracy respect",
+      "keywords_ar": "تأكد من كل مشروب قبل التسليم صحيح اسم تخصيصات تم اتباعها تقديم معايير دقة احترام زبون عميل ضيف",
+      "en": {
+        "title": "Confirm every beverage",
+        "body": "Before handing over a drink, take a moment to ensure the correct beverage has been prepared, the customer's name is correct where applicable, customisations have been followed, and the presentation meets Starbucks standards. Accuracy demonstrates respect for the customer's choice."
+      },
+      "ar": {
+        "title": "تأكّد من كل مشروب",
+        "body": "قبل تسليم المشروب، خذ لحظة للتأكّد من أن المشروب الصحيح قد حُضّر، وأن اسم الزبون صحيح حين ينطبق، وأن التخصيصات نُفّذت، وأن التقديم يلبّي معايير ستاربكس. الدقة تُظهر احتراماً لاختيار الزبون."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-personal",
+      "keywords_en": "personal hand off use name wish enjoyable day thank returning caramel macchiato enjoy stopping by",
+      "keywords_ar": "تسليم شخصي استخدم الاسم تمنى يوماً ممتعاً شكر العائدين كراميل ماكياتو استمتع زيارتك زبون عميل ضيف",
+      "en": {
+        "title": "Make every hand-off feel personal",
+        "body": "Whenever appropriate: use the customer's name, wish them an enjoyable day, thank returning customers, and acknowledge regular orders naturally. Examples: \"Here's your Caramel Macchiato. Enjoy!\", \"Thanks for stopping by today,\" \"Have a wonderful afternoon.\" Small moments create lasting memories."
+      },
+      "ar": {
+        "title": "اجعل كل تسليم شخصياً",
+        "body": "حين يكون مناسباً: استخدم اسم الزبون، وتمنَّ له يوماً ممتعاً، واشكر الزبائن العائدين، ولاحظ الطلبات المعتادة بطبيعية. أمثلة: «تفضّل الكراميل ماكياتو. استمتع!»، «شكراً لزيارتك اليوم»، «أتمنى لك بعد ظهر رائع». اللحظات الصغيرة تصنع ذكريات باقية."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-teamwork",
+      "keywords_en": "speed teamwork not individuals communicating clearly supporting organised preparing efficiently helping smooth",
+      "keywords_ar": "السرعة عمل جماعي ليست أفراداً تواصل واضح دعم تنظيم تحضير بكفاءة مساعدة سلاسة زبون عميل ضيف",
+      "en": {
+        "title": "Speed is about teamwork",
+        "body": "Fast service isn't created by individuals — it's created by teams working together. Every partner contributes by communicating clearly, supporting one another, staying organised, preparing efficiently, and helping where needed. When the team works together, customers experience a smooth journey."
+      },
+      "ar": {
+        "title": "السرعة عمل جماعي",
+        "body": "الخدمة السريعة لا يصنعها أفراد — بل فرق تعمل معاً. كل شريك يساهم بالتواصل الواضح، ودعم الآخرين، والبقاء منظّماً، والتحضير بكفاءة، والمساعدة حيث تلزم. وحين يعمل الفريق معاً، يعيش الزبون رحلة سلسة."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-notrushed",
+      "keywords_en": "fast doesnt mean rushed efficiency hurried calm friendly attentive eye contact acknowledge waiting few seconds",
+      "keywords_ar": "السرعة لا تعني الاستعجال كفاءة مستعجل هدوء ودود منتبه تواصل بصري ملاحظة المنتظرين ثوان زبون عميل ضيف",
+      "en": {
+        "title": "Fast doesn't mean rushed",
+        "body": "Customers appreciate efficiency — they don't appreciate feeling hurried. Even during busy periods: stay calm, stay friendly, stay attentive, keep making eye contact, and acknowledge waiting customers. A warm interaction only takes a few seconds, but it leaves a lasting impression."
+      },
+      "ar": {
+        "title": "السرعة لا تعني الاستعجال",
+        "body": "الزبائن يقدّرون الكفاءة — ولا يقدّرون الشعور بالاستعجال. حتى في أوقات الازدحام: ابقَ هادئاً، وودوداً، ومنتبهاً، وواصل التواصل البصري، ولاحظ الزبائن المنتظرين. التفاعل الدافئ لا يستغرق سوى ثوانٍ، لكنه يترك انطباعاً باقياً."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-accuracy",
+      "keywords_en": "accuracy before speed quickly correctly mistakes longer delays checking order carefully quality together",
+      "keywords_ar": "الدقة قبل السرعة بسرعة بشكل صحيح أخطاء تأخير أطول فحص الطلب بعناية جودة معاً زبون عميل ضيف",
+      "en": {
+        "title": "Accuracy before speed",
+        "body": "Preparing beverages quickly is important — preparing them correctly is even more important. Mistakes often create longer delays than taking a few extra moments to check the order carefully. Quality and speed should always work together."
+      },
+      "ar": {
+        "title": "الدقة قبل السرعة",
+        "body": "تحضير المشروبات بسرعة مهم — لكن تحضيرها بشكل صحيح أهم. الأخطاء غالباً تسبّب تأخيراً أطول من أخذ لحظات إضافية لفحص الطلب بعناية. الجودة والسرعة يجب أن تعملا معاً دائماً."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sh-mistakes",
+      "keywords_en": "handoff mistakes avoid without acknowledging calling names unclearly only speed forgetting smile ignoring samples explaining",
+      "keywords_ar": "أخطاء التسليم تجنب دون ملاحظة نداء غير واضح السرعة فقط نسيان الابتسامة تجاهل عينات شرح زبون عميل ضيف",
+      "en": {
+        "title": "Common hand-off mistakes",
+        "body": "Avoid: handing over beverages without acknowledging the customer; calling names unclearly; focusing only on speed; forgetting to smile; ignoring customers waiting at the hand-off area; offering samples without explaining them; rushing conversations; preparing beverages without checking customisations; and letting busy periods reduce hospitality. Great experiences are built through consistency."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في التسليم",
+        "body": "تجنّب: تسليم المشروبات دون ملاحظة الزبون؛ نداء الأسماء بشكل غير واضح؛ التركيز على السرعة فقط؛ نسيان الابتسامة؛ تجاهل المنتظرين عند منطقة التسليم؛ تقديم عينات دون شرحها؛ استعجال الحوارات؛ تحضير المشروبات دون التحقق من التخصيصات؛ والسماح للازدحام بتقليل الضيافة. التجارب الرائعة تُبنى بالاستمرارية."
+      },
+      "source": {
+        "en": "Sampling, Hand-Off & Speed of Service",
+        "ar": "التذوق والتسليم وسرعة الخدمة"
+      }
+    },
+    {
+      "id": "sl-loyalty",
+      "keywords_en": "loyalty begins every visit not rewards alone warm welcome friendly handcrafted quality recognition reliable",
+      "keywords_ar": "الولاء يبدأ بكل زيارة ليست المكافآت وحدها ترحيب دافئ ودود جودة مصنوعة يدوياً تقدير موثوقية زبون عميل ضيف",
+      "en": {
+        "title": "Loyalty begins with every visit",
+        "body": "Loyalty isn't created through rewards alone — it begins with how customers feel each time they visit. Customers return because they consistently experience a warm welcome, friendly partners, handcrafted quality, personal recognition, genuine connection and reliable service. Every positive interaction strengthens that relationship."
+      },
+      "ar": {
+        "title": "الولاء يبدأ من كل زيارة",
+        "body": "الولاء لا تصنعه المكافآت وحدها — بل يبدأ بشعور الزبون في كل زيارة. يعود الزبائن لأنهم يجدون باستمرار ترحيباً دافئاً، وشركاء ودودين، وجودة مصنوعة يدوياً، وتقديراً شخصياً، وتواصلاً صادقاً، وخدمة موثوقة. كل تفاعل إيجابي يقوّي هذه العلاقة."
+      },
+      "source": {
+        "en": "The Power of Loyalty & Service Recovery",
+        "ar": "قوة الولاء ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "sl-relationships",
+      "keywords_en": "loyalty about relationships rewards encourage return give reason stay smile listen personalise care consistency",
+      "keywords_ar": "الولاء علاقات المكافآت تشجع العودة سبب للبقاء ابتسامة إصغاء تخصيص عناية استمرارية زبون عميل ضيف",
+      "en": {
+        "title": "Loyalty is about relationships",
+        "body": "Rewards encourage customers to return; relationships give them a reason to stay. Customers remember partners who smile, listen, personalise recommendations, prepare beverages with care, and create genuine moments of connection. Loyalty grows through consistency."
+      },
+      "ar": {
+        "title": "الولاء علاقات",
+        "body": "المكافآت تشجّع الزبون على العودة، أما العلاقات فتمنحه سبباً للبقاء. الزبائن يتذكّرون الشركاء الذين يبتسمون، ويصغون، ويخصّصون توصياتهم، ويحضّرون المشروبات بعناية، ويصنعون لحظات تواصل صادقة. الولاء ينمو بالاستمرارية."
+      },
+      "source": {
+        "en": "The Power of Loyalty & Service Recovery",
+        "ar": "قوة الولاء ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "sl-concerns",
+      "keywords_en": "every concern deserves attention beverage prepared incorrectly order delay missing item customisation quality misunderstanding",
+      "keywords_ar": "كل شكوى تستحق اهتماماً مشروب حُضر بشكل خاطئ تأخير طلب صنف ناقص تخصيص جودة سوء فهم زبون عميل ضيف",
+      "en": {
+        "title": "Every concern deserves attention",
+        "body": "Occasionally customers may experience a beverage prepared incorrectly, an order delay, a missing item, a customisation that wasn't followed, a quality concern, or a misunderstanding. No matter the situation, every concern deserves to be taken seriously."
+      },
+      "ar": {
+        "title": "كل شكوى تستحق الاهتمام",
+        "body": "أحياناً قد يواجه الزبون مشروباً حُضّر بشكل خاطئ، أو تأخيراً في الطلب، أو صنفاً ناقصاً، أو تخصيصاً لم يُنفّذ، أو مسألة جودة، أو سوء فهم. ومهما كان الموقف، كل شكوى تستحق أن تُؤخذ على محمل الجد."
+      },
+      "source": {
+        "en": "The Power of Loyalty & Service Recovery",
+        "ar": "قوة الولاء ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "sl-makeitright",
+      "keywords_en": "make it right remaking beverage correcting order replacing item shift supervisor store manager approved procedures",
+      "keywords_ar": "أصلح الأمر إعادة تحضير المشروب تصحيح الطلب استبدال صنف مشرف الوردية مدير المتجر إجراءات معتمدة زبون عميل ضيف",
+      "en": {
+        "title": "Make it right",
+        "body": "When something hasn't met Starbucks standards, our priority is restoring the customer's confidence. Depending on the situation and store procedures this may include remaking the beverage, correcting the order, replacing an item, seeking support from the shift supervisor or store manager when needed, and following approved recovery procedures. The objective is simple: leave the customer feeling cared for."
+      },
+      "ar": {
+        "title": "أصلح الأمر",
+        "body": "حين لا يرقى شيء لمعايير ستاربكس، أولويتنا استعادة ثقة الزبون. وحسب الموقف وإجراءات المتجر قد يشمل ذلك إعادة تحضير المشروب، أو تصحيح الطلب، أو استبدال صنف، أو طلب دعم مشرف الوردية أو مدير المتجر عند الحاجة، واتباع إجراءات المعالجة المعتمدة. الهدف بسيط: أن يغادر الزبون وهو يشعر بالاهتمام."
+      },
+      "source": {
+        "en": "The Power of Loyalty & Service Recovery",
+        "ar": "قوة الولاء ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "sl-recover-trust",
+      "keywords_en": "recovering trust not complete when new beverage handed reconnect smile thank patience happy before leave",
+      "keywords_ar": "استعادة الثقة لا تنتهي بتسليم المشروب الجديد إعادة تواصل ابتسامة شكر صبر سعيد قبل المغادرة زبون عميل ضيف",
+      "en": {
+        "title": "Recovering trust",
+        "body": "A service recovery isn't complete when the new beverage is handed over. Take a moment to reconnect: smile, thank the customer for their patience, and make sure they're happy before they leave. Sometimes the recovery creates an even stronger impression than the original order."
+      },
+      "ar": {
+        "title": "استعادة الثقة",
+        "body": "معالجة الخدمة لا تكتمل بتسليم المشروب الجديد. خذ لحظة لإعادة التواصل: ابتسم، واشكر الزبون على صبره، وتأكّد من رضاه قبل مغادرته. أحياناً تترك المعالجة انطباعاً أقوى من الطلب الأصلي نفسه."
+      },
+      "source": {
+        "en": "The Power of Loyalty & Service Recovery",
+        "ar": "قوة الولاء ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "sl-mistakes",
+      "keywords_en": "loyalty recovery mistakes avoid interrupting defensive blaming partner thats just how its made arguing taste rushing",
+      "keywords_ar": "أخطاء الولاء والمعالجة تجنب مقاطعة دفاع لوم شريك هكذا يُحضر جدال الذوق استعجال زبون عميل ضيف",
+      "en": {
+        "title": "Common loyalty & recovery mistakes",
+        "body": "Avoid: interrupting customers; becoming defensive; blaming another partner; saying \"that's just how it's made\"; arguing about personal taste; ignoring customisation requests; making promises you cannot keep; rushing the recovery; and forgetting to thank the customer. Customers remember how we make them feel during difficult moments."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في الولاء والمعالجة",
+        "body": "تجنّب: مقاطعة الزبائن؛ الدفاع عن النفس؛ لوم شريك آخر؛ قول «هكذا يُحضَّر دائماً»؛ الجدال حول الذوق الشخصي؛ تجاهل طلبات التخصيص؛ قطع وعود لا يمكنك الوفاء بها؛ استعجال المعالجة؛ ونسيان شكر الزبون. الزبائن يتذكّرون كيف جعلناهم يشعرون في اللحظات الصعبة."
+      },
+      "source": {
+        "en": "The Power of Loyalty & Service Recovery",
+        "ar": "قوة الولاء ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "sa-why",
+      "keywords_en": "why frustrated beverage doesnt taste right weak strong hot cold missing customisations waiting wrong order mobile ignored",
+      "keywords_ar": "لماذا محبط المشروب طعمه ليس صحيحاً خفيف قوي ساخن بارد تخصيصات ناقصة انتظار طلب خاطئ موبايل تجاهل زبون عميل ضيف",
+      "en": {
+        "title": "Why customers become frustrated",
+        "body": "Customers don't usually become upset over one small issue. Frustration may be caused by a beverage that doesn't taste right, a coffee that's too weak or too strong, a drink that's too hot or too cold, missing customisations, long waiting times, receiving the wrong order, mobile orders not being ready, or feeling ignored during busy periods. Sometimes the issue is the beverage; sometimes it's how the customer felt."
+      },
+      "ar": {
+        "title": "لماذا ينزعج الزبائن",
+        "body": "لا ينزعج الزبائن عادة بسبب مسألة صغيرة واحدة. قد ينشأ الإحباط من مشروب طعمه ليس كما يجب، أو قهوة خفيفة أو قوية أكثر من اللازم، أو مشروب ساخن أو بارد أكثر من اللازم، أو تخصيصات ناقصة، أو انتظار طويل، أو طلب خاطئ، أو طلب عبر التطبيق غير جاهز، أو الشعور بالتجاهل وقت الازدحام. أحياناً تكون المشكلة في المشروب، وأحياناً في شعور الزبون."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-calm",
+      "keywords_en": "stay calm positive attitude influences conversation speak clearly friendly tone avoid matching reflect energy",
+      "keywords_ar": "ابق هادئاً إيجابياً الموقف يؤثر في الحوار تحدث بوضوح نبرة ودودة تجنب المجاراة يعكسون الطاقة زبون عميل ضيف",
+      "en": {
+        "title": "Stay calm and positive",
+        "body": "When a customer is upset, your attitude can influence the entire conversation. Remain calm, speak clearly, maintain a friendly tone, and avoid matching the customer's frustration. Customers often reflect the energy they receive — a calm partner helps create a calm conversation."
+      },
+      "ar": {
+        "title": "ابقَ هادئاً وإيجابياً",
+        "body": "حين ينزعج الزبون، قد يؤثّر موقفك في الحوار كله. ابقَ هادئاً، وتحدّث بوضوح، وحافظ على نبرة ودودة، وتجنّب مجاراة إحباط الزبون. غالباً ما يعكس الزبائن الطاقة التي يتلقّونها — والشريك الهادئ يصنع حواراً هادئاً."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-quality",
+      "keywords_en": "beverage quality watery doesnt taste like usual not enough coffee too sweet milk isnt right extra hot not what ordered",
+      "keywords_ar": "جودة المشروب مائي ليس كالمعتاد قهوة غير كافية حلو جداً الحليب ليس صحيحاً ساخن إضافي ليس ما طلبته زبون عميل ضيف",
+      "en": {
+        "title": "Beverage quality concerns",
+        "body": "Every handcrafted beverage should meet Starbucks standards. Customers may say: \"My coffee tastes watery,\" \"This doesn't taste like my usual drink,\" \"There's not enough coffee flavour,\" \"It's too sweet,\" \"The milk isn't right,\" \"I asked for extra hot,\" or \"This isn't what I ordered.\" Every concern deserves attention. Taste is personal, but quality is our responsibility."
+      },
+      "ar": {
+        "title": "مخاوف جودة المشروب",
+        "body": "كل مشروب مصنوع يدوياً يجب أن يلبّي معايير ستاربكس. قد يقول الزبون: «قهوتي طعمها مائي»، «هذا ليس طعم مشروبي المعتاد»، «نكهة القهوة غير كافية»، «إنه حلو جداً»، «الحليب ليس صحيحاً»، «طلبته ساخناً إضافياً»، أو «هذا ليس ما طلبته». كل شكوى تستحق الاهتمام. الذوق شخصي، لكن الجودة مسؤوليتنا."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-taste",
+      "keywords_en": "never argue about taste thats how its supposed to taste everyone else likes we made it correctly remake",
+      "keywords_ar": "لا تجادل حول الذوق هكذا يجب أن يكون طعمه الجميع يحبه حضرناه بشكل صحيح إعادة تحضير زبون عميل ضيف",
+      "en": {
+        "title": "Never argue about taste",
+        "body": "If a customer says \"this coffee tastes wrong,\" avoid responses like \"that's how it's supposed to taste,\" \"everyone else likes it,\" or \"we made it correctly.\" Instead focus on the customer's experience: \"I'm sorry it isn't what you were expecting. Let's remake it the way you'd enjoy it.\" Our goal isn't to prove we're right — it's to make the customer's experience right."
+      },
+      "ar": {
+        "title": "لا تجادل أبداً حول الذوق",
+        "body": "إذا قال الزبون «طعم هذه القهوة ليس صحيحاً»، تجنّب ردوداً مثل «هكذا يجب أن يكون طعمها» أو «الجميع يحبها» أو «حضّرناها بشكل صحيح». وركّز بدلاً من ذلك على تجربة الزبون: «آسف لأنه ليس ما توقّعته. لنعد تحضيره بالطريقة التي تستمتع بها». هدفنا ليس إثبات أننا على حق — بل جعل تجربة الزبون صحيحة."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-remake",
+      "keywords_en": "beverage needs remaking apologise confirm preferred double check customisations promptly thank patience",
+      "keywords_ar": "المشروب يحتاج إعادة تحضير اعتذر تأكد من المفضل تحقق مزدوج التخصيصات بسرعة اشكر الصبر زبون عميل ضيف",
+      "en": {
+        "title": "If the beverage needs remaking",
+        "body": "If a remake is appropriate: apologise sincerely, confirm the customer's preferred beverage, double-check any customisations, prepare the replacement promptly, and thank the customer for their patience. A quick, positive recovery often creates stronger loyalty than a perfect first attempt."
+      },
+      "ar": {
+        "title": "إذا احتاج المشروب إعادة تحضير",
+        "body": "إن كانت إعادة التحضير مناسبة: اعتذر بصدق، وتأكّد من المشروب الذي يفضّله الزبون، وراجع التخصيصات مرتين، وحضّر البديل بسرعة، واشكر الزبون على صبره. المعالجة السريعة الإيجابية غالباً تصنع ولاءً أقوى من محاولة أولى مثالية."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-mobile",
+      "keywords_en": "mobile order concerns not ready convenience acknowledge delay check immediately explain reassure same warmth counter",
+      "keywords_ar": "مخاوف طلب التطبيق غير جاهز راحة اعتراف بالتأخير تحقق فوراً اشرح طمأن نفس الدفء الكاونتر زبون عميل ضيف",
+      "en": {
+        "title": "Mobile order concerns",
+        "body": "Customers collecting mobile orders expect convenience. If an order isn't ready: acknowledge the delay, check the order immediately, explain what's happening, reassure the customer that you're resolving it, and thank them for their patience. Treat every mobile order customer with the same warmth as someone ordering at the counter."
+      },
+      "ar": {
+        "title": "مخاوف الطلبات عبر التطبيق",
+        "body": "الزبائن الذين يستلمون طلبات التطبيق يتوقّعون السهولة. وإن لم يكن الطلب جاهزاً: اعترف بالتأخير، وتحقّق من الطلب فوراً، واشرح ما يحدث، وطمئن الزبون أنك تعالج الأمر، واشكره على صبره. عامل كل زبون طلب عبر التطبيق بنفس دفء من يطلب عند الكاونتر."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-ownership",
+      "keywords_en": "take ownership someone else made it barista was busy thats not my station one starbucks one team sorted",
+      "keywords_ar": "تحمل المسؤولية شخص آخر حضره الباريستا كان مشغولاً ليست محطتي ستاربكس واحد فريق واحد زبون عميل ضيف",
+      "en": {
+        "title": "Take ownership",
+        "body": "Even if another partner prepared the beverage, the customer is speaking to you. Avoid saying \"someone else made it,\" \"the barista was busy,\" or \"that's not my station.\" Instead say: \"I'm sorry about that. Let me help get this sorted for you.\" Customers see one Starbucks. One team."
+      },
+      "ar": {
+        "title": "تحمّل المسؤولية",
+        "body": "حتى لو حضّر المشروب شريك آخر، فالزبون يتحدّث إليك أنت. تجنّب قول «شخص آخر حضّره» أو «الباريستا كان مشغولاً» أو «هذه ليست محطتي». وقل بدلاً من ذلك: «آسف على ذلك. دعني أساعدك في حل الأمر». الزبائن يرون ستاربكس واحداً. وفريقاً واحداً."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-support",
+      "keywords_en": "when involve support shift supervisor store manager requests dissatisfied after remake approval escalate unsure",
+      "keywords_ar": "متى تطلب الدعم مشرف الوردية مدير المتجر يطلب غير راض بعد إعادة التحضير موافقة تصعيد غير متأكد زبون عميل ضيف",
+      "en": {
+        "title": "Know when to involve support",
+        "body": "Some situations require assistance from the shift supervisor or store manager. Seek support when: a customer requests a manager, the customer remains dissatisfied after a remake, store approval is required, the situation continues to escalate, or you're unsure of the appropriate solution. Working together ensures the customer receives the best possible support."
+      },
+      "ar": {
+        "title": "اعرف متى تطلب الدعم",
+        "body": "بعض المواقف تحتاج مساعدة مشرف الوردية أو مدير المتجر. اطلب الدعم حين: يطلب الزبون المدير، أو يبقى غير راضٍ بعد إعادة التحضير، أو تُطلب موافقة المتجر، أو يستمر الموقف بالتصاعد، أو لست متأكداً من الحل المناسب. العمل معاً يضمن حصول الزبون على أفضل دعم ممكن."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "sa-reconnect",
+      "keywords_en": "recover connection after resolving reconnect smile hand over confidently thank opportunity make it right impression",
+      "keywords_ar": "استعادة التواصل بعد الحل إعادة تواصل ابتسامة تسليم بثقة شكر فرصة لإصلاح الأمر انطباع زبون عميل ضيف",
+      "en": {
+        "title": "Recover the connection",
+        "body": "After resolving the issue, reconnect with the customer: smile, hand over the new beverage confidently, and thank them sincerely. Simple words like \"Thank you for giving us the opportunity to make it right\" can leave a lasting positive impression."
+      },
+      "ar": {
+        "title": "استعِد التواصل",
+        "body": "بعد حل المشكلة، أعد التواصل مع الزبون: ابتسم، وسلّم المشروب الجديد بثقة، واشكره بصدق. كلمات بسيطة مثل «شكراً لمنحنا فرصة إصلاح الأمر» قد تترك انطباعاً إيجابياً باقياً."
+      },
+      "source": {
+        "en": "Handling Angry Customers (Starbucks)",
+        "ar": "التعامل مع الزبائن الغاضبين (ستاربكس)"
+      }
+    },
+    {
+      "id": "st-different",
+      "keywords_en": "every customer different observe pace body language mood engagement familiarity menu purpose",
+      "keywords_ar": "كل زبون مختلف راقب الإيقاع لغة الجسد المزاج التفاعل معرفة القائمة الغرض عميل ضيف",
+      "en": {
+        "title": "Every customer is different",
+        "body": "Customers visit Starbucks for many reasons, and understanding their purpose helps you provide the right experience. Observe their pace, their body language, their mood, their level of engagement, and their familiarity with the menu. Small observations help create more meaningful interactions. Great service isn't treating every customer the same — it's giving every customer what matters most to them."
+      },
+      "ar": {
+        "title": "كل زبون مختلف",
+        "body": "يزور الزبائن ستاربكس لأسباب كثيرة، وفهم غرضهم يساعدك على تقديم التجربة المناسبة. راقب إيقاعهم، ولغة جسدهم، ومزاجهم، ومستوى تفاعلهم، ومدى معرفتهم بالقائمة. الملاحظات الصغيرة تساعد على صنع تفاعلات أكثر معنى. الخدمة الرائعة ليست معاملة الجميع بنفس الطريقة — بل منح كل زبون ما يهمّه أكثر."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-hurry",
+      "keywords_en": "customer in a hurry watch brief already know order mobile pay before work speed accuracy clear efficient",
+      "keywords_ar": "الزبون المستعجل ساعة مختصر يعرف طلبه تطبيق قبل العمل سرعة دقة وضوح كفاءة عميل ضيف",
+      "en": {
+        "title": "The customer in a hurry",
+        "body": "They often look at their watch, keep conversations brief, already know their order, use Mobile Order & Pay, and visit before work or meetings. They value speed, accuracy and clear communication. Best approach: acknowledge them quickly, confirm the order clearly, keep the interaction friendly but efficient, and keep them informed if there's a delay. Fast service doesn't mean forgetting the connection — a warm smile and a genuine \"Have a great day!\" can be enough."
+      },
+      "ar": {
+        "title": "الزبون المستعجل",
+        "body": "غالباً ينظر إلى ساعته، ويختصر الحديث، ويعرف طلبه مسبقاً، ويستخدم الطلب عبر التطبيق، ويزور قبل العمل أو الاجتماعات. وهو يقدّر السرعة والدقة والتواصل الواضح. أفضل نهج: رحّب به بسرعة، وأكّد الطلب بوضوح، وأبقِ التعامل ودوداً لكن سريعاً، وأبقه على اطلاع إن كان هناك تأخير. الخدمة السريعة لا تعني نسيان التواصل — فابتسامة دافئة و«أتمنى لك يوماً رائعاً» صادقة قد تكفي."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-regular",
+      "keywords_en": "regular customer frequently same beverage familiar partners consistency recognition familiarity name loyalty",
+      "keywords_ar": "الزبون المنتظم متكرر نفس المشروب شركاء مألوفون استمرارية تقدير ألفة اسم ولاء عميل ضيف",
+      "en": {
+        "title": "The regular customer",
+        "body": "They visit frequently, order the same beverage, recognise familiar partners, and appreciate consistency. They value recognition, familiarity and personal connection. Best approach: welcome them warmly, remember their favourite order when possible, use their name where appropriate, and thank them for their continued visits. Feeling recognised creates loyalty."
+      },
+      "ar": {
+        "title": "الزبون المنتظم",
+        "body": "يزور بشكل متكرّر، ويطلب نفس المشروب، ويتعرّف على الشركاء المألوفين، ويقدّر الاستمرارية. وهو يقدّر التقدير والألفة والتواصل الشخصي. أفضل نهج: رحّب به بحرارة، وتذكّر طلبه المفضّل حين يمكن، واستخدم اسمه حين يكون مناسباً، واشكره على زياراته المستمرة. الشعور بالتقدير يصنع الولاء."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-firsttime",
+      "keywords_en": "first time customer longer reading menu questions unsure looking around guidance reassurance recommendations confident",
+      "keywords_ar": "الزبون لأول مرة وقت أطول في القائمة أسئلة متردد ينظر حوله إرشاد طمأنة توصيات واثق عميل ضيف",
+      "en": {
+        "title": "The first-time customer",
+        "body": "They may spend longer reading the menu, ask lots of questions, feel unsure about the choices, and look around before ordering. They value guidance, reassurance and friendly recommendations. Best approach: welcome them warmly, ask about their preferences, explain the menu simply, and recommend popular beverages based on what they enjoy. Help them leave feeling confident."
+      },
+      "ar": {
+        "title": "الزبون لأول مرة",
+        "body": "قد يقضي وقتاً أطول في قراءة القائمة، ويطرح أسئلة كثيرة، ويشعر بالتردّد في الاختيار، وينظر حوله قبل الطلب. وهو يقدّر الإرشاد والطمأنة والتوصيات الودودة. أفضل نهج: رحّب به بحرارة، واسأل عن تفضيلاته، واشرح القائمة ببساطة، وأوصِ بالمشروبات الرائجة بناءً على ما يحبّه. ساعده على المغادرة وهو واثق."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-talkative",
+      "keywords_en": "talkative customer asks about your day work family stories genuine conversation heard aware other waiting",
+      "keywords_ar": "الزبون الاجتماعي يسأل عن يومك عمل عائلة قصص حوار صادق مسموع انتباه للمنتظرين عميل ضيف",
+      "en": {
+        "title": "The talkative customer",
+        "body": "They may ask about your day, talk about their work or family, share stories, and enjoy friendly interactions. They value genuine conversation, feeling heard and friendly connection. Best approach: listen actively, respond naturally, and keep the conversation warm while remaining aware of other waiting customers. Connection should feel genuine without affecting service for others."
+      },
+      "ar": {
+        "title": "الزبون الاجتماعي",
+        "body": "قد يسأل عن يومك، ويتحدّث عن عمله أو عائلته، ويشارك قصصاً، ويستمتع بالتفاعل الودود. وهو يقدّر الحوار الصادق والشعور بأنه مسموع والتواصل الودود. أفضل نهج: أصغِ بفعالية، ورد بطبيعية، وأبقِ الحوار دافئاً مع بقائك منتبهاً للزبائن المنتظرين. يجب أن يكون التواصل صادقاً دون التأثير على خدمة الآخرين."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-quiet",
+      "keywords_en": "quiet customer minimal interaction quick peaceful respect efficiency simplicity avoid forcing conversation less is more",
+      "keywords_ar": "الزبون الهادئ تفاعل قليل سريع هادئ احترام كفاءة بساطة تجنب فرض الحوار الأقل أفضل عميل ضيف",
+      "en": {
+        "title": "The quiet customer",
+        "body": "Not everyone wants conversation. Some customers prefer minimal interaction, quick service and a peaceful experience. They value respect, efficiency and simplicity. Best approach: smile, be polite, avoid forcing conversation, and let the customer set the pace. Sometimes great service is knowing when less is more."
+      },
+      "ar": {
+        "title": "الزبون الهادئ",
+        "body": "ليس الجميع يريد الحديث. بعض الزبائن يفضّلون تفاعلاً أقل، وخدمة سريعة، وتجربة هادئة. وهم يقدّرون الاحترام والكفاءة والبساطة. أفضل نهج: ابتسم، وكن مهذّباً، وتجنّب فرض الحوار، ودع الزبون يحدّد الإيقاع. أحياناً الخدمة الرائعة هي معرفة متى يكون الأقل أفضل."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-families",
+      "keywords_en": "families time to decide childrens options extra space patience carrying kindness flexibility greet everyone children",
+      "keywords_ar": "العائلات وقت للقرار خيارات أطفال مساحة إضافية صبر حمل لطف مرونة رحب بالجميع أطفال زبون عميل ضيف",
+      "en": {
+        "title": "Families",
+        "body": "Families may need time to decide, children's options, extra space, patience and assistance carrying items. They value kindness, flexibility and a welcoming environment. Best approach: greet everyone, speak warmly to children when appropriate, be patient while they order, and offer practical assistance where possible. Small gestures make family visits easier and more enjoyable."
+      },
+      "ar": {
+        "title": "العائلات",
+        "body": "قد تحتاج العائلات وقتاً للقرار، وخيارات للأطفال، ومساحة إضافية، وصبراً، ومساعدة في حمل الأغراض. وهي تقدّر اللطف والمرونة والبيئة المرحّبة. أفضل نهج: رحّب بالجميع، وتحدّث بدفء مع الأطفال حين يكون مناسباً، وكن صبوراً أثناء طلبهم، وقدّم مساعدة عملية حين يمكن. اللفتات الصغيرة تجعل زيارة العائلة أسهل وأمتع."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-working",
+      "keywords_en": "customers working studying calm environment reliable minimal interruptions refills consistency respect space brief",
+      "keywords_ar": "الزبائن العاملون الدارسون بيئة هادئة موثوقية مقاطعات قليلة إعادة تعبئة استمرارية احترام المساحة زبون عميل ضيف",
+      "en": {
+        "title": "Customers working or studying",
+        "body": "Many customers use Starbucks as a place to work or study. They often appreciate a calm environment, reliable service, minimal interruptions, quick refills where available, and consistency. Best approach: respect their space, keep interactions friendly and brief, and maintain a welcoming café environment."
+      },
+      "ar": {
+        "title": "الزبائن العاملون أو الدارسون",
+        "body": "كثير من الزبائن يستخدمون ستاربكس مكاناً للعمل أو الدراسة. وهم غالباً يقدّرون البيئة الهادئة، والخدمة الموثوقة، وقلّة المقاطعات، وإعادة التعبئة السريعة حيث تتوفر، والاستمرارية. أفضل نهج: احترم مساحتهم، وأبقِ التعامل ودوداً ومختصراً، وحافظ على أجواء مقهى مرحّبة."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-celebrating",
+      "keywords_en": "customers celebrating birthdays graduations achievements friends family occasions enthusiasm recognition congratulate memorable",
+      "keywords_ar": "الزبائن المحتفلون أعياد ميلاد تخرج إنجازات أصدقاء عائلة مناسبات حماس تقدير تهنئة زبون عميل ضيف",
+      "en": {
+        "title": "Customers celebrating special moments",
+        "body": "Some customers visit to celebrate birthdays, graduations, achievements, friends meeting, or family occasions. They value enthusiasm, recognition and positive energy. Best approach: celebrate naturally, smile, congratulate them where appropriate, and help make the visit memorable."
+      },
+      "ar": {
+        "title": "الزبائن المحتفلون بلحظات خاصة",
+        "body": "بعض الزبائن يزوروننا للاحتفال بأعياد ميلاد، أو تخرّج، أو إنجازات، أو لقاء أصدقاء، أو مناسبات عائلية. وهم يقدّرون الحماس والتقدير والطاقة الإيجابية. أفضل نهج: احتفل بطبيعية، وابتسم، وهنّئهم حين يكون مناسباً، وساعد في جعل الزيارة تُذكر."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-special",
+      "keywords_en": "customers special requests customise every beverage dietary requirements allergies accuracy attention detail confirm clarify",
+      "keywords_ar": "الزبائن بطلبات خاصة تخصيص كل مشروب متطلبات غذائية حساسية دقة انتباه للتفاصيل تأكيد توضيح زبون عميل ضيف",
+      "en": {
+        "title": "Customers with special requests",
+        "body": "Some customers customise every beverage; others have dietary requirements or allergies. They value accuracy, attention to detail and confidence. Best approach: listen carefully, confirm the order, clarify any customisations, and prepare the beverage according to Starbucks standards. Accuracy builds trust."
+      },
+      "ar": {
+        "title": "الزبائن ذوو الطلبات الخاصة",
+        "body": "بعض الزبائن يخصّصون كل مشروب، وآخرون لديهم متطلبات غذائية أو حساسية. وهم يقدّرون الدقة والانتباه للتفاصيل والثقة. أفضل نهج: أصغِ بعناية، وأكّد الطلب، ووضّح أي تخصيصات، وحضّر المشروب وفق معايير ستاربكس. الدقة تبني الثقة."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-adapting",
+      "keywords_en": "adapting your style dont change who you are how communicate conversation guidance hurry celebrating usual flexibility",
+      "keywords_ar": "تكييف أسلوبك لا تغير من أنت كيف تتواصل حوار إرشاد استعجال احتفال المعتاد مرونة زبون عميل ضيف",
+      "en": {
+        "title": "Adapting your style",
+        "body": "Great partners don't change who they are — they adapt how they communicate. Ask yourself: Does this customer want conversation? Do they need guidance? Are they in a hurry? Are they celebrating? Do they simply want their usual drink? Flexibility creates exceptional experiences."
+      },
+      "ar": {
+        "title": "تكييف أسلوبك",
+        "body": "الشركاء المميزون لا يغيّرون من هم — بل يكيّفون كيف يتواصلون. اسأل نفسك: هل يريد هذا الزبون حواراً؟ هل يحتاج إرشاداً؟ هل هو مستعجل؟ هل يحتفل؟ أم يريد مشروبه المعتاد فقط؟ المرونة تصنع تجارب استثنائية."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    },
+    {
+      "id": "st-mistakes",
+      "keywords_en": "types mistakes avoid treating same assuming talking too much too little ignoring body language rushing first time forgetting regulars impatient",
+      "keywords_ar": "أخطاء الأنواع تجنب معاملة الجميع بنفس الطريقة افتراض كلام كثير قليل تجاهل لغة الجسد استعجال الجدد نسيان المنتظمين زبون عميل ضيف",
+      "en": {
+        "title": "Common mistakes with customer types",
+        "body": "Avoid: treating every customer exactly the same; assuming what customers want; talking too much; talking too little; ignoring body language; rushing first-time visitors; forgetting to recognise regular customers; and becoming impatient with families or indecisive customers. Every customer is unique."
+      },
+      "ar": {
+        "title": "أخطاء شائعة مع أنواع الزبائن",
+        "body": "تجنّب: معاملة كل زبون بنفس الطريقة تماماً؛ افتراض ما يريده الزبون؛ الكلام أكثر من اللازم؛ الكلام أقل من اللازم؛ تجاهل لغة الجسد؛ استعجال زوّار المرة الأولى؛ نسيان تقدير الزبائن المنتظمين؛ ونفاد الصبر مع العائلات أو المترددين. كل زبون فريد."
+      },
+      "source": {
+        "en": "Understanding Different Types of Customers",
+        "ar": "فهم الأنواع المختلفة من الزبائن"
+      }
+    }
+  ]
+}

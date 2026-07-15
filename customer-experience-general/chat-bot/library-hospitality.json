@@ -1,0 +1,775 @@
+{
+  "meta": {
+    "division": "hospitality",
+    "title": "ATLAS Library — Hospitality (Art of Guest Experience)",
+    "note": "Only edit this file to change HOSPITALITY content. Replace the example card with real topics.",
+    "videoTypes": "link | youtube | stream | mp4"
+  },
+  "cards": [
+    {
+      "id": "hw-why",
+      "keywords_en": "why welcome matters 7 seconds first impression 23% spend gen z 89 emotional loyalty 70 stats",
+      "keywords_ar": "لماذا الترحيب مهم سبع ثوان انطباع أول إنفاق جيل زد عاطفي ولاء إحصاءات ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Why the welcome matters",
+        "body": "First impressions form in under 7 seconds — that's all it takes for a guest to decide if they feel seen and valued. Guests who feel welcomed spend up to 23% more and are more likely to return. 89% of Gen Z say experience matters more than price, and 70% of loyalty is emotional, not transactional. When you connect, you create value."
+      },
+      "ar": {
+        "title": "لماذا الترحيب مهم",
+        "body": "يتكوّن الانطباع الأول في أقل من ٧ ثوانٍ — وهذا كل ما يحتاجه الضيف ليقرّر إن كان يشعر بأنه مرئي وذو قيمة. الضيوف الذين يشعرون بالترحيب ينفقون حتى ٢٣٪ أكثر ويعودون غالباً. و٨٩٪ من جيل Z يقولون إن التجربة أهم من السعر، و٧٠٪ من الولاء عاطفي لا تعاملي. حين تتواصل، تصنع قيمة."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-what",
+      "keywords_en": "what makes warm welcome smile eye contact body language tone personal not robotic fast not rushed",
+      "keywords_ar": "ما يصنع ترحيباً حاراً ابتسامة تواصل بصري لغة الجسد نبرة شخصي غير آلي سريع دون استعجال ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "What makes a warm welcome",
+        "body": "It starts in the first few seconds: a real friendly smile, open and positive body language, a warm welcoming tone, and eye contact. Be personal, not robotic — use a friendly greeting, recognise repeat guests when you can, and respect cultural differences and personal space. Think of it as: fast but never rushed, personal but not scripted, friendly but real."
+      },
+      "ar": {
+        "title": "ما الذي يصنع ترحيباً حاراً",
+        "body": "يبدأ في الثواني الأولى: ابتسامة حقيقية ودودة، ولغة جسد منفتحة وإيجابية، ونبرة دافئة مرحّبة، وتواصل بصري. كن شخصياً لا آلياً — استخدم تحية ودودة، وتعرّف على الضيوف المتكرّرين حين تستطيع، واحترم الاختلافات الثقافية والمساحة الشخصية. فكّر فيه هكذا: سريع لكن غير مستعجل، شخصي لكن غير محفوظ، ودود لكن حقيقي."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-personalize",
+      "keywords_en": "personalizing welcome not one size fits all name returning match mood energy space culture age adapt",
+      "keywords_ar": "تخصيص الترحيب ليس مقاساً واحداً اسم عائد مجاراة المزاج طاقة مساحة ثقافة عمر تكيف ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Personalising the welcome",
+        "body": "A warm welcome isn't one-size-fits-all. Watch, listen and adapt: use the guest's name when known, acknowledge returning guests, match their mood and energy, respect their space and timing, and adjust based on culture, age and situation. If they seem quiet, match that; if they're upbeat, join in. A great welcome fits the guest, not the script."
+      },
+      "ar": {
+        "title": "تخصيص الترحيب",
+        "body": "الترحيب الحار ليس مقاساً واحداً يناسب الجميع. راقب وأصغِ وتكيّف: استخدم اسم الضيف إن عرفته، ورحّب بالعائدين، وجارِ مزاجه وطاقته، واحترم مساحته وتوقيته، وعدّل حسب الثقافة والعمر والموقف. إن بدا هادئاً فجارِه، وإن كان مفعماً بالحيوية فشاركه. الترحيب الرائع يناسب الضيف لا النص المحفوظ."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-returning",
+      "keywords_en": "returning guests welcome back recognise loyal trust assumptions lovely to see you again regular",
+      "keywords_ar": "الضيوف العائدون أهلاً بعودتك تعرف ولاء ثقة افتراضات سعدنا برؤيتك منتظم ضيف زبون عميل",
+      "en": {
+        "title": "Recognising returning guests",
+        "body": "Returning guests are placing their trust in us again. Welcome them back warmly, acknowledge their return naturally, thank them for visiting again, and keep delivering exceptional service without making assumptions about what they want. A simple \"Welcome back — it's lovely to see you again\" can make a guest feel recognised and appreciated."
+      },
+      "ar": {
+        "title": "التعرّف على الضيوف العائدين",
+        "body": "الضيوف العائدون يمنحوننا ثقتهم مجدداً. رحّب بعودتهم بحرارة، واعترف بعودتهم بشكل طبيعي، واشكرهم على زيارتهم مرة أخرى، وواصل تقديم خدمة استثنائية دون افتراض ما يريدونه. عبارة بسيطة مثل «أهلاً بعودتك — سعدنا برؤيتك مجدداً» تكفي ليشعر الضيف بأنه معروف ومقدَّر."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-arrival",
+      "keywords_en": "comfortable arrival seating menus waiting time refreshments busy forgotten first minutes relax",
+      "keywords_ar": "وصول مريح جلوس قوائم وقت الانتظار مرطبات ازدحام منسي دقائق أولى استرخاء ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Creating a comfortable arrival",
+        "body": "The first few minutes should help guests relax. Depending on your restaurant and brand standards this may include assisting with seating, offering menus promptly, explaining any waiting time clearly, offering refreshments where available and appropriate, and making sure guests know someone will be with them shortly. Even when it's busy, guests should never feel forgotten."
+      },
+      "ar": {
+        "title": "صنع وصول مريح",
+        "body": "الدقائق الأولى يجب أن تساعد الضيف على الاسترخاء. وحسب مطعمك ومعايير علامتك قد يشمل ذلك المساعدة في الجلوس، وتقديم القوائم بسرعة، وشرح أي وقت انتظار بوضوح، وتقديم المرطبات حين تتوفر ويكون مناسباً، والتأكّد من علم الضيف بأن أحدهم سيكون معه قريباً. وحتى في الازدحام يجب ألا يشعر الضيف بأنه منسي."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-busy",
+      "keywords_en": "busy periods wait queue acknowledge immediately honest waiting time patience informed priority seating",
+      "keywords_ar": "أوقات الازدحام انتظار طابور اعتراف فوري صدق وقت الانتظار صبر إبقاء على اطلاع أولوية ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Managing busy periods with care",
+        "body": "Busy restaurants don't have to create rushed experiences. If there's a wait: acknowledge guests immediately, explain the expected waiting time honestly, thank them for their patience, and keep them informed if circumstances change. For eligible priority or loyalty guests, follow your restaurant's approved procedures on priority seating or queue management. Every guest should feel respected throughout."
+      },
+      "ar": {
+        "title": "إدارة أوقات الازدحام بعناية",
+        "body": "المطاعم المزدحمة لا يجب أن تصنع تجارب مستعجلة. إن كان هناك انتظار: رحّب بالضيوف فوراً، واشرح مدة الانتظار المتوقّعة بصدق، واشكرهم على صبرهم، وأبقهم على اطلاع إن تغيّرت الظروف. وللضيوف المؤهّلين لخدمة الأولوية أو الولاء، اتبع الإجراءات المعتمدة في مطعمك بشأن أولوية الجلوس أو إدارة الطابور. كل ضيف يستحق الاحترام طوال الوقت."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-conversations",
+      "keywords_en": "start conversations not scripts ready to order first visit in the mood help choose questions connection",
+      "keywords_ar": "ابدأ حواراً لا نصاً جاهز للطلب أول زيارة مزاج مساعدة في الاختيار أسئلة تواصل ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Start conversations, not scripts",
+        "body": "The menu is important — the conversation is equally important. Rather than immediately asking \"Are you ready to order?\", take time to understand your guests. Simple questions make it personal: \"Is this your first visit with us?\", \"Have you dined with us before?\", \"Is there anything you're in the mood for today?\", \"Can I help you choose something?\" Conversations create connections."
+      },
+      "ar": {
+        "title": "ابدأ حواراً لا نصاً محفوظاً",
+        "body": "القائمة مهمة — والحوار مهم بالقدر نفسه. بدل السؤال مباشرة «هل أنت جاهز للطلب؟»، خذ وقتاً لفهم ضيوفك. الأسئلة البسيطة تجعل الأمر شخصياً: «هل هذه زيارتك الأولى لنا؟»، «هل تناولت الطعام معنا من قبل؟»، «هل هناك شيء يناسب مزاجك اليوم؟»، «هل أساعدك في الاختيار؟» الحوارات تصنع تواصلاً."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-styles",
+      "keywords_en": "three styles curated conversation explorer confirmer elevator unsure confident loyal read the guest",
+      "keywords_ar": "ثلاثة أساليب حوار مدروس المستكشف المؤكد المرتقي متردد واثق وفي قراءة الضيف ضيوف زبون عميل",
+      "en": {
+        "title": "The 3 styles of curated conversation",
+        "body": "Use the style that meets the guest where they are. Explorer — new or unsure guests: \"Can I help you choose a favourite?\" Goal: build comfort and guide gently. Confirmer — confident or returning guests: \"Same go-to today? Or trying something new?\" Goal: add value while respecting their usual choice. Elevator — curious or loyal guests: \"Want to add what everyone's loving this week?\" Goal: surprise and delight with new ideas."
+      },
+      "ar": {
+        "title": "أساليب الحوار المدروس الثلاثة",
+        "body": "استخدم الأسلوب الذي يلتقي بالضيف حيث هو. المستكشف — ضيف جديد أو متردد: «هل أساعدك في اختيار طبق مفضّل؟» الهدف: بناء الراحة والإرشاد بلطف. المؤكِّد — ضيف واثق أو عائد: «نفس طلبك المعتاد اليوم؟ أم تجرّب شيئاً جديداً؟» الهدف: إضافة قيمة مع احترام اختياره المعتاد. المرتقي — ضيف فضولي أو وفيّ: «هل تضيف ما يحبّه الجميع هذا الأسبوع؟» الهدف: المفاجأة والإسعاد بأفكار جديدة."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-listening",
+      "keywords_en": "active listening preferences dietary requirements allergies favourite flavours occasions interrupting",
+      "keywords_ar": "إصغاء فعال تفضيلات متطلبات غذائية حساسية نكهات مفضلة مناسبات مقاطعة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Active listening creates better experiences",
+        "body": "Guests often tell us exactly what they need — our role is to listen. Listen for preferences, dietary requirements, allergies, favourite flavours, dining occasions, and any questions or uncertainty. Avoid interrupting, and listen carefully before recommending. The better you understand your guests, the better you can serve them."
+      },
+      "ar": {
+        "title": "الإصغاء الفعّال يصنع تجارب أفضل",
+        "body": "غالباً ما يخبرنا الضيوف بما يحتاجونه بالضبط — ودورنا أن نصغي. أصغِ للتفضيلات، والمتطلبات الغذائية، والحساسية، والنكهات المفضّلة، ومناسبات تناول الطعام، وأي أسئلة أو تردّد. تجنّب المقاطعة، وأصغِ جيداً قبل أن توصي. كلما فهمت ضيفك أكثر، خدمته أفضل."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-occasions",
+      "keywords_en": "special occasions birthdays anniversaries milestones graduations celebrating ask naturally noticed",
+      "keywords_ar": "مناسبات خاصة أعياد ميلاد ذكرى سنوية إنجازات تخرج احتفال سؤال طبيعي ملاحظة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Discovering special occasions",
+        "body": "Some visits become unforgettable simply because someone noticed. Where appropriate, ask naturally if guests are celebrating a birthday, anniversary, family milestone, graduation or other special occasion. Recognising these moments lets the team create memorable experiences in line with your restaurant's procedures — thoughtful recognition often becomes the highlight of the visit."
+      },
+      "ar": {
+        "title": "اكتشاف المناسبات الخاصة",
+        "body": "بعض الزيارات تصبح لا تُنسى لمجرد أن أحدهم لاحظ. حين يكون مناسباً، اسأل بطبيعية إن كان الضيوف يحتفلون بعيد ميلاد أو ذكرى سنوية أو إنجاز عائلي أو تخرّج أو مناسبة خاصة أخرى. ملاحظة هذه اللحظات تتيح للفريق صنع تجارب تُذكر وفق إجراءات مطعمك — والاهتمام المدروس غالباً يصبح أجمل ما في الزيارة."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-aura",
+      "keywords_en": "aura introduce naturally loyalty points benefits member helping not promoting sign up app",
+      "keywords_ar": "أورا تقديم طبيعي ولاء نقاط مزايا عضو مساعدة لا ترويج اشتراك تطبيق ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Introducing AURA naturally",
+        "body": "Loyalty conversations should always add value. Where appropriate, introduce AURA naturally: \"Are you already enjoying the benefits of AURA?\", \"You can collect AURA points on today's visit,\" or \"If you're not yet an AURA member, I'd be happy to explain how it works.\" The conversation should feel like helping — not promoting."
+      },
+      "ar": {
+        "title": "تقديم أورا بشكل طبيعي",
+        "body": "حوارات الولاء يجب أن تضيف قيمة دائماً. حين يكون مناسباً، قدّم أورا بطبيعية: «هل تستمتع بالفعل بمزايا أورا؟»، «يمكنك جمع نقاط أورا في زيارة اليوم»، أو «إن لم تكن عضواً في أورا بعد، يسعدني أن أشرح لك كيف يعمل». يجب أن يبدو الحوار مساعدة — لا ترويجاً."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "hw-mistakes",
+      "keywords_en": "welcome mistakes avoid no eye contact robotic rushed only taking orders interrupting ignoring occasions assumptions",
+      "keywords_ar": "أخطاء الترحيب تجنب دون تواصل بصري آلي مستعجل الطلبات فقط مقاطعة تجاهل المناسبات افتراضات ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Common welcome mistakes",
+        "body": "Avoid: greeting guests without eye contact; using rushed or robotic welcomes; focusing only on taking orders; interrupting guests; ignoring special occasions; forgetting to introduce relevant loyalty benefits; making assumptions about guest preferences; and talking more than listening. Great hospitality starts with genuine curiosity."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في الترحيب",
+        "body": "تجنّب: تحية الضيوف دون تواصل بصري؛ الترحيب المستعجل أو الآلي؛ التركيز على أخذ الطلبات فقط؛ مقاطعة الضيوف؛ تجاهل المناسبات الخاصة؛ نسيان تقديم مزايا الولاء المناسبة؛ افتراض تفضيلات الضيف؛ والكلام أكثر من الإصغاء. الضيافة الرائعة تبدأ بفضول صادق."
+      },
+      "source": {
+        "en": "Warm Welcome & Curated Conversations",
+        "ar": "الترحيب الحار والحوارات المدروسة"
+      }
+    },
+    {
+      "id": "cs-story",
+      "keywords_en": "every dish story ingredients flavours freshness cooking style texture signature chicken burger describe",
+      "keywords_ar": "كل طبق قصة مكونات نكهات طزاجة طريقة طهي قوام مميز وصف ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Every dish has a story",
+        "body": "Guests connect with stories more than lists of ingredients. Rather than just naming a dish, help guests imagine the experience — talk about flavours, freshness, cooking style, texture, signature ingredients, and what makes it unique. Instead of \"this is our chicken burger,\" try: \"It's one of our most popular choices, freshly prepared with a crispy coating, served with our signature sauce, with a satisfying balance of flavour and texture.\""
+      },
+      "ar": {
+        "title": "لكل طبق قصة",
+        "body": "يتواصل الضيوف مع القصص أكثر من قوائم المكوّنات. بدل تسمية الطبق فحسب، ساعد الضيف على تخيّل التجربة — تحدّث عن النكهات، والطزاجة، وطريقة الطهي، والقوام، والمكوّنات المميزة، وما يجعله فريداً. بدل «هذا برجر الدجاج لدينا» جرّب: «من أكثر خياراتنا رواجاً، يُحضّر طازجاً بطبقة مقرمشة، ويُقدّم مع صلصتنا المميّزة، بتوازن ممتع بين النكهة والقوام.»"
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-enthusiasm",
+      "keywords_en": "genuine enthusiasm passion influences confident naturally smile popular memorised scripts authentic",
+      "keywords_ar": "حماس صادق شغف يؤثر ثقة طبيعي ابتسامة رائج نصوص محفوظة أصيل ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Speak with genuine enthusiasm",
+        "body": "Your passion influences your guests. When you genuinely enjoy talking about the menu, guests feel more confident in your recommendations. Speak naturally, smile, and share what makes certain dishes popular. Avoid memorised scripts — guests respond to authentic enthusiasm. Guests connect more with genuine energy than perfect words."
+      },
+      "ar": {
+        "title": "تحدّث بحماس صادق",
+        "body": "شغفك يؤثّر في ضيوفك. حين تستمتع فعلاً بالحديث عن القائمة، يشعر الضيف بثقة أكبر في توصياتك. تحدّث بطبيعية، وابتسم، وشارك ما يجعل بعض الأطباق مفضّلة. وتجنّب النصوص المحفوظة — فالضيوف يتفاعلون مع الحماس الأصيل. الضيوف يتواصلون مع الطاقة الصادقة أكثر من الكلمات المثالية."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-understand",
+      "keywords_en": "understand before recommend questions mood light filling visited before something new dietary preferences",
+      "keywords_ar": "افهم قبل التوصية أسئلة مزاج خفيف مشبع زيارة سابقة شيء جديد تفضيلات غذائية ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Understand before you recommend",
+        "body": "The best recommendations begin with curiosity. Ask: \"What are you in the mood for today?\", \"Do you prefer something light or more filling?\", \"Have you visited us before?\", \"Are you looking to try something new?\", \"Are there any dietary preferences we should know about?\" Listening carefully lets you personalise every recommendation."
+      },
+      "ar": {
+        "title": "افهم قبل أن توصي",
+        "body": "أفضل التوصيات تبدأ بالفضول. اسأل: «ما الذي يناسب مزاجك اليوم؟»، «تفضّل شيئاً خفيفاً أم أكثر إشباعاً؟»، «هل زرتنا من قبل؟»، «هل تودّ تجربة شيء جديد؟»، «هل هناك تفضيلات غذائية يجب أن نعرفها؟» الإصغاء الجيد يتيح لك تخصيص كل توصية."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-match",
+      "keywords_en": "match menu to guest comfort healthier celebrating children taste appetite occasion dietary previous favourites",
+      "keywords_ar": "مطابقة القائمة للضيف راحة صحي احتفال أطفال ذوق شهية مناسبة غذائي مفضلات سابقة ضيوف زبون عميل",
+      "en": {
+        "title": "Match the menu to the guest",
+        "body": "Different guests have different expectations — some want comfort, some want healthier choices, some are celebrating, some are dining with children. Tailor your recommendations based on taste preferences, appetite, occasion, dietary needs, and previous favourites. Personalised recommendations create memorable experiences."
+      },
+      "ar": {
+        "title": "طابِق القائمة مع الضيف",
+        "body": "الضيوف يختلفون في توقّعاتهم — بعضهم يريد الراحة، وبعضهم خيارات أصح، وبعضهم يحتفل، وبعضهم مع أطفال. كيّف توصياتك حسب تفضيلات الذوق، والشهية، والمناسبة، والاحتياجات الغذائية، والمفضّلات السابقة. التوصيات المخصّصة تصنع تجارب تُذكر."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-signature",
+      "keywords_en": "signature seasonal dishes chef recommendations limited time new additions unique special why",
+      "keywords_ar": "أطباق مميزة موسمية توصيات الشيف وقت محدود إضافات جديدة فريد خاص لماذا ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Introduce signature and seasonal dishes",
+        "body": "Guests often appreciate discovering something unique. Where available, confidently introduce signature dishes, chef's recommendations, seasonal specials, limited-time menu items, and new additions — and explain why they're special. Guests are more likely to try something new when they understand its value."
+      },
+      "ar": {
+        "title": "قدّم الأطباق المميزة والموسمية",
+        "body": "يقدّر الضيوف اكتشاف شيء فريد. وحيثما توفّر، قدّم بثقة الأطباق المميّزة، وتوصيات الشيف، والعروض الموسمية، وأصناف القائمة محدودة الوقت، والإضافات الجديدة — واشرح لماذا هي مميّزة. الضيوف أكثر ميلاً لتجربة الجديد حين يفهمون قيمته."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-pairings",
+      "keywords_en": "thoughtful pairings drink side dessert sharing starter children option complement balance enhance",
+      "keywords_ar": "اقتراحات متناغمة مشروب طبق جانبي حلوى مقبلات للمشاركة خيار أطفال يكمل توازن ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Thoughtful pairings add value",
+        "body": "A great meal is often made better by the right combination. Suggest pairings that naturally complement the order: a refreshing drink that balances the flavours, a side that completes the dish, a dessert that provides the perfect ending, a sharing starter for the table, or a children's option for families. The goal isn't to add more items — it's to enhance the overall dining experience."
+      },
+      "ar": {
+        "title": "الاقتراحات المتناغمة تضيف قيمة",
+        "body": "الوجبة الرائعة تصبح أفضل غالباً بالتركيبة الصحيحة. اقترح ما يكمّل الطلب طبيعياً: مشروب منعش يوازن النكهات، أو طبق جانبي يُكمل الطبق، أو حلوى تختم الوجبة بشكل مثالي، أو مقبلات للمشاركة على الطاولة، أو خيار للأطفال للعائلات. الهدف ليس إضافة أصناف — بل تحسين تجربة تناول الطعام كاملة."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-purpose",
+      "keywords_en": "recommend with purpose how does this improve experience available texture refresh palate finishes trust",
+      "keywords_ar": "أوصِ بهدف كيف يحسن التجربة متوفر قوام ينعش الحنك يختم ثقة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Recommend with purpose",
+        "body": "Every recommendation should answer one question: \"How does this improve the guest's experience?\" Avoid recommending items simply because they're available — instead explain how they complement the meal: a side that adds texture, a drink that refreshes the palate, a dessert that finishes the meal perfectly. Purpose creates trust."
+      },
+      "ar": {
+        "title": "أوصِ بهدف",
+        "body": "كل توصية يجب أن تجيب على سؤال واحد: «كيف يحسّن هذا تجربة الضيف؟» تجنّب التوصية بشيء لمجرد توفّره — بل اشرح كيف يكمّل الوجبة: طبق جانبي يضيف قواماً، أو مشروب ينعش الحنك، أو حلوى تختم الوجبة بشكل مثالي. الهدف يصنع الثقة."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-premium",
+      "keywords_en": "premium choices larger option upgrade sharing complete meal added value not pressure tasting menu",
+      "keywords_ar": "خيارات مميزة حجم أكبر ترقية مشاركة وجبة كاملة قيمة مضافة لا ضغط قائمة تذوق ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Premium choices should feel like better experiences",
+        "body": "Sometimes guests appreciate premium options — introduce them by focusing on the experience. Rather than \"Would you like the larger option?\", explain the benefit: \"Many guests choose this option because it's perfect for sharing, or if you're looking for a more complete meal.\" Premium recommendations should always feel like added value, not added pressure."
+      },
+      "ar": {
+        "title": "الخيارات المميزة يجب أن تبدو تجربة أفضل",
+        "body": "أحياناً يقدّر الضيف الخيارات المميّزة — قدّمها بالتركيز على التجربة. بدل «هل تريد الحجم الأكبر؟» اشرح الفائدة: «كثير من الضيوف يختارون هذا لأنه مثالي للمشاركة، أو إن كنت تبحث عن وجبة أكمل». التوصية المميّزة يجب أن تبدو قيمة مضافة لا ضغطاً إضافياً."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "cs-mistakes",
+      "keywords_en": "storytelling mistakes avoid reading menu same dish everyone too quickly overloading technical terminology declined",
+      "keywords_ar": "أخطاء سرد القصة تجنب القراءة من القائمة نفس الطبق للجميع بسرعة إغراق مصطلحات تقنية رفض ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Common recommendation mistakes",
+        "body": "Avoid: reading directly from the menu; recommending the same dish to every guest; speaking too quickly; overloading guests with too many choices; suggesting extra items without explaining their value; using technical food terminology guests may not understand; and continuing to recommend after the guest has politely declined. Guests appreciate guidance — not pressure."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في التوصية",
+        "body": "تجنّب: القراءة مباشرة من القائمة؛ التوصية بنفس الطبق لكل ضيف؛ التحدّث بسرعة؛ إغراق الضيف بخيارات كثيرة؛ اقتراح أصناف إضافية دون شرح قيمتها؛ استخدام مصطلحات طعام تقنية قد لا يفهمها الضيف؛ ومواصلة التوصية بعد رفض مهذّب. الضيوف يقدّرون الإرشاد — لا الضغط."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      }
+    },
+    {
+      "id": "mm-moments",
+      "keywords_en": "memorable moments small touches birthday colouring napkin occasion checking back congratulations thoughtful",
+      "keywords_ar": "لحظات لا تنسى لمسات صغيرة عيد ميلاد تلوين منديل مناسبة متابعة تهنئة اهتمام ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Creating memorable moments",
+        "body": "Memorable moments don't require grand gestures — often it's the small, thoughtful touches that matter most: celebrating a birthday with enthusiasm, offering colouring activities for children where available, bringing an extra napkin before it's requested, noticing a special occasion, checking back at the right moment, and offering genuine congratulations or well wishes. Thoughtfulness shows guests they're cared for — not simply served."
+      },
+      "ar": {
+        "title": "صنع لحظات لا تُنسى",
+        "body": "اللحظات التي تُذكر لا تحتاج بادرات كبيرة — غالباً اللمسات الصغيرة المدروسة هي الأهم: الاحتفال بعيد ميلاد بحماس، وتقديم أنشطة تلوين للأطفال حيث تتوفر، وإحضار منديل إضافي قبل طلبه، وملاحظة مناسبة خاصة، والمرور في اللحظة المناسبة للاطمئنان، وتقديم تهنئة أو تمنيات صادقة. الاهتمام يُظهر للضيف أنه محل رعاية — لا مجرد خدمة."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "mm-surprise",
+      "keywords_en": "surprise delight complimentary treat handwritten message birthday dessert family moment approved never promise",
+      "keywords_ar": "مفاجأة إسعاد ضيافة مجانية رسالة مكتوبة حلوى عيد ميلاد لحظة عائلية معتمد لا تعد ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "The power of surprise and delight",
+        "body": "Unexpected moments often become unforgettable memories. Where appropriate and in line with brand guidelines, small gestures may include a complimentary treat, a handwritten celebration message, a birthday dessert, helping create a memorable family moment, or recognising a returning guest. The value isn't in the gesture itself — it's in how it makes the guest feel. Never promise or provide complimentary items unless approved by your brand's procedures."
+      },
+      "ar": {
+        "title": "قوة المفاجأة والإسعاد",
+        "body": "اللحظات غير المتوقّعة تصبح غالباً ذكريات لا تُنسى. حين يكون مناسباً ووفق إرشادات العلامة، قد تشمل البادرات الصغيرة ضيافة مجانية، أو رسالة تهنئة مكتوبة بخط اليد، أو حلوى عيد ميلاد، أو المساعدة في صنع لحظة عائلية، أو التعرّف على ضيف عائد. القيمة ليست في البادرة نفسها — بل في شعور الضيف بها. لا تعِد أو تقدّم ضيافة مجانية إلا إذا كانت معتمدة في إجراءات علامتك."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "mm-team",
+      "keywords_en": "every team member hosts servers cashiers kitchen managers teamwork one seamless journey roles",
+      "keywords_ar": "كل فرد في الفريق مضيف نادل كاشير مطبخ مدراء عمل جماعي رحلة واحدة أدوار ضيوف زبون عميل",
+      "en": {
+        "title": "Every team member creates the experience",
+        "body": "Memorable moments aren't created by one person — they're created through teamwork. Hosts, servers, cashiers, kitchen teams and managers all contribute to the guest's overall experience. Guests don't separate individual roles; they remember the experience as one seamless journey."
+      },
+      "ar": {
+        "title": "كل فرد في الفريق يصنع التجربة",
+        "body": "اللحظات التي تُذكر لا يصنعها شخص واحد — بل يصنعها العمل الجماعي. المضيفون والنادلون وموظفو الصندوق وفرق المطبخ والمدراء جميعهم يساهمون في تجربة الضيف. الضيوف لا يفصلون بين الأدوار؛ بل يتذكّرون التجربة كرحلة واحدة متكاملة."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "mm-payment",
+      "keywords_en": "seamless payment bill simple efficient stress free attentive accurate final questions rushed",
+      "keywords_ar": "دفع سلس فاتورة بسيط كفء دون توتر منتبه دقيق أسئلة أخيرة استعجال ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "The seamless payment experience",
+        "body": "Paying the bill should feel simple, efficient and stress-free — keep providing hospitality right until the final moment. During payment: remain attentive, handle payment accurately, answer any final questions, thank guests sincerely, and avoid making guests feel rushed. The service shouldn't stop when the meal ends."
+      },
+      "ar": {
+        "title": "تجربة دفع سلسة",
+        "body": "دفع الفاتورة يجب أن يكون بسيطاً وسريعاً وخالياً من التوتر — واصل الضيافة حتى اللحظة الأخيرة. أثناء الدفع: ابقَ منتبهاً، وتعامل مع الدفع بدقة، وأجب عن أي أسئلة أخيرة، واشكر الضيوف بصدق، وتجنّب أن تجعلهم يشعرون بالاستعجال. الخدمة لا تتوقّف بانتهاء الوجبة."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "mm-aura",
+      "keywords_en": "aura payment stage collect points scan membership rewards benefits do you have aura value",
+      "keywords_ar": "أورا مرحلة الدفع جمع النقاط مسح العضوية مكافآت مزايا قيمة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Introducing AURA at payment",
+        "body": "The payment stage is often the ideal time to make sure guests enjoy AURA's benefits. Rather than simply asking \"Do you have AURA?\", create value: \"May I help you collect your AURA points today?\", \"Are you already enjoying the benefits of AURA?\", or \"Let's make sure you receive your AURA rewards from today's visit.\" If the guest isn't a member, briefly explain the benefits in a friendly, natural way — focus on helping them enjoy future rewards, not on promoting a programme."
+      },
+      "ar": {
+        "title": "تقديم أورا عند الدفع",
+        "body": "مرحلة الدفع غالباً الوقت المثالي لضمان استفادة الضيف من مزايا أورا. بدل السؤال «هل لديك أورا؟» اصنع قيمة: «هل أساعدك في جمع نقاط أورا اليوم؟»، «هل تستمتع بالفعل بمزايا أورا؟»، أو «لنتأكّد من حصولك على مكافآت أورا من زيارة اليوم». وإن لم يكن عضواً، اشرح المزايا باختصار بأسلوب ودود طبيعي — وركّز على مساعدته للاستفادة مستقبلاً لا على الترويج للبرنامج."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "mm-farewell",
+      "keywords_en": "farewell final words thank you dining hope welcome again wonderful evening safe travels smile lasting",
+      "keywords_ar": "وداع كلمات أخيرة شكراً على تناول الطعام نأمل الترحيب مجدداً أمسية رائعة رحلة آمنة ابتسامة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Making every farewell memorable",
+        "body": "The final words guests hear often become the lasting memory of their visit. A genuine farewell might be: \"Thank you for dining with us,\" \"We hope to welcome you again soon,\" \"Have a wonderful evening,\" \"Safe travels,\" or \"We look forward to seeing you again.\" Smile, make eye contact where appropriate, and leave guests feeling appreciated."
+      },
+      "ar": {
+        "title": "اجعل كل وداع يُذكر",
+        "body": "آخر الكلمات التي يسمعها الضيف تصبح غالباً ذكرى زيارته الباقية. الوداع الصادق قد يكون: «شكراً لتناولك الطعام معنا»، «نأمل الترحيب بك قريباً»، «أتمنى لك أمسية رائعة»، «رحلة آمنة»، أو «نتطلّع لرؤيتك مجدداً». ابتسم، وتواصل بالعين حين يكون مناسباً، واترك الضيف يشعر بالتقدير."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "mm-consistency",
+      "keywords_en": "consistency creates loyalty know what to expect warm hospitality attentive great food genuine care confidence",
+      "keywords_ar": "الاتساق يصنع الولاء توقع ضيافة دافئة خدمة منتبهة طعام رائع عناية صادقة ثقة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Consistency creates loyalty",
+        "body": "Guests return because they know what to expect. Every visit should consistently deliver warm hospitality, attentive service, great food, genuine care, memorable moments and a seamless farewell. Consistency builds confidence — and confidence builds loyalty."
+      },
+      "ar": {
+        "title": "الاتساق يصنع الولاء",
+        "body": "يعود الضيوف لأنهم يعرفون ما يتوقّعونه. كل زيارة يجب أن تقدّم باستمرار ضيافة دافئة، وخدمة منتبهة، وطعاماً رائعاً، وعناية صادقة، ولحظات تُذكر، ووداعاً سلساً. الاتساق يبني الثقة — والثقة تبني الولاء."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "mm-mistakes",
+      "keywords_en": "farewell mistakes avoid transaction forgetting aura rushing finished scripted robotic ignoring returning promising",
+      "keywords_ar": "أخطاء الوداع تجنب معاملة نسيان أورا استعجال بعد الانتهاء نص آلي تجاهل العائدين وعود ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Common farewell mistakes",
+        "body": "Avoid: treating payment as simply a transaction; forgetting to mention AURA where applicable; rushing guests once they've finished dining; using scripted or robotic farewells; ignoring returning guests; promising complimentary items that aren't approved; forgetting to thank guests; and ending the interaction without genuine warmth. Often, the final few moments are the ones guests remember most."
+      },
+      "ar": {
+        "title": "أخطاء شائعة في الوداع",
+        "body": "تجنّب: التعامل مع الدفع كمجرد معاملة؛ نسيان ذكر أورا حين ينطبق؛ استعجال الضيوف بعد انتهائهم؛ الوداع المحفوظ أو الآلي؛ تجاهل الضيوف العائدين؛ الوعد بضيافة مجانية غير معتمدة؛ نسيان شكر الضيوف؛ وإنهاء التعامل دون دفء صادق. غالباً ما تكون اللحظات الأخيرة هي الأكثر بقاءً في ذاكرة الضيف."
+      },
+      "source": {
+        "en": "Memorable Moments & Seamless Farewell",
+        "ar": "لحظات لا تُنسى ووداع سلس"
+      }
+    },
+    {
+      "id": "gg-gratitude",
+      "keywords_en": "gratitude more than thank you appreciation sincere smile name personally wishing inviting processed",
+      "keywords_ar": "امتنان أكثر من شكراً تقدير ابتسامة صادقة اسم شخصياً تمنيات دعوة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Gratitude is more than saying thank you",
+        "body": "Every guest deserves appreciation, but genuine gratitude goes beyond words — it means showing guests their visit truly matters. Simple actions make a lasting difference: a sincere smile, using the guest's name where appropriate, thanking them personally, wishing them a wonderful day, and inviting them to visit again. Guests should leave feeling appreciated — not processed."
+      },
+      "ar": {
+        "title": "الامتنان أكثر من كلمة شكراً",
+        "body": "كل ضيف يستحق التقدير، لكن الامتنان الصادق يتجاوز الكلمات — فهو إظهار أن زيارته تعني لنا شيئاً حقاً. أفعال بسيطة تصنع فرقاً باقياً: ابتسامة صادقة، واستخدام اسم الضيف حين يكون مناسباً، وشكره شخصياً، وتمنّي يوم رائع له، ودعوته للزيارة مجدداً. يجب أن يغادر الضيف وهو يشعر بالتقدير — لا بأنه مجرد معاملة."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "gg-personal",
+      "keywords_en": "personal thank you celebrating with us family enjoy rest evening look forward welcoming back tailor",
+      "keywords_ar": "شكر شخصي الاحتفال معنا عائلة استمتع ببقية الأمسية نتطلع للترحيب تخصيص ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Make every thank you personal",
+        "body": "A personalised farewell feels genuine. Whenever appropriate, tailor your appreciation: \"Thank you for celebrating with us today,\" \"It was wonderful having you and your family with us,\" \"We hope you enjoy the rest of your evening,\" \"We look forward to welcoming you back soon.\" The more personal the farewell, the more memorable the experience."
+      },
+      "ar": {
+        "title": "اجعل كل شكر شخصياً",
+        "body": "الوداع المخصّص يبدو صادقاً. حين يكون مناسباً، خصّص تقديرك: «شكراً لاحتفالك معنا اليوم»، «كان من الرائع وجودك مع عائلتك معنا»، «نأمل أن تستمتع ببقية أمسيتك»، «نتطلّع للترحيب بك قريباً». كلما كان الوداع أكثر شخصية، كانت التجربة أكثر بقاءً في الذاكرة."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "gg-future",
+      "keywords_en": "encouraging future visits seasonal menus upcoming experiences app download loyalty exclusive offers value",
+      "keywords_ar": "تشجيع الزيارات القادمة قوائم موسمية تجارب قادمة تحميل التطبيق ولاء عروض حصرية قيمة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Encouraging future visits",
+        "body": "Every visit is an opportunity to inspire the next one. Depending on the brand and current promotions you may invite guests to return for seasonal menus or upcoming experiences, introduce AURA benefits where applicable, encourage them to download the brand's app if available, explain how loyalty programmes enhance future visits, and mention exclusive offers available through approved channels. The goal isn't to sell another visit — it's to help guests discover additional value."
+      },
+      "ar": {
+        "title": "تشجيع الزيارات القادمة",
+        "body": "كل زيارة فرصة لإلهام الزيارة التالية. وحسب العلامة والعروض الحالية، يمكنك دعوة الضيوف للعودة لقوائم موسمية أو تجارب قادمة، وتقديم مزايا أورا حين ينطبق، وتشجيعهم على تحميل تطبيق العلامة إن توفر، وشرح كيف تُثري برامج الولاء زياراتهم القادمة، وذكر العروض الحصرية عبر القنوات المعتمدة. الهدف ليس بيع زيارة أخرى — بل مساعدة الضيف على اكتشاف قيمة إضافية."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "gg-promise",
+      "keywords_en": "restaurant promise if its not perfect well fix it mindset listening ownership solution confidence care",
+      "keywords_ar": "وعد المطعم إن لم يكن مثالياً سنصلحه عقلية إصغاء مسؤولية حل ثقة اهتمام ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "The Restaurant Promise",
+        "body": "Our mindset is simple: \"If it's not perfect, we'll fix it.\" This promise guides every recovery conversation. It means listening carefully, taking ownership, finding the best available solution, and restoring the guest's confidence. Guests don't expect perfection — they expect us to care."
+      },
+      "ar": {
+        "title": "وعد المطعم",
+        "body": "عقليتنا بسيطة: «إن لم يكن مثالياً، سنصلحه». هذا الوعد يوجّه كل حوار معالجة. ويعني الإصغاء بعناية، وتحمّل المسؤولية، وإيجاد أفضل حل متاح، واستعادة ثقة الضيف. الضيوف لا يتوقّعون الكمال — بل يتوقّعون أن نهتم."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "gg-empathy",
+      "keywords_en": "respond empathy disappointed thank you for letting us know sorry make this right defensive understanding",
+      "keywords_ar": "الرد بتعاطف خيبة شكراً لإخبارنا آسف نصلح الأمر دفاعي فهم ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Respond with empathy",
+        "body": "Empathy creates connection. Simple responses: \"I understand why you're disappointed,\" \"Thank you for letting us know,\" \"I'm sorry your experience hasn't met your expectations,\" \"Let's see how we can make this right.\" Avoid becoming defensive or explaining the problem before acknowledging the guest's feelings — understanding comes before solutions."
+      },
+      "ar": {
+        "title": "استجب بتعاطف",
+        "body": "التعاطف يصنع التواصل. ردود بسيطة: «أتفهّم سبب خيبة أملك»، «شكراً لإخبارنا»، «آسف لأن تجربتك لم ترقَ لتوقّعاتك»، «لنرَ كيف نصلح هذا». وتجنّب الدفاع عن النفس أو شرح المشكلة قبل الاعتراف بمشاعر الضيف — الفهم يسبق الحلول."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "gg-solution",
+      "keywords_en": "finding right solution replacing dish correcting order fresh meal goodwill gesture manager guidelines",
+      "keywords_ar": "إيجاد الحل الصحيح استبدال طبق تصحيح الطلب وجبة طازجة بادرة حسن نية مدير إرشادات ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Focus on finding the right solution",
+        "body": "Every situation is different. Depending on the circumstances and your brand's procedures, solutions may include replacing a dish, correcting an order, preparing a fresh meal, offering an approved goodwill gesture, or involving a manager when appropriate. The solution should always aim to restore the guest's confidence while following restaurant guidelines."
+      },
+      "ar": {
+        "title": "ركّز على إيجاد الحل الصحيح",
+        "body": "كل موقف مختلف. وحسب الظروف وإجراءات علامتك، قد تشمل الحلول استبدال طبق، أو تصحيح طلب، أو تحضير وجبة طازجة، أو تقديم بادرة حسن نية معتمدة، أو إشراك المدير حين يكون مناسباً. يجب أن يهدف الحل دائماً لاستعادة ثقة الضيف مع الالتزام بإرشادات المطعم."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "gg-goodwill",
+      "keywords_en": "goodwill gestures complimentary dessert beverage invitation return discount voucher authorisation approved",
+      "keywords_ar": "بادرات حسن نية حلوى مجانية مشروب دعوة للعودة خصم قسيمة تفويض معتمد ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Goodwill gestures",
+        "body": "A thoughtful gesture can reinforce our commitment to guest satisfaction. Where approved by your restaurant's procedures, examples may include a complimentary dessert or beverage, an invitation to return, a discount or voucher for a future visit, or another approved recovery gesture. These should never be offered automatically or promised without authorisation — their purpose is to rebuild trust, not simply compensate for a mistake."
+      },
+      "ar": {
+        "title": "بادرات حسن النية",
+        "body": "البادرة المدروسة تعزّز التزامنا برضا الضيف. وحين تكون معتمدة في إجراءات مطعمك، قد تشمل الأمثلة حلوى أو مشروباً مجانياً، أو دعوة للعودة، أو خصماً أو قسيمة لزيارة قادمة، أو بادرة معالجة معتمدة أخرى. ولا يجب تقديمها تلقائياً أو الوعد بها دون تفويض — فالغرض منها إعادة بناء الثقة لا مجرد التعويض عن خطأ."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "gg-learn",
+      "keywords_en": "learn from every guest feedback caused prevented improve future continuous improvement reflect",
+      "keywords_ar": "التعلم من كل ضيف ملاحظات سبب منع تحسين المستقبل تحسين مستمر تأمل ضيوف زبون عميل",
+      "en": {
+        "title": "Learn from every guest",
+        "body": "Guest feedback is one of our greatest opportunities to improve. After every recovery, ask yourself: What caused the issue? Could it have been prevented? What can we learn? How can we improve the experience for future guests? Continuous improvement strengthens every restaurant."
+      },
+      "ar": {
+        "title": "تعلّم من كل ضيف",
+        "body": "ملاحظات الضيوف من أعظم فرصنا للتحسّن. بعد كل معالجة، اسأل نفسك: ما الذي سبّب المشكلة؟ هل كان يمكن تفاديها؟ ما الذي نتعلّمه؟ كيف نحسّن التجربة للضيوف القادمين؟ التحسّن المستمر يقوّي كل مطعم."
+      },
+      "source": {
+        "en": "Genuine Gratitude & Service Recovery",
+        "ar": "الامتنان الصادق ومعالجة الخدمة"
+      }
+    },
+    {
+      "id": "ag-emotion",
+      "keywords_en": "angry guest emotion behind complaint waiting wrong order food expectations missing items ignored occasion",
+      "keywords_ar": "ضيف غاضب المشاعر خلف الشكوى انتظار طلب خاطئ طعام توقعات أصناف ناقصة تجاهل مناسبة ضيوف زبون عميل",
+      "en": {
+        "title": "Understand the emotion behind the complaint",
+        "body": "Guests rarely become upset over a single issue — frustration usually builds from a combination: waiting longer than expected, receiving the wrong order, food not meeting expectations, missing items, poor communication, feeling ignored, or a special occasion not going as planned. Sometimes the complaint is about the food; sometimes it's about how the guest felt. Understanding the emotion helps you respond more effectively."
+      },
+      "ar": {
+        "title": "افهم المشاعر خلف الشكوى",
+        "body": "نادراً ما ينزعج الضيف من مسألة واحدة — فالإحباط يتراكم عادة من مجموعة أسباب: انتظار أطول من المتوقّع، أو طلب خاطئ، أو طعام دون التوقّعات، أو أصناف ناقصة، أو تواصل ضعيف، أو الشعور بالتجاهل، أو مناسبة خاصة لم تسر كما خُطّط لها. أحياناً تكون الشكوى عن الطعام، وأحياناً عن شعور الضيف. فهم المشاعر يساعدك على الرد بفعالية أكبر."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    },
+    {
+      "id": "ag-calm",
+      "keywords_en": "stay calm first voice respectful open body language avoid matching tone helping defending reassurance",
+      "keywords_ar": "ابق هادئاً أولاً صوت محترم لغة جسد منفتحة تجنب مجاراة النبرة مساعدة دفاع طمأنة ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Stay calm first",
+        "body": "Guests look to you for reassurance. No matter how emotional the conversation becomes: keep your voice calm, speak respectfully, maintain open body language, avoid matching the guest's tone, and focus on helping rather than defending. Your calm approach often helps calm the guest — professionalism creates confidence."
+      },
+      "ar": {
+        "title": "ابقَ هادئاً أولاً",
+        "body": "الضيوف ينظرون إليك بحثاً عن الطمأنينة. مهما بلغت حدّة الحوار: حافظ على هدوء صوتك، وتحدّث باحترام، والزم لغة جسد منفتحة، وتجنّب مجاراة نبرة الضيف، وركّز على المساعدة لا على الدفاع. هدوؤك غالباً يهدّئ الضيف — والمهنية تصنع الثقة."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    },
+    {
+      "id": "ag-food",
+      "keywords_en": "food issues immediate attention wrong order cold overcooked undercooked flavour missing presentation dietary dismiss",
+      "keywords_ar": "مشاكل الطعام اهتمام فوري طلب خاطئ بارد زائد الطهي ناقص نكهة ناقص تقديم غذائي تجاهل ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Food issues need immediate attention",
+        "body": "If a guest raises a concern about their meal, take it seriously. Common concerns: the dish isn't what was ordered, the food is cold, the meal is overcooked or undercooked, the flavour isn't as expected, an item is missing, the presentation isn't right, or a dietary request wasn't followed. Never dismiss the concern — every guest deserves to feel heard."
+      },
+      "ar": {
+        "title": "مشاكل الطعام تحتاج اهتماماً فورياً",
+        "body": "إذا أثار الضيف مخاوف بشأن وجبته، فخذها على محمل الجد. المخاوف الشائعة: الطبق ليس ما طُلب، أو الطعام بارد، أو الوجبة زائدة أو ناقصة الطهي، أو النكهة ليست كما توقّع، أو صنف ناقص، أو التقديم غير مناسب، أو طلب غذائي لم يُنفّذ. لا تستهِن بالمخاوف أبداً — كل ضيف يستحق أن يشعر بأنه مسموع."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    },
+    {
+      "id": "ag-blame",
+      "keywords_en": "never blame kitchen colleagues chef busy someone forgot one restaurant one team ownership",
+      "keywords_ar": "لا تلم المطبخ الزملاء الشيف مشغول أحدهم نسي مطعم واحد فريق واحد مسؤولية ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Never blame the kitchen or your colleagues",
+        "body": "Guests see one restaurant and one team. Avoid saying \"the kitchen made a mistake,\" \"the chef is busy,\" or \"someone forgot.\" Instead say: \"I'm sorry this happened. Let me get this resolved for you.\" Taking ownership demonstrates professionalism and teamwork."
+      },
+      "ar": {
+        "title": "لا تلُم المطبخ أو زملاءك أبداً",
+        "body": "الضيوف يرون مطعماً واحداً وفريقاً واحداً. تجنّب قول «المطبخ أخطأ» أو «الشيف مشغول» أو «أحدهم نسي». وقل بدلاً من ذلك: «آسف لحدوث هذا. دعني أحلّه لك». تحمّل المسؤولية دليل مهنية وروح فريق."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    },
+    {
+      "id": "ag-informed",
+      "keywords_en": "keep guest informed replacement takes time updated new meal being prepared patience silence uncertainty",
+      "keywords_ar": "أبق الضيف على اطلاع بديل يستغرق وقتاً تحديث وجبة جديدة قيد التحضير صبر صمت غموض ضيوف زبون عميل",
+      "en": {
+        "title": "Keep the guest informed",
+        "body": "If a replacement dish or solution will take time, tell the guest and keep them updated. Simple communication reduces frustration: \"Your new meal is being prepared now,\" \"Thank you for your patience — it will be with you shortly.\" Silence increases uncertainty; communication builds trust."
+      },
+      "ar": {
+        "title": "أبقِ الضيف على اطلاع",
+        "body": "إن كان الطبق البديل أو الحل سيستغرق وقتاً، أخبر الضيف وأبقه على اطلاع. التواصل البسيط يقلّل الإحباط: «وجبتك الجديدة قيد التحضير الآن»، «شكراً لصبرك — ستصلك قريباً». الصمت يزيد الغموض، والتواصل يبني الثقة."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    },
+    {
+      "id": "ag-occasions",
+      "keywords_en": "special occasions extra care birthday anniversary milestone higher expectations act quickly recover team",
+      "keywords_ar": "مناسبات خاصة عناية إضافية عيد ميلاد ذكرى إنجاز توقعات أعلى تصرف بسرعة معالجة فريق ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Special occasions need extra care",
+        "body": "Guests celebrating birthdays, anniversaries or family milestones often have higher expectations. If something goes wrong during a special occasion: recognise the importance of the moment, act quickly, and work together with the team to recover the experience. Guests often remember how we responded more than the original problem."
+      },
+      "ar": {
+        "title": "المناسبات الخاصة تحتاج عناية إضافية",
+        "body": "الضيوف الذين يحتفلون بأعياد الميلاد أو الذكرى السنوية أو الإنجازات العائلية لديهم توقّعات أعلى غالباً. وإن حدث خطأ خلال مناسبة خاصة: أدرك أهمية اللحظة، وتصرّف بسرعة، واعمل مع الفريق لمعالجة التجربة. غالباً يتذكّر الضيوف كيف استجبنا أكثر من المشكلة نفسها."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    },
+    {
+      "id": "ag-manager",
+      "keywords_en": "when involve manager requests speak cannot resolve goodwill approval dissatisfied safety allergies food quality",
+      "keywords_ar": "متى تشرك المدير يطلب لا يمكن الحل بادرة موافقة غير راض سلامة حساسية جودة الطعام ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Know when to involve a manager",
+        "body": "Some situations need extra support. Involve your manager when: a guest requests to speak with one, the issue can't be resolved within your role, a goodwill gesture requires approval, the guest remains dissatisfied, or safety, allergies or food quality concerns require management attention. Escalating appropriately ensures the guest receives the right support."
+      },
+      "ar": {
+        "title": "اعرف متى تشرك المدير",
+        "body": "بعض المواقف تحتاج دعماً إضافياً. أشرك مديرك حين: يطلب الضيف التحدّث معه، أو لا يمكن حل المسألة ضمن دورك، أو تتطلّب بادرة حسن النية موافقة، أو يبقى الضيف غير راضٍ، أو تتطلّب مسائل السلامة أو الحساسية أو جودة الطعام اهتمام الإدارة. التصعيد المناسب يضمن حصول الضيف على الدعم الصحيح."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    },
+    {
+      "id": "ag-mistakes",
+      "keywords_en": "angry mistakes avoid interrupting defensive arguing thats just how the dish is blaming promises walking away",
+      "keywords_ar": "أخطاء الغضب تجنب مقاطعة دفاع جدال هكذا هو الطبق لوم وعود الانصراف ضيف ضيوف زبون عميل",
+      "en": {
+        "title": "Common mistakes with angry guests",
+        "body": "Avoid: interrupting the guest; becoming defensive; arguing about the complaint; saying \"that's just how the dish is\"; blaming the kitchen or another team member; making promises you cannot keep; ignoring guest emotions; walking away without explaining the next step; and treating the complaint as an inconvenience. Every guest deserves respect, regardless of the situation."
+      },
+      "ar": {
+        "title": "أخطاء شائعة مع الضيف الغاضب",
+        "body": "تجنّب: مقاطعة الضيف؛ الدفاع عن النفس؛ الجدال حول الشكوى؛ قول «هكذا هو الطبق ببساطة»؛ لوم المطبخ أو زميل آخر؛ قطع وعود لا يمكنك الوفاء بها؛ تجاهل مشاعر الضيف؛ الانصراف دون شرح الخطوة التالية؛ والتعامل مع الشكوى كإزعاج. كل ضيف يستحق الاحترام مهما كان الموقف."
+      },
+      "source": {
+        "en": "Handling Angry Guests",
+        "ar": "التعامل مع الضيوف الغاضبين"
+      }
+    }
+  ]
+}
