@@ -290,7 +290,7 @@
 
   <div class="composer">
     <div class="field" id="field">
-      <textarea id="input" rows="1" placeholder="Ask ATLAS anything about exceptional customer experiences…" oninput="autoGrow(this)" onkeydown="onKey(event)"></textarea>
+      <textarea id="input" rows="1" placeholder="How can ATLAS help you today?" oninput="autoGrow(this)" onkeydown="onKey(event)" onfocus="this.placeholder=''" onblur="if(!this.value)this.placeholder=UI[lang].ph"></textarea>
       <button class="send" id="send" onclick="ask()" aria-label="Send">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
       </button>
@@ -372,7 +372,7 @@ function search(query,l){
 const MAIL="ahmed.abdelsalam@alshaya.com";
 const UI={
  en:{title:"ATLAS",pill:"CX Partner",subtitle:"Your CX Intelligence Partner",
-   ph:"Ask ATLAS anything about exceptional customer experiences…",
+   ph:"How can ATLAS help you today?",
    foot:`Developed by the Customer Experience team · 2026 · Any queries? <a href="mailto:${MAIL}">contact here</a>`,
    introBig:"How can I help on the floor today?",
    introSmall:"Ask me anything about customer experience, and I'll find the right guidance from your training library.",
@@ -383,7 +383,7 @@ const UI={
    notFound:"I couldn't find that in the CX content yet. Please check with your line manager or area manager, and it's worth adding to the library.",
    chips:["What is conversion rate?","How do I make a great first impression?","An angry customer, what do I do?","How do I recommend an add-on naturally?"]},
  ar:{title:"ATLAS",pill:"شريك تجربة الزبون",subtitle:"شريكك الذكي في تجربة الزبون",
-   ph:"اسأل أطلس عن أي شيء يخص تجربة زبون استثنائية…",
+   ph:"كيف يمكن لأطلس مساعدتك اليوم؟",
    foot:`من إعداد فريق تجربة الزبون · ٢٠٢٦ · لأي استفسار؟ <a href="mailto:${MAIL}">تواصل هنا</a>`,
    introBig:"كيف أساعدك في المتجر اليوم؟",
    introSmall:"اسألني عن أي شيء يخص تجربة الزبون، وسأجد لك الإرشاد المناسب من مكتبة تدريبك.",
@@ -428,7 +428,7 @@ function renderPicker(){
     const D=DIVISIONS[k];
     const b=document.createElement("button"); b.className="divcard";
     b.innerHTML=`<span class="ic">${D.logo?`<img src="${D.logo}" alt="">`:D.icon}</span>
-      <span class="tx"><span class="nm">${D[lang].name}</span><span class="ds">${D[lang].desc}</span></span>
+      <span class="tx"><span class="nm">${D[lang].desc}</span><span class="ds">${D[lang].name}</span></span>
       <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>`;
     b.querySelector(".nm").style.display="block"; b.querySelector(".ds").style.display="block";
     b.onclick=()=>chooseDivision(k);
