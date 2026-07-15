@@ -251,7 +251,8 @@
     flex:1; border:0; background:transparent; resize:none; font:inherit; font-size:14.7px; color:var(--ink);
     padding:9px 0; max-height:130px; outline:none; line-height:1.5;
   }
-  textarea::placeholder{ color:var(--muted); }
+  textarea::placeholder{ color:var(--muted); transition:color .15s ease; }
+  textarea:focus::placeholder{ color:transparent; }
   .send{
     width:40px;height:40px;border-radius:13px;border:0;cursor:pointer;display:grid;place-items:center;flex:none;
     background:linear-gradient(140deg, var(--brand), var(--brand-deep)); color:#fff;
@@ -290,7 +291,7 @@
 
   <div class="composer">
     <div class="field" id="field">
-      <textarea id="input" rows="1" placeholder="How can ATLAS help you today?" oninput="autoGrow(this)" onkeydown="onKey(event)" onfocus="this.placeholder=''" onblur="if(!this.value)this.placeholder=UI[lang].ph"></textarea>
+      <textarea id="input" rows="1" placeholder="How can ATLAS help you today?" oninput="autoGrow(this)" onkeydown="onKey(event)"></textarea>
       <button class="send" id="send" onclick="ask()" aria-label="Send">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
       </button>
