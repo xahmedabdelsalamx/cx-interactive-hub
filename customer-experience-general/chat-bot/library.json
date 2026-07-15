@@ -8,7 +8,7 @@
     {
       "id": "definition",
       "keywords_en": "conversion rate convert percentage formula calculate what is meaning definition visitors buyers footfall",
-      "keywords_ar": "معدل التحويل نسبة معادلة حساب تعريف يعني ما هو زوار مشترين",
+      "keywords_ar": "معدل التحويل نسبة معادلة حساب تعريف يعني ما هو زوار مشترين عميل عملاء",
       "en": {
         "title": "What is a conversion rate?",
         "body": "Conversion rate is the percentage of store visitors who make a purchase. Formula: Number of Sales ÷ Number of Visitors × 100. Example: if 100 people enter and 20 buy, your conversion rate is 20% — 1 in every 5 visitors buys something."
@@ -44,14 +44,14 @@
     {
       "id": "why",
       "keywords_en": "why important matters reason revenue satisfaction demand stock",
-      "keywords_ar": "لماذا مهم أهمية سبب إيراد رضا طلب مخزون",
+      "keywords_ar": "لماذا مهم أهمية سبب إيراد رضا طلب مخزون عميل عملاء",
       "en": {
         "title": "Why does conversion rate matter?",
         "body": "A higher conversion rate means more sales from the same footfall — you don't need more visitors, just more buyers. It also reflects customer satisfaction: if people leave without buying, something needs fixing. And it helps forecast demand and manage stock."
       },
       "ar": {
         "title": "لماذا معدل التحويل مهم؟",
-        "body": "ارتفاع معدل التحويل يعني مبيعات أكثر من نفس عدد الزوّار — لست بحاجة لزوّار أكثر بل لمشترين أكثر. كما يعكس رضا العملاء: إذا غادروا دون شراء فهناك ما يجب تحسينه. ويساعد في توقّع الطلب وإدارة المخزون."
+        "body": "ارتفاع معدل التحويل يعني مبيعات أكثر من نفس عدد الزوّار — لست بحاجة لزوّار أكثر بل لمشترين أكثر. كما يعكس رضا الزبائن: إذا غادروا دون شراء فهناك ما يجب تحسينه. ويساعد في توقّع الطلب وإدارة المخزون."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -61,7 +61,7 @@
     {
       "id": "sales-math",
       "keywords_en": "sales atv average transaction footfall one percent 1% increase impact revenue calculate math formula kd more sales",
-      "keywords_ar": "مبيعات متوسط الفاتورة زيادة تأثير حساب معادلة دينار واحد بالمئة مبيعات أكثر",
+      "keywords_ar": "مبيعات متوسط الفاتورة زيادة تأثير حساب معادلة دينار واحد بالمئة مبيعات أكثر عميل عملاء",
       "en": {
         "title": "How conversion impacts sales",
         "body": "Sales = Footfall × Conversion × ATV (average transaction value). Example: 10,000 × 25% × 14 KD = 35,000 KD. If you raise conversion by just 1% (to 26%), sales become 36,400 KD — about a 4% increase in sales from a single 1% gain."
@@ -78,14 +78,14 @@
     {
       "id": "personalized",
       "keywords_en": "personalized personal needs name tailor recommend recommendation skincare individual",
-      "keywords_ar": "شخصية احتياج اسم توصية تخصيص اهتمام",
+      "keywords_ar": "شخصية احتياج اسم توصية تخصيص اهتمام عميل عملاء",
       "en": {
         "title": "Personalized service",
         "body": "Understand each customer's needs. Greet warmly, ask open-ended questions, use their name if known, and tailor recommendations to what they're interested in. Customers buy more when they feel understood and valued."
       },
       "ar": {
         "title": "الخدمة الشخصية",
-        "body": "افهم احتياج كل عميل. رحّب به بحرارة، واطرح أسئلة مفتوحة، واستخدم اسمه إن عرفته، وقدّم توصيات تناسب اهتمامه. العميل يشتري أكثر حين يشعر بأنه مفهوم وذو قيمة."
+        "body": "افهم احتياج كل زبون. رحّب به بحرارة، واطرح أسئلة مفتوحة، واستخدم اسمه إن عرفته، وقدّم توصيات تناسب اهتمامه. الزبون يشتري أكثر حين يشعر بأنه مفهوم وذو قيمة."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -95,14 +95,14 @@
     {
       "id": "product-knowledge",
       "keywords_en": "product knowledge expert features benefits compare comparison know products trust advice",
-      "keywords_ar": "معرفة المنتج خبير مزايا فوائد مقارنة ثقة نصيحة",
+      "keywords_ar": "معرفة المنتج خبير مزايا فوائد مقارنة ثقة نصيحة عميل عملاء",
       "en": {
         "title": "Product knowledge",
         "body": "Be the expert. Know product features, benefits and uses, offer comparisons to help customers decide, and share tips or extra uses they may not know. Confidence in your knowledge builds trust — and trust leads to more sales."
       },
       "ar": {
         "title": "المعرفة بالمنتج",
-        "body": "كن الخبير. اعرف مزايا المنتجات وفوائدها واستخداماتها، وقدّم مقارنات تساعد العميل على القرار، وشارك نصائح قد لا يعرفها. ثقتك بمعرفتك تبني ثقة العميل — والثقة تقود إلى مبيعات أكثر."
+        "body": "كن الخبير. اعرف مزايا المنتجات وفوائدها واستخداماتها، وقدّم مقارنات تساعد الزبون على القرار، وشارك نصائح قد لا يعرفها. ثقتك بمعرفتك تبني ثقة الزبون — والثقة تقود إلى مبيعات أكثر."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -112,14 +112,14 @@
     {
       "id": "upsell",
       "keywords_en": "upsell upselling cross sell crosssell add more higher premium complement bundle suggest push without pushy extra item",
-      "keywords_ar": "بيع أعلى بيع متقاطع منتج أعلى إضافة يكمل اقتراح دون إلحاح ضغط",
+      "keywords_ar": "بيع أعلى بيع متقاطع منتج أعلى إضافة يكمل اقتراح دون إلحاح ضغط عميل عملاء",
       "en": {
         "title": "Upselling & cross-selling",
         "body": "Upselling means suggesting a higher-end product and highlighting its added value. Cross-selling means suggesting items that go together (e.g. a t-shirt with new jeans). Keep it subtle and frame it as a benefit to the customer, not a sales push."
       },
       "ar": {
         "title": "البيع الأعلى والبيع المتقاطع",
-        "body": "البيع الأعلى هو اقتراح منتج أرقى مع إبراز قيمته المضافة. البيع المتقاطع هو اقتراح منتجات متكاملة (مثل قميص مع بنطال جينز). اجعله لطيفاً وقدّمه كفائدة للعميل لا كضغط للبيع."
+        "body": "البيع الأعلى هو اقتراح منتج أرقى مع إبراز قيمته المضافة. البيع المتقاطع هو اقتراح منتجات متكاملة (مثل قميص مع بنطال جينز). اجعله لطيفاً وقدّمه كفائدة للزبون لا كضغط للبيع."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -129,14 +129,14 @@
     {
       "id": "urgency",
       "keywords_en": "urgency limited stock offer deal fomo hurry scarcity ends today promotion now quick",
-      "keywords_ar": "إلحاح عرض محدود مخزون ينتهي ترويج الآن سرعة فرصة",
+      "keywords_ar": "إلحاح عرض محدود مخزون ينتهي ترويج الآن سرعة فرصة عميل عملاء",
       "en": {
         "title": "Creating urgency",
         "body": "Highlight limited-time offers or low stock to encourage action now. Use phrases like \"only a few left\" or \"offer ends today.\" Fear of missing out is a strong motivator. Example: \"This promotion is only available this weekend — don't miss out!\""
       },
       "ar": {
         "title": "خلق شعور بالإلحاح",
-        "body": "أبرز العروض محدودة الوقت أو قلّة المخزون لتشجيع العميل على التصرّف الآن. استخدم عبارات مثل «بقيت قطع قليلة» أو «العرض ينتهي اليوم». الخوف من تفويت الفرصة محفّز قوي. مثال: «هذا العرض متاح هذا الأسبوع فقط — لا تفوّته!»"
+        "body": "أبرز العروض محدودة الوقت أو قلّة المخزون لتشجيع الزبون على التصرّف الآن. استخدم عبارات مثل «بقيت قطع قليلة» أو «العرض ينتهي اليوم». الخوف من تفويت الفرصة محفّز قوي. مثال: «هذا العرض متاح هذا الأسبوع فقط — لا تفوّته!»"
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -146,14 +146,14 @@
     {
       "id": "followup",
       "keywords_en": "follow up followup check back engage out of stock return relationship loyalty come back",
-      "keywords_ar": "متابعة تواصل غير متوفر علاقة ولاء عودة",
+      "keywords_ar": "متابعة تواصل غير متوفر علاقة ولاء عودة عميل عملاء",
       "en": {
         "title": "Follow-up",
         "body": "Stay engaged through the whole shopping journey. After helping a customer, check back to see if they need anything else. Offer to follow up on out-of-stock items. Consistent engagement builds relationships and brings customers back."
       },
       "ar": {
         "title": "المتابعة",
-        "body": "ابقَ متواصلاً طوال رحلة التسوّق. بعد مساعدة العميل، عُد إليه لتتأكد إن كان يحتاج شيئاً آخر. اعرض المتابعة بشأن المنتجات غير المتوفرة. التواصل المستمر يبني العلاقات ويعيد العملاء."
+        "body": "ابقَ متواصلاً طوال رحلة التسوّق. بعد مساعدة الزبون، عُد إليه لتتأكد إن كان يحتاج شيئاً آخر. اعرض المتابعة بشأن المنتجات غير المتوفرة. التواصل المستمر يبني العلاقات ويعيد الزبائن."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -163,14 +163,14 @@
     {
       "id": "greeting",
       "keywords_en": "greet greeting hello welcome smile eye contact approach start how to greet",
-      "keywords_ar": "ترحيب تحية أهلا ابتسامة تواصل بصري استقبال كيف أرحب",
+      "keywords_ar": "ترحيب تحية أهلا ابتسامة تواصل بصري استقبال كيف أرحب عميل عملاء",
       "en": {
         "title": "Warm greeting",
         "body": "Smile genuinely, make eye contact, and use a warm, personal greeting — not a robotic one. Example: for an unsure customer, \"Hi! Let me know if there's anything specific you're looking for today.\""
       },
       "ar": {
         "title": "الترحيب الحار",
-        "body": "ابتسم بصدق، وحافظ على التواصل البصري، واستخدم ترحيباً حاراً وشخصياً لا آلياً. مثال: لعميل متردد، «أهلاً! أخبرني إن كنت تبحث عن شيء محدد اليوم.»"
+        "body": "ابتسم بصدق، وحافظ على التواصل البصري، واستخدم ترحيباً حاراً وشخصياً لا آلياً. مثال: لزبون متردد، «أهلاً! أخبرني إن كنت تبحث عن شيء محدد اليوم.»"
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -180,14 +180,14 @@
     {
       "id": "listening",
       "keywords_en": "listen listening active understand paraphrase interrupt body language attention",
-      "keywords_ar": "إصغاء استماع فهم مقاطعة لغة الجسد انتباه",
+      "keywords_ar": "إصغاء استماع فهم مقاطعة لغة الجسد انتباه عميل عملاء",
       "en": {
         "title": "Active listening",
         "body": "Focus fully on the customer, use body language like nodding, and paraphrase their needs to confirm — \"So you're looking for a gift for someone who loves skincare?\" Avoid interrupting or jumping to solutions too early."
       },
       "ar": {
         "title": "الإصغاء الفعّال",
-        "body": "ركّز كلياً على العميل، واستخدم لغة الجسد مثل الإيماء، وأعد صياغة احتياجه للتأكد — «إذاً أنت تبحث عن هدية لمن يحب العناية بالبشرة؟» تجنّب المقاطعة أو التسرّع في تقديم الحلول."
+        "body": "ركّز كلياً على الزبون، واستخدم لغة الجسد مثل الإيماء، وأعد صياغة احتياجه للتأكد — «إذاً أنت تبحث عن هدية لمن يحب العناية بالبشرة؟» تجنّب المقاطعة أو التسرّع في تقديم الحلول."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -197,7 +197,7 @@
     {
       "id": "open-questions",
       "keywords_en": "open ended questions ask questions conversation yes no what how engage talk",
-      "keywords_ar": "أسئلة مفتوحة سؤال حوار نعم لا محادثة تفاعل",
+      "keywords_ar": "أسئلة مفتوحة سؤال حوار نعم لا محادثة تفاعل عميل عملاء",
       "en": {
         "title": "Open-ended questions",
         "body": "Open-ended questions gather more detail than yes/no ones. Instead of \"Are you looking for a specific item?\" ask \"What brings you in today? Are you shopping for yourself or someone else?\" This makes the interaction feel like a conversation, not a transaction."
@@ -214,14 +214,14 @@
     {
       "id": "closing",
       "keywords_en": "close closing seal deal hesitant unsure not sure doubt reassure register checkout guide buy convince undecided",
-      "keywords_ar": "إتمام إغلاق متردد غير متأكد طمأنة إقناع صندوق توجيه شراء حائر",
+      "keywords_ar": "إتمام إغلاق متردد غير متأكد طمأنة إقناع صندوق توجيه شراء حائر عميل عملاء",
       "en": {
         "title": "Closing the sale",
         "body": "Closing should feel natural and supportive, not pushy. Use assumptive phrases like \"Would you like to take this to the register?\" Highlight benefits, and reassure hesitant customers: \"You can always exchange it if it's not the perfect fit.\""
       },
       "ar": {
         "title": "إتمام البيع",
-        "body": "إتمام البيع يجب أن يكون طبيعياً وداعماً لا ملحّاً. استخدم عبارات افتراضية مثل «هل تودّ أخذه إلى الصندوق؟» أبرز الفوائد، وطمئن العميل المتردد: «يمكنك دائماً استبداله إن لم يكن مناسباً.»"
+        "body": "إتمام البيع يجب أن يكون طبيعياً وداعماً لا ملحّاً. استخدم عبارات افتراضية مثل «هل تودّ أخذه إلى الصندوق؟» أبرز الفوائد، وطمئن الزبون المتردد: «يمكنك دائماً استبداله إن لم يكن مناسباً.»"
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -231,7 +231,7 @@
     {
       "id": "journey",
       "keywords_en": "journey stages entry browsing decision checkout touchpoints steps where impact stage",
-      "keywords_ar": "رحلة مراحل دخول تصفح قرار دفع خطوات أين مرحلة",
+      "keywords_ar": "رحلة مراحل دخول تصفح قرار دفع خطوات أين مرحلة عميل عملاء",
       "en": {
         "title": "Where you impact conversion",
         "body": "You can influence conversion at four stages: Entry & Greeting, Product Browsing, Decision Making, and Checkout. Improve engagement at each stage — a good greeting at entry, helpful guidance while browsing, reassurance at decision time, and a smooth checkout."
@@ -248,14 +248,14 @@
     {
       "id": "measurement",
       "keywords_en": "measure measured cctv camera count footfall pos heat map track tool sensor how measured tracking",
-      "keywords_ar": "قياس كاميرا عد زوار نقاط البيع خريطة حرارية أداة تتبع كيف يقاس",
+      "keywords_ar": "قياس كاميرا عد زوار نقاط البيع خريطة حرارية أداة تتبع كيف يقاس عميل عملاء",
       "en": {
         "title": "How conversion is measured",
         "body": "Stores use cameras and tools to measure conversion. Entrance cameras count footfall and filter out staff/non-target entries; floor cameras track engagement and wait times with heat mapping; POS cameras link transactions to actual customers. This data is combined with POS for an accurate rate."
       },
       "ar": {
         "title": "كيف يُقاس التحويل",
-        "body": "تستخدم المتاجر الكاميرات والأدوات لقياس التحويل. كاميرات المدخل تحسب الزوّار وتستبعد الموظفين؛ كاميرات الصالة تتابع التفاعل وأوقات الانتظار عبر الخرائط الحرارية؛ كاميرات الصندوق تربط المعاملات بالعملاء الفعليين."
+        "body": "تستخدم المتاجر الكاميرات والأدوات لقياس التحويل. كاميرات المدخل تحسب الزوّار وتستبعد الموظفين؛ كاميرات الصالة تتابع التفاعل وأوقات الانتظار عبر الخرائط الحرارية؛ كاميرات الصندوق تربط المعاملات بالزبائن الفعليين."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -265,14 +265,14 @@
     {
       "id": "context",
       "keywords_en": "numbers q4 lfl stats statistics benchmark current walk away left without buying 80 71 26 data opportunity",
-      "keywords_ar": "أرقام إحصاء معيار غادروا دون شراء بيانات فرصة الوضع الحالي",
+      "keywords_ar": "أرقام إحصاء معيار غادروا دون شراء بيانات فرصة الوضع الحالي عميل عملاء",
       "en": {
         "title": "Why this matters right now",
         "body": "The numbers show the opportunity: in Q4, 80% of potential customers left without buying, only 15% engaged with more than one brand, and like-for-like transactions were down 26%. With conversion around 71%, nearly 1 in 3 customers still walks away without purchasing."
       },
       "ar": {
         "title": "لماذا هذا مهم الآن",
-        "body": "الأرقام تُظهر الفرصة: في الربع الأخير غادر ٨٠٪ من العملاء المحتملين دون شراء، وتفاعل ١٥٪ فقط مع أكثر من علامة، وانخفضت المعاملات المماثلة ٢٦٪. ومع معدل تحويل نحو ٧١٪، لا يزال قرابة عميل من كل ٣ يغادر دون شراء."
+        "body": "الأرقام تُظهر الفرصة: في الربع الأخير غادر ٨٠٪ من الزبائن المحتملين دون شراء، وتفاعل ١٥٪ فقط مع أكثر من علامة، وانخفضت المعاملات المماثلة ٢٦٪. ومع معدل تحويل نحو ٧١٪، لا يزال قرابة زبون من كل ٣ يغادر دون شراء."
       },
       "source": {
         "en": "Art of Driving Conversion",
@@ -282,14 +282,14 @@
     {
       "id": "fi-why",
       "keywords_en": "first impression matter 7 seconds seven trust loyalty why important welcome new customer",
-      "keywords_ar": "الانطباع الأول سبع ثوان ثقة ولاء لماذا مهم ترحيب عميل جديد",
+      "keywords_ar": "الانطباع الأول سبع ثوان ثقة ولاء لماذا مهم ترحيب زبون جديد عميل عملاء",
       "en": {
         "title": "Why first impressions matter",
         "body": "First impressions form in about 7 seconds — and 55% comes from body language, 38% from tone, only 7% from words. A warm first impression builds trust instantly, makes customers more likely to buy, encourages loyalty and repeat visits, sets you apart from competitors, and shapes what they tell others. You get one chance — make it count."
       },
       "ar": {
         "title": "لماذا الانطباع الأول مهم",
-        "body": "يتكوّن الانطباع الأول خلال نحو ٧ ثوانٍ — و٥٥٪ منه من لغة الجسد، و٣٨٪ من نبرة الصوت، و٧٪ فقط من الكلمات. الانطباع الدافئ يبني الثقة فوراً، ويزيد احتمال الشراء، ويشجّع الولاء وتكرار الزيارة، ويميّزك عن المنافسين، ويؤثّر على ما يقوله العميل للآخرين. لديك فرصة واحدة — استثمرها."
+        "body": "يتكوّن الانطباع الأول خلال نحو ٧ ثوانٍ — و٥٥٪ منه من لغة الجسد، و٣٨٪ من نبرة الصوت، و٧٪ فقط من الكلمات. الانطباع الدافئ يبني الثقة فوراً، ويزيد احتمال الشراء، ويشجّع الولاء وتكرار الزيارة، ويميّزك عن المنافسين، ويؤثّر على ما يقوله الزبون للآخرين. لديك فرصة واحدة — استثمرها."
       },
       "source": {
         "en": "Art of First Impression",
@@ -318,14 +318,14 @@
     {
       "id": "fi-nonverbal",
       "keywords_en": "body language non verbal nonverbal posture eye contact smile tone signals 55 38 7 how you say",
-      "keywords_ar": "لغة الجسد غير لفظي وضعية تواصل بصري ابتسامة نبرة إشارات كيف تقول",
+      "keywords_ar": "لغة الجسد غير لفظي وضعية تواصل بصري ابتسامة نبرة إشارات كيف تقول عميل عملاء",
       "en": {
         "title": "Body language & non-verbal cues",
         "body": "Most of a first impression is non-verbal — 55% body language and 38% tone versus just 7% words. Smile genuinely, make eye contact, and keep an open, inviting posture. Read the customer's signals and adjust your approach. It's not just what you say, but how you say it."
       },
       "ar": {
         "title": "لغة الجسد والإشارات غير اللفظية",
-        "body": "معظم الانطباع الأول غير لفظي — ٥٥٪ لغة جسد و٣٨٪ نبرة صوت مقابل ٧٪ فقط للكلمات. ابتسم بصدق، وتواصل بالعين، وحافظ على وضعية منفتحة ومرحّبة. اقرأ إشارات العميل وعدّل أسلوبك. المهم ليس ما تقوله فقط، بل كيف تقوله."
+        "body": "معظم الانطباع الأول غير لفظي — ٥٥٪ لغة جسد و٣٨٪ نبرة صوت مقابل ٧٪ فقط للكلمات. ابتسم بصدق، وتواصل بالعين، وحافظ على وضعية منفتحة ومرحّبة. اقرأ إشارات الزبون وعدّل أسلوبك. المهم ليس ما تقوله فقط، بل كيف تقوله."
       },
       "source": {
         "en": "Art of First Impression",
@@ -335,14 +335,14 @@
     {
       "id": "fi-loyal",
       "keywords_en": "loyal returning guest repeat customer recognize acknowledge loyalty aura perks regular remember",
-      "keywords_ar": "عميل عائد مخلص متكرر ولاء أورا مزايا تعرف تذكر منتظم",
+      "keywords_ar": "زبون عائد مخلص متكرر ولاء أورا مزايا تعرف تذكر منتظم عميل عملاء",
       "en": {
         "title": "Recognizing loyal & returning guests",
         "body": "Spot and acknowledge returning customers, and personalize the interaction based on their past visits and preferences. Use loyalty programmes and exclusive perks (like AURA) to make them feel recognised and strengthen the relationship. A returning guest who feels remembered comes back more often."
       },
       "ar": {
-        "title": "التعرّف على العملاء العائدين",
-        "body": "تعرّف على العملاء العائدين ورحّب بهم، وخصّص التعامل بناءً على زياراتهم السابقة وتفضيلاتهم. استخدم برامج الولاء والمزايا الحصرية (مثل AURA) ليشعروا بأنهم معروفون، ولتقوية العلاقة. العميل العائد الذي يشعر بأنه متذكَّر يعود أكثر."
+        "title": "التعرّف على الزبائن العائدين",
+        "body": "تعرّف على الزبائن العائدين ورحّب بهم، وخصّص التعامل بناءً على زياراتهم السابقة وتفضيلاتهم. استخدم برامج الولاء والمزايا الحصرية (مثل AURA) ليشعروا بأنهم معروفون، ولتقوية العلاقة. الزبون العائد الذي يشعر بأنه متذكَّر يعود أكثر."
       },
       "source": {
         "en": "Art of First Impression",
@@ -352,14 +352,14 @@
     {
       "id": "disc-why",
       "keywords_en": "discovery matter understand needs 82 percent uncover why trust emotions people not product",
-      "keywords_ar": "اكتشاف فهم احتياج ثمانين ثقة عاطفة لماذا الإنسان لا المنتج",
+      "keywords_ar": "اكتشاف فهم احتياج ثمانين ثقة عاطفة لماذا الإنسان لا المنتج عميل عملاء",
       "en": {
         "title": "Why discovery matters",
         "body": "Discovery means uncovering what the customer really needs before recommending. 82% of shoppers are more likely to buy from someone who understands their needs. It shifts the focus from product to people and builds trust, not just transactions — and since emotions drive most buying decisions, understanding them leads to loyalty and stronger sales."
       },
       "ar": {
         "title": "لماذا الاكتشاف مهم",
-        "body": "الاكتشاف يعني فهم ما يحتاجه العميل فعلاً قبل تقديم التوصية. ٨٢٪ من المتسوّقين أكثر ميلاً للشراء ممن يفهم احتياجهم. وهو ينقل التركيز من المنتج إلى الإنسان ويبني الثقة لا مجرد معاملة — ولأن العاطفة تقود معظم قرارات الشراء، فإن فهمها يقود إلى الولاء ومبيعات أقوى."
+        "body": "الاكتشاف يعني فهم ما يحتاجه الزبون فعلاً قبل تقديم التوصية. ٨٢٪ من المتسوّقين أكثر ميلاً للشراء ممن يفهم احتياجهم. وهو ينقل التركيز من المنتج إلى الإنسان ويبني الثقة لا مجرد معاملة — ولأن العاطفة تقود معظم قرارات الشراء، فإن فهمها يقود إلى الولاء ومبيعات أقوى."
       },
       "source": {
         "en": "Art of Discovery",
@@ -388,14 +388,14 @@
     {
       "id": "disc-listening",
       "keywords_en": "active listening discovery listen understand empathy unsaid just looking feel heard tune in",
-      "keywords_ar": "إصغاء فعال اكتشاف استماع فهم تعاطف أتفرج مشاعر مسموع",
+      "keywords_ar": "إصغاء فعال اكتشاف استماع فهم تعاطف أتفرج مشاعر مسموع عميل عملاء",
       "en": {
         "title": "Active listening (the heart of discovery)",
         "body": "Active listening is tuning in to what's said and unsaid — not waiting for your turn to talk. Listen to understand, ask with purpose and listen with empathy, and use the customer's own words and emotions in your recommendation. When someone says \"I'm just looking,\" stay with them. People buy confidence, comfort and pride — and they remember how you made them feel."
       },
       "ar": {
         "title": "الإصغاء الفعّال (قلب الاكتشاف)",
-        "body": "الإصغاء الفعّال هو الانتباه لما يُقال وما لا يُقال — لا انتظار دورك في الكلام. أصغِ لتفهم، واسأل بهدف وأصغِ بتعاطف، واستخدم كلمات العميل ومشاعره في توصيتك. حين يقول «أنا فقط أتفرّج»، ابقَ معه. الناس يشترون الثقة والراحة والفخر — ويتذكّرون كيف جعلتهم يشعرون."
+        "body": "الإصغاء الفعّال هو الانتباه لما يُقال وما لا يُقال — لا انتظار دورك في الكلام. أصغِ لتفهم، واسأل بهدف وأصغِ بتعاطف، واستخدم كلمات الزبون ومشاعره في توصيتك. حين يقول «أنا فقط أتفرّج»، ابقَ معه. الناس يشترون الثقة والراحة والفخر — ويتذكّرون كيف جعلتهم يشعرون."
       },
       "source": {
         "en": "Art of Discovery",
@@ -405,7 +405,7 @@
     {
       "id": "disc-questions",
       "keywords_en": "open ended questions closed doors what brings you in occasion mood ask discovery great questions floor",
-      "keywords_ar": "أسئلة مفتوحة مغلقة مناسبة مزاج ما أتى بك سؤال اكتشاف",
+      "keywords_ar": "أسئلة مفتوحة مغلقة مناسبة مزاج ما أتى بك سؤال اكتشاف عميل عملاء",
       "en": {
         "title": "Questions that open doors",
         "body": "Open-ended questions invite stories and reveal needs and emotions; closed yes/no questions shut conversation down. Use openers like \"What brings you in today?\", \"What's the occasion or mood you're shopping for?\", and \"How do you want this to feel?\" Avoid \"Do you need help?\" and \"Are you just browsing?\" Open questions spark connection."
@@ -422,7 +422,7 @@
     {
       "id": "disc-personalization",
       "keywords_en": "personalization personalize mirror tone tailor lifestyle emotional cues browsing treat make them feel",
-      "keywords_ar": "تخصيص نبرة نمط حياة إشارات عاطفية أتفرج تدلل شعور",
+      "keywords_ar": "تخصيص نبرة نمط حياة إشارات عاطفية أتفرج تدلل شعور عميل عملاء",
       "en": {
         "title": "Power of personalization",
         "body": "Personalization turns a casual visit into a memorable experience. Four ways: mirror their tone and pace; stay curious even at \"just browsing\" (\"Anything you're treating yourself to today?\"); tailor recommendations to their world — lifestyle, mood, occasion; and use emotional cues in your language (\"This feels like something you'd love for unwinding after a long day\"). Reflect who they are, don't push what you like."
@@ -439,14 +439,14 @@
     {
       "id": "disc-resistance",
       "keywords_en": "resistance just looking hesitant rejection space rephrase not pushy handle objection browsing wall cold",
-      "keywords_ar": "مقاومة أتفرج تردد رفض مساحة إعادة صياغة ملح اعتراض جدار",
+      "keywords_ar": "مقاومة أتفرج تردد رفض مساحة إعادة صياغة ملح اعتراض جدار عميل عملاء",
       "en": {
         "title": "Handling resistance (\"I'm just looking\")",
         "body": "When a customer says \"I'm just looking\" or gives short answers, it's not rejection — it's hesitation. Don't break the wall, walk gently around it: rephrase your question more softly, give them space, or share a warm line like \"This one's been a favourite for people looking to unwind after work.\" Stay present, not pushy. Example: \"Of course — take your time! Anything you're in the mood for today?\""
       },
       "ar": {
         "title": "التعامل مع التردّد («أنا فقط أتفرّج»)",
-        "body": "حين يقول العميل «أنا فقط أتفرّج» أو يعطي إجابات قصيرة، فهذا ليس رفضاً بل تردّد. لا تكسر الجدار بل مُرّ حوله بلطف: أعد صياغة سؤالك بنعومة، أو امنحه مساحة، أو شارك عبارة دافئة مثل «هذا من المفضّل لمن يريد الاسترخاء بعد العمل». ابقَ حاضراً لا ملحّاً. مثال: «بالطبع — خذ وقتك! هل من شيء يناسب مزاجك اليوم؟»"
+        "body": "حين يقول الزبون «أنا فقط أتفرّج» أو يعطي إجابات قصيرة، فهذا ليس رفضاً بل تردّد. لا تكسر الجدار بل مُرّ حوله بلطف: أعد صياغة سؤالك بنعومة، أو امنحه مساحة، أو شارك عبارة دافئة مثل «هذا من المفضّل لمن يريد الاسترخاء بعد العمل». ابقَ حاضراً لا ملحّاً. مثال: «بالطبع — خذ وقتك! هل من شيء يناسب مزاجك اليوم؟»"
       },
       "source": {
         "en": "Art of Discovery",
@@ -456,14 +456,14 @@
     {
       "id": "story-what",
       "keywords_en": "product storytelling story what is features feeling picture life sell think about it take it",
-      "keywords_ar": "سرد قصة المنتج ما هو مزايا شعور تخيل حياة بيع",
+      "keywords_ar": "سرد قصة المنتج ما هو مزايا شعور تخيل حياة بيع عميل عملاء",
       "en": {
         "title": "What is product storytelling?",
         "body": "Product storytelling means presenting a product through a short story and a moment, not a list of features. You bring it to life so the customer pictures it in their day. Customers don't fall in love with features — they fall in love with what life feels like with the product. A good story turns \"I'll think about it\" into \"I'll take it.\""
       },
       "ar": {
         "title": "ما هو سرد قصة المنتج؟",
-        "body": "سرد قصة المنتج يعني تقديم المنتج عبر قصة قصيرة ولحظة، لا قائمة مزايا. تجعله حيّاً ليتخيّله العميل في يومه. العملاء لا يعشقون المزايا — بل يعشقون شعور الحياة مع المنتج. القصة الجيدة تحوّل «سأفكّر بالأمر» إلى «سآخذه»."
+        "body": "سرد قصة المنتج يعني تقديم المنتج عبر قصة قصيرة ولحظة، لا قائمة مزايا. تجعله حيّاً ليتخيّله الزبون في يومه. الزبائن لا يعشقون المزايا — بل يعشقون شعور الحياة مع المنتج. القصة الجيدة تحوّل «سأفكّر بالأمر» إلى «سآخذه»."
       },
       "source": {
         "en": "Art of Product Storytelling",
@@ -492,14 +492,14 @@
     {
       "id": "story-why",
       "keywords_en": "why stories sell attention feeling picture conversion basket loyalty scene maybe later take it",
-      "keywords_ar": "لماذا القصص تبيع انتباه مشاعر تخيل تحويل سلة ولاء مشهد",
+      "keywords_ar": "لماذا القصص تبيع انتباه مشاعر تخيل تحويل سلة ولاء مشهد عميل عملاء",
       "en": {
         "title": "Why stories sell",
         "body": "A quick scene grabs attention better than a spec (\"Picture stepping out after work in this top that breathes the heat away\"). Stories create feelings, and feelings drive choices; they help customers picture the product in their life, and they move people from \"maybe later\" to \"I'll take it.\" Stories lift conversion, basket size, and loyalty."
       },
       "ar": {
         "title": "لماذا القصص تبيع",
-        "body": "المشهد السريع يجذب الانتباه أكثر من المواصفة («تخيّل خروجك بعد العمل بهذا القميص الذي يطرد الحر»). القصص تصنع مشاعر، والمشاعر تقود القرارات؛ وتساعد العميل على تخيّل المنتج في حياته، وتنقله من «ربما لاحقاً» إلى «سآخذه». القصص ترفع التحويل وحجم السلة والولاء."
+        "body": "المشهد السريع يجذب الانتباه أكثر من المواصفة («تخيّل خروجك بعد العمل بهذا القميص الذي يطرد الحر»). القصص تصنع مشاعر، والمشاعر تقود القرارات؛ وتساعد الزبون على تخيّل المنتج في حياته، وتنقله من «ربما لاحقاً» إلى «سآخذه». القصص ترفع التحويل وحجم السلة والولاء."
       },
       "source": {
         "en": "Art of Product Storytelling",
@@ -509,7 +509,7 @@
     {
       "id": "story-formula",
       "keywords_en": "story formula moment sensory feel words personal tie close scene example how to tell",
-      "keywords_ar": "صيغة قصة لحظة حسي كلمات رابط شخصي مشهد مثال كيف",
+      "keywords_ar": "صيغة قصة لحظة حسي كلمات رابط شخصي مشهد مثال كيف عميل عملاء",
       "en": {
         "title": "The storytelling formula",
         "body": "Use a simple four-part formula: Moment + simple sensory \"feel-it\" words + a personal tie-in + close with a scene they can live today. Example — instead of \"linen dress, breathable fabric,\" say: \"This linen dress is your easy win for warm days — light on the skin, easy to move in, perfect for chilly AC moments. You'll wear it from lunch to late coffee and still feel fresh.\""
@@ -526,14 +526,14 @@
     {
       "id": "rec-why",
       "keywords_en": "elevated recommendation add on why important atv ipt expertise trust upsell complete experience",
-      "keywords_ar": "توصية إضافة لماذا متوسط الفاتورة قطع خبرة ثقة تجربة",
+      "keywords_ar": "توصية إضافة لماذا متوسط الفاتورة قطع خبرة ثقة تجربة عميل عملاء",
       "en": {
         "title": "Why elevated recommendations matter",
         "body": "A good recommendation shows you understand the customer and turns a single purchase into a complete experience. Smart add-ons build trust, not pressure — you're showing care and expertise, not pushing. Done consistently, it lifts service quality and store results: better experiences, higher ATV and stronger IPT, because customers trust you more."
       },
       "ar": {
         "title": "لماذا التوصية المتقنة مهمة",
-        "body": "التوصية الجيدة تُظهر أنك فهمت العميل، وتحوّل عملية شراء واحدة إلى تجربة متكاملة. الإضافات الذكية تبني الثقة لا الضغط — فأنت تُظهر الاهتمام والخبرة لا الإلحاح. وحين تلتزم بها ترتفع جودة الخدمة ونتائج المتجر: تجربة أفضل، ومتوسط فاتورة أعلى، وعدد قطع أكبر، لأن العميل يثق بك أكثر."
+        "body": "التوصية الجيدة تُظهر أنك فهمت الزبون، وتحوّل عملية شراء واحدة إلى تجربة متكاملة. الإضافات الذكية تبني الثقة لا الضغط — فأنت تُظهر الاهتمام والخبرة لا الإلحاح. وحين تلتزم بها ترتفع جودة الخدمة ونتائج المتجر: تجربة أفضل، ومتوسط فاتورة أعلى، وعدد قطع أكبر، لأن الزبون يثق بك أكثر."
       },
       "source": {
         "en": "Art of Elevated Recommendation",
@@ -543,7 +543,7 @@
     {
       "id": "rec-method",
       "keywords_en": "spot link suggest confirm method steps recommend add on how technique complete pair matching",
-      "keywords_ar": "لاحظ اربط اقترح أكد طريقة خطوات توصية كيف يكمل مطابق",
+      "keywords_ar": "لاحظ اربط اقترح أكد طريقة خطوات توصية كيف يكمل مطابق عميل عملاء",
       "en": {
         "title": "Spot, Link, Suggest, Confirm",
         "body": "Recommend naturally with four small steps. Spot: see what they're buying and find a clue (holding perfume? maybe matching lotion). Link: connect it to something they said or liked (\"You said she likes floral scents — this matches perfectly\"). Suggest: offer one product that completes it (\"Most people pair this candle with the matching diffuser so the scent lasts longer\"). Confirm: ask kindly (\"Would you like to add that too?\")."
@@ -560,7 +560,7 @@
     {
       "id": "rec-natural",
       "keywords_en": "natural effortless conversational not pushy pitch friend link empower awkward sound sales talk",
-      "keywords_ar": "طبيعي عفوي حوار ملح خطبة صديق ربط قرار محرج",
+      "keywords_ar": "طبيعي عفوي حوار ملح خطبة صديق ربط قرار محرج عميل عملاء",
       "en": {
         "title": "Making it sound effortless",
         "body": "The best recommendations come from a real conversation, not a pitch. Speak like a person, keep it short and clear, and share tips as if helping a friend. Always link the suggestion back to what they already chose so it stays relevant, and let the choice feel like theirs. Say \"A lot of people who love what you picked also enjoy this one\" — not \"This is the best, you should get it.\""
@@ -577,14 +577,14 @@
     {
       "id": "cr-intro",
       "keywords_en": "conflict resolution complaint upset angry customer difficult situation overview why loyal",
-      "keywords_ar": "حل خلاف نزاع شكوى عميل غاضب منزعج موقف صعب لماذا وفي",
+      "keywords_ar": "حل خلاف نزاع شكوى زبون غاضب منزعج موقف صعب لماذا وفي عميل عملاء",
       "en": {
         "title": "Handling conflict & complaints",
         "body": "Every difficult situation is a chance to create a loyal customer. Customers rarely remember a perfect transaction, but they always remember how they were treated when something went wrong. Conflict resolution isn't about winning an argument — it's about understanding, resolving, and leaving the customer feeling respected."
       },
       "ar": {
         "title": "التعامل مع الخلافات والشكاوى",
-        "body": "كل موقف صعب فرصة لكسب عميل وفيّ. نادراً ما يتذكّر العملاء معاملة مثالية، لكنهم دائماً يتذكّرون كيف عوملوا حين حدث خطأ. حل الخلاف ليس ربح الجدال — بل الفهم والحل وترك العميل يشعر بالاحترام."
+        "body": "كل موقف صعب فرصة لكسب زبون وفيّ. نادراً ما يتذكّر الزبائن معاملة مثالية، لكنهم دائماً يتذكّرون كيف عوملوا حين حدث خطأ. حل الخلاف ليس ربح الجدال — بل الفهم والحل وترك الزبون يشعر بالاحترام."
       },
       "source": {
         "en": "Conflict Resolution",
@@ -594,14 +594,14 @@
     {
       "id": "cr-understand",
       "keywords_en": "understand listen first heard acknowledge feelings interrupt receipt exchange calm before solve",
-      "keywords_ar": "فهم إصغاء مسموع اعتراف شعور مقاطعة فاتورة استبدال قبل الحل هدوء",
+      "keywords_ar": "فهم إصغاء مسموع اعتراف شعور مقاطعة فاتورة استبدال قبل الحل هدوء عميل عملاء",
       "en": {
         "title": "Understand before you solve",
         "body": "Customers want to feel heard before they get answers. Before explaining policy or offering solutions: listen without interrupting, keep positive body language, let them finish, and acknowledge how they feel. People calm down when they believe someone genuinely understands them. Example: if a customer is upset they can't exchange without a receipt, listen and acknowledge the frustration first, then discuss options."
       },
       "ar": {
         "title": "افهم قبل أن تحُل",
-        "body": "يريد العميل أن يشعر بأنه مسموع قبل أن يحصل على إجابات. قبل شرح السياسة أو تقديم الحلول: أصغِ دون مقاطعة، وحافظ على لغة جسد إيجابية، ودعه يُكمل، واعترف بشعوره. يهدأ الناس حين يشعرون أن أحداً يفهمهم حقاً. مثال: إذا انزعج عميل لعدم إمكان الاستبدال دون فاتورة، أصغِ واعترف بإحباطه أولاً ثم ناقش الخيارات."
+        "body": "يريد الزبون أن يشعر بأنه مسموع قبل أن يحصل على إجابات. قبل شرح السياسة أو تقديم الحلول: أصغِ دون مقاطعة، وحافظ على لغة جسد إيجابية، ودعه يُكمل، واعترف بشعوره. يهدأ الناس حين يشعرون أن أحداً يفهمهم حقاً. مثال: إذا انزعج زبون لعدم إمكان الاستبدال دون فاتورة، أصغِ واعترف بإحباطه أولاً ثم ناقش الخيارات."
       },
       "source": {
         "en": "Conflict Resolution",
@@ -611,14 +611,14 @@
     {
       "id": "cr-calm",
       "keywords_en": "stay calm pressure angry raised voice tone defensive argue blame frustrated shouting control emotions",
-      "keywords_ar": "هدوء ضغط غاضب صوت مرتفع نبرة دفاعي جدال لوم محبط صراخ",
+      "keywords_ar": "هدوء ضغط غاضب صوت مرتفع نبرة دفاعي جدال لوم محبط صراخ عميل عملاء",
       "en": {
         "title": "Stay calm under pressure",
         "body": "A customer's emotions should never control yours. When someone raises their voice, keep your tone calm, speak slowly and clearly, avoid defensive language, and never argue or blame — focus on solving, not proving who's right. Say things like \"I understand why this is frustrating,\" \"Let's see what we can do,\" and \"I'll help you find the best solution.\""
       },
       "ar": {
         "title": "ابقَ هادئاً تحت الضغط",
-        "body": "لا يجب أن تتحكّم مشاعر العميل بمشاعرك. حين يرفع أحدهم صوته، حافظ على هدوء نبرتك، وتحدّث ببطء ووضوح، وتجنّب اللغة الدفاعية، ولا تجادل أو تلُم — ركّز على الحل لا على إثبات من على حق. قل عبارات مثل «أتفهّم لماذا هذا محبط» و«لنرَ ما يمكننا فعله» و«سأساعدك في إيجاد أفضل حل»."
+        "body": "لا يجب أن تتحكّم مشاعر الزبون بمشاعرك. حين يرفع أحدهم صوته، حافظ على هدوء نبرتك، وتحدّث ببطء ووضوح، وتجنّب اللغة الدفاعية، ولا تجادل أو تلُم — ركّز على الحل لا على إثبات من على حق. قل عبارات مثل «أتفهّم لماذا هذا محبط» و«لنرَ ما يمكننا فعله» و«سأساعدك في إيجاد أفضل حل»."
       },
       "source": {
         "en": "Conflict Resolution",
@@ -628,14 +628,14 @@
     {
       "id": "cr-empathy",
       "keywords_en": "empathy genuine respect disappointing not our fault calm down feel understood recognise experience",
-      "keywords_ar": "تعاطف احترام مخيب ليس خطأنا اهدأ فهم اعتراف تجربة",
+      "keywords_ar": "تعاطف احترام مخيب ليس خطأنا اهدأ فهم اعتراف تجربة عميل عملاء",
       "en": {
         "title": "Show genuine empathy",
         "body": "Empathy doesn't mean agreeing with every complaint — it means recognising the customer's experience. Instead of \"Calm down,\" say \"I can see why that would be disappointing.\" Instead of \"That's not our fault,\" say \"Let's work together to make this right.\" The goal is to make the customer feel respected."
       },
       "ar": {
         "title": "أظهر تعاطفاً صادقاً",
-        "body": "التعاطف لا يعني الموافقة على كل شكوى — بل الاعتراف بتجربة العميل. بدل «اهدأ» قل «أفهم لماذا قد يكون هذا مخيّباً». وبدل «هذا ليس خطأنا» قل «لنعمل معاً لإصلاح الأمر». الهدف أن يشعر العميل بالاحترام."
+        "body": "التعاطف لا يعني الموافقة على كل شكوى — بل الاعتراف بتجربة الزبون. بدل «اهدأ» قل «أفهم لماذا قد يكون هذا مخيّباً». وبدل «هذا ليس خطأنا» قل «لنعمل معاً لإصلاح الأمر». الهدف أن يشعر الزبون بالاحترام."
       },
       "source": {
         "en": "Conflict Resolution",
@@ -645,14 +645,14 @@
     {
       "id": "cr-solutions",
       "keywords_en": "solutions not excuses alternatives options ownership i dont know out of stock another store promise unavailable",
-      "keywords_ar": "حلول أعذار بدائل خيارات لا أعرف غير متوفر فرع آخر وعد",
+      "keywords_ar": "حلول أعذار بدائل خيارات لا أعرف غير متوفر فرع آخر وعد عميل عملاء",
       "en": {
         "title": "Offer solutions, not excuses",
         "body": "Whenever possible, offer available alternatives, explain options clearly, and keep ownership of the conversation. Avoid passing customers between colleagues, saying \"I don't know,\" or making promises you can't keep. If you don't know the answer, say \"I'll find out for you.\" Example: if a product is unavailable, check whether another Alshaya store has it or suggest a suitable alternative."
       },
       "ar": {
         "title": "قدّم حلولاً لا أعذاراً",
-        "body": "كلما أمكن، اعرض بدائل متاحة، واشرح الخيارات بوضوح، وابقَ مالكاً للحوار. تجنّب تمرير العميل بين الزملاء، أو قول «لا أعرف»، أو قطع وعود لا يمكنك الوفاء بها. إن لم تعرف الإجابة قل «سأعرف لك ذلك». مثال: إن كان المنتج غير متوفر، تحقّق إن كان متاحاً في فرع آخر لألشايا أو اقترح بديلاً مناسباً."
+        "body": "كلما أمكن، اعرض بدائل متاحة، واشرح الخيارات بوضوح، وابقَ مالكاً للحوار. تجنّب تمرير الزبون بين الزملاء، أو قول «لا أعرف»، أو قطع وعود لا يمكنك الوفاء بها. إن لم تعرف الإجابة قل «سأعرف لك ذلك». مثال: إن كان المنتج غير متوفر، تحقّق إن كان متاحاً في فرع آخر لألشايا أو اقترح بديلاً مناسباً."
       },
       "source": {
         "en": "Conflict Resolution",
@@ -662,14 +662,14 @@
     {
       "id": "cr-recover",
       "keywords_en": "recover recovery apologise apology mistake fix thank valued loyal formula service recovery",
-      "keywords_ar": "معالجة استرداد اعتذار خطأ حل شكر تقدير ولاء صيغة",
+      "keywords_ar": "معالجة استرداد اعتذار خطأ حل شكر تقدير ولاء صيغة عميل عملاء",
       "en": {
         "title": "Recover the experience",
         "body": "Mistakes happen — what matters is how quickly and professionally you recover. A great recovery: apologise sincerely, solve the issue, thank the customer for their patience, and leave them feeling valued. Customers often become more loyal after excellent service recovery than after a problem-free visit. The formula: Listen → Empathise → Solve → Confirm satisfaction → Thank the customer."
       },
       "ar": {
         "title": "استعِد التجربة",
-        "body": "الأخطاء تحدث — والمهم سرعة ومهنية معالجتها. المعالجة الجيدة: اعتذر بصدق، وحُل المشكلة، واشكر العميل على صبره، واتركه يشعر بالتقدير. غالباً ما يصبح العميل أكثر ولاءً بعد معالجة خدمة ممتازة مقارنة بزيارة بلا مشاكل. الصيغة: أصغِ ← تعاطف ← حُل ← تأكّد من الرضا ← اشكر العميل."
+        "body": "الأخطاء تحدث — والمهم سرعة ومهنية معالجتها. المعالجة الجيدة: اعتذر بصدق، وحُل المشكلة، واشكر الزبون على صبره، واتركه يشعر بالتقدير. غالباً ما يصبح الزبون أكثر ولاءً بعد معالجة خدمة ممتازة مقارنة بزيارة بلا مشاكل. الصيغة: أصغِ ← تعاطف ← حُل ← تأكّد من الرضا ← اشكر الزبون."
       },
       "source": {
         "en": "Conflict Resolution",
@@ -679,14 +679,14 @@
     {
       "id": "cr-escalate",
       "keywords_en": "escalate escalation manager approval safety security when to escalate supervisor help policy",
-      "keywords_ar": "تصعيد مدير موافقة سلامة أمن مشرف مساعدة متى سياسة",
+      "keywords_ar": "تصعيد مدير موافقة سلامة أمن مشرف مساعدة متى سياسة عميل عملاء",
       "en": {
         "title": "Know when to escalate",
         "body": "Some situations need extra support. Escalate when the customer requests a manager, when policy requires approval, when safety or security is involved, when the situation keeps escalating, or when you can't confidently resolve it. Escalating isn't failing — it's making sure the customer gets the right support."
       },
       "ar": {
         "title": "اعرف متى تُصعّد الأمر",
-        "body": "بعض المواقف تحتاج دعماً إضافياً. صعّد الأمر حين يطلب العميل المدير، أو حين تتطلّب السياسة موافقة، أو حين تتعلّق المسألة بالسلامة أو الأمن، أو حين يستمر الموقف بالتصاعد، أو حين لا تستطيع حلّه بثقة. التصعيد ليس فشلاً — بل ضمان حصول العميل على الدعم المناسب."
+        "body": "بعض المواقف تحتاج دعماً إضافياً. صعّد الأمر حين يطلب الزبون المدير، أو حين تتطلّب السياسة موافقة، أو حين تتعلّق المسألة بالسلامة أو الأمن، أو حين يستمر الموقف بالتصاعد، أو حين لا تستطيع حلّه بثقة. التصعيد ليس فشلاً — بل ضمان حصول الزبون على الدعم المناسب."
       },
       "source": {
         "en": "Conflict Resolution",
