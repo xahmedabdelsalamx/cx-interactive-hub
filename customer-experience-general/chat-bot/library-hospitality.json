@@ -21,7 +21,17 @@
       "source": {
         "en": "Warm Welcome & Curated Conversations",
         "ar": "الترحيب الحار والحوارات المدروسة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/275386/art-of-warm-welcome-in-raising-cane-s",
+          "title": {
+            "en": "Art of Warm Welcome (Raising Cane's)",
+            "ar": "فن الترحيب الحار (رايزنغ كينز)"
+          }
+        }
+      ]
     },
     {
       "id": "hw-what",
@@ -38,7 +48,17 @@
       "source": {
         "en": "Warm Welcome & Curated Conversations",
         "ar": "الترحيب الحار والحوارات المدروسة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/275386/art-of-warm-welcome-in-raising-cane-s",
+          "title": {
+            "en": "Art of Warm Welcome (Raising Cane's)",
+            "ar": "فن الترحيب الحار (رايزنغ كينز)"
+          }
+        }
+      ]
     },
     {
       "id": "hw-personalize",
@@ -55,7 +75,17 @@
       "source": {
         "en": "Warm Welcome & Curated Conversations",
         "ar": "الترحيب الحار والحوارات المدروسة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/275386/art-of-warm-welcome-in-raising-cane-s",
+          "title": {
+            "en": "Art of Warm Welcome (Raising Cane's)",
+            "ar": "فن الترحيب الحار (رايزنغ كينز)"
+          }
+        }
+      ]
     },
     {
       "id": "hw-returning",
@@ -123,7 +153,17 @@
       "source": {
         "en": "Warm Welcome & Curated Conversations",
         "ar": "الترحيب الحار والحوارات المدروسة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286783/art-of-curated-conversation",
+          "title": {
+            "en": "Art of Curated Conversation",
+            "ar": "فن الحوار المدروس"
+          }
+        }
+      ]
     },
     {
       "id": "hw-styles",
@@ -140,7 +180,17 @@
       "source": {
         "en": "Warm Welcome & Curated Conversations",
         "ar": "الترحيب الحار والحوارات المدروسة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286783/art-of-curated-conversation",
+          "title": {
+            "en": "Art of Curated Conversation",
+            "ar": "فن الحوار المدروس"
+          }
+        }
+      ]
     },
     {
       "id": "hw-listening",
@@ -157,7 +207,17 @@
       "source": {
         "en": "Warm Welcome & Curated Conversations",
         "ar": "الترحيب الحار والحوارات المدروسة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286783/art-of-curated-conversation",
+          "title": {
+            "en": "Art of Curated Conversation",
+            "ar": "فن الحوار المدروس"
+          }
+        }
+      ]
     },
     {
       "id": "hw-occasions",

@@ -21,7 +21,25 @@
       "source": {
         "en": "Warm Welcome & The Power of Connection",
         "ar": "الترحيب الحار وقوة التواصل"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/237663/rochelle-lingad-starbucks-adnoc-business-centre-uae",
+          "title": {
+            "en": "The Power of Connection: Rochelle Lingad (Starbucks ADNOC, UAE)",
+            "ar": "قوة التواصل: روشيل لينغاد (ستاربكس أدنوك، الإمارات)"
+          }
+        },
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286784/the-power-of-connection",
+          "title": {
+            "en": "The Power of Connection: Smile, Kindness, Connection",
+            "ar": "قوة التواصل: الابتسامة واللطف والتواصل"
+          }
+        }
+      ]
     },
     {
       "id": "sb-connect",
@@ -38,7 +56,17 @@
       "source": {
         "en": "Warm Welcome & The Power of Connection",
         "ar": "الترحيب الحار وقوة التواصل"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/237663/rochelle-lingad-starbucks-adnoc-business-centre-uae",
+          "title": {
+            "en": "The Power of Connection: Rochelle Lingad (Starbucks ADNOC, UAE)",
+            "ar": "قوة التواصل: روشيل لينغاد (ستاربكس أدنوك، الإمارات)"
+          }
+        }
+      ]
     },
     {
       "id": "sb-care",
@@ -55,7 +83,17 @@
       "source": {
         "en": "Warm Welcome & The Power of Connection",
         "ar": "الترحيب الحار وقوة التواصل"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286784/the-power-of-connection",
+          "title": {
+            "en": "The Power of Connection: Smile, Kindness, Connection",
+            "ar": "قوة التواصل: الابتسامة واللطف والتواصل"
+          }
+        }
+      ]
     },
     {
       "id": "sb-contribute",
@@ -72,7 +110,17 @@
       "source": {
         "en": "Warm Welcome & The Power of Connection",
         "ar": "الترحيب الحار وقوة التواصل"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/267794/the-starbucks-way-to-sell",
+          "title": {
+            "en": "The Starbucks Way to Sell: Listen, Observe, Recommend",
+            "ar": "طريقة ستاربكس في البيع: أصغِ، لاحظ، أوصِ"
+          }
+        }
+      ]
     },
     {
       "id": "sb-trust",
@@ -106,7 +154,17 @@
       "source": {
         "en": "Warm Welcome & The Power of Connection",
         "ar": "الترحيب الحار وقوة التواصل"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/237663/rochelle-lingad-starbucks-adnoc-business-centre-uae",
+          "title": {
+            "en": "The Power of Connection: Rochelle Lingad (Starbucks ADNOC, UAE)",
+            "ar": "قوة التواصل: روشيل لينغاد (ستاربكس أدنوك، الإمارات)"
+          }
+        }
+      ]
     },
     {
       "id": "sb-smile",
@@ -123,7 +181,17 @@
       "source": {
         "en": "Warm Welcome & The Power of Connection",
         "ar": "الترحيب الحار وقوة التواصل"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/286784/the-power-of-connection",
+          "title": {
+            "en": "The Power of Connection: Smile, Kindness, Connection",
+            "ar": "قوة التواصل: الابتسامة واللطف والتواصل"
+          }
+        }
+      ]
     },
     {
       "id": "sb-returning",
@@ -208,7 +276,25 @@
       "source": {
         "en": "The Art of Selling Starbucks Products",
         "ar": "فن بيع منتجات ستاربكس"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/275388/selling-starbucks-products",
+          "title": {
+            "en": "Selling Starbucks Products",
+            "ar": "بيع منتجات ستاربكس"
+          }
+        },
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/267794/the-starbucks-way-to-sell",
+          "title": {
+            "en": "The Starbucks Way to Sell: Listen, Observe, Recommend",
+            "ar": "طريقة ستاربكس في البيع: أصغِ، لاحظ، أوصِ"
+          }
+        }
+      ]
     },
     {
       "id": "sp-story",
@@ -225,7 +311,17 @@
       "source": {
         "en": "The Art of Selling Starbucks Products",
         "ar": "فن بيع منتجات ستاربكس"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/275388/selling-starbucks-products",
+          "title": {
+            "en": "Selling Starbucks Products",
+            "ar": "بيع منتجات ستاربكس"
+          }
+        }
+      ]
     },
     {
       "id": "sp-fits",
@@ -242,7 +338,17 @@
       "source": {
         "en": "The Art of Selling Starbucks Products",
         "ar": "فن بيع منتجات ستاربكس"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/267794/the-starbucks-way-to-sell",
+          "title": {
+            "en": "The Starbucks Way to Sell: Listen, Observe, Recommend",
+            "ar": "طريقة ستاربكس في البيع: أصغِ، لاحظ، أوصِ"
+          }
+        }
+      ]
     },
     {
       "id": "sp-seasonal",
