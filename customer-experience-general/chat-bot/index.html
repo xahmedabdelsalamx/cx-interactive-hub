@@ -187,9 +187,8 @@
   @media (prefers-color-scheme: dark){ .chip:hover{ color:#FF9BA5; } }
   .related .chip{ box-shadow:none; }
 
-  .platform{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:12px; }
-  .platform .lbl{ font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:700; }
-  .platform img{ height:19px; width:auto; display:block; opacity:.92; }
+  .platform{ display:flex; align-items:center; justify-content:center; margin-top:14px; }
+  .platform img{ height:34px; width:auto; display:block; opacity:.95; }
   @media (prefers-color-scheme: dark){ .platform img{ filter:brightness(1.5) saturate(1.1); } }
 
   /* thinking */
@@ -258,7 +257,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
       </button>
     </div>
-    <div class="platform"><span class="lbl" id="partof"></span><img src="" id="hublogo" alt="CX Hub"></div>
+    <div class="platform"><img src="" id="hublogo" alt="CX Hub"></div>
     <div class="foot" id="foot"></div>
   </div>
 </div>
@@ -331,7 +330,7 @@ function setLang(l){
   const u=UI[l];
   $("title").textContent=u.title; $("pill").textContent=u.pill; $("subtitle").textContent=u.subtitle;
   $("input").placeholder=u.ph; $("foot").innerHTML=u.foot;
-  $("partof").textContent=u.partOf; $("hublogo").src=CXHUB;
+  $("hublogo").src=CXHUB;
   renderIntro();
 }
 function renderIntro(){
