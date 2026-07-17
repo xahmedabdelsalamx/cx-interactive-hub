@@ -716,7 +716,37 @@
   }
 
   /* ---------------- RESULT ---------------- */
-  function advanceRound(pct) { state.scores.push(pct); state.roundIndex++; playRound(); }
+  function advanceRound(pct) {
+    state.scores.push(pct); state.roundIndex++;
+    // Brain break between rounds (never before round 1, never after the last round)
+    var more = state.division && state.roundIndex < state.division.rounds.length;
+    if (more && window.MINIGAMES && window.MINIGAMES.length) { showMiniGame(); return; }
+    playRound();
+  }
+
+  /* ---------------- BRAIN BREAK (mini-game between rounds) ----------------
+     Pure fun, zero scoring impact. Picks a different game each break. */
+  function showMiniGame() {
+    var games = window.MINIGAMES;
+    var g = games[(state.roundIndex - 1) % games.length];
+    var c = $("#minigameCard"); c.innerHTML = "";
+    rerenderCurrent = showMiniGame;
+
+    var head = el("div", "mg-head");
+    head.appendChild(el("div", "mg-tag", L(g.tag)));
+    head.appendChild(el("div", "mg-name", L(g.name)));
+    c.appendChild(head);
+
+    var mount = el("div", "mg-mount");
+    c.appendChild(mount);
+
+    var skip = el("button", "mg-skip", L({ ar: "تخطّي، كمّل الجولة الجاية", en: "Skip, next round" }));
+    skip.onclick = function () { playRound(); };
+    c.appendChild(skip);
+
+    showScreen("screen-minigame");
+    g.mount(mount, function () { playRound(); }, state.lang);
+  }
 
   /* ---------------- MECHANIC: RUSH (timed rapid-fire + energy meter) ---------------- */
   function runRush(round, mount) {
