@@ -65,7 +65,8 @@
     correctMatch:{ ar: "التوصيل الصحيح", en: "The correct matches" },
     moreLearn:  { ar: "تعلّم أكثر", en: "More learning" },
     sTrue:      { ar: "صح", en: "True" },
-    sFalse:     { ar: "خطأ", en: "False" }
+    sFalse:     { ar: "خطأ", en: "False" },
+    rightWas:   { ar: "الصح كان:", en: "The right move was:" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -75,6 +76,46 @@
   function u(k) { return L(UI[k]); }
   function phMedia() { return { type: "placeholder", label: { ar: "صورة / أنيميشن", en: "image / lottie" } }; }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------------- FEEDBACK (right and wrong must FEEL different) ----------
+     Question feedback is authored as "<praise>! <lesson>".
+     Correct  -> praise + lesson  ("🔥 عين صقر! التردد الصامت هو طلب مساعدة...")
+     Wrong    -> encouraging opener + what the right move was + the same lesson
+                 (never the praise, which is what made wrong answers read as
+                 congratulations). */
+  var PRAISE = [
+    { ar: "ممتاز!", en: "Nice!" }, { ar: "أحسنت!", en: "Well done!" },
+    { ar: "تمام!", en: "Exactly!" }, { ar: "إحساس عالي!", en: "Great instinct!" }
+  ];
+  var HARDLUCK = [
+    { ar: "ما ظبطت هالمرة.", en: "Not this time." },
+    { ar: "قريب، بس مو بالضبط.", en: "Close, but not quite." },
+    { ar: "حظ أوفر، ركّز بالتفصيلة.", en: "Hard luck, watch the detail." },
+    { ar: "مو هذي، فكّر باللحظة مرة ثانية.", en: "Not this one, rethink the moment." }
+  ];
+  function pickOne(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function splitFb(t) {
+    var i = t.indexOf("!");
+    if (i > -1 && i < 60) return { praise: t.slice(0, i + 1).trim(), lesson: t.slice(i + 1).trim() };
+    return { praise: "", lesson: t };
+  }
+  function rightMove(q, mech) {
+    if (mech === "swipe") return L(q.isOpportunity
+      ? { ar: "فرصة تواصل، اسحب يمين", en: "an opportunity, swipe right" }
+      : { ar: "أعطه مساحة، اسحب يسار", en: "give space, swipe left" });
+    if (mech === "speed") return L(q.isTrue ? { ar: "صح", en: "True" } : { ar: "خطأ", en: "False" });
+    if (mech === "convo") return (q.replies && q.replies[q.correct]) ? L(q.replies[q.correct]) : "";
+    if (mech === "scenario" || mech === "rush") return (q.options && q.options[q.correct]) ? L(q.options[q.correct]) : "";
+    return "";
+  }
+  function fbText(q, mech, ok, timeout) {
+    var p = splitFb(L(q.feedback));
+    if (ok) return "✓ " + (p.praise || L(pickOne(PRAISE))) + " " + p.lesson;
+    var head = timeout ? ("⏱ " + u("timeUp")) : ("✕ " + L(pickOne(HARDLUCK)));
+    var rm = rightMove(q, mech);
+    var why = rm ? (" " + u("rightWas") + " " + rm + ".") : "";
+    return head + why + " " + p.lesson;
+  }
 
   function showScreen(id) {
     var s = document.querySelectorAll(".screen");
@@ -398,7 +439,7 @@
           (right ? yes : no).classList.add("ok");
           if (v !== right) (v ? yes : no).classList.add("bad");
           fb.className = "fb show " + (v === right ? "ok" : "no");
-          fb.textContent = (v === right ? "✓ " : "✕ ") + L(q.feedback);
+          fb.textContent = fbText(q, "speed", v === right);
         }
         no.onclick = function () { onAnswer(false); paint(false); };
         yes.onclick = function () { onAnswer(true); paint(true); };
@@ -716,7 +757,7 @@
         if (ad && ad.answered(answers[idx])) {
           var ok = ad.correct(q, answers[idx]);
           fb.className = "fb show " + (ok ? "ok" : "no");
-          fb.textContent = (ok ? "✓ " : "✕ ") + L(q.feedback);
+          fb.textContent = fbText(q, round.mechanic, ok);
         } else { fb.className = "fb"; fb.textContent = ""; }
         next.disabled = !(ad && ad.answered(answers[idx]));
       }
@@ -847,7 +888,7 @@
         else { streak = 0; energy = Math.max(0, energy - 14); }
         enf.style.width = energy + "%";
         fb.className = "fb show " + (ok ? "ok" : "no");
-        fb.textContent = (i === -1 ? "⏱ " + u("timeUp") + " " : (ok ? "✓ " : "✕ ")) + L(q.feedback);
+        fb.textContent = fbText(q, "rush", ok, i === -1);
         setTimeout(function () { idx++; (idx >= qs.length) ? finish() : draw(); }, 1050);
       }
     }

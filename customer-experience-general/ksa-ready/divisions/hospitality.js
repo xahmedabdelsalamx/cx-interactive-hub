@@ -173,7 +173,6 @@ window.DIVISION_hospitality = {
           instruction: { ar: "الضيوف خلّصوا وجاهزين يمشون. رتّب وداع يخلّيهم يرجعون.", en: "They're finished and ready to leave. Order a farewell that brings them back." },
           media: "hospR3_q1",
           steps: [
-            { ar: "اسأل لو يحتاجون أي شي قبل لا يمشون", en: "Ask if they need anything before they go" },
             { ar: "تأكد إن كل شي كان على ذوقهم", en: "Confirm everything was to their liking" },
             { ar: "اشكرهم بصدق على زيارتهم", en: "Thank them sincerely for visiting" },
             { ar: "ادعهم يرجعون: «نتشرّف بزيارتكم مرة ثانية»", en: "Invite them back: \"we'd love to see you again\"" },
@@ -196,7 +195,6 @@ window.DIVISION_hospitality = {
           instruction: { ar: "رتّب إغلاق الطاولة بفخر.", en: "Order how to close a table with pride." },
           media: "hospR3_q3",
           steps: [
-            { ar: "تأكد إن تجربتهم كانت كاملة ومريحة", en: "Make sure the experience felt complete and comfortable" },
             { ar: "قدّم الفاتورة بهدوء وبدون استعجال", en: "Present the bill calmly, no rushing" },
             { ar: "ساعدهم يجمّعون نقاط أورا قبل الدفع", en: "Help them collect Aura points before payment" },
             { ar: "اشكرهم بشكل شخصي", en: "Thank them personally" },
@@ -222,8 +220,7 @@ window.DIVISION_hospitality = {
             { ar: "تابع الطاولة وتأكد إنهم مرتاحين", en: "Check the table, make sure they're comfortable" },
             { ar: "اقترح ختام خفيف لو حابّين", en: "Suggest a light finish if they'd like" },
             { ar: "اشكرهم على الزيارة بصدق", en: "Thank them sincerely for the visit" },
-            { ar: "ادعهم يرجعون بلمسة شخصية", en: "Invite them back with a personal touch" },
-            { ar: "ودّعهم بطاقة إيجابية", en: "Send them off with positive energy" }
+            { ar: "ودّعهم بدعوة يرجعون", en: "Send them off with an invite back" }
           ],
           feedback: { ar: "🔥 كل وداع هو بداية الزيارة الجاية. آخر 30 ثانية عندك تقرر إذا بيرجعون ولا لا.", en: "🔥 Every farewell starts the next visit. Your last 30 seconds decide whether they come back." }
         }

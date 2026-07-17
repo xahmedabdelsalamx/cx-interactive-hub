@@ -184,7 +184,6 @@ window.DIVISION_retail = {
           media: "retailR3_q1",
           steps: [
             { ar: "رحّب باختياره: «خيار موفّق»", en: "Acknowledge the choice: \"great pick\"" },
-            { ar: "وجّهه للكاشير", en: "Guide him to the till" },
             { ar: "أكّد المنتج بهدوء", en: "Confirm the item calmly" },
             { ar: "غلّفه بعناية", en: "Pack it with care" },
             { ar: "ودّعه بحرارة", en: "Send him off warmly" }
@@ -207,7 +206,6 @@ window.DIVISION_retail = {
           media: "retailR3_q3",
           steps: [
             { ar: "رحّب فيه من جديد عند الكاشير", en: "Greet him again at the till" },
-            { ar: "خلّك حاضر: ابتسامة وتواصل بصري", en: "Be present: smile and eye contact" },
             { ar: "اذكر مزايا أورا", en: "Mention Aura benefits" },
             { ar: "غلّف بعناية", en: "Pack with care" },
             { ar: "ودّعه ودعوة يرجع", en: "Farewell plus an invite back" }
@@ -229,7 +227,6 @@ window.DIVISION_retail = {
           instruction: { ar: "من لحظة القرار لين يطلع من الباب. رتّب الرحلة كاملة.", en: "From the moment he decides to the moment he's out the door. Order the full journey." },
           media: "retailR3_q5",
           steps: [
-            { ar: "الزبون قرر الشراء", en: "The customer decides to buy" },
             { ar: "رحّب باختياره: «خيار موفّق»", en: "Acknowledge the choice: \"great pick\"" },
             { ar: "اقترح إضافة وحدة طبيعية", en: "Suggest one natural add-on" },
             { ar: "أنهِ الدفع بسلاسة", en: "Complete payment smoothly" },
@@ -244,7 +241,6 @@ window.DIVISION_retail = {
             { ar: "رحّب باختياره للهدية", en: "Acknowledge his gift choice" },
             { ar: "اقترح تغليف هدية أنيق", en: "Offer elegant gift wrapping" },
             { ar: "اذكر مزايا أورا", en: "Mention Aura benefits" },
-            { ar: "غلّفها بعناية", en: "Pack it with care" },
             { ar: "ودّعه بحرارة", en: "Send him off warmly" }
           ],
           feedback: { ar: "💚 لاحظ: هو ما يشتري عطر، يشتري لحظة بيعطيها لأحد يحبه. التغليف مو خدمة، هو جزء من الهدية.", en: "💚 Notice: he isn't buying a fragrance, he's buying a moment he'll hand to someone he loves. Wrapping isn't a service, it's part of the gift." }

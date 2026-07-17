@@ -118,9 +118,9 @@
           var saved = Math.abs(targetX - dive) < r.width * 0.13;
           var wide = targetX < r.width * 0.14 || targetX > r.width * 0.86;
           st.shots--;
-          if (!saved && !wide) { st.goals++; st.streak++; msg("⚽ " + L({ ar: "هدف!", en: "GOAL!" }, lang), "#16a34a"); pop(); }
-          else if (saved) { st.streak = 0; msg("🧤 " + L({ ar: "تصدّى!", en: "SAVED!" }, lang), "#e11d48"); }
-          else { st.streak = 0; msg("😬 " + L({ ar: "برّا!", en: "WIDE!" }, lang), "#f59e0b"); }
+          if (!saved && !wide) { st.goals++; st.streak++; msg("⚽ " + L({ ar: "هدف!", en: "GOAL!" }, lang), "gold"); pop(); }
+          else if (saved) { st.streak = 0; msg("🧤 " + L({ ar: "تصدّى!", en: "SAVED!" }, lang), "bad"); }
+          else { st.streak = 0; msg("😬 " + L({ ar: "برّا!", en: "WIDE!" }, lang), "warn"); }
           upd();
           setTimeout(function () {
             ball.style.transition = "none";
@@ -129,7 +129,7 @@
           }, 620);
         }, 430);
       }
-      function msg(t, c) { flash.textContent = t; flash.style.color = c; flash.className = "mg-flash show"; setTimeout(function () { flash.className = "mg-flash"; }, 700); }
+      function msg(t, k) { flash.textContent = t; flash.className = "mg-flash show " + (k || "gold"); setTimeout(function () { flash.className = "mg-flash " + (k || "gold"); }, 780); }
       function pop() {
         for (var i = 0; i < 14; i++) {
           var d = el("div", "mg-confetti");
@@ -208,7 +208,7 @@
         if (ow <= 6) { over(); return; }
 
         var exact = Math.abs(st.x - prevX) < 5;
-        if (exact) { st.perfect++; msg("✨ " + L({ ar: "مثالي!", en: "PERFECT!" }, lang), "#16a34a"); }
+        if (exact) { st.perfect++; msg("✨ " + L({ ar: "مثالي!", en: "PERFECT!" }, lang), "gold"); }
 
         var b = el("div", "sk-box");
         b.style.width = (exact ? prevW : ow) + "px";
@@ -225,7 +225,7 @@
       }
       arena.addEventListener("pointerdown", function (e) { drop(); e.preventDefault(); });
 
-      function msg(t, c) { flash.textContent = t; flash.style.color = c; flash.className = "mg-flash show"; setTimeout(function () { flash.className = "mg-flash"; }, 650); }
+      function msg(t, k) { flash.textContent = t; flash.className = "mg-flash show " + (k || "gold"); setTimeout(function () { flash.className = "mg-flash " + (k || "gold"); }, 700); }
       function stop() { st.running = false; if (raf) cancelAnimationFrame(raf); mover.style.display = "none"; }
       function over() { stop(); end(L({ ar: "وصلت " + st.height + " طوابق", en: "You reached " + st.height + " floors" }, lang)); }
       function win() { stop(); end(L({ ar: "برج كامل! " + st.height + " طوابق", en: "Tower complete! " + st.height + " floors" }, lang)); }
@@ -301,13 +301,13 @@
       }
       function pick(ok, timeout) {
         clearInterval(timer);
-        if (ok) { st.hits++; st.streak++; st.best = Math.max(st.best, st.streak); msg("🔥 +1", "#16a34a"); }
-        else { st.streak = 0; msg(timeout ? "⏱" : "✕", "#e11d48"); }
+        if (ok) { st.hits++; st.streak++; st.best = Math.max(st.best, st.streak); msg("🔥 +1", "gold"); }
+        else { st.streak = 0; msg(timeout ? "⏱" : "✕", "bad"); }
         upd();
         setTimeout(next, 380);
       }
       function shuffleArr(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } }
-      function msg(t, c) { flash.textContent = t; flash.style.color = c; flash.className = "mg-flash show"; setTimeout(function () { flash.className = "mg-flash"; }, 420); }
+      function msg(t, k) { flash.textContent = t; flash.className = "mg-flash show " + (k || "gold"); setTimeout(function () { flash.className = "mg-flash " + (k || "gold"); }, 460); }
       function finish() {
         clearInterval(timer);
         arena.removeChild(grid);
