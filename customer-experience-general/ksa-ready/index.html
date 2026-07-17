@@ -25,7 +25,7 @@ body{font-family:var(--font);color:var(--ink);
   background-image:linear-gradient(135deg,#00351f,#005430,#00733f,#005430);
   background-size:230% 230%;animation:bgshift 17s ease infinite;
   min-height:100dvh;display:flex;flex-direction:column;align-items:center;
-  padding:16px 14px;position:relative;overflow-x:hidden}
+  padding:28px 16px;position:relative;overflow-x:hidden}
 @keyframes bgshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @media(prefers-reduced-motion:reduce){body{animation:none}}
 
@@ -35,11 +35,11 @@ body{font-family:var(--font);color:var(--ink);
 @keyframes drift{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-26px) rotate(8deg)}}
 @media(prefers-reduced-motion:reduce){.floater{animation:none}}
 
-.wrap{width:100%;max-width:500px;z-index:1;display:flex;flex-direction:column;gap:12px}
+.wrap{width:100%;max-width:600px;z-index:1;display:flex;flex-direction:column;gap:14px;margin-block:auto}
 
 /* ===== THE MAIN WINDOW (single big white card) ===== */
 .window{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
-  padding:18px 20px 26px;min-height:548px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  padding:22px 30px 30px;min-height:582px;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .win-head{display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid var(--line)}
 .win-logos{display:flex;align-items:center;gap:12px;min-height:44px}
@@ -50,12 +50,23 @@ body{font-family:var(--font);color:var(--ink);
 .langbtn:hover{border-color:var(--brand);transform:translateY(-1px)}
 .win-body{flex:1;display:flex;flex-direction:column;justify-content:center}
 
+/* keep form + text columns comfortable now that the window is wider */
+#intakeForm,#worldCard,#introCard,#roundIntroCard,#resultCard{max-width:470px;margin-inline:auto;width:100%}
+
+/* responsive: tighten up on phones */
+@media(max-width:620px){
+  body{padding:14px 12px}
+  .wrap{gap:11px;max-width:100%}
+  .window{padding:16px 17px 24px;border-radius:22px;min-height:540px}
+  .footcard{padding:12px 13px}
+}
+
 /* screens */
 .screen{display:none;animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both}
 .screen.active{display:block}
 @keyframes pop{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
 .brandbar{height:6px;background:var(--grad);border-radius:6px;width:74px;margin:0 auto 16px}
-.h1{font-size:23px;font-weight:900;text-align:center;margin:2px 0 4px}
+.h1{font-size:25px;font-weight:900;text-align:center;margin:4px 0 6px}
 .h2{font-size:19px;font-weight:800;text-align:center;margin:6px 0}
 .h3{font-size:16px;font-weight:800;text-align:center;margin:4px 0}
 .muted{color:var(--ink-soft);text-align:center;font-size:14px;line-height:1.6}
@@ -112,7 +123,7 @@ body{font-family:var(--font);color:var(--ink);
 .round-list{margin:10px 4px;padding-inline-start:22px;line-height:2;font-weight:600}
 
 /* ===== KSA FLAG (entry screen) ===== */
-.ksa-flag{display:flex;justify-content:center;margin:0 0 12px;min-height:54px;align-items:center}
+.ksa-flag{display:flex;justify-content:center;margin:2px 0 16px;min-height:54px;align-items:center}
 .ksa-flag .flag-emoji{font-size:50px;line-height:1;display:inline-block;transform-origin:50% 60%;
   animation:flagwave 3.4s ease-in-out infinite;filter:drop-shadow(0 5px 10px rgba(0,0,0,.28))}
 @keyframes flagwave{0%,100%{transform:rotate(-3deg) skewX(0deg)}25%{transform:rotate(1deg) skewX(-7deg)}
