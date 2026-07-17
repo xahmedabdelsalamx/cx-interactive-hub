@@ -457,80 +457,84 @@
         if (saved != null) paint(saved);
       }
     },
+    /* MATCH — RAPID MATCH: one item at a time, tap the match from 3 options.
+       Same data shape (pairs listed in correct order); distractors are drawn
+       from the other pairs in the same question. Far faster and lighter to read
+       than an 8-chip grid: 4 taps instead of 9, and 4 short items on screen. */
     match: {
-      answered: function (a) { return !!(a && a.locked); },
-      correct: function (q, a) { return !!(a && a.ok); },
+      answered: function (a) { return !!(a && a.picks && a.n && a.picks.length === a.n); },
+      correct: function (q, a) { return !!(a && a.picks && a.picks.every(function (p, i) { return p === i; })); },
       render: function (q, area, saved, onAnswer) {
         var n = q.pairs.length;
-        var assign = saved && saved.assign ? saved.assign.slice() : [];
-        for (var z = 0; z < n; z++) if (assign[z] === undefined) assign[z] = null;
-        var tries = saved && saved.tries ? saved.tries : 0;
-        var locked = !!(saved && saved.locked), okState = !!(saved && saved.ok), active = null;
+        var picks = saved && saved.picks ? saved.picks.slice() : [];
 
         area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
         if (q.instruction) area.appendChild(el("div", "scn-bubble", L(q.instruction)));
 
-        var grid = el("div", "match-grid");
-        var lc = el("div", "match-col"), rc = el("div", "match-col");
-        var rights = q.pairs.map(function (p, i) { return { text: p.right, pidx: i }; });
-        if (!locked) shuffle(rights);
-        var lChips = [], rChips = [];
-        q.pairs.forEach(function (p, i) {
-          var c = el("button", "match-chip"); c.appendChild(el("span", "match-badge")); c.appendChild(el("span", "match-txt", L(p.left)));
-          if (!locked) c.onclick = function () { leftClick(i); };
-          lChips.push(c); lc.appendChild(c);
-        });
-        rights.forEach(function (r) {
-          var c = el("button", "match-chip"); c.appendChild(el("span", "match-badge")); c.appendChild(el("span", "match-txt", L(r.text)));
-          c._pidx = r.pidx; if (!locked) c.onclick = function () { rightClick(r.pidx); };
-          rChips.push(c); rc.appendChild(c);
-        });
-        grid.appendChild(lc); grid.appendChild(rc); area.appendChild(grid);
+        var stepLbl = el("div", "rm-step");
+        var host = el("div", "rm-host");
+        area.appendChild(stepLbl); area.appendChild(host);
 
-        var msg = el("div", "trial-msg");
-        var checkBtn = el("button", "btn check-btn", u("check"));
-        area.appendChild(msg); area.appendChild(checkBtn);
+        function save() { return { picks: picks.slice(), n: n }; }
 
-        function save() { return { assign: assign.slice(), tries: tries, locked: locked, ok: okState }; }
-        function paint() {
-          lChips.forEach(function (c, i) {
-            c.querySelector(".match-badge").textContent = assign[i] != null ? (i + 1) : "";
-            c.classList.toggle("assigned", assign[i] != null); c.classList.toggle("active", active === i);
+        function summary() {
+          stepLbl.textContent = "";
+          host.innerHTML = "";
+          var list = el("div", "rm-summary");
+          q.pairs.forEach(function (p, i) {
+            var ok = picks[i] === i;
+            var row = el("div", "rm-srow " + (ok ? "ok" : "no"));
+            row.appendChild(el("span", "rm-mark", ok ? "✓" : "✕"));
+            var body = el("span", "rm-sbody");
+            body.appendChild(el("span", "rm-sl", L(p.left)));
+            body.appendChild(el("span", "rm-sr", L(q.pairs[i].right)));
+            if (!ok && picks[i] != null) {
+              var wrong = el("span", "rm-swrong", "✕ " + L(q.pairs[picks[i]].right));
+              body.appendChild(wrong);
+            }
+            row.appendChild(body);
+            list.appendChild(row);
           });
-          rChips.forEach(function (c) {
-            var li = assign.indexOf(c._pidx);
-            c.querySelector(".match-badge").textContent = li >= 0 ? (li + 1) : "";
-            c.classList.toggle("assigned", li >= 0);
-          });
-          checkBtn.disabled = !assign.every(function (x) { return x != null; });
+          host.appendChild(list);
         }
-        function leftClick(i) { if (assign[i] != null) { assign[i] = null; active = i; } else { active = i; } paint(); onAnswer(save()); }
-        function rightClick(pidx) { if (active == null) return; var prev = assign.indexOf(pidx); if (prev >= 0) assign[prev] = null; assign[active] = pidx; active = null; paint(); onAnswer(save()); }
-        function lockUI() { lChips.forEach(function (c) { c.disabled = true; }); rChips.forEach(function (c) { c.disabled = true; }); checkBtn.style.display = "none"; }
-        function revealSolution() {
-          lChips.forEach(function (c, i) { c.classList.add(assign[i] === i ? "right" : "wrong"); });
-          var sol = el("div", "solution");
-          sol.appendChild(el("div", "solution-h", u("correctMatch")));
-          q.pairs.forEach(function (p) {
-            var row = el("div", "sol-row");
-            row.appendChild(el("span", "sol-l", L(p.left)));
-            row.appendChild(el("span", "sol-arrow", "↔"));
-            row.appendChild(el("span", "sol-r", L(p.right)));
-            sol.appendChild(row);
+
+        function step() {
+          var i = picks.length;
+          if (i >= n) { summary(); return; }
+          host.innerHTML = "";
+          stepLbl.textContent = (i + 1) + " / " + n;
+
+          var card = el("div", "rm-card", L(q.pairs[i].left));
+          host.appendChild(card);
+
+          // options: the correct right + up to 2 distractors from other pairs
+          var others = [];
+          for (var k = 0; k < n; k++) if (k !== i) others.push(k);
+          shuffle(others);
+          var choice = [i].concat(others.slice(0, 2));
+          shuffle(choice);
+
+          var opts = el("div", "rm-opts");
+          choice.forEach(function (pi) {
+            var b = el("button", "rm-opt", L(q.pairs[pi].right));
+            b.onclick = function () {
+              Array.prototype.forEach.call(opts.children, function (c) { c.disabled = true; });
+              b.classList.add(pi === i ? "ok" : "no");
+              if (pi !== i) {
+                Array.prototype.forEach.call(opts.children, function (c, ci) {
+                  if (choice[ci] === i) c.classList.add("ok");
+                });
+              }
+              picks.push(pi);
+              onAnswer(save());
+              setTimeout(function () { step(); }, pi === i ? 380 : 900);
+            };
+            opts.appendChild(b);
           });
-          area.appendChild(sol);
+          host.appendChild(opts);
         }
-        checkBtn.onclick = function () {
-          if (assign.every(function (x, i) { return x === i; })) {
-            okState = true; locked = true; lChips.concat(rChips).forEach(function (c) { c.classList.add("right"); }); lockUI(); onAnswer(save());
-          } else {
-            tries++;
-            if (tries >= 2) { okState = false; locked = true; lockUI(); revealSolution(); onAnswer(save()); }
-            else { msg.className = "trial-msg show"; msg.textContent = u("tryAgain1"); onAnswer(save()); }
-          }
-        };
-        if (locked) { lockUI(); if (okState) lChips.concat(rChips).forEach(function (c) { c.classList.add("right"); }); else revealSolution(); }
-        paint();
+
+        if (picks.length >= n) summary(); else step();
       }
     },
     /* ORDER — tap the steps in sequence. 2 trials, then reveal + explain. */
@@ -733,7 +737,7 @@
           var correct = 0;
           for (var i = 0; i < qs.length; i++) if (ad.correct(qs[i], answers[i])) correct++;
           state.scores.push(Math.round(correct / qs.length * 100));
-          state.roundIndex++; playRound();
+          state.roundIndex++; maybeBreak();
         } else { idx++; draw(); }
       };
       nav.appendChild(prev); nav.appendChild(next);
@@ -745,12 +749,15 @@
   }
 
   /* ---------------- RESULT ---------------- */
-  function advanceRound(pct) {
-    state.scores.push(pct); state.roundIndex++;
-    // Brain break between rounds (never before round 1, never after the last round)
+  function maybeBreak() {
     var more = state.division && state.roundIndex < state.division.rounds.length;
     if (more && window.MINIGAMES && window.MINIGAMES.length) { showMiniGame(); return; }
     playRound();
+  }
+
+  function advanceRound(pct) {
+    state.scores.push(pct); state.roundIndex++;
+    maybeBreak();
   }
 
   /* ---------------- BRAIN BREAK (mini-game between rounds) ----------------
