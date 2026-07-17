@@ -12,6 +12,12 @@
 
 window.MEDIA = {
 
+  /* ---- ENTRY SCREEN ---- */
+  /* KSA flag on the entry screen. Drop assets/lottie/ksaFlag.json (or switch to
+     { type:"png", src:"assets/images/ksaFlag.png" }). Until the file exists it
+     falls back to the animated 🇸🇦 emoji, so the screen never looks empty. */
+  ksaFlag: { type:"lottie", src:"assets/lottie/ksaFlag.json" },
+
   /* ---- RETAIL · Art of Selling ---- */
   retailIntro: { type:"lottie", src:"assets/lottie/retailIntro.json" },
   /* R1 swipe — First Impression & Discovery */

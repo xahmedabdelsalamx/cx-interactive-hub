@@ -117,8 +117,10 @@ body{font-family:var(--font);color:var(--ink);
   animation:flagwave 3.4s ease-in-out infinite;filter:drop-shadow(0 5px 10px rgba(0,0,0,.28))}
 @keyframes flagwave{0%,100%{transform:rotate(-3deg) skewX(0deg)}25%{transform:rotate(1deg) skewX(-7deg)}
   50%{transform:rotate(3deg) skewX(0deg)}75%{transform:rotate(1deg) skewX(7deg)}}
-.ksa-flag-svg{width:122px;height:82px;filter:drop-shadow(0 7px 14px rgba(0,0,0,.34))}
-@media(prefers-reduced-motion:reduce){.ksa-flag .flag-emoji{animation:none}}
+.ksa-flag-img{width:auto;height:74px;max-width:100%;transform-origin:50% 60%;
+  animation:flagwave 3.4s ease-in-out infinite;filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))}
+.ksa-flag-lottie{width:140px;height:92px;display:block}
+@media(prefers-reduced-motion:reduce){.ksa-flag .flag-emoji,.ksa-flag-img{animation:none}}
 
 /* ===== CHARACTER STAGE (game-style, gradient hero inside the window) ===== */
 .stage-hero{position:relative;overflow:hidden;background:var(--grad);background-size:180% 180%;

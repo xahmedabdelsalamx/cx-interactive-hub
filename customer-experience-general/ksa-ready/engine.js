@@ -19,7 +19,7 @@
     empLabel:   { ar: "الرقم الوظيفي", en: "Employee ID" },
     nameLabel:  { ar: "الاسم بالكامل", en: "Full name" },
     empPH:      { ar: "مثال 323999", en: "e.g. 323999" },
-    namePH:     { ar: "مثال: أحمد شعبان", en: "Example: Ahmed Shaaban" },
+    namePH:     { ar: "مثال: فيصل عبدالله", en: "Example: Faisal Abdullah" },
     brandLabel: { ar: "علامتك التجارية", en: "Brand" },
     brandPH:    { ar: "اختر علامتك التجارية", en: "Choose your brand" },
     genderLabel:{ ar: "الجنس", en: "Gender" },
@@ -250,21 +250,33 @@
 
   /* KSA flag on the entry screen: waving emoji now; upgrades to a gently waving
      real flag automatically if assets/images/ksa-flag.png is present. */
+  /* KSA flag on the entry screen. Reads the "ksaFlag" slot in media-config.js:
+     drop in a Lottie or PNG and it appears automatically. If the file isn't
+     there yet, it falls back to the animated flag emoji. */
   function renderKsaFlag() {
     var host = $("#ksaFlag"); if (!host) return;
-    host.innerHTML = "";
-    host.appendChild(el("span", "flag-emoji", "🇸🇦"));
-    var probe = new Image();
-    probe.onload = function () {
-      host.innerHTML =
-        '<svg class="ksa-flag-svg" viewBox="0 0 122 82" xmlns="http://www.w3.org/2000/svg">' +
-        '<defs><filter id="ksaWave"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.022" numOctaves="2" result="n">' +
-        '<animate attributeName="baseFrequency" dur="7s" values="0.012 0.022;0.018 0.026;0.012 0.022" repeatCount="indefinite"/>' +
-        '</feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="8"/></filter></defs>' +
-        '<image href="assets/images/ksa-flag.png" x="1" y="1" width="120" height="80" preserveAspectRatio="xMidYMid slice" filter="url(#ksaWave)"/>' +
-        '</svg>';
-    };
-    probe.src = "assets/images/ksa-flag.png";
+    function emoji() { host.innerHTML = ""; host.appendChild(el("span", "flag-emoji", "🇸🇦")); }
+    emoji();
+    var m = window.MEDIA && MEDIA.ksaFlag;
+    if (!m || !m.src || m.type === "placeholder") return;
+
+    if (m.type === "png") {
+      var probe = new Image();
+      probe.onload = function () {
+        host.innerHTML = "";
+        var img = el("img", "ksa-flag-img"); img.src = m.src; img.alt = "";
+        host.appendChild(img);
+      };
+      probe.src = m.src;
+    } else if (m.type === "lottie" && window.fetch) {
+      fetch(m.src).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function () {
+        host.innerHTML = "";
+        var lp = document.createElement("lottie-player");
+        lp.className = "ksa-flag-lottie"; lp.setAttribute("src", m.src);
+        lp.setAttribute("autoplay", ""); lp.setAttribute("loop", "");
+        host.appendChild(lp);
+      }).catch(function () { /* keep emoji */ });
+    }
   }
 
   /* ---------------- WORLD REVEAL ---------------- */
