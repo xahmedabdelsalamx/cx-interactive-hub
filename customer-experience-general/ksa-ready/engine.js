@@ -63,7 +63,9 @@
     tryAgain1:  { ar: "مو بالضبط، باقي لك محاولة وحدة", en: "Not quite, one attempt left" },
     correctOrder:{ ar: "الترتيب الصحيح", en: "The correct order" },
     correctMatch:{ ar: "التوصيل الصحيح", en: "The correct matches" },
-    moreLearn:  { ar: "تعلّم أكثر", en: "More learning" }
+    moreLearn:  { ar: "تعلّم أكثر", en: "More learning" },
+    sTrue:      { ar: "صح", en: "True" },
+    sFalse:     { ar: "خطأ", en: "False" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -376,6 +378,33 @@
         yes.onclick = function () { mark(true); onAnswer(true); };
         mark(saved);
         btns.appendChild(no); btns.appendChild(yes); area.appendChild(btns);
+      }
+    },
+    /* SPEED — quick-fire true/false with instant feedback (Starbucks R3) */
+    speed: {
+      answered: function (a) { return a === true || a === false; },
+      correct: function (q, a) { return a === !!q.isTrue; },
+      render: function (q, area, saved, onAnswer) {
+        area.appendChild(renderMedia(q.media || phMedia(), "media-sm"));
+        area.appendChild(el("div", "speed-card", L(q.statement)));
+        var btns = el("div", "speed-btns");
+        var no = el("button", "speed-btn no", "✕ " + u("sFalse"));
+        var yes = el("button", "speed-btn yes", "✓ " + u("sTrue"));
+        var fb = el("div", "fb");
+        function paint(v) {
+          if (v == null) return;
+          [no, yes].forEach(function (b) { b.disabled = true; b.classList.remove("sel"); });
+          var right = !!q.isTrue;
+          (right ? yes : no).classList.add("ok");
+          if (v !== right) (v ? yes : no).classList.add("bad");
+          fb.className = "fb show " + (v === right ? "ok" : "no");
+          fb.textContent = (v === right ? "✓ " : "✕ ") + L(q.feedback);
+        }
+        no.onclick = function () { onAnswer(false); paint(false); };
+        yes.onclick = function () { onAnswer(true); paint(true); };
+        btns.appendChild(no); btns.appendChild(yes);
+        area.appendChild(btns); area.appendChild(fb);
+        if (saved != null) paint(saved);
       }
     },
     scenario: {

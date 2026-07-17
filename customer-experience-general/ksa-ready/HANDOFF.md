@@ -3,7 +3,7 @@
 **Purpose of this file:** paste it (or upload it) at the start of a new chat, together with `ksa-gamification.zip`, so work can continue with no loss of context.
 
 **Owner:** Ahmed Abdelsalam — Customer Experience Hub team, Alshaya Group (ahmed.abdelsalam@alshaya.com)
-**Last updated:** 17 July 2026
+**Last updated:** 17 July 2026 (Gen Z rewrite + Starbucks + mini-games)
 
 ---
 
@@ -34,8 +34,10 @@ Entry/intake screen uses a vibrant **KSA green `#005430`**.
 |---|---|
 | **Retail content** | ✅ Complete — 5 rounds, 38 questions, authored from 5 real PPT decks + beauty-brand questions |
 | **Hospitality content** | ✅ Complete — 5 rounds, 28 questions (R1/R2/R5 from decks; **R3 & R4 authored by Claude**, no deck existed) |
-| **Starbucks content** | ❌ Not started — decks not yet provided |
-| **Mechanics** | ✅ swipe, convo, match, order, scenario, rush — all built. ❌ **`speed` not built** (needed for Starbucks R3) |
+| **Starbucks content** | ✅ Complete — 5 rounds, 28 questions, from the condensed master guide (6 modules) |
+| **Mechanics** | ✅ ALL built: swipe, convo, match, order, scenario, speed, rush |
+| **Mini-games** | ✅ 3 brain-break games between rounds (penalty, stack, quick), auto-themed per world, zero scoring impact |
+| **Voice** | ✅ All 94 questions rewritten Gen Z immersive: micro-stories, brand-authentic, role-based (no personal names), Arabic has zero Latin characters |
 | **Media (Lottie/PNG)** | ⚙️ All 80 slots wired to Lottie paths; **actual .json files not yet created** (graceful fallback showing) |
 | **Character art** | ⚙️ Slots defined (4 male + 4 female per division); **PNGs not yet created** (fallback showing) |
 | **Backend** | ⚙️ AppsScript written; **not deployed** — `CONFIG.scriptUrl` is empty, so the app runs offline-safe |
