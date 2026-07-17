@@ -66,7 +66,9 @@
     moreLearn:  { ar: "تعلّم أكثر", en: "More learning" },
     sTrue:      { ar: "صح", en: "True" },
     sFalse:     { ar: "خطأ", en: "False" },
-    rightWas:   { ar: "الصح كان:", en: "The right move was:" }
+    rightWas:   { ar: "الصح كان:", en: "The right move was:" },
+    fbHint:     { ar: "لا تنسى تشاركنا رأيك تحت 👇 عشان نطوّر تجربتك", en: "Don't forget to share your feedback below 👇 to help us improve your experience" },
+    previewTag: { ar: "معاينة", en: "Preview" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -206,6 +208,7 @@
     return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { passed: false }; });
   }
   function post(payload) {
+    if (state.preview) return Promise.resolve({ ok: true, offline: true });  // preview never writes real data
     if (!backendReady()) return Promise.resolve({ ok: true, offline: true });
     return fetch(CONFIG.scriptUrl, {
       method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -912,6 +915,7 @@
     var total = mainScores.length ? Math.round(mainScores.reduce(function (a, b) { return a + b; }, 0) / mainScores.length) : 0;
     var passed = total >= CONFIG.passMark;
 
+    if (passed) c.appendChild(el("div", "trophy", "🏆"));
     c.appendChild(el("div", "result-head", passed ? u("resultReady") : u("failed")));
 
     var ring = el("div", "score-ring"); ring.style.setProperty("--p", total);
@@ -936,7 +940,10 @@
       bonus: state.bonus ? state.bonus.score : "", energy: state.bonus ? state.bonus.energy : ""
     });
 
+    c.appendChild(el("div", "fbk-hint", u("fbHint")));
+
     if (!passed) {
+      c.appendChild(buildFeedback());
       var retry = el("button", "btn", u("retry"));
       retry.onclick = function () { state.roundIndex = 0; state.scores = []; state.bonus = null; playRound(); };
       c.appendChild(retry);
@@ -1006,16 +1013,21 @@
 
   function confetti() {
     var box = $("#confetti"); box.innerHTML = "";
-    var cols = ["#e43c50", "#f15a24", "#006241", "#ffba2e", "#7b61ff", "#19b36b"];
-    for (var i = 0; i < 70; i++) {
+    var w = WORLDS[state.world] || {};
+    // the world's own colour, gold, and a couple of neutral sparkles
+    var cols = [w.color || "#e43c50", "#ffd24a", "#ffffff", w.color || "#e43c50", "#ffb300", "#19b36b"];
+    for (var i = 0; i < 110; i++) {
       var p = el("i");
       p.style.left = (Math.random() * 100) + "%";
       p.style.background = cols[i % cols.length];
-      p.style.animationDuration = (Math.random() * 1.6 + 2.2) + "s";
-      p.style.animationDelay = (Math.random() * 0.5) + "s";
+      p.style.width = (5 + Math.random() * 6) + "px";
+      p.style.height = (8 + Math.random() * 9) + "px";
+      p.style.opacity = (0.75 + Math.random() * 0.25);
+      p.style.animationDuration = (Math.random() * 1.8 + 2.4) + "s";
+      p.style.animationDelay = (Math.random() * 0.9) + "s";
       box.appendChild(p);
     }
-    setTimeout(function () { box.innerHTML = ""; }, 4400);
+    setTimeout(function () { box.innerHTML = ""; }, 5200);
   }
 
   function buildFeedback() {
@@ -1039,11 +1051,54 @@
   }
 
   /* ---------------- INIT ---------------- */
+  /* ---------------- PREVIEW SHORTCUT (for reviewing, not for players) -------
+     Add ?preview=pass or ?preview=fail to the URL to jump straight to the
+     result screen with sample data. Optional: &world=retail|hospitality|
+     starbucks  &lang=ar|en  &gender=male|female
+     Examples:  index.html?preview=pass&world=starbucks
+                index.html?preview=fail&world=hospitality&lang=en          */
+  function devPreview() {
+    var q = {};
+    location.search.replace(/^\?/, "").split("&").forEach(function (kv) {
+      if (!kv) return; var p = kv.split("="); q[decodeURIComponent(p[0])] = decodeURIComponent(p[1] || "");
+    });
+    var mode = q.preview;
+    if (mode !== "pass" && mode !== "fail") return false;
+
+    if (q.lang === "ar" || q.lang === "en") { state.lang = q.lang; applyDir(); $("#langLabel").textContent = state.lang === "ar" ? "EN" : "ع"; }
+
+    var wid = q.world;
+    if (!wid || !WORLDS[wid] || !window["DIVISION_" + wid]) wid = "retail";
+    state.world = wid;
+    state.division = window["DIVISION_" + wid];
+    state.gender = (q.gender === "female") ? "female" : "male";
+    state.empId = "323999";
+    state.name = q.name || (state.lang === "ar" ? "فيصل عبدالله" : "Faisal Abdullah");
+    var brands = BRANDS.filter(function (b) { return b.world === wid; });
+    state.brand = brands[0] || BRANDS[0];
+    var chars = (WORLDS[wid].characters[state.gender] || WORLDS[wid].characters.male || []);
+    state.character = chars.length ? chars[0].id : null;
+    state.certified = false;
+    state.preview = true;
+
+    var target = mode === "pass" ? 92 : 44;
+    state.scores = state.division.rounds.map(function (rd) { return rd.bonus ? 88 : target; });
+    state.bonus = { score: 88, energy: 76, streak: 5 };
+
+    applyWorldTheme(wid);
+    showResult();
+
+    var tag = el("div", "preview-tag", u("previewTag") + " · " + mode + " · " + wid);
+    document.body.appendChild(tag);
+    return true;
+  }
+
   function init() {
     applyDir();
     $("#langBtn").onclick = function () { setLang(state.lang === "ar" ? "en" : "ar"); };
     $("#langLabel").textContent = state.lang === "ar" ? "EN" : "ع";
     buildFooter();
+    if (devPreview()) return;
     buildIntake();
   }
   document.addEventListener("DOMContentLoaded", init);
