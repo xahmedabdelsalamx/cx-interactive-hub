@@ -68,7 +68,10 @@
     sFalse:     { ar: "خطأ", en: "False" },
     rightWas:   { ar: "الصح كان:", en: "The right move was:" },
     fbHint:     { ar: "لا تنسى تشاركنا رأيك تحت 👇 عشان نطوّر تجربتك", en: "Don't forget to share your feedback below 👇 to help us improve your experience" },
-    previewTag: { ar: "معاينة", en: "Preview" }
+    previewTag: { ar: "معاينة", en: "Preview" },
+    dlBadge:    { ar: "نزّل شارتك 📥", en: "Download my badge 📥" },
+    shareLine:  { ar: "افتخر فيها وشاركها 🔥 نزّل شارتك وخلّ فريقك يشوف إنجازك", en: "Be proud and share it 🔥 Download your badge and let your team see what you achieved" },
+    dlFail:     { ar: "ما قدرنا نجهّز الصورة، جرّب من متصفح ثاني", en: "Couldn't create the image, try another browser" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -950,6 +953,10 @@
       c.appendChild(learnButton(u("moreLearn"), "btn ghost"));
     } else {
       c.appendChild(buildBadge(total));
+      c.appendChild(el("div", "share-line", u("shareLine")));
+      var dl = el("button", "btn dl-btn", u("dlBadge"));
+      dl.onclick = function () { downloadBadge(total, dl); };
+      c.appendChild(dl);
       c.appendChild(buildFeedback());
       c.appendChild(learnButton());
       var saveNote = el("div", "score-saved");  // appended only on confirmed save
@@ -986,6 +993,123 @@
     chip.appendChild(av);
     chip.appendChild(el("span", "player-name", state.name || ""));
     return chip;
+  }
+
+  /* ---------------- BADGE IMAGE (downloadable) ----------------
+     Drawn natively on a canvas (no external library, nothing to be blocked by
+     a corporate network) at 1080x1350, which is the portrait size social apps
+     like best. Arabic is rendered with ctx.direction = "rtl" so it shapes and
+     aligns correctly. */
+  function badgeCanvas(total, cb) {
+    var w = WORLDS[state.world], d = state.division;
+    var W = 1080, H = 1350;
+    var cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    var ctx = cv.getContext("2d");
+    var isAr = state.lang === "ar";
+
+    function paint(logoImg) {
+      // background: the world's own gradient
+      var cols = (w.bgGradient || w.gradient || "#333333").match(/#[0-9a-fA-F]{3,8}/g) || ["#333333", "#111111"];
+      var g = ctx.createLinearGradient(0, 0, W, H);
+      cols.forEach(function (c, i) { g.addColorStop(cols.length > 1 ? i / (cols.length - 1) : 0, c); });
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+      // soft centre glow
+      var rg = ctx.createRadialGradient(W / 2, H * 0.40, 30, W / 2, H * 0.40, W * 0.8);
+      rg.addColorStop(0, "rgba(255,255,255,.20)"); rg.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+
+      // inner hairline frame
+      ctx.strokeStyle = "rgba(255,255,255,.30)"; ctx.lineWidth = 4;
+      roundRect(ctx, 34, 34, W - 68, H - 68, 34); ctx.stroke();
+
+      ctx.direction = isAr ? "rtl" : "ltr";
+      ctx.textAlign = "center";
+
+      // logo
+      if (logoImg) {
+        var lh = 150, lw = lh * (logoImg.width / logoImg.height);
+        var maxW = W * 0.66;
+        if (lw > maxW) { lw = maxW; lh = lw * (logoImg.height / logoImg.width); }
+        ctx.drawImage(logoImg, (W - lw) / 2, 110, lw, lh);
+      }
+
+      // medal
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,.35)"; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
+      ctx.beginPath(); ctx.arc(W / 2, 500, 150, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff"; ctx.fill();
+      ctx.restore();
+      ctx.beginPath(); ctx.arc(W / 2, 500, 150, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(255,186,46,.85)"; ctx.lineWidth = 8; ctx.stroke();
+      star(ctx, W / 2, 500, 92, 44, "#ffba2e");
+
+      function line(t, y, size, weight, color, ls) {
+        ctx.font = weight + " " + size + "px Cairo, 'Segoe UI', sans-serif";
+        ctx.fillStyle = color;
+        if ("letterSpacing" in ctx) ctx.letterSpacing = (ls || 0) + "px";
+        ctx.fillText(t, W / 2, y);
+        if ("letterSpacing" in ctx) ctx.letterSpacing = "0px";
+      }
+
+      line(u("mastery"), 740, 36, "800", "#ffe08a", 8);
+      line(state.name || "", 828, 76, "900", "#ffffff");
+      var champ = isAr ? (u("championOf") + " " + L(d.title)) : (L(d.title) + " " + u("championOf"));
+      line(champ, 890, 40, "800", "rgba(255,255,255,.96)");
+      line(u("scoredTxt") + " " + total + "%", 958, 42, "800", "#ffffff");
+      line(monthYear(), 1018, 34, "700", "rgba(255,255,255,.85)");
+
+      ctx.strokeStyle = "rgba(255,255,255,.28)"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(W * 0.22, 1078); ctx.lineTo(W * 0.78, 1078); ctx.stroke();
+      line(u("orgFoot"), 1132, 32, "800", "rgba(255,255,255,.95)");
+      line(L(state.brand), 1196, 30, "700", "rgba(255,255,255,.75)");
+
+      cb(cv);
+    }
+
+    var img = new Image();
+    img.onload = function () { paint(img); };
+    img.onerror = function () { paint(null); };
+    img.src = w.logoWhite;
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function star(ctx, cx, cy, outer, inner, fill) {
+    ctx.save(); ctx.beginPath();
+    for (var i = 0; i < 10; i++) {
+      var r = i % 2 === 0 ? outer : inner;
+      var a = (Math.PI / 5) * i - Math.PI / 2;
+      ctx[i === 0 ? "moveTo" : "lineTo"](cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+    }
+    ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); ctx.restore();
+  }
+
+  function downloadBadge(total, btn) {
+    var go = function () {
+      badgeCanvas(total, function (cv) {
+        try {
+          cv.toBlob(function (blob) {
+            if (!blob) { btn.textContent = u("dlFail"); return; }
+            var a = document.createElement("a");
+            var url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = (state.division.id + "-badge-" + (state.name || "player")).replace(/\s+/g, "-") + ".png";
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+          }, "image/png");
+        } catch (e) { btn.textContent = u("dlFail"); }
+      });
+    };
+    // make sure the webfont is ready so the canvas doesn't fall back to a system font
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(go).catch(go); else go();
   }
 
   function buildBadge(total) {
