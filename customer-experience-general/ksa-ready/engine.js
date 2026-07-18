@@ -71,7 +71,9 @@
     previewTag: { ar: "معاينة", en: "Preview" },
     dlBadge:    { ar: "نزّل شارتك 📥", en: "Download my badge 📥" },
     shareLine:  { ar: "افتخر فيها وشاركها 🔥 نزّل شارتك وخلّ فريقك يشوف إنجازك", en: "Be proud and share it 🔥 Download your badge and let your team see what you achieved" },
-    dlFail:     { ar: "ما قدرنا نجهّز الصورة، جرّب من متصفح ثاني", en: "Couldn't create the image, try another browser" }
+    dlFail:     { ar: "ما قدرنا نجهّز الصورة، جرّب من متصفح ثاني", en: "Couldn't create the image, try another browser" },
+    empFound:   { ar: "تم التعرّف عليك", en: "We found you" },
+    empNew:     { ar: "أول مرة معنا؟ كمّل عادي 👍", en: "New with us? Carry on 👍" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -210,6 +212,13 @@
               "&action=check&empId=" + encodeURIComponent(empId);
     return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { passed: false }; });
   }
+  function lookupEmp(empId) {
+    if (!backendReady() || !empId) return Promise.resolve({ found: false });
+    var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
+              "&action=lookup&empId=" + encodeURIComponent(empId);
+    return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { found: false }; });
+  }
+
   function post(payload) {
     if (state.preview) return Promise.resolve({ ok: true, offline: true });  // preview never writes real data
     if (!backendReady()) return Promise.resolve({ ok: true, offline: true });
@@ -250,6 +259,33 @@
     var emp = $("#empId");
     emp.setAttribute("inputmode", "numeric"); emp.setAttribute("maxlength", "12"); emp.setAttribute("autocomplete", "off");
     emp.addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); });
+
+    /* Match the Emp ID against the company active list as soon as they finish
+       typing. This is a courtesy only: it confirms we know them and saves the
+       reporting join later. A new hire who doesn't know their ID yet, or who
+       isn't on the list, is NEVER blocked. */
+    var empNote = el("div", "emp-note");
+    emp.parentNode.appendChild(empNote);
+    var lastLooked = "";
+    emp.addEventListener("blur", function () {
+      var v = emp.value.trim();
+      if (!v || v === lastLooked || !backendReady()) return;
+      lastLooked = v;
+      empNote.className = "emp-note show muted-note";
+      empNote.textContent = "…";
+      lookupEmp(v).then(function (r) {
+        if (r && r.found) {
+          state.listMatch = r;
+          empNote.className = "emp-note show ok";
+          empNote.textContent = "✓ " + u("empFound") + ": " + (r.name || "") + (r.brand ? " · " + r.brand : "");
+          if (!$("#name").value.trim() && r.name) $("#name").value = r.name;   // helpful prefill, still editable
+        } else {
+          state.listMatch = null;
+          empNote.className = "emp-note show muted-note";
+          empNote.textContent = u("empNew");
+        }
+      });
+    });
     var nm = $("#name");
     nm.setAttribute("autocomplete", "off");
     nm.addEventListener("input", function () { this.value = this.value.replace(/[^A-Za-z\u0600-\u06FF\s'.\-]/g, ""); });

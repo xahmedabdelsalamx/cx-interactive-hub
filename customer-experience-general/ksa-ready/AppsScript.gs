@@ -1,94 +1,459 @@
 /* ============================================================
    KSA NEW-HIRE GAMIFICATION · GOOGLE APPS SCRIPT BACKEND
    ------------------------------------------------------------
-   One web app for ALL divisions (retail / hospitality / starbucks).
-   Stores scores + feedback in two tabs.
+   One web app for all three "Art of" divisions:
+     retail      = The Art of Selling        (Apparel + Wellness + H&M + Primark)
+     hospitality = The Art of Guest Experience (Hospitality Division)
+     starbucks   = The Art of Connection      (Starbucks)
 
-   SETUP (once):
-   1. Create a Google Sheet. Extensions ▸ Apps Script. Paste this.
-   2. Set SECRET_TOKEN below to match CONFIG.secretToken in config/shared.js.
-   3. Run setup() once (creates the two tabs + headers).
-   4. Deploy ▸ New deployment ▸ Web app:
-        Execute as: Me   |   Who has access: Anyone
-   5. Copy the /exec URL into CONFIG.scriptUrl in config/shared.js.
+   TABS
+     Config      market filter + pass mark          (you may edit)
+     Map         company Division -> art division   (you may edit)
+     ActiveList  your active list, pasted as export (you paste each period)
+     Scores      raw results, one row per attempt   (written by the game)
+     Feedback    stars + comment                    (written by the game)
+     Completion  KSA roster joined to results       (live formulas)
+     Summary     TWO views, see below               (live formulas)
+     Unmatched   played but not on the list         (live formulas)
+     _Agg        hidden helper, one row per player
+
+   SUMMARY HAS TWO VIEWS ON PURPOSE
+     A) Against the active list  -> denominator = KSA roster. True completion %.
+     B) All players (manual)     -> everyone who played, on the list or not.
+     You need both: there is no new-joiner list, so (A) understates completion
+     for people not yet on the roster, and (B) never misses anyone.
+
+   LIVE BY DESIGN
+     Nothing is frozen. Completion / Summary / Unmatched are formulas joining
+     Scores to ActiveList on Employee Number. Paste a new list next period and
+     every number recalculates itself. Leavers drop out, brand moves follow.
+
+   NEVER BLOCKS
+     A new hire who does not know their Emp ID still plays. Their row is kept
+     and shows in Unmatched until a list containing them is pasted, then they
+     move into Completion automatically.
+
+   SETUP (once)
+   1. Google Sheet > Extensions > Apps Script. Paste this file. Save.
+   2. Run setup().
+   3. Paste your active list into ActiveList at A1 (columns exactly as exported).
+   4. Deploy > New deployment > Web app.
+        Execute as: Me      Who has access: Anyone
+   5. Copy the /exec URL into CONFIG.scriptUrl in config/shared.js
+      AND into dashboard.html (same URL).
+
+   EVERY PERIOD
+     Paste the new list over ActiveList, then menu: KSA Game > Refresh.
    ============================================================ */
 
 var SECRET_TOKEN = "CXHUBKSA";
+var PASS_MARK    = 80;        // must match the game
+var MARKET       = "Saudi";   // KSA only. Change in the Config tab, not here.
+
+var T_SCORES="Scores", T_FB="Feedback", T_LIST="ActiveList", T_COMP="Completion",
+    T_SUM="Summary", T_UNM="Unmatched", T_AGG="_Agg", T_CFG="Config", T_MAP="Map";
 
 var SCORE_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Gender","Character",
-  "Round1%","Round2%","Round3%","Round4%","Bonus%","Energy","Total%","Passed","Lang","ClientTime"];
+  "Round1%","Round2%","Round3%","Round4%","Bonus%","Energy","Total%","Passed","Matched","Lang","ClientTime"];
 var FB_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Rating","Comment","Lang","ClientTime"];
+var LIST_HEADERS = ["Payroll Name","Employee Number","Brand","Market","Division",
+  "Position","Line Manager Name","Employee Name","Job"];
 
+/* Company Division -> art division. Edit in the Map tab if HR renames anything. */
+var DIV_MAP = [
+  ["Apparel Division",     "retail"],
+  ["Wellness Division",    "retail"],
+  ["H & M",                "retail"],
+  ["Primark",              "retail"],
+  ["Hospitality Division", "hospitality"],
+  ["Starbucks",            "starbucks"]
+];
+var WORLD_LABEL = [
+  ["retail",      "The Art of Selling"],
+  ["hospitality", "The Art of Guest Experience"],
+  ["starbucks",   "The Art of Connection"]
+];
+
+/* ================= SETUP ================= */
 function setup() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  ensureTab(ss, "Scores", SCORE_HEADERS);
-  ensureTab(ss, "Feedback", FB_HEADERS);
+  ensureTab_(ss, T_SCORES, SCORE_HEADERS);
+  ensureTab_(ss, T_FB, FB_HEADERS);
+  ensureTab_(ss, T_LIST, LIST_HEADERS);
+  buildConfig_(ss);
+  buildMap_(ss);
+  buildReports();
+  SpreadsheetApp.getUi().alert(
+    "Setup complete.\n\n1. Paste your active list into '" + T_LIST + "' (A1).\n" +
+    "2. Deploy as Web app, copy the /exec URL into CONFIG.scriptUrl (config/shared.js)\n" +
+    "   and into dashboard.html."
+  );
 }
 
-function ensureTab(ss, name, headers) {
+function buildConfig_(ss) {
+  var sh = ss.getSheetByName(T_CFG) || ss.insertSheet(T_CFG);
+  if (sh.getLastRow() === 0) {
+    sh.getRange("A1:B3").setValues([
+      ["Market", MARKET],
+      ["Pass mark %", PASS_MARK],
+      ["Note", "Market filters the whole report. Use exactly as spelled in the active list (Saudi, UAE, Kuwait...)"]
+    ]);
+    sh.getRange("A1:A3").setFontWeight("bold");
+    sh.getRange("B1:B2").setBackground("#fff3cd").setFontWeight("bold");
+    sh.setColumnWidth(1, 130); sh.setColumnWidth(2, 420);
+  }
+}
+
+function buildMap_(ss) {
+  var sh = ss.getSheetByName(T_MAP) || ss.insertSheet(T_MAP);
+  if (sh.getLastRow() === 0) {
+    sh.getRange(1, 1, 1, 2).setValues([["Company Division", "Art division"]])
+      .setFontWeight("bold").setBackground("#f1f3f4");
+    sh.getRange(2, 1, DIV_MAP.length, 2).setValues(DIV_MAP);
+    sh.getRange(1, 4, 1, 2).setValues([["Art division", "Label"]])
+      .setFontWeight("bold").setBackground("#f1f3f4");
+    sh.getRange(2, 4, WORLD_LABEL.length, 2).setValues(WORLD_LABEL);
+    sh.setColumnWidth(1, 200); sh.setColumnWidth(4, 130); sh.setColumnWidth(5, 220);
+    sh.getRange("A10").setValue("If HR renames a division, fix it here. Everything else follows.")
+      .setFontColor("#888888");
+  }
+}
+
+function ensureTab_(ss, name, headers) {
   var sh = ss.getSheetByName(name) || ss.insertSheet(name);
   if (sh.getLastRow() === 0) {
     sh.appendRow(headers);
-    sh.getRange(1, 1, 1, headers.length).setFontWeight("bold");
+    sh.getRange(1, 1, 1, headers.length).setFontWeight("bold").setBackground("#f1f3f4");
     sh.setFrozenRows(1);
   }
   return sh;
 }
 
-/* ---------- doGet: pass-once certification check ---------- */
-function doGet(e) {
-  var p = e.parameter || {};
-  if (p.token !== SECRET_TOKEN) return json({ error: "bad token" });
-  if (p.action === "check") {
-    var passed = hasPassed(p.empId);
-    return json({ passed: passed });
+/* ================= REPORT TABS ================= */
+function buildReports() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  buildConfig_(ss); buildMap_(ss);
+
+  /* one row per player: EmpID | best% | last played | attempts */
+  var agg = ss.getSheetByName(T_AGG) || ss.insertSheet(T_AGG);
+  agg.clear();
+  agg.getRange("A1").setFormula(
+    '=IFERROR(QUERY(' + T_SCORES + '!A2:R,' +
+    '"select D, max(N), max(A), count(D) where D is not null group by D ' +
+    'label D \'\', max(N) \'\', max(A) \'\', count(D) \'\'",0),)'
+  );
+  agg.hideSheet();
+
+  /* ---- Completion: KSA roster only, mapped to the 3 art divisions ---- */
+  var comp = ss.getSheetByName(T_COMP) || ss.insertSheet(T_COMP);
+  comp.clear();
+  comp.getRange(1, 1, 1, 12).setValues([[
+    "EmpID","Employee Name","Brand","Company Division","Market","Line Manager",
+    "Art division","Played","Best %","Passed","Attempts","Last Played"
+  ]]).setFontWeight("bold").setBackground("#f1f3f4");
+  comp.setFrozenRows(1);
+
+  // A:F spill from the active list, filtered to the configured market
+  comp.getRange("A2").setFormula(
+    '=IFERROR(FILTER({' + T_LIST + '!B2:B,' + T_LIST + '!H2:H,' + T_LIST + '!C2:C,' +
+    T_LIST + '!E2:E,' + T_LIST + '!D2:D,' + T_LIST + '!G2:G},' +
+    T_LIST + '!B2:B<>"",' + T_LIST + '!D2:D=' + T_CFG + '!$B$1),"")'
+  );
+  comp.getRange("G2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(D2:D,' + T_MAP + '!$A$2:$B,2,FALSE),"unmapped")))');
+  comp.getRange("H2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IF(COUNTIF(' + T_AGG + '!A:A,A2:A)>0,"Yes","No")))');
+  comp.getRange("I2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,2,FALSE),"")))');
+  comp.getRange("J2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IF(IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,2,FALSE),0)>=' + T_CFG + '!$B$2,"Yes","No")))');
+  comp.getRange("K2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,4,FALSE),0)))');
+  comp.getRange("L2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,3,FALSE),"")))');
+  comp.setColumnWidth(2, 220);
+
+  /* ---- Summary: view A (vs active list) + view B (all players) ---- */
+  var sum = ss.getSheetByName(T_SUM) || ss.insertSheet(T_SUM);
+  sum.clear();
+  sum.getRange("A1").setFormula('="Market: "&' + T_CFG + '!B1&"   ·   Pass mark: "&' + T_CFG + '!B2&"%"')
+     .setFontWeight("bold").setFontSize(12);
+  sum.getRange("A2").setValue("Change the market or pass mark in the Config tab.").setFontColor("#888888");
+
+  sum.getRange("A4").setValue("A) AGAINST THE ACTIVE LIST  (true completion of the roster)")
+     .setFontWeight("bold").setBackground("#e8f0fe");
+  sum.getRange(5, 1, 1, 6).setValues([[
+    "Art division","On active list","Played","Passed","Played %","Passed %"
+  ]]).setFontWeight("bold").setBackground("#f1f3f4");
+  var worlds = [["retail"],["hospitality"],["starbucks"]];
+  sum.getRange(6, 1, 3, 1).setValues(worlds);
+  for (var r = 6; r <= 8; r++) {
+    sum.getRange(r, 2).setFormula('=COUNTIFS(' + T_COMP + '!$G$2:$G,$A' + r + ')');
+    sum.getRange(r, 3).setFormula('=COUNTIFS(' + T_COMP + '!$G$2:$G,$A' + r + ',' + T_COMP + '!$H$2:$H,"Yes")');
+    sum.getRange(r, 4).setFormula('=COUNTIFS(' + T_COMP + '!$G$2:$G,$A' + r + ',' + T_COMP + '!$J$2:$J,"Yes")');
+    sum.getRange(r, 5).setFormula('=IFERROR(C' + r + '/B' + r + ',0)').setNumberFormat("0.0%");
+    sum.getRange(r, 6).setFormula('=IFERROR(D' + r + '/B' + r + ',0)').setNumberFormat("0.0%");
   }
-  return json({ ok: true });
+  sum.getRange("A9").setValue("TOTAL").setFontWeight("bold");
+  sum.getRange("B9").setFormula("=SUM(B6:B8)").setFontWeight("bold");
+  sum.getRange("C9").setFormula("=SUM(C6:C8)").setFontWeight("bold");
+  sum.getRange("D9").setFormula("=SUM(D6:D8)").setFontWeight("bold");
+  sum.getRange("E9").setFormula("=IFERROR(C9/B9,0)").setFontWeight("bold").setNumberFormat("0.0%");
+  sum.getRange("F9").setFormula("=IFERROR(D9/B9,0)").setFontWeight("bold").setNumberFormat("0.0%");
+
+  sum.getRange("A11").setValue("B) ALL PLAYERS  (everyone who played, on the list or not)")
+     .setFontWeight("bold").setBackground("#fef7e0");
+  sum.getRange(12, 1, 1, 5).setValues([[
+    "Art division","Unique players","Attempts","Passed (unique)","Avg attempts"
+  ]]).setFontWeight("bold").setBackground("#f1f3f4");
+  sum.getRange(13, 1, 3, 1).setValues(worlds);
+  for (var r2 = 13; r2 <= 15; r2++) {
+    sum.getRange(r2, 2).setFormula('=IFERROR(COUNTA(UNIQUE(FILTER(' + T_SCORES + '!$D$2:$D,' + T_SCORES + '!$B$2:$B=$A' + r2 + ',' + T_SCORES + '!$D$2:$D<>""))),0)');
+    sum.getRange(r2, 3).setFormula('=COUNTIFS(' + T_SCORES + '!$B$2:$B,$A' + r2 + ')');
+    sum.getRange(r2, 4).setFormula('=IFERROR(COUNTA(UNIQUE(FILTER(' + T_SCORES + '!$D$2:$D,' + T_SCORES + '!$B$2:$B=$A' + r2 + ',' + T_SCORES + '!$O$2:$O="Yes"))),0)');
+    sum.getRange(r2, 5).setFormula('=IFERROR(C' + r2 + '/B' + r2 + ',0)').setNumberFormat("0.00");
+  }
+  sum.getRange("A16").setValue("TOTAL").setFontWeight("bold");
+  sum.getRange("B16").setFormula("=SUM(B13:B15)").setFontWeight("bold");
+  sum.getRange("C16").setFormula("=SUM(C13:C15)").setFontWeight("bold");
+  sum.getRange("D16").setFormula("=SUM(D13:D15)").setFontWeight("bold");
+  sum.getRange("E16").setFormula("=IFERROR(C16/B16,0)").setFontWeight("bold").setNumberFormat("0.00");
+  sum.setColumnWidth(1, 180);
+
+  /* ---- Unmatched ---- */
+  var unm = ss.getSheetByName(T_UNM) || ss.insertSheet(T_UNM);
+  unm.clear();
+  unm.getRange(1, 1, 1, 5).setValues([[
+    "EmpID typed","Name typed","Art division played","Total %","When"
+  ]]).setFontWeight("bold").setBackground("#f1f3f4");
+  unm.setFrozenRows(1);
+  unm.getRange("A2").setFormula(
+    '=IFERROR(FILTER({' + T_SCORES + '!D2:E,' + T_SCORES + '!B2:B,' + T_SCORES + '!N2:N,' + T_SCORES + '!A2:A},' +
+    T_SCORES + '!D2:D<>"",COUNTIF(' + T_LIST + '!B:B,' + T_SCORES + '!D2:D)=0),"")'
+  );
+  unm.getRange("G1").setValue(
+    "Played but their Emp ID is not on the active list: new joiners not on it yet, a different market, or a typo. " +
+    "Their score is kept. Paste an updated list and any that now match move into Completion automatically."
+  ).setFontColor("#888888");
+  unm.setColumnWidth(2, 220);
 }
 
-function hasPassed(empId) {
-  if (!empId) return false;
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Scores");
-  if (!sh || sh.getLastRow() < 2) return false;
-  var rows = sh.getRange(2, 1, sh.getLastRow() - 1, SCORE_HEADERS.length).getValues();
-  var idEmp = SCORE_HEADERS.indexOf("EmpID");
-  var idPass = SCORE_HEADERS.indexOf("Passed");
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu("KSA Game")
+    .addItem("Setup (first time)", "setup")
+    .addItem("Refresh after updating Active List", "refreshAfterListUpdate")
+    .addItem("Rebuild report tabs", "buildReports")
+    .addToUi();
+}
+
+function refreshAfterListUpdate() {
+  clearLookupCache();
+  SpreadsheetApp.flush();
+  SpreadsheetApp.getUi().alert("Done. Completion, Summary, Unmatched and the dashboard now use the new list.");
+}
+
+/* ================= WEB APP ================= */
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.token !== SECRET_TOKEN) return json_({ error: "bad token" });
+  if (p.action === "check")  return json_({ passed: hasPassed_(p.empId) });
+  if (p.action === "lookup") {
+    var rec = lookupEmp_(p.empId);
+    return json_(rec ? { found: true, name: rec.name, brand: rec.brand,
+                         division: rec.division, market: rec.market, job: rec.job }
+                     : { found: false });
+  }
+  if (p.action === "stats")  return json_(stats_());     // powers dashboard.html
+  return json_({ ok: true });
+}
+
+function doPost(e) {
+  var d;
+  try { d = JSON.parse(e.postData.contents); } catch (err) { return json_({ ok: false, error: "bad json" }); }
+  if (d.token !== SECRET_TOKEN) return json_({ ok: false, error: "bad token" });
+  var ss = SpreadsheetApp.getActiveSpreadsheet(), now = new Date();
+
+  if (d.action === "feedback") {
+    ensureTab_(ss, T_FB, FB_HEADERS).appendRow([
+      now, d.division || "", d.brand || "", d.empId || "", d.name || "",
+      num_(d.rating), d.comment || "", d.lang || "", d.clientTime || ""
+    ]);
+    return json_({ ok: true });
+  }
+  if (d.action === "score") {
+    var s = d.scores || [], rec = lookupEmp_(d.empId);
+    ensureTab_(ss, T_SCORES, SCORE_HEADERS).appendRow([
+      now, d.division || "", d.brand || "", d.empId || "", d.name || "",
+      d.gender || "", d.character || "",
+      num_(s[0]), num_(s[1]), num_(s[2]), num_(s[3]), num_(d.bonus), num_(d.energy),
+      num_(d.total), (String(d.passed).toLowerCase() === "yes" ? "Yes" : "No"),
+      (rec ? "Yes" : "No"), d.lang || "", d.clientTime || ""
+    ]);
+    return json_({ ok: true, matched: !!rec });
+  }
+  return json_({ ok: false, error: "unknown action" });
+}
+
+/* ================= STATS (for the live dashboard) ================= */
+function stats_() {
+  var cache = CacheService.getScriptCache();
+  var hit = cache.get("stats");
+  if (hit) { try { return JSON.parse(hit); } catch (e) {} }
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var cfg = ss.getSheetByName(T_CFG);
+  var market = cfg ? String(cfg.getRange("B1").getValue() || MARKET) : MARKET;
+  var pass = cfg ? Number(cfg.getRange("B2").getValue() || PASS_MARK) : PASS_MARK;
+
+  var out = {
+    generated: new Date().toISOString(), market: market, passMark: pass,
+    totals: { attempts: 0, unique: 0, passed: 0, failed: 0, avgScore: 0, avgAttempts: 0, matchedPlayers: 0, unmatchedPlayers: 0 },
+    worlds: {}, rounds: { r1: 0, r2: 0, r3: 0, r4: 0, bonus: 0 },
+    brands: [], daily: [], feedback: { count: 0, avg: 0, recent: [] },
+    roster: { total: 0, worlds: {} }, lang: { ar: 0, en: 0 }
+  };
+  var W = ["retail", "hospitality", "starbucks"];
+  W.forEach(function (w) {
+    out.worlds[w] = { attempts: 0, unique: 0, passed: 0, avgScore: 0, roster: 0, playedRoster: 0, passedRoster: 0 };
+    out.roster.worlds[w] = 0;
+  });
+
+  /* --- roster from Completion (already KSA + mapped) --- */
+  var comp = ss.getSheetByName(T_COMP);
+  if (comp && comp.getLastRow() > 1) {
+    var cv = comp.getRange(2, 7, comp.getLastRow() - 1, 4).getValues();  // G..J world, played, best, passed
+    cv.forEach(function (r) {
+      var w = String(r[0]);
+      if (!out.worlds[w]) return;
+      out.roster.total++; out.roster.worlds[w]++; out.worlds[w].roster++;
+      if (String(r[1]) === "Yes") out.worlds[w].playedRoster++;
+      if (String(r[3]) === "Yes") out.worlds[w].passedRoster++;
+    });
+  }
+
+  /* --- scores --- */
+  var sh = ss.getSheetByName(T_SCORES);
+  if (sh && sh.getLastRow() > 1) {
+    var rows = sh.getRange(2, 1, sh.getLastRow() - 1, 18).getValues();
+    var byId = {}, brandMap = {}, dayMap = {}, sumTotal = 0, rs = [0, 0, 0, 0, 0], rc = [0, 0, 0, 0, 0];
+    rows.forEach(function (r) {
+      var when = r[0], world = String(r[1]), brand = String(r[2]), id = normId_(r[3]);
+      var total = Number(r[13]) || 0, passed = String(r[14]) === "Yes", matched = String(r[15]) === "Yes";
+      var lang = String(r[16] || "").toLowerCase();
+      out.totals.attempts++; sumTotal += total;
+      if (lang === "ar") out.lang.ar++; else if (lang === "en") out.lang.en++;
+      [7, 8, 9, 10, 11].forEach(function (ci, k) {
+        var v = Number(r[ci]); if (!isNaN(v) && r[ci] !== "") { rs[k] += v; rc[k]++; }
+      });
+      if (out.worlds[world]) { out.worlds[world].attempts++; }
+      if (brand) brandMap[brand] = brandMap[brand] || { brand: brand, attempts: 0, passed: 0 };
+      if (brand) { brandMap[brand].attempts++; if (passed) brandMap[brand].passed++; }
+      if (when instanceof Date) {
+        var d = Utilities.formatDate(when, Session.getScriptTimeZone(), "yyyy-MM-dd");
+        dayMap[d] = (dayMap[d] || 0) + 1;
+      }
+      if (id) {
+        if (!byId[id]) byId[id] = { world: world, best: total, passed: passed, matched: matched, n: 0 };
+        byId[id].n++;
+        byId[id].best = Math.max(byId[id].best, total);
+        byId[id].passed = byId[id].passed || passed;
+        byId[id].matched = byId[id].matched || matched;
+        byId[id].world = world;
+      }
+    });
+
+    Object.keys(byId).forEach(function (id) {
+      var p = byId[id];
+      out.totals.unique++;
+      if (p.passed) out.totals.passed++; else out.totals.failed++;
+      if (p.matched) out.totals.matchedPlayers++; else out.totals.unmatchedPlayers++;
+      if (out.worlds[p.world]) {
+        out.worlds[p.world].unique++;
+        if (p.passed) out.worlds[p.world].passed++;
+      }
+    });
+    out.totals.avgScore = out.totals.attempts ? Math.round(sumTotal / out.totals.attempts) : 0;
+    out.totals.avgAttempts = out.totals.unique ? +(out.totals.attempts / out.totals.unique).toFixed(2) : 0;
+    ["r1", "r2", "r3", "r4", "bonus"].forEach(function (k, i) {
+      out.rounds[k] = rc[i] ? Math.round(rs[i] / rc[i]) : 0;
+    });
+    out.brands = Object.keys(brandMap).map(function (b) { return brandMap[b]; })
+      .sort(function (a, b) { return b.attempts - a.attempts; }).slice(0, 12);
+    out.daily = Object.keys(dayMap).sort().slice(-30).map(function (d) { return { d: d, n: dayMap[d] }; });
+
+    W.forEach(function (w) {
+      var tot = 0, n = 0;
+      rows.forEach(function (r) { if (String(r[1]) === w) { tot += Number(r[13]) || 0; n++; } });
+      out.worlds[w].avgScore = n ? Math.round(tot / n) : 0;
+    });
+  }
+
+  /* --- feedback --- */
+  var fb = ss.getSheetByName(T_FB);
+  if (fb && fb.getLastRow() > 1) {
+    var f = fb.getRange(2, 1, fb.getLastRow() - 1, 9).getValues();
+    var sumR = 0, nR = 0;
+    f.forEach(function (r) {
+      var rate = Number(r[5]);
+      if (!isNaN(rate) && rate > 0) { sumR += rate; nR++; }
+    });
+    out.feedback.count = f.length;
+    out.feedback.avg = nR ? +(sumR / nR).toFixed(2) : 0;
+    out.feedback.recent = f.slice(-8).reverse().map(function (r) {
+      return { division: String(r[1]), rating: Number(r[5]) || 0, comment: String(r[6] || "").slice(0, 160) };
+    }).filter(function (x) { return x.comment; });
+  }
+
+  cache.put("stats", JSON.stringify(out), 60);   // 1 min
+  return out;
+}
+
+/* ================= ACTIVE LIST LOOKUP ================= */
+function normId_(v) {
+  if (v === null || v === undefined) return "";
+  var s = String(v).trim();
+  if (s.indexOf(".") > -1 && !isNaN(Number(s))) s = String(parseInt(Number(s), 10));
+  return s.replace(/\D/g, "").replace(/^0+/, "");
+}
+
+function lookupEmp_(rawId) {
+  var id = normId_(rawId);
+  if (!id) return null;
+  var cache = CacheService.getScriptCache();
+  var hit = cache.get("emp_" + id);
+  if (hit) { try { var o = JSON.parse(hit); return o.found ? o : null; } catch (e) {} }
+
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_LIST);
+  if (!sh || sh.getLastRow() < 2) return null;
+  var rows = sh.getRange(2, 2, sh.getLastRow() - 1, 8).getValues();  // B..I
   for (var i = 0; i < rows.length; i++) {
-    if (String(rows[i][idEmp]) === String(empId) && String(rows[i][idPass]).toLowerCase() === "yes") return true;
+    if (normId_(rows[i][0]) === id) {
+      var rec = { found: true, empId: String(rows[i][0]), brand: rows[i][1] || "",
+        market: rows[i][2] || "", division: rows[i][3] || "", manager: rows[i][5] || "",
+        name: rows[i][6] || "", job: rows[i][7] || "" };
+      cache.put("emp_" + id, JSON.stringify(rec), 600);
+      return rec;
+    }
+  }
+  cache.put("emp_" + id, JSON.stringify({ found: false }), 600);
+  return null;
+}
+
+function clearLookupCache() {
+  var c = CacheService.getScriptCache();
+  try { c.remove("stats"); } catch (e) {}
+  PropertiesService.getScriptProperties().setProperty("listVersion", String(Date.now()));
+}
+
+/* ================= HELPERS ================= */
+function hasPassed_(empId) {
+  var id = normId_(empId);
+  if (!id) return false;
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_SCORES);
+  if (!sh || sh.getLastRow() < 2) return false;
+  var rows = sh.getRange(2, 4, sh.getLastRow() - 1, 12).getValues();
+  for (var i = 0; i < rows.length; i++) {
+    if (normId_(rows[i][0]) === id && String(rows[i][11]).toLowerCase() === "yes") return true;
   }
   return false;
 }
 
-/* ---------- doPost: store score or feedback ---------- */
-function doPost(e) {
-  var d;
-  try { d = JSON.parse(e.postData.contents); } catch (err) { return json({ ok: false, error: "bad json" }); }
-  if (d.token !== SECRET_TOKEN) return json({ ok: false, error: "bad token" });
-
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var now = new Date();
-
-  if (d.action === "feedback") {
-    ensureTab(ss, "Feedback", FB_HEADERS).appendRow([
-      now, d.division || "", d.brand || "", d.empId || "", d.name || "",
-      d.rating || "", d.comment || "", d.lang || "", d.clientTime || ""
-    ]);
-    return json({ ok: true });
-  }
-
-  // default: score
-  var s = d.scores || [];
-  ensureTab(ss, "Scores", SCORE_HEADERS).appendRow([
-    now, d.division || "", d.brand || "", d.empId || "", d.name || "", d.gender || "", d.character || "",
-    num(s[0]), num(s[1]), num(s[2]), num(s[3]), num(d.bonus), num(d.energy),
-    d.total != null ? d.total : "", d.passed || "", d.lang || "", d.clientTime || ""
-  ]);
-  return json({ ok: true });
-}
-
-function num(v) { return v == null ? "" : v; }
-
-function json(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj))
+function num_(v) { var n = Number(v); return isNaN(n) ? "" : n; }
+function json_(o) {
+  return ContentService.createTextOutput(JSON.stringify(o))
     .setMimeType(ContentService.MimeType.JSON);
 }

@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Art Series: KSA Ready · Live Dashboard</title>
+<link rel="icon" href="favicon.png">
+<!-- ============================================================
+     LIVE MANAGEMENT DASHBOARD
+     Reads straight from the Google Sheet via the Apps Script web app
+     (action=stats). No chart library: every chart here is plain CSS/SVG,
+     so nothing can be blocked by the corporate network.
+
+     TO USE: it reads CONFIG.scriptUrl + CONFIG.secretToken from
+     config/shared.js automatically. Just deploy the Apps Script and set
+     CONFIG.scriptUrl there, then open this page.
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111827; --ink-soft:#6b7280; --line:#e6e9ee; --bg:#f5f7fa; --card:#fff;
+    --retail:#e43c50; --hosp:#f15a24; --sbux:#006241; --ksa:#005430;
+    --ok:#19b36b; --bad:#e43c50; --warn:#f59e0b;
+    --shadow:0 10px 30px -18px rgba(16,24,40,.45);
+    --font:'Cairo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);padding:22px;min-height:100vh}
+  .wrap{max-width:1240px;margin:0 auto}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+  .logo{height:42px;width:auto}
+  h1{font-size:22px;font-weight:900;letter-spacing:-.2px}
+  .sub{font-size:12.5px;color:var(--ink-soft);font-weight:700}
+  .spacer{flex:1}
+  .pill{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink-soft)}
+  .live{display:inline-flex;align-items:center;gap:6px;color:var(--ok)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  button.rf{font-family:var(--font);font-weight:800;font-size:12.5px;background:var(--ksa);color:#fff;
+    border:none;border-radius:10px;padding:9px 16px;cursor:pointer}
+  button.rf:hover{filter:brightness(1.1)}
+
+  .exec{background:linear-gradient(135deg,#00351f,#005430 55%,#00733f);color:#fff;border-radius:18px;
+    padding:20px 22px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .exec h2{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-bottom:10px}
+  .exec p{font-size:15.5px;font-weight:700;line-height:1.75}
+  .exec b{color:#ffd24a}
+
+  .grid{display:grid;gap:14px;margin-bottom:16px}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:2fr 1fr}
+
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+  .card h3{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .kpi{font-size:34px;font-weight:900;line-height:1.05;font-variant-numeric:tabular-nums}
+  .kpi small{font-size:14px;font-weight:800;color:var(--ink-soft)}
+  .kpi-note{font-size:12px;font-weight:700;color:var(--ink-soft);margin-top:6px}
+  .up{color:var(--ok)} .down{color:var(--bad)} .amber{color:var(--warn)}
+
+  /* donut */
+  .donut{width:132px;height:132px;border-radius:50%;margin:2px auto 8px;display:grid;place-items:center;
+    background:conic-gradient(var(--c) calc(var(--p)*1%), #eef1f5 0)}
+  .donut i{width:98px;height:98px;background:#fff;border-radius:50%;display:grid;place-items:center;
+    font-style:normal;font-weight:900;font-size:23px;font-variant-numeric:tabular-nums}
+
+  /* bars */
+  .bars{display:flex;flex-direction:column;gap:11px}
+  .bar-row{display:grid;grid-template-columns:132px 1fr 62px;align-items:center;gap:10px}
+  .bar-lbl{font-size:12.5px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bar-track{height:12px;border-radius:999px;background:#eef1f5;overflow:hidden}
+  .bar-fill{height:100%;border-radius:999px;transition:width .7s cubic-bezier(.2,.9,.3,1)}
+  .bar-val{font-size:12.5px;font-weight:800;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:start;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-soft);padding:8px 6px;border-bottom:1.5px solid var(--line)}
+  td{padding:9px 6px;border-bottom:1px solid #f1f3f6;font-weight:700}
+  tr:last-child td{border-bottom:none}
+  .tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;color:#fff}
+
+  .spark{width:100%;height:66px;display:block}
+  .fb-item{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+  .fb-stars{color:#f5b301;font-size:13px;letter-spacing:1px}
+  .fb-txt{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.55;margin-top:3px}
+  .empty{color:var(--ink-soft);font-weight:700;font-size:13px;padding:16px 0;text-align:center}
+  footer{text-align:center;color:var(--ink-soft);font-size:11.5px;font-weight:700;margin-top:20px;line-height:1.7}
+  .err{background:#fdecef;border:1.5px solid #f6ced6;color:#b02338;border-radius:12px;padding:12px;font-weight:700;font-size:13px}
+
+  @media(max-width:1080px){.g5{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+  @media(max-width:680px){.g5,.g4,.g3{grid-template-columns:1fr 1fr}body{padding:12px}.kpi{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img class="logo" src="assets/logos/cx-hub-color.png" alt="">
+    <div>
+      <h1>Art Series: KSA Ready · Live Dashboard</h1>
+      <div class="sub" id="sub">Loading…</div>
+    </div>
+    <div class="spacer"></div>
+    <span class="pill live"><span class="dot"></span> Live</span>
+    <span class="pill" id="marketPill">—</span>
+    <button class="rf" id="refresh">Refresh</button>
+  </header>
+
+  <div id="err"></div>
+
+  <div class="exec" id="exec">
+    <h2>Executive summary</h2>
+    <p id="execTxt">Reading the sheet…</p>
+  </div>
+
+  <div class="grid g5" id="kpis"></div>
+
+  <div class="grid g3" id="worldCards"></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Completion against the active list (KSA roster)</h3>
+      <div class="bars" id="rosterBars"></div>
+      <div class="kpi-note" id="rosterNote"></div>
+    </div>
+    <div class="card">
+      <h3>Where players struggle · average score per round</h3>
+      <div class="bars" id="roundBars"></div>
+      <div class="kpi-note">Lowest bar = the round to fix first.</div>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Activity · plays per day (last 30)</h3>
+      <svg class="spark" id="spark" viewBox="0 0 600 66" preserveAspectRatio="none"></svg>
+      <div class="kpi-note" id="sparkNote"></div>
+    </div>
+    <div class="card">
+      <h3>Language</h3>
+      <div class="bars" id="langBars"></div>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Top brands by attempts</h3>
+      <table id="brandTbl"><thead><tr><th>Brand</th><th>Attempts</th><th>Passed</th><th>Pass rate</th></tr></thead><tbody></tbody></table>
+    </div>
+    <div class="card">
+      <h3>Latest feedback</h3>
+      <div id="fbBox"></div>
+    </div>
+  </div>
+
+  <footer>
+    Customer Experience Hub · Alshaya Group<br>
+    Reads live from the game's Google Sheet. Numbers refresh every 60 seconds.
+  </footer>
+</div>
+
+<script src="config/shared.js"></script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+  var WORLDS = {
+    retail:      { label:"The Art of Selling",           short:"Retail",      color:"var(--retail)", hex:"#e43c50" },
+    hospitality: { label:"The Art of Guest Experience",  short:"Hospitality", color:"var(--hosp)",   hex:"#f15a24" },
+    starbucks:   { label:"The Art of Connection",        short:"Starbucks",   color:"var(--sbux)",   hex:"#006241" }
+  };
+  var fmt = function(n){ return (n==null?0:n).toLocaleString("en-US"); };
+  var pct = function(a,b){ return b ? Math.round(a/b*100) : 0; };
+
+  function el(t,c,x){ var e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e; }
+
+  function ready(){ return window.CONFIG && CONFIG.scriptUrl; }
+
+  function load(){
+    if(!ready()){
+      $("#err").innerHTML = '<div class="err">CONFIG.scriptUrl is empty in config/shared.js. ' +
+        'Deploy the Apps Script web app and paste the /exec URL there, then reload this page.</div>';
+      $("#execTxt").textContent = "Not connected to the sheet yet.";
+      return;
+    }
+    var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) + "&action=stats";
+    fetch(url).then(function(r){ return r.json(); }).then(render).catch(function(){
+      $("#err").innerHTML = '<div class="err">Could not reach the web app. Check the deployment is set to ' +
+        '"Anyone" and the /exec URL is correct.</div>';
+    });
+  }
+
+  function render(s){
+    $("#err").innerHTML = "";
+    $("#sub").textContent = "Updated " + new Date(s.generated).toLocaleString();
+    $("#marketPill").textContent = "Market: " + s.market + " · pass " + s.passMark + "%";
+
+    var t = s.totals, r = s.roster || { total:0, worlds:{} };
+    var passRate = pct(t.passed, t.unique);
+    var rosterPlayed = 0, rosterPassed = 0;
+    Object.keys(WORLDS).forEach(function(w){
+      var x = s.worlds[w] || {};
+      rosterPlayed += x.playedRoster || 0; rosterPassed += x.passedRoster || 0;
+    });
+
+    /* ---- executive summary ---- */
+    var weakest = ["r1","r2","r3","r4"].reduce(function(a,b){ return (s.rounds[a]<=s.rounds[b])?a:b; });
+    var weakLbl = { r1:"Round 1", r2:"Round 2", r3:"Round 3", r4:"Round 4" }[weakest];
+    var txt;
+    if(!t.attempts){
+      txt = "No one has played yet. Once the game goes out, this page fills in by itself.";
+    } else {
+      txt = "<b>" + fmt(t.unique) + "</b> people have played (<b>" + fmt(t.attempts) + "</b> attempts, " +
+        "averaging <b>" + t.avgAttempts + "</b> tries each). <b>" + fmt(t.passed) + "</b> passed and " +
+        "<b>" + fmt(t.failed) + "</b> have not yet, a pass rate of <b>" + passRate + "%</b>. " +
+        "Against the KSA active list of <b>" + fmt(r.total) + "</b>, <b>" + pct(rosterPlayed, r.total) + "%</b> have played " +
+        "and <b>" + pct(rosterPassed, r.total) + "%</b> are certified. " +
+        "The average score is <b>" + t.avgScore + "%</b> and the weakest round is <b>" + weakLbl +
+        "</b> at <b>" + s.rounds[weakest] + "%</b>. " +
+        (t.unmatchedPlayers ? "<b>" + fmt(t.unmatchedPlayers) + "</b> players are not on the active list yet (new joiners or typos), they still count in All players." : "Every player matched the active list.");
+    }
+    $("#execTxt").innerHTML = txt;
+
+    /* ---- KPI row ---- */
+    var kpis = [
+      { h:"Unique players",  v:fmt(t.unique),          n:"distinct Emp IDs" },
+      { h:"Total attempts",  v:fmt(t.attempts),        n:t.avgAttempts + " per player (repetition)" },
+      { h:"Certified",       v:fmt(t.passed),          n:passRate + "% pass rate", cls:"up" },
+      { h:"Not yet passed",  v:fmt(t.failed),          n:"can retry unlimited", cls:t.failed?"down":"" },
+      { h:"Avg score",       v:t.avgScore + "<small>%</small>", n:"pass mark " + s.passMark + "%" }
+    ];
+    var box = $("#kpis"); box.innerHTML = "";
+    kpis.forEach(function(k){
+      var c = el("div","card");
+      c.appendChild(el("h3",null,k.h));
+      var v = el("div","kpi " + (k.cls||"")); v.innerHTML = k.v; c.appendChild(v);
+      c.appendChild(el("div","kpi-note",k.n));
+      box.appendChild(c);
+    });
+
+    /* ---- per-world donuts ---- */
+    var wc = $("#worldCards"); wc.innerHTML = "";
+    Object.keys(WORLDS).forEach(function(w){
+      var d = s.worlds[w] || {}, meta = WORLDS[w];
+      var rp = pct(d.playedRoster||0, d.roster||0);
+      var c = el("div","card");
+      c.appendChild(el("h3",null,meta.label));
+      var don = el("div","donut");
+      don.style.setProperty("--p", rp); don.style.setProperty("--c", meta.hex);
+      var i = el("i",null,rp + "%"); don.appendChild(i); c.appendChild(don);
+      var note = el("div","kpi-note");
+      note.innerHTML = "<b>" + fmt(d.playedRoster||0) + "</b> of <b>" + fmt(d.roster||0) + "</b> on the list played &middot; " +
+        fmt(d.passedRoster||0) + " certified<br>" +
+        fmt(d.unique||0) + " unique players &middot; " + fmt(d.attempts||0) + " attempts &middot; avg " + (d.avgScore||0) + "%";
+      note.style.textAlign = "center";
+      c.appendChild(note);
+      wc.appendChild(c);
+    });
+
+    /* ---- roster bars ---- */
+    var rb = $("#rosterBars"); rb.innerHTML = "";
+    Object.keys(WORLDS).forEach(function(w){
+      var d = s.worlds[w] || {};
+      rb.appendChild(bar(WORLDS[w].short, pct(d.playedRoster||0, d.roster||0), WORLDS[w].hex,
+        fmt(d.playedRoster||0) + "/" + fmt(d.roster||0)));
+    });
+    $("#rosterNote").innerHTML = "Roster = KSA active list, mapped: Apparel + Wellness + H&amp;M + Primark &rarr; Selling. " +
+      "Update the list and these move by themselves.";
+
+    /* ---- round bars ---- */
+    var rr = $("#roundBars"); rr.innerHTML = "";
+    [["Round 1","r1"],["Round 2","r2"],["Round 3","r3"],["Round 4","r4"],["Bonus","bonus"]].forEach(function(p){
+      var v = s.rounds[p[1]] || 0;
+      var col = v >= s.passMark ? "#19b36b" : (v >= s.passMark - 15 ? "#f59e0b" : "#e43c50");
+      rr.appendChild(bar(p[0], v, col, v + "%"));
+    });
+
+    /* ---- sparkline ---- */
+    spark(s.daily || []);
+    var totalDays = (s.daily||[]).length;
+    $("#sparkNote").textContent = totalDays ? (totalDays + " active days · busiest " +
+      Math.max.apply(null,(s.daily||[]).map(function(d){return d.n;})) + " plays in a day") : "No activity yet.";
+
+    /* ---- language ---- */
+    var lb = $("#langBars"); lb.innerHTML = "";
+    var langTot = (s.lang.ar||0) + (s.lang.en||0);
+    lb.appendChild(bar("العربية", pct(s.lang.ar, langTot), "#005430", fmt(s.lang.ar)));
+    lb.appendChild(bar("English", pct(s.lang.en, langTot), "#6b7280", fmt(s.lang.en)));
+
+    /* ---- brands ---- */
+    var tb = $("#brandTbl").querySelector("tbody"); tb.innerHTML = "";
+    if(!(s.brands||[]).length){ tb.innerHTML = '<tr><td colspan="4" class="empty">No plays yet.</td></tr>'; }
+    (s.brands||[]).forEach(function(b){
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + b.brand + "</td><td>" + fmt(b.attempts) + "</td><td>" + fmt(b.passed) + "</td>" +
+        "<td>" + pct(b.passed,b.attempts) + "%</td>";
+      tb.appendChild(tr);
+    });
+
+    /* ---- feedback ---- */
+    var fb = $("#fbBox"); fb.innerHTML = "";
+    var f = s.feedback || { count:0, avg:0, recent:[] };
+    var head = el("div","kpi-note");
+    head.innerHTML = "<b style='font-size:20px;color:var(--ink)'>" + (f.avg||0) + " / 5</b> &nbsp; from " + fmt(f.count) + " responses";
+    fb.appendChild(head);
+    if(!f.recent.length){ fb.appendChild(el("div","empty","No comments yet.")); }
+    f.recent.forEach(function(x){
+      var d = el("div","fb-item");
+      var st = el("div","fb-stars","★".repeat(Math.max(0,Math.min(5,x.rating))) + "☆".repeat(Math.max(0,5-x.rating)));
+      d.appendChild(st);
+      d.appendChild(el("div","fb-txt",x.comment));
+      fb.appendChild(d);
+    });
+  }
+
+  function bar(label, val, color, right){
+    var row = el("div","bar-row");
+    row.appendChild(el("div","bar-lbl",label));
+    var tr = el("div","bar-track");
+    var fl = el("div","bar-fill");
+    fl.style.background = color; fl.style.width = "0%";
+    setTimeout(function(){ fl.style.width = Math.max(0,Math.min(100,val)) + "%"; }, 60);
+    tr.appendChild(fl); row.appendChild(tr);
+    row.appendChild(el("div","bar-val", right != null ? right : val + "%"));
+    return row;
+  }
+
+  function spark(daily){
+    var svg = $("#spark"); svg.innerHTML = "";
+    if(!daily.length){ return; }
+    var W = 600, H = 66, max = Math.max.apply(null, daily.map(function(d){ return d.n; })) || 1;
+    var step = daily.length > 1 ? W/(daily.length-1) : W;
+    var pts = daily.map(function(d,i){ return [i*step, H - (d.n/max)*(H-10) - 4]; });
+    var path = pts.map(function(p,i){ return (i?"L":"M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ");
+    var area = path + " L" + W + "," + H + " L0," + H + " Z";
+    add("path", { d:area, fill:"rgba(0,84,48,.12)" });
+    add("path", { d:path, fill:"none", stroke:"#005430", "stroke-width":"2.5", "stroke-linejoin":"round", "stroke-linecap":"round" });
+    pts.forEach(function(p){ add("circle", { cx:p[0], cy:p[1], r:2.5, fill:"#005430" }); });
+    function add(tag, attrs){
+      var e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      Object.keys(attrs).forEach(function(k){ e.setAttribute(k, attrs[k]); });
+      svg.appendChild(e);
+    }
+  }
+
+  $("#refresh").onclick = load;
+  load();
+  setInterval(load, 60000);   // live: refresh every minute
+})();
+</script>
+</body>
+</html>
