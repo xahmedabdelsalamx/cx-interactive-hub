@@ -3,7 +3,7 @@
    ============================================================ */
 
 window.CONFIG = {
-  scriptUrl: "",                 // paste deployed Apps Script /exec URL (empty = offline)
+  scriptUrl: "https://script.google.com/macros/s/AKfycbxKNzh4JS1wGcpf7e2piOfD7aJeaqh7117ihBHUK2BcPf3BYvwPSBut2uIAWVdq1SEf/exec",                 // paste deployed Apps Script /exec URL (empty = offline)
   secretToken: "CXHUBKSA",       // must match SECRET_TOKEN in AppsScript.gs
 
   defaultLang: "ar",             // KSA Arabic is the default
