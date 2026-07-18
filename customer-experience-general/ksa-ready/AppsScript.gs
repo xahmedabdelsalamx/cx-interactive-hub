@@ -57,7 +57,7 @@ var SCORE_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Gender","Cha
   "Round1%","Round2%","Round3%","Round4%","Bonus%","Energy","Total%","Passed","Matched","Lang","ClientTime"];
 var FB_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Rating","Comment","Lang","ClientTime"];
 var LIST_HEADERS = ["Payroll Name","Employee Number","Brand","Market","Division",
-  "Position","Line Manager Name","Employee Name","Job"];
+  "Position","Line Manager Name","Employee Name","Job","Organization","Org Type"];
 
 /* Company Division -> art division. Edit in the Map tab if HR renames anything. */
 var DIV_MAP = [
@@ -147,25 +147,25 @@ function buildReports() {
   /* ---- Completion: KSA roster only, mapped to the 3 art divisions ---- */
   var comp = ss.getSheetByName(T_COMP) || ss.insertSheet(T_COMP);
   comp.clear();
-  comp.getRange(1, 1, 1, 12).setValues([[
+  comp.getRange(1, 1, 1, 14).setValues([[
     "EmpID","Employee Name","Brand","Company Division","Market","Line Manager",
-    "Art division","Played","Best %","Passed","Attempts","Last Played"
+    "Store","Org Type","Art division","Played","Best %","Passed","Attempts","Last Played"
   ]]).setFontWeight("bold").setBackground("#f1f3f4");
   comp.setFrozenRows(1);
 
-  // A:F spill from the active list, filtered to the configured market
+  // A:H spill from the active list, filtered to the configured market
   comp.getRange("A2").setFormula(
     '=IFERROR(FILTER({' + T_LIST + '!B2:B,' + T_LIST + '!H2:H,' + T_LIST + '!C2:C,' +
-    T_LIST + '!E2:E,' + T_LIST + '!D2:D,' + T_LIST + '!G2:G},' +
+    T_LIST + '!E2:E,' + T_LIST + '!D2:D,' + T_LIST + '!G2:G,' + T_LIST + '!J2:J,' + T_LIST + '!K2:K},' +
     T_LIST + '!B2:B<>"",' + T_LIST + '!D2:D=' + T_CFG + '!$B$1),"")'
   );
-  comp.getRange("G2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(D2:D,' + T_MAP + '!$A$2:$B,2,FALSE),"unmapped")))');
-  comp.getRange("H2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IF(COUNTIF(' + T_AGG + '!A:A,A2:A)>0,"Yes","No")))');
-  comp.getRange("I2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,2,FALSE),"")))');
-  comp.getRange("J2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IF(IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,2,FALSE),0)>=' + T_CFG + '!$B$2,"Yes","No")))');
-  comp.getRange("K2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,4,FALSE),0)))');
-  comp.getRange("L2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,3,FALSE),"")))');
-  comp.setColumnWidth(2, 220);
+  comp.getRange("I2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(D2:D,' + T_MAP + '!$A$2:$B,2,FALSE),"unmapped")))');
+  comp.getRange("J2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IF(COUNTIF(' + T_AGG + '!A:A,A2:A)>0,"Yes","No")))');
+  comp.getRange("K2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,2,FALSE),"")))');
+  comp.getRange("L2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IF(IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,2,FALSE),0)>=' + T_CFG + '!$B$2,"Yes","No")))');
+  comp.getRange("M2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,4,FALSE),0)))');
+  comp.getRange("N2").setFormula('=ARRAYFORMULA(IF(A2:A="","",IFERROR(VLOOKUP(A2:A,' + T_AGG + '!A:D,3,FALSE),"")))');
+  comp.setColumnWidth(2, 220); comp.setColumnWidth(7, 260);
 
   /* ---- Summary: view A (vs active list) + view B (all players) ---- */
   var sum = ss.getSheetByName(T_SUM) || ss.insertSheet(T_SUM);
@@ -182,9 +182,9 @@ function buildReports() {
   var worlds = [["retail"],["hospitality"],["starbucks"]];
   sum.getRange(6, 1, 3, 1).setValues(worlds);
   for (var r = 6; r <= 8; r++) {
-    sum.getRange(r, 2).setFormula('=COUNTIFS(' + T_COMP + '!$G$2:$G,$A' + r + ')');
-    sum.getRange(r, 3).setFormula('=COUNTIFS(' + T_COMP + '!$G$2:$G,$A' + r + ',' + T_COMP + '!$H$2:$H,"Yes")');
-    sum.getRange(r, 4).setFormula('=COUNTIFS(' + T_COMP + '!$G$2:$G,$A' + r + ',' + T_COMP + '!$J$2:$J,"Yes")');
+    sum.getRange(r, 2).setFormula('=COUNTIFS(' + T_COMP + '!$I$2:$I,$A' + r + ')');
+    sum.getRange(r, 3).setFormula('=COUNTIFS(' + T_COMP + '!$I$2:$I,$A' + r + ',' + T_COMP + '!$J$2:$J,"Yes")');
+    sum.getRange(r, 4).setFormula('=COUNTIFS(' + T_COMP + '!$I$2:$I,$A' + r + ',' + T_COMP + '!$L$2:$L,"Yes")');
     sum.getRange(r, 5).setFormula('=IFERROR(C' + r + '/B' + r + ',0)').setNumberFormat("0.0%");
     sum.getRange(r, 6).setFormula('=IFERROR(D' + r + '/B' + r + ',0)').setNumberFormat("0.0%");
   }
@@ -213,6 +213,26 @@ function buildReports() {
   sum.getRange("D16").setFormula("=SUM(D13:D15)").setFontWeight("bold");
   sum.getRange("E16").setFormula("=IFERROR(C16/B16,0)").setFontWeight("bold").setNumberFormat("0.00");
   sum.setColumnWidth(1, 180);
+
+  /* C) BY STORE — ranked, so managers can chase the lagging locations */
+  sum.getRange("A18").setValue("C) BY STORE  (completion per location, lowest first)")
+     .setFontWeight("bold").setBackground("#e6f4ea");
+  sum.getRange(19, 1, 1, 5).setValues([[
+    "Store","On active list","Played","Passed","Played %"
+  ]]).setFontWeight("bold").setBackground("#f1f3f4");
+  sum.getRange("A20").setFormula(
+    '=IFERROR(QUERY({' + T_COMP + '!$G$2:$G,' + T_COMP + '!$J$2:$J,' + T_COMP + '!$L$2:$L},' +
+    '"select Col1, count(Col1), sum(Col2=\'Yes\'), sum(Col3=\'Yes\') ' +
+    'where Col1 is not null and Col1 <> \'\' group by Col1 order by count(Col1) desc ' +
+    'label Col1 \'\', count(Col1) \'\', sum(Col2=\'Yes\') \'\', sum(Col3=\'Yes\') \'\'",0),' +
+    '"no data yet")'
+  );
+  // played% column next to the query spill
+  sum.getRange("E20").setFormula('=ARRAYFORMULA(IF(A20:A="","",IFERROR(C20:C/B20:B,0)))').setNumberFormat("0.0%");
+  sum.setColumnWidth(1, 280);
+  sum.getRange("G18").setValue(
+    "Tip: click the store table, Data > Create a filter, then sort Played % ascending to see who needs a nudge."
+  ).setFontColor("#888888");
 
   /* ---- Unmatched ---- */
   var unm = ss.getSheetByName(T_UNM) || ss.insertSheet(T_UNM);
@@ -304,7 +324,7 @@ function stats_() {
     totals: { attempts: 0, unique: 0, passed: 0, failed: 0, avgScore: 0, avgAttempts: 0, matchedPlayers: 0, unmatchedPlayers: 0 },
     worlds: {}, rounds: { r1: 0, r2: 0, r3: 0, r4: 0, bonus: 0 },
     brands: [], daily: [], feedback: { count: 0, avg: 0, recent: [] },
-    roster: { total: 0, worlds: {} }, lang: { ar: 0, en: 0 }
+    roster: { total: 0, worlds: {} }, lang: { ar: 0, en: 0 }, stores: []
   };
   var W = ["retail", "hospitality", "starbucks"];
   W.forEach(function (w) {
@@ -312,18 +332,33 @@ function stats_() {
     out.roster.worlds[w] = 0;
   });
 
-  /* --- roster from Completion (already KSA + mapped) --- */
+  /* --- roster + per-store from Completion (already KSA + mapped) --- */
   var comp = ss.getSheetByName(T_COMP);
+  var storeMap = {};
   if (comp && comp.getLastRow() > 1) {
-    var cv = comp.getRange(2, 7, comp.getLastRow() - 1, 4).getValues();  // G..J world, played, best, passed
+    // G store, I art division, J played, L passed
+    var cv = comp.getRange(2, 7, comp.getLastRow() - 1, 6).getValues();  // G..L
     cv.forEach(function (r) {
-      var w = String(r[0]);
-      if (!out.worlds[w]) return;
-      out.roster.total++; out.roster.worlds[w]++; out.worlds[w].roster++;
-      if (String(r[1]) === "Yes") out.worlds[w].playedRoster++;
-      if (String(r[3]) === "Yes") out.worlds[w].passedRoster++;
+      var store = String(r[0] || ""), w = String(r[2]);
+      var played = String(r[3]) === "Yes", passed = String(r[5]) === "Yes";
+      if (out.worlds[w]) {
+        out.roster.total++; out.roster.worlds[w]++; out.worlds[w].roster++;
+        if (played) out.worlds[w].playedRoster++;
+        if (passed) out.worlds[w].passedRoster++;
+      }
+      if (store) {
+        if (!storeMap[store]) storeMap[store] = { store: store, world: w, roster: 0, played: 0, passed: 0 };
+        storeMap[store].roster++;
+        if (played) storeMap[store].played++;
+        if (passed) storeMap[store].passed++;
+      }
     });
   }
+  out.stores = Object.keys(storeMap).map(function (k) {
+    var s2 = storeMap[k];
+    s2.playedPct = s2.roster ? Math.round(s2.played / s2.roster * 100) : 0;
+    return s2;
+  }).sort(function (a, b) { return b.roster - a.roster; });
 
   /* --- scores --- */
   var sh = ss.getSheetByName(T_SCORES);
@@ -419,12 +454,13 @@ function lookupEmp_(rawId) {
 
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_LIST);
   if (!sh || sh.getLastRow() < 2) return null;
-  var rows = sh.getRange(2, 2, sh.getLastRow() - 1, 8).getValues();  // B..I
+  var rows = sh.getRange(2, 2, sh.getLastRow() - 1, 10).getValues();  // B..K
   for (var i = 0; i < rows.length; i++) {
     if (normId_(rows[i][0]) === id) {
       var rec = { found: true, empId: String(rows[i][0]), brand: rows[i][1] || "",
         market: rows[i][2] || "", division: rows[i][3] || "", manager: rows[i][5] || "",
-        name: rows[i][6] || "", job: rows[i][7] || "" };
+        name: rows[i][6] || "", job: rows[i][7] || "",
+        store: rows[i][8] || "", orgType: rows[i][9] || "" };
       cache.put("emp_" + id, JSON.stringify(rec), 600);
       return rec;
     }
