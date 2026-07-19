@@ -202,9 +202,11 @@ function buildReports() {
   ]]).setFontWeight("bold").setBackground("#f1f3f4");
   sum.getRange(13, 1, 3, 1).setValues(worlds);
   for (var r2 = 13; r2 <= 15; r2++) {
-    sum.getRange(r2, 2).setFormula('=IFERROR(COUNTA(UNIQUE(FILTER(' + T_SCORES + '!$D$2:$D,' + T_SCORES + '!$B$2:$B=$A' + r2 + ',' + T_SCORES + '!$D$2:$D<>""))),0)');
+    // Unique players = count distinct EmpIDs for this world. COUNTUNIQUEIFS avoids
+    // the COUNTA(UNIQUE(FILTER(...))) trap that returns 1 for an empty Scores sheet.
+    sum.getRange(r2, 2).setFormula('=IFERROR(COUNTUNIQUEIFS(' + T_SCORES + '!$D$2:$D,' + T_SCORES + '!$B$2:$B,$A' + r2 + ',' + T_SCORES + '!$D$2:$D,"<>"),0)');
     sum.getRange(r2, 3).setFormula('=COUNTIFS(' + T_SCORES + '!$B$2:$B,$A' + r2 + ')');
-    sum.getRange(r2, 4).setFormula('=IFERROR(COUNTA(UNIQUE(FILTER(' + T_SCORES + '!$D$2:$D,' + T_SCORES + '!$B$2:$B=$A' + r2 + ',' + T_SCORES + '!$O$2:$O="Yes"))),0)');
+    sum.getRange(r2, 4).setFormula('=IFERROR(COUNTUNIQUEIFS(' + T_SCORES + '!$D$2:$D,' + T_SCORES + '!$B$2:$B,$A' + r2 + ',' + T_SCORES + '!$O$2:$O,"Yes",' + T_SCORES + '!$D$2:$D,"<>"),0)');
     sum.getRange(r2, 5).setFormula('=IFERROR(C' + r2 + '/B' + r2 + ',0)').setNumberFormat("0.00");
   }
   sum.getRange("A16").setValue("TOTAL").setFontWeight("bold");

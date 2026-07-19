@@ -57,12 +57,10 @@
     scoreSaved: { ar: "تم حفظ نتيجتك", en: "Your score was saved" },
     bonusRound: { ar: "جولة المكافأة ⚡", en: "Bonus Round ⚡" },
     bonusLbl:   { ar: "مكافأة · سرعة الموسم", en: "Bonus · Peak Rush" },
-    rushGo:     { ar: "بسرعة!", en: "Go fast!" },
     timeUp:     { ar: "انتهى الوقت!", en: "Time's up!" },
     check:      { ar: "تحقّق", en: "Check" },
     tryAgain1:  { ar: "مو بالضبط، باقي لك محاولة وحدة", en: "Not quite, one attempt left" },
     correctOrder:{ ar: "الترتيب الصحيح", en: "The correct order" },
-    correctMatch:{ ar: "التوصيل الصحيح", en: "The correct matches" },
     moreLearn:  { ar: "تعلّم أكثر", en: "More learning" },
     sTrue:      { ar: "صح", en: "True" },
     sFalse:     { ar: "خطأ", en: "False" },
@@ -976,7 +974,8 @@
       action: "score", division: state.division.id, brand: L(state.brand),
       empId: state.empId, name: state.name, gender: state.gender || "", character: state.character,
       scores: state.scores, total: total, passed: passed ? "yes" : "no", lang: state.lang,
-      bonus: state.bonus ? state.bonus.score : "", energy: state.bonus ? state.bonus.energy : ""
+      bonus: state.bonus ? state.bonus.score : "", energy: state.bonus ? state.bonus.energy : "",
+      clientTime: new Date().toISOString()
     });
 
     c.appendChild(el("div", "fbk-hint", u("fbHint")));
@@ -1204,7 +1203,8 @@
     var send = el("button", "btn", u("sendFb"));
     send.onclick = function () {
       post({ action: "feedback", division: state.division.id, brand: L(state.brand),
-        empId: state.empId, name: state.name, rating: rating, comment: ta.value.trim(), lang: state.lang });
+        empId: state.empId, name: state.name, rating: rating, comment: ta.value.trim(),
+        lang: state.lang, clientTime: new Date().toISOString() });
       box.innerHTML = ""; box.appendChild(el("h3", "h3", u("thanks")));
     };
     box.appendChild(send); return box;
