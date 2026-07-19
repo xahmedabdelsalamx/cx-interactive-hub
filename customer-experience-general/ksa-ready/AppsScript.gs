@@ -273,6 +273,7 @@ function doGet(e) {
   var p = (e && e.parameter) || {};
   if (p.token !== SECRET_TOKEN) return json_({ error: "bad token" });
   if (p.action === "check")  return json_({ passed: hasPassed_(p.empId) });
+  if (p.action === "history") return json_(playerHistory_(p.empId));
   if (p.action === "lookup") {
     var rec = lookupEmp_(p.empId);
     return json_(rec ? { found: true, name: rec.name, brand: rec.brand,
@@ -478,6 +479,37 @@ function clearLookupCache() {
 }
 
 /* ================= HELPERS ================= */
+/* Returns a returning player's history: attempts, best score, last score, passed.
+   Used to greet them with "welcome back" and show progress. Never blocks. */
+function playerHistory_(empId) {
+  var id = normId_(empId);
+  if (!id) return { attempts: 0 };
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_SCORES);
+  if (!sh || sh.getLastRow() < 2) return { attempts: 0 };
+  var rows = sh.getRange(2, 1, sh.getLastRow() - 1, 15).getValues();  // A..O
+  var attempts = 0, best = -1, lastTotal = null, lastWhen = null, passed = false, lastDiv = "";
+  rows.forEach(function (r) {
+    if (normId_(r[3]) !== id) return;                 // D = EmpID
+    attempts++;
+    var total = Number(r[13]) || 0;                   // N = Total%
+    if (total > best) best = total;
+    if (String(r[14]).toLowerCase() === "yes") passed = true;  // O = Passed
+    var when = r[0];                                  // A = Timestamp
+    if (!lastWhen || (when instanceof Date && when > lastWhen)) {
+      lastWhen = when; lastTotal = total; lastDiv = String(r[1] || "");
+    }
+  });
+  if (!attempts) return { attempts: 0 };
+  return {
+    attempts: attempts,
+    best: best < 0 ? 0 : best,
+    last: lastTotal == null ? 0 : lastTotal,
+    passed: passed,
+    lastDivision: lastDiv,
+    lastPlayed: lastWhen instanceof Date ? Utilities.formatDate(lastWhen, Session.getScriptTimeZone(), "yyyy-MM-dd") : ""
+  };
+}
+
 function hasPassed_(empId) {
   var id = normId_(empId);
   if (!id) return false;

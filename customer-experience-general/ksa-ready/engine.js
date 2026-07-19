@@ -71,7 +71,20 @@
     shareLine:  { ar: "افتخر فيها وشاركها 🔥 نزّل شارتك وخلّ فريقك يشوف إنجازك", en: "Be proud and share it 🔥 Download your badge and let your team see what you achieved" },
     dlFail:     { ar: "ما قدرنا نجهّز الصورة، جرّب من متصفح ثاني", en: "Couldn't create the image, try another browser" },
     empFound:   { ar: "تم التعرّف عليك", en: "We found you" },
-    empNew:     { ar: "أول مرة معنا؟ كمّل عادي 👍", en: "New with us? Carry on 👍" }
+    empNew:     { ar: "أول مرة معنا؟ كمّل عادي 👍", en: "New with us? Carry on 👍" },
+    welcomeBack:{ ar: "مرحباً برجوعك", en: "Welcome back" },
+    wbBest:     { ar: "أفضل نتيجة", en: "Best score" },
+    wbLast:     { ar: "آخر نتيجة", en: "Last score" },
+    wbTries:    { ar: "عدد المحاولات", en: "Attempts" },
+    wbPassed:   { ar: "أنت مجتاز بالفعل! تقدر تلعب مرة ثانية وتحسّن نتيجتك", en: "You've already passed! Play again to beat your score" },
+    wbTryAgain: { ar: "قربت! هالمرة أنت أقرب للنجاح، يلا نكمّل", en: "So close! You're closer this time, let's go" },
+    brainBreak: { ar: "استراحة ولعب", en: "Brain break" },
+    mgCalm:     { ar: "خذ نفس، هدّي حماسك، ونلعب شوي قبل الجولة الجاية 🔥", en: "Take a breath, cool down, and have some fun before the next round 🔥" },
+    mgHowTo:    { ar: "طريقة اللعب", en: "How to play" },
+    mgNoScore:  { ar: "لا تشيل هم، هذي اللعبة للمتعة بس وما تأثر على نتيجتك", en: "No pressure, this game is just for fun and doesn't affect your score" },
+    mgPlay:     { ar: "يلا نلعب", en: "Let's play" },
+    mgSkip:     { ar: "تخطّي وكمّل الجولة الجاية", en: "Skip and continue" },
+    mgSkipGame: { ar: "تخطّي، كمّل الجولة الجاية", en: "Skip, next round" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -210,6 +223,13 @@
               "&action=check&empId=" + encodeURIComponent(empId);
     return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { passed: false }; });
   }
+  function playerHistory(empId) {
+    if (!backendReady() || !empId) return Promise.resolve({ attempts: 0 });
+    var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
+              "&action=history&empId=" + encodeURIComponent(empId);
+    return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { attempts: 0 }; });
+  }
+
   function lookupEmp(empId) {
     if (!backendReady() || !empId) return Promise.resolve({ found: false });
     var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
@@ -245,6 +265,37 @@
   }
 
   /* ---------------- INTAKE ---------------- */
+  function renderWelcomeBack(box, h) {
+    box.className = "welcome-back show";
+    box.innerHTML = "";
+    var wname = (state.listMatch && state.listMatch.name) || $("#name").value.trim();
+    var firstName = wname ? wname.split(/\s+/)[0] : "";
+
+    box.appendChild(el("div", "wb-title", "👋 " + u("welcomeBack") + (firstName ? "، " + firstName : "")));
+
+    var stats = el("div", "wb-stats");
+    function stat(val, label) {
+      var s = el("div", "wb-stat");
+      s.appendChild(el("div", "wb-v", String(val)));
+      s.appendChild(el("div", "wb-l", label));
+      return s;
+    }
+    stats.appendChild(stat(h.best + "%", u("wbBest")));
+    stats.appendChild(stat(h.last + "%", u("wbLast")));
+    stats.appendChild(stat(h.attempts, u("wbTries")));
+    box.appendChild(stats);
+
+    var line = el("div", "wb-msg");
+    if (h.passed) {
+      line.className = "wb-msg ok";
+      line.textContent = "🏆 " + u("wbPassed");
+    } else {
+      line.className = "wb-msg push";
+      line.textContent = "💪 " + u("wbTryAgain");
+    }
+    box.appendChild(line);
+  }
+
   function buildIntake() {
     rerenderCurrent = buildIntake;
     ksaTheme(); setBg("entry"); setHeaderLogos("entry");
@@ -264,6 +315,8 @@
        isn't on the list, is NEVER blocked. */
     var empNote = el("div", "emp-note");
     emp.parentNode.appendChild(empNote);
+    var welcomeBack = el("div", "welcome-back");
+    emp.parentNode.appendChild(welcomeBack);
     var lastLooked = "";
     emp.addEventListener("blur", function () {
       var v = emp.value.trim();
@@ -271,6 +324,7 @@
       lastLooked = v;
       empNote.className = "emp-note show muted-note";
       empNote.textContent = "…";
+      welcomeBack.className = "welcome-back";
       lookupEmp(v).then(function (r) {
         if (r && r.found) {
           state.listMatch = r;
@@ -282,6 +336,11 @@
           empNote.className = "emp-note show muted-note";
           empNote.textContent = u("empNew");
         }
+      });
+      // separately, check if they've played before -> welcome back with their history
+      playerHistory(v).then(function (h) {
+        if (!h || !h.attempts) return;
+        renderWelcomeBack(welcomeBack, h);
       });
     });
     var nm = $("#name");
@@ -848,7 +907,41 @@
     var g = games[(state.roundIndex - 1) % games.length];
     var c = $("#minigameCard"); c.innerHTML = "";
     rerenderCurrent = showMiniGame;
+    showScreen("screen-minigame");
+    miniGameIntro(c, g);
+  }
 
+  /* Intro screen: cools the player down after a scored round and explains the
+     game BEFORE it starts, so they're not dropped in cold and confused. */
+  function miniGameIntro(c, g) {
+    c.innerHTML = "";
+    var intro = el("div", "mg-intro");
+
+    intro.appendChild(el("div", "mg-intro-badge", "🎮 " + u("brainBreak")));
+    intro.appendChild(el("div", "mg-intro-emoji", g.emoji || "🎯"));
+    intro.appendChild(el("div", "mg-intro-name", L(g.name)));
+    intro.appendChild(el("div", "mg-intro-calm", u("mgCalm")));
+
+    var how = el("div", "mg-intro-how");
+    how.appendChild(el("div", "mg-intro-how-t", u("mgHowTo")));
+    how.appendChild(el("div", "mg-intro-how-d", L(g.how)));
+    intro.appendChild(how);
+
+    intro.appendChild(el("div", "mg-intro-note", u("mgNoScore")));
+
+    var play = el("button", "btn mg-play", u("mgPlay") + " " + (g.emoji || "🎮"));
+    play.onclick = function () { mountGame(c, g); };
+    intro.appendChild(play);
+
+    var skip = el("button", "mg-skip", u("mgSkip"));
+    skip.onclick = function () { playRound(); };
+    intro.appendChild(skip);
+
+    c.appendChild(intro);
+  }
+
+  function mountGame(c, g) {
+    c.innerHTML = "";
     var head = el("div", "mg-head");
     head.appendChild(el("div", "mg-tag", L(g.tag)));
     head.appendChild(el("div", "mg-name", L(g.name)));
@@ -857,11 +950,10 @@
     var mount = el("div", "mg-mount");
     c.appendChild(mount);
 
-    var skip = el("button", "mg-skip", L({ ar: "تخطّي، كمّل الجولة الجاية", en: "Skip, next round" }));
+    var skip = el("button", "mg-skip", u("mgSkipGame"));
     skip.onclick = function () { playRound(); };
     c.appendChild(skip);
 
-    showScreen("screen-minigame");
     g.mount(mount, function () { playRound(); }, state.lang);
   }
 

@@ -29,6 +29,7 @@
      --------------------------------------------------------- */
   var penalty = {
     id: "penalty",
+    emoji: "⚽",
     name: { ar: "ركلات الترجيح", en: "Penalty Rush" },
     tag: { ar: "استراحة سريعة", en: "Brain Break" },
     how: { ar: "اسحب الكرة باتجاه المرمى وارفع إصبعك للتسديد. عندك 5 محاولات.", en: "Drag the ball toward the goal and release to shoot. You get 5 shots." },
@@ -157,6 +158,7 @@
      --------------------------------------------------------- */
   var stack = {
     id: "stack",
+    emoji: "🧱",
     name: { ar: "كوّم الصناديق", en: "Stack It" },
     tag: { ar: "استراحة سريعة", en: "Brain Break" },
     how: { ar: "اضغط في أي مكان لإسقاط الصندوق. حاول تضبطه فوق اللي تحته بالضبط.", en: "Tap anywhere to drop the box. Try to land it right on top of the last one." },
@@ -245,6 +247,7 @@
      --------------------------------------------------------- */
   var quick = {
     id: "quick",
+    emoji: "⚡",
     name: { ar: "أسرع يد", en: "Quick Hands" },
     tag: { ar: "استراحة سريعة", en: "Brain Break" },
     how: { ar: "اضغط على الرمز المطلوب فقط، وبسرعة. 10 جولات وكل جولة أسرع.", en: "Tap only the icon it asks for, fast. 10 rounds, each one quicker." },

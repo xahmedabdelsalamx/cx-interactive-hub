@@ -3,7 +3,7 @@
 **Purpose of this file:** paste it (or upload it) at the start of a new chat, together with `ksa-gamification.zip`, so work can continue with no loss of context.
 
 **Owner:** Ahmed Abdelsalam — Customer Experience Hub team, Alshaya Group (ahmed.abdelsalam@alshaya.com)
-**Last updated:** 18 July 2026 (dashboard + store search, Rapid Match, badge download, preview shortcut, backend live, bug fixes)
+**Last updated:** 18 July 2026 (welcome-back for returning players, mini-game intro screens, + earlier: dashboard, Rapid Match, badge download, preview, backend live, bug fixes)
 
 ---
 
@@ -39,6 +39,8 @@ Entry/intake screen uses a vibrant **KSA green `#005430`**.
 | **Mini-games** | ✅ 3 brain-break games between rounds (penalty, stack, quick), auto-themed per world, zero scoring impact. **4-per-world plan still pending user go/no-go.** |
 | **Voice** | ✅ All 94 questions Gen Z immersive: micro-stories, brand-authentic, role-based (no personal names), Arabic zero Latin, answer positions varied |
 | **Result screen** | ✅ Trophy on pass, feedback form on BOTH pass & fail, world-coloured confetti, share line, **downloadable badge PNG** |
+| **Returning players** | ✅ On Emp-ID entry, `action=history` fetches their best/last score + attempts → "welcome back" panel with progress + encouraging message. Unlimited replays. |
+| **Mini-game intros** | ✅ Each brain-break now opens with an intro screen (emoji, name, "cool down" line, how-to-play, "no score impact", Let's play / Skip) so players aren't dropped in cold. |
 | **Live dashboard** | ✅ `dashboard.html` — exec summary, KPIs, per-world donuts, round-difficulty bars, activity sparkline, language split, **store search**, brands, feedback. No chart library (CSS/SVG). |
 | **Backend** | ✅ **DEPLOYED & LIVE.** `CONFIG.scriptUrl` is set. Active-list matching, dual reporting (vs-list + all-players), store completion, stats API. |
 | **Preview shortcut** | ✅ `?preview=pass` / `?preview=fail` (+ `&world=` `&lang=` `&gender=`) jumps to result screen; never writes to backend |
@@ -225,7 +227,13 @@ All in `assets/characters/`. **Transparent PNG, portrait, ~600–900px tall, fac
 
 **Summary has 3 views:** (A) vs active list = true completion of the KSA roster; (B) all players = everyone who played, list or not; (C) by store = completion per location.
 
-**Web-app actions:** `doGet ?action=check` (pass-once), `?action=lookup` (Emp match), `?action=stats` (dashboard JSON, 1-min cache). `doPost action=score / action=feedback`.
+**How replays count (unlimited replays are allowed):** every play appends ONE row to `Scores`, so 3 plays by the same person = 3 rows. Reporting de-duplicates by Emp ID:
+- **Unique players** = distinct Emp IDs (`COUNTUNIQUEIFS` on the Scores EmpID column). Replays do NOT inflate this.
+- **Total attempts** = raw row count (`COUNTIFS`). This is the "repetition" number.
+- **Completion / Certified** = an Emp ID counts once as "played"/"passed" via the `_Agg` best-score-per-player join, so retries can only *improve* someone's status, never double-count them.
+- Dashboard mirrors all of this from `action=stats`, which folds rows by Emp ID (best score wins) before counting.
+
+**Web-app actions:** `doGet ?action=check` (pass-once), `?action=history` (returning-player best/last/attempts/passed → "welcome back"), `?action=lookup` (Emp match), `?action=stats` (dashboard JSON, 1-min cache). `doPost action=score / action=feedback`.
 
 **Live dashboard — `dashboard.html`:** reads `action=stats` every 60s. Exec summary (auto-written prose), KPI row (unique / attempts / repetition / certified / not-yet-passed / avg score), 3 per-world completion donuts, "where players struggle" round-difficulty bars, activity sparkline (30 days), language split, **Completion-by-store card with live search** (775 KSA stores), top brands, latest feedback. No chart library — all CSS/SVG (corporate-network safe). Title: "Art Series: KSA Ready · Live Dashboard".
 
@@ -272,7 +280,7 @@ All in `assets/characters/`. **Transparent PNG, portrait, ~600–900px tall, fac
 8. Expand Hospitality/Starbucks main rounds from 5 → 7 questions to match Retail's depth.
 9. Delete 3 unused legacy media keys (`retailIntro`, `hospIntro`, `sbuxIntro`).
 
-**Recently completed (so a new chat doesn't redo them):** Gen Z rewrite of all 94 Qs · Starbucks + `speed` mechanic · Rapid Match (replaced heavy grid) · order rounds trimmed to 4 steps · 3 mini-games wired between rounds · differentiated right/wrong feedback · trophy + feedback-on-both + confetti + downloadable badge PNG · preview shortcut · full backend with active-list matching + store column + dual/store reporting · live dashboard with store search · bug fixes (phantom "1" in Summary via `COUNTUNIQUEIFS`; empty ClientTime column now sent).
+**Recently completed (so a new chat doesn't redo them):** Gen Z rewrite of all 94 Qs · Starbucks + `speed` mechanic · Rapid Match (replaced heavy grid) · order rounds trimmed to 4 steps · 3 mini-games wired between rounds · differentiated right/wrong feedback · trophy + feedback-on-both + confetti + downloadable badge PNG · preview shortcut · full backend with active-list matching + store column + dual/store reporting · live dashboard with store search · welcome-back panel for returning players (`action=history`) · mini-game intro screens · bug fixes (phantom "1" in Summary via `COUNTUNIQUEIFS`; empty ClientTime column now sent).
 
 ---
 

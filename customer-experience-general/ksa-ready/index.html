@@ -83,6 +83,18 @@ body{font-family:var(--font);color:var(--ink);
 .emp-note.show{display:block}
 .emp-note.ok{color:#0c7a45}
 .emp-note.muted-note{color:var(--ink-soft)}
+.welcome-back{display:none;margin-top:10px;border:1.5px solid color-mix(in srgb,var(--brand) 25%,#fff);
+  background:color-mix(in srgb,var(--brand) 6%,#fff);border-radius:14px;padding:12px 14px}
+.welcome-back.show{display:block;animation:wbIn .4s ease both}
+@keyframes wbIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.wb-title{font-weight:900;font-size:15px;color:var(--brand);margin-bottom:8px}
+.wb-stats{display:flex;gap:8px;margin-bottom:8px}
+.wb-stat{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 4px;text-align:center}
+.wb-v{font-weight:900;font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.wb-l{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+.wb-msg{font-size:12.5px;font-weight:800;line-height:1.5;text-align:center;padding:2px}
+.wb-msg.ok{color:#0c7a45}
+.wb-msg.push{color:var(--brand)}
 .seg-btn{flex:1;font-family:var(--font);font-weight:800;font-size:14.5px;padding:12px;border:1.5px solid var(--line);
   border-radius:12px;background:#f7faf8;color:var(--ink);cursor:pointer;transition:.15s}
 .seg-btn:hover{border-color:var(--brand)}
@@ -138,6 +150,21 @@ body{font-family:var(--font);color:var(--ink);
 .speed-btn.bad{background:#fdecef;border-color:#e43c50;color:#b02338;opacity:1}
 
 /* ===== MINI-GAMES (brain break) — all colours inherit the active world ===== */
+.mg-intro{text-align:center;padding:6px 4px 4px}
+.mg-intro-badge{display:inline-block;font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,#fff);
+  border:1px solid color-mix(in srgb,var(--brand) 25%,#fff);border-radius:999px;padding:5px 14px;margin-bottom:14px}
+.mg-intro-emoji{font-size:60px;line-height:1;margin:6px 0 4px;animation:mgFloat 2.4s ease-in-out infinite}
+@keyframes mgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.mg-intro-name{font-weight:900;font-size:24px;color:var(--ink);margin-bottom:8px}
+.mg-intro-calm{font-size:14px;font-weight:700;color:var(--ink-soft);line-height:1.6;max-width:320px;margin:0 auto 16px}
+.mg-intro-how{background:color-mix(in srgb,var(--brand) 6%,#fff);
+  border:1.5px solid color-mix(in srgb,var(--brand) 20%,#fff);border-radius:14px;padding:13px 15px;
+  margin-bottom:12px;text-align:start}
+.mg-intro-how-t{font-weight:900;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:5px}
+.mg-intro-how-d{font-weight:700;font-size:14px;color:var(--ink);line-height:1.6}
+.mg-intro-note{font-size:12px;font-weight:700;color:var(--ink-soft);line-height:1.5;margin-bottom:16px}
+.mg-play{margin-top:0}
 .mg-head{text-align:center;margin-bottom:10px}
 .mg-tag{display:inline-block;font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,#fff);
