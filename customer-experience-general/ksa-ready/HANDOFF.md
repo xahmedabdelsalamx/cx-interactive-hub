@@ -3,7 +3,7 @@
 **Purpose of this file:** paste it (or upload it) at the start of a new chat, together with `ksa-gamification.zip`, so work can continue with no loss of context.
 
 **Owner:** Ahmed Abdelsalam — Customer Experience Hub team, Alshaya Group (ahmed.abdelsalam@alshaya.com)
-**Last updated:** 17 July 2026 (Gen Z rewrite + Starbucks + mini-games)
+**Last updated:** 18 July 2026 (dashboard + store search, Rapid Match, badge download, preview shortcut, backend live, bug fixes)
 
 ---
 
@@ -35,13 +35,21 @@ Entry/intake screen uses a vibrant **KSA green `#005430`**.
 | **Retail content** | ✅ Complete — 5 rounds, 38 questions, authored from 5 real PPT decks + beauty-brand questions |
 | **Hospitality content** | ✅ Complete — 5 rounds, 28 questions (R1/R2/R5 from decks; **R3 & R4 authored by Claude**, no deck existed) |
 | **Starbucks content** | ✅ Complete — 5 rounds, 28 questions, from the condensed master guide (6 modules) |
-| **Mechanics** | ✅ ALL built: swipe, convo, match, order, scenario, speed, rush |
-| **Mini-games** | ✅ 3 brain-break games between rounds (penalty, stack, quick), auto-themed per world, zero scoring impact |
-| **Voice** | ✅ All 94 questions rewritten Gen Z immersive: micro-stories, brand-authentic, role-based (no personal names), Arabic has zero Latin characters |
-| **Media (Lottie/PNG)** | ⚙️ All 80 slots wired to Lottie paths; **actual .json files not yet created** (graceful fallback showing) |
+| **Mechanics** | ✅ ALL built: swipe, convo, match (Rapid Match), order, scenario, speed, rush |
+| **Mini-games** | ✅ 3 brain-break games between rounds (penalty, stack, quick), auto-themed per world, zero scoring impact. **4-per-world plan still pending user go/no-go.** |
+| **Voice** | ✅ All 94 questions Gen Z immersive: micro-stories, brand-authentic, role-based (no personal names), Arabic zero Latin, answer positions varied |
+| **Result screen** | ✅ Trophy on pass, feedback form on BOTH pass & fail, world-coloured confetti, share line, **downloadable badge PNG** |
+| **Live dashboard** | ✅ `dashboard.html` — exec summary, KPIs, per-world donuts, round-difficulty bars, activity sparkline, language split, **store search**, brands, feedback. No chart library (CSS/SVG). |
+| **Backend** | ✅ **DEPLOYED & LIVE.** `CONFIG.scriptUrl` is set. Active-list matching, dual reporting (vs-list + all-players), store completion, stats API. |
+| **Preview shortcut** | ✅ `?preview=pass` / `?preview=fail` (+ `&world=` `&lang=` `&gender=`) jumps to result screen; never writes to backend |
+| **Media (Lottie/PNG)** | ⚙️ All 113 slots wired to Lottie paths; **actual .json files not yet created** (graceful fallback showing) |
 | **Character art** | ⚙️ Slots defined (4 male + 4 female per division); **PNGs not yet created** (fallback showing) |
-| **Backend** | ⚙️ AppsScript written; **not deployed** — `CONFIG.scriptUrl` is empty, so the app runs offline-safe |
-| **Copywriter review** | ⏳ `KSA_Game_Questions_Retail_Hospitality.docx` generated and sent; **edits not yet returned** |
+| **Copywriter review** | ⏳ `KSA_Game_Questions_Review.docx` regenerated (all options shown, stable IDs); **edits not yet returned** |
+
+### Known open decisions (awaiting user)
+- **4 mini-games per world** (Bag Drop / Burger Stack / Cup Stack + Tag Pop / Order Up / Bean Catch) — proposed, not built.
+- **Exclude "Support" staff** (1,013 non-store rows) from completion denominator — one-line filter, not yet applied.
+- **New-joiner filter:** roster is all 7,086 KSA staff, so completion % looks low. If a hire-date column is ever added, filter the denominator.
 
 ---
 
@@ -135,15 +143,19 @@ window.DIVISION_<id> = { id, world, logo:"assets/logos/…-color.png", title:{ar
 
 ## 7. Round mapping (one mechanic per round)
 
-| Round | Retail | Hospitality | Starbucks (planned) |
+| Round | Retail | Hospitality | Starbucks |
 |---|---|---|---|
-| R1 | swipe — First Impression & Discovery | convo — Warm Welcome & Curated Conversations | swipe — Warm Welcome & Power of Connection |
-| R2 | match — Storytelling & Recommendation | match — Culinary Storytelling & Pairings | match — Selling Starbucks Products |
-| R3 | order — Closing & Seamless Checkout | order — Memorable Moments & Farewell | **speed** — Sampling, Hand-Off & Speed of Service |
-| R4 | scenario — Loyalty & Service Recovery | scenario — Genuine Gratitude & Recovery | scenario — Power of Loyalty & Recovery |
+| R1 | swipe — Radar Mode | convo — Welcome Mode | swipe — Connection Radar |
+| R2 | match (Rapid Match) — Story Mode | match (Rapid Match) — Menu Storyteller | match (Rapid Match) — Recommendation Engine |
+| R3 | order — The Last 30 Seconds | order — Memory Makers & Farewell | **speed** — Rapid Truth (sampling/hand-off) |
+| R4 | scenario — Rescue Mode | scenario — The Restaurant Promise | scenario — Make It Right |
 | R5 | rush (bonus) — Peak Season | rush (bonus) — Peak Service | rush (bonus) — Peak Service |
 
-**Current counts:** Retail 7/7/7/7/10 = 38 · Hospitality 5/5/5/5/8 = 28 (Retail is larger because beauty-brand questions were added).
+**Current counts:** Retail 7/7/7/7/10 = 38 · Hospitality 5/5/5/5/8 = 28 · Starbucks 5/5/5/5/8 = 28. **Total 94.** (Retail is larger because beauty-brand questions were added.)
+
+**Match = Rapid Match:** one left item on a coloured card, tap the correct right from 3 options (distractors pulled from other pairs in the same question), instant feedback, end-of-question ✓/✗ summary. Replaced the heavy 8-chip grid (was ~63 taps in Retail → now 28). Same data shape (`pairs` still in correct order).
+**Order = drag-and-drop, always exactly 4 steps** (24 arrangements — 3 was too easy, 5 frustrating). Dragged card physically follows the finger via pointer events.
+**Feedback differentiates right vs wrong:** correct → praise + lesson; wrong → rotating hard-luck opener + "the right move was: X" + lesson (never the praise). Applied at all 3 render points (navigable rounds, rush incl. timeout, speed).
 
 ### Key source-deck concepts baked into content
 - **Retail:** 7-second first impression; 55/38/7 (93% non-verbal); Notice→Ask→Guide; "Busy is normal, Cold is a choice"; features→feelings; "Say less, help more"; CLARIFY→CONNECT→COMPLETE; hesitation = opportunity, rejection = decision; "Own the Last 30 Seconds"; **Aura** loyalty; SEE→OWN→RESTORE→INVITE; "Peak is not pressure, it's proof."
@@ -196,13 +208,28 @@ All in `assets/characters/`. **Transparent PNG, portrait, ~600–900px tall, fac
 
 ---
 
-## 10. Backend (Google Sheets via Apps Script)
+## 10. Backend + dashboard (Google Sheets via Apps Script)
 
-`AppsScript.gs`, `SECRET_TOKEN = "CXHUBKSA"`.
+`AppsScript.gs`, `SECRET_TOKEN = "CXHUBKSA"` (matches `secretToken` in `config/shared.js`). **DEPLOYED & LIVE** — `CONFIG.scriptUrl` is set to the `/exec` URL.
 
-**Scores headers:** Timestamp, Division, Brand, EmpID, Name, **Gender**, Character, Round1%–Round4%, **Bonus%**, **Energy**, Total%, Passed, Lang, ClientTime. Plus a Feedback tab. `doGet?action=check` does the pass-once check.
+**Tabs it creates:** `Config` (market filter + pass mark), `Map` (company Division → art division), `ActiveList` (user pastes the 11-column export), `Scores`, `Feedback`, `Completion` (live join), `Summary` (3 views), `Unmatched` (live formulas), `_Agg` (hidden helper).
 
-**⏳ PENDING (user action):** run `setup()`, deploy as a web app, paste the `/exec` URL into `CONFIG.scriptUrl` in `config/shared.js`. Until then `scriptUrl` is empty and the app is offline-safe (the "تم حفظ نتيجتك" note only shows when the backend confirms).
+**Scores headers:** Timestamp, Division, Brand, EmpID, Name, Gender, Character, Round1%–Round4%, Bonus%, Energy, Total%, Passed, **Matched**, Lang, ClientTime.
+
+**The core idea — nothing is frozen:** Completion / Summary / Unmatched are live formulas joining Scores → ActiveList on Employee Number. Paste a new active list each period → menu **KSA Game → Refresh** → everything recalculates. Leavers drop out, brand moves follow.
+
+**Active-list matching (the ease-the-manual-pivot feature):**
+- The 11-column export: Payroll Name, Employee Number, Brand, Market, Division, Position, Line Manager Name, Employee Name, Job, **Organization (store)**, **Org Type**.
+- `DIV_MAP` rolls company divisions into the 3 art worlds: Apparel + Wellness + H&M + Primark → `retail`; Hospitality Division → `hospitality`; Starbucks → `starbucks`. Verified against user files: retail 1,841 / hospitality 1,843 / starbucks 3,402 = **7,086 KSA** (of 30,173 across 10 markets; filtered to Saudi via `Config`).
+- On Emp-ID blur the game calls `action=lookup`; a match shows a green "✓ we found you", prefills the name (editable). **Never blocks** — unknown IDs still play and land in `Unmatched`, then move to `Completion` automatically when a list containing them is pasted. `normId_()` forgives `0400003`, `400003.0`, `SA-400003`, `" 400003 "`.
+
+**Summary has 3 views:** (A) vs active list = true completion of the KSA roster; (B) all players = everyone who played, list or not; (C) by store = completion per location.
+
+**Web-app actions:** `doGet ?action=check` (pass-once), `?action=lookup` (Emp match), `?action=stats` (dashboard JSON, 1-min cache). `doPost action=score / action=feedback`.
+
+**Live dashboard — `dashboard.html`:** reads `action=stats` every 60s. Exec summary (auto-written prose), KPI row (unique / attempts / repetition / certified / not-yet-passed / avg score), 3 per-world completion donuts, "where players struggle" round-difficulty bars, activity sparkline (30 days), language split, **Completion-by-store card with live search** (775 KSA stores), top brands, latest feedback. No chart library — all CSS/SVG (corporate-network safe). Title: "Art Series: KSA Ready · Live Dashboard".
+
+**Preview shortcut (for reviewing without playing):** `index.html?preview=pass` or `?preview=fail`, plus optional `&world=retail|hospitality|starbucks &lang=ar|en &gender=male|female &name=`. Jumps to the result screen with sample data (92%=pass, 44%=fail). Sets `state.preview=true`, which guards `post()` so **preview never writes to the backend**.
 
 ---
 
@@ -228,13 +255,24 @@ All in `assets/characters/`. **Transparent PNG, portrait, ~600–900px tall, fac
 
 ## 13. Next steps / open items
 
-1. **Starbucks division** — awaiting 5 decks (4 main + 1 peak). Requires building the **`speed`** mechanic (R3), then `divisions/starbucks.js` + media keys + enabling the script tag in `index.html`.
-2. **Copywriter edits** — `KSA_Game_Questions_Retail_Hospitality.docx` is out for review. When returned (edited .docx or a list of "Division → Round → Q# → field → new text"), fold changes into `divisions/*.js`.
-3. **Assets** — Lottie `.json` files into `assets/lottie/`, character PNGs into `assets/characters/`, optional `ksaFlag` file.
-4. **Backend deploy** — run `setup()`, deploy, paste `/exec` URL into `CONFIG.scriptUrl`.
-5. **Confirm Milano's division.**
-6. Optional: expand Hospitality from 5 → 7 questions per main round to match Retail's depth.
-7. Optional: delete the 3 unused legacy media keys (`retailIntro`, `hospIntro`, `sbuxIntro`).
+**Awaiting user decision:**
+1. **4 mini-games per world** (Bag Drop / Burger Stack / Cup Stack + unique Tag Pop / Order Up / Bean Catch) — proposed, not built. Currently 3 games rotate.
+2. **Exclude "Support" staff** (1,013 non-store rows) from the completion denominator — one-line filter, not applied.
+3. **Confirm Milano's division** (currently mapped to retail).
+
+**Awaiting external input:**
+4. **Copywriter edits** — `KSA_Game_Questions_Review.docx` is out for review (all options shown, stable IDs like `RET-R1-Q3`). When returned, fold changes into `divisions/*.js` by matching IDs.
+5. **Assets** — Lottie `.json` into `assets/lottie/`, character PNGs into `assets/characters/` (`<div>-male-1..4.png` / `<div>-female-1..4.png`), optional `ksaFlag` file.
+
+**Backend operations (recurring):**
+6. **Each period:** paste the new 11-column active list over the `ActiveList` tab → menu **KSA Game → Refresh**. If backend *code* ever changes, also **Deploy → Manage deployments → Edit → New version**.
+7. **New-joiner filter:** roster = all 7,086 KSA staff, so completion % reads low. If a hire-date/new-joiner column appears, filter the denominator.
+
+**Optional polish:**
+8. Expand Hospitality/Starbucks main rounds from 5 → 7 questions to match Retail's depth.
+9. Delete 3 unused legacy media keys (`retailIntro`, `hospIntro`, `sbuxIntro`).
+
+**Recently completed (so a new chat doesn't redo them):** Gen Z rewrite of all 94 Qs · Starbucks + `speed` mechanic · Rapid Match (replaced heavy grid) · order rounds trimmed to 4 steps · 3 mini-games wired between rounds · differentiated right/wrong feedback · trophy + feedback-on-both + confetti + downloadable badge PNG · preview shortcut · full backend with active-list matching + store column + dual/store reporting · live dashboard with store search · bug fixes (phantom "1" in Summary via `COUNTUNIQUEIFS`; empty ClientTime column now sent).
 
 ---
 
