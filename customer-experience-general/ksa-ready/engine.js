@@ -14,8 +14,8 @@
 
   /* ---------------- UI STRINGS (KSA Arabic + English) ---------------- */
   var UI = {
-    appTitle:   { ar: "تحدّي تجربة الزبائن", en: "CX Onboarding Challenge" },
-    intakeSub:  { ar: "سجّل بياناتك عشان تبدأ", en: "Enter your details to begin" },
+    appTitle:   { ar: "جاهزون للانطلاق في السعودية", en: "KSA Ready, Level Up the Experience" },
+    intakeSub:  { ar: "ارتقِ بتجربة الزبائن", en: "Level Up the Customer Experience" },
     empLabel:   { ar: "الرقم الوظيفي", en: "Employee ID" },
     nameLabel:  { ar: "الاسم بالكامل", en: "Full name" },
     empPH:      { ar: "مثال 323999", en: "e.g. 323999" },
