@@ -228,7 +228,9 @@ The company active list is HR personal data (30,173 rows: employee names, number
 
 ### `AppsScript.gs` (deployed, `SECRET_TOKEN = "CXHUBKSA"`)
 Tabs: `Scores`, `Feedback`, `Summary` (play-based rollup), `_Agg` (hidden, best score per player).
-Actions: `doGet ?action=check` (pass-once) · `?action=history` (returning player best/last/attempts → welcome-back panel) · `?action=stats` (dashboard JSON, 1-min cache) · `?action=export` (row-level game data for the offline report). `doPost action=score / action=feedback`.
+Actions: `doGet ?action=check` (pass-once) · `?action=history` (returning player best/last/attempts → welcome-back panel) · `?action=stats` (dashboard JSON incl. feedback distribution + up to 120 recent comments, 1-min cache) · `?action=export` (row-level game data **and feedback** for the offline report). `doPost action=score / action=feedback`.
+
+**Pagination:** every growing list is paged, never infinite-scrolled. Dashboard: feedback 6/page, brands 10/page. Completion report: stores 25/page, unmatched 12/page, feedback 8/page. Both files share a small `paginate({items, perPage, pager, render})` helper.
 
 ### `dashboard.html` — live, play-based
 Exec summary, KPI row (unique / attempts / repetition / certified / not-yet-passed / avg score), per-world **pass-rate** donuts, round-difficulty bars, activity sparkline, language split, top brands, latest feedback. CSS/SVG only, no chart library.

@@ -165,21 +165,42 @@ function doPost(e) {
    Emp ID / name / brand / score the player typed. completion-report.html pulls
    this and joins it to the active list LOCALLY on your machine. */
 function exportRows_() {
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_SCORES);
-  if (!sh || sh.getLastRow() < 2) return { rows: [] };
-  var v = sh.getRange(2, 1, sh.getLastRow() - 1, 17).getValues();
-  var rows = v.map(function (r) {
-    return {
-      t: (r[0] instanceof Date) ? Utilities.formatDate(r[0], Session.getScriptTimeZone(), "yyyy-MM-dd") : "",
-      w: String(r[1] || ""),          // art division
-      b: String(r[2] || ""),          // brand
-      id: String(r[3] || ""),         // emp id as typed
-      n: String(r[4] || ""),          // name as typed
-      s: Number(r[13]) || 0,          // total %
-      p: String(r[14]) === "Yes" ? 1 : 0
-    };
-  });
-  return { rows: rows, passMark: PASS_MARK, generated: new Date().toISOString() };
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(T_SCORES);
+  var out = { rows: [], feedback: [], passMark: PASS_MARK, generated: new Date().toISOString() };
+
+  if (sh && sh.getLastRow() > 1) {
+    var v = sh.getRange(2, 1, sh.getLastRow() - 1, 17).getValues();
+    out.rows = v.map(function (r) {
+      return {
+        t: (r[0] instanceof Date) ? Utilities.formatDate(r[0], Session.getScriptTimeZone(), "yyyy-MM-dd") : "",
+        w: String(r[1] || ""),          // art division
+        b: String(r[2] || ""),          // brand
+        id: String(r[3] || ""),         // emp id as typed
+        n: String(r[4] || ""),          // name as typed
+        s: Number(r[13]) || 0,          // total %
+        p: String(r[14]) === "Yes" ? 1 : 0
+      };
+    });
+  }
+
+  var fb = ss.getSheetByName(T_FB);
+  if (fb && fb.getLastRow() > 1) {
+    var f = fb.getRange(2, 1, fb.getLastRow() - 1, 9).getValues();
+    out.feedback = f.map(function (r) {
+      return {
+        t: (r[0] instanceof Date) ? Utilities.formatDate(r[0], Session.getScriptTimeZone(), "yyyy-MM-dd") : "",
+        w: String(r[1] || ""),          // division
+        b: String(r[2] || ""),          // brand
+        id: String(r[3] || ""),
+        n: String(r[4] || ""),          // name
+        r: Number(r[5]) || 0,           // rating
+        c: String(r[6] || ""),          // comment
+        l: String(r[7] || "")           // lang
+      };
+    }).reverse();                       // newest first
+  }
+  return out;
 }
 
 /* ================= STATS (live dashboard) ================= */
@@ -262,9 +283,21 @@ function stats_() {
     });
     out.feedback.count = f.length;
     out.feedback.avg = nR ? +(sumR / nR).toFixed(2) : 0;
-    out.feedback.recent = f.slice(-8).reverse().map(function (r) {
-      return { division: String(r[1]), rating: Number(r[5]) || 0, comment: String(r[6] || "").slice(0, 160) };
-    }).filter(function (x) { return x.comment; });
+    // rating distribution, for the 5..1 star bars
+    var dist = { 1:0, 2:0, 3:0, 4:0, 5:0 };
+    f.forEach(function (r) {
+      var v3 = Math.round(Number(r[5]));
+      if (v3 >= 1 && v3 <= 5) dist[v3]++;
+    });
+    out.feedback.dist = dist;
+    // send the most recent 120 with comments; the dashboard paginates them
+    out.feedback.recent = f.slice(-400).reverse().map(function (r) {
+      return {
+        division: String(r[1]), brand: String(r[2] || ""),
+        rating: Number(r[5]) || 0, comment: String(r[6] || "").slice(0, 240),
+        when: (r[0] instanceof Date) ? Utilities.formatDate(r[0], Session.getScriptTimeZone(), "yyyy-MM-dd") : ""
+      };
+    }).filter(function (x) { return x.comment; }).slice(0, 120);
   }
 
   cache.put("stats", JSON.stringify(out), 60);

@@ -84,6 +84,22 @@
 
   .spark{width:100%;height:66px;display:block}
   .fb-item{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+  .fb-meta{font-size:10.5px;font-weight:800;color:var(--ink-soft);margin-top:4px}
+  .pane{max-height:420px;overflow-y:auto;padding-inline-end:4px}
+  .pager{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;
+    padding-top:10px;border-top:1.5px solid var(--line)}
+  .pager-info{font-size:12px;font-weight:800;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .pager-btns{display:flex;gap:6px}
+  .pg{font-family:var(--font);font-weight:800;font-size:12.5px;padding:7px 13px;border-radius:9px;
+    border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+  .pg:hover:enabled{border-color:var(--ksa);color:var(--ksa)}
+  .pg:disabled{opacity:.4;cursor:not-allowed}
+  .stars-dist{display:flex;flex-direction:column;gap:6px;margin:10px 0 4px}
+  .sd-row{display:grid;grid-template-columns:52px 1fr 42px;align-items:center;gap:8px}
+  .sd-l{font-size:11.5px;font-weight:800;color:var(--ink-soft)}
+  .sd-t{height:8px;border-radius:999px;background:#eef1f5;overflow:hidden}
+  .sd-f{height:100%;border-radius:999px;background:#f5b301}
+  .sd-v{font-size:11.5px;font-weight:800;text-align:right;color:var(--ink-soft);font-variant-numeric:tabular-nums}
   .fb-stars{color:#f5b301;font-size:13px;letter-spacing:1px}
   .fb-txt{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.55;margin-top:3px}
   .empty{color:var(--ink-soft);font-weight:700;font-size:13px;padding:16px 0;text-align:center}
@@ -161,12 +177,16 @@
 
   <div class="grid g2">
     <div class="card">
-      <h3>Top brands by attempts</h3>
-      <table id="brandTbl"><thead><tr><th>Brand</th><th>Attempts</th><th>Passed</th><th>Pass rate</th></tr></thead><tbody></tbody></table>
+      <h3>Brands by attempts</h3>
+      <div class="pane"><table id="brandTbl"><thead><tr><th>Brand</th><th>Attempts</th><th>Passed</th><th>Pass rate</th></tr></thead><tbody></tbody></table></div>
+      <div class="pager" id="brandPager"></div>
     </div>
     <div class="card">
-      <h3>Latest feedback</h3>
-      <div id="fbBox"></div>
+      <h3>Player feedback</h3>
+      <div id="fbHead"></div>
+      <div class="stars-dist" id="fbDist"></div>
+      <div class="pane" id="fbBox"></div>
+      <div class="pager" id="fbPager"></div>
     </div>
   </div>
 
@@ -296,30 +316,92 @@
     lb.appendChild(bar("العربية", pct(s.lang.ar, langTot), "#005430", fmt(s.lang.ar)));
     lb.appendChild(bar("English", pct(s.lang.en, langTot), "#6b7280", fmt(s.lang.en)));
 
-    /* ---- brands ---- */
-    var tb = $("#brandTbl").querySelector("tbody"); tb.innerHTML = "";
-    if(!(s.brands||[]).length){ tb.innerHTML = '<tr><td colspan="4" class="empty">No plays yet.</td></tr>'; }
-    (s.brands||[]).forEach(function(b){
-      var tr = document.createElement("tr");
-      tr.innerHTML = "<td>" + b.brand + "</td><td>" + fmt(b.attempts) + "</td><td>" + fmt(b.passed) + "</td>" +
-        "<td>" + pct(b.passed,b.attempts) + "%</td>";
-      tb.appendChild(tr);
+    /* ---- brands (paginated) ---- */
+    var tb = $("#brandTbl").querySelector("tbody");
+    paginate({
+      items: s.brands || [], perPage: 10, pager: "#brandPager",
+      render: function(list){
+        tb.innerHTML = "";
+        if(!list.length){ tb.innerHTML = '<tr><td colspan="4" class="empty">No plays yet.</td></tr>'; return; }
+        list.forEach(function(b){
+          var tr = document.createElement("tr");
+          tr.innerHTML = "<td>" + b.brand + "</td><td>" + fmt(b.attempts) + "</td><td>" + fmt(b.passed) + "</td>" +
+            "<td>" + pct(b.passed,b.attempts) + "%</td>";
+          tb.appendChild(tr);
+        });
+      }
     });
 
-    /* ---- feedback ---- */
-    var fb = $("#fbBox"); fb.innerHTML = "";
-    var f = s.feedback || { count:0, avg:0, recent:[] };
+    /* ---- feedback: summary + star distribution + paginated comments ---- */
+    var f = s.feedback || { count:0, avg:0, recent:[], dist:{} };
+    var fh = $("#fbHead"); fh.innerHTML = "";
     var head = el("div","kpi-note");
-    head.innerHTML = "<b style='font-size:20px;color:var(--ink)'>" + (f.avg||0) + " / 5</b> &nbsp; from " + fmt(f.count) + " responses";
-    fb.appendChild(head);
-    if(!f.recent.length){ fb.appendChild(el("div","empty","No comments yet.")); }
-    f.recent.forEach(function(x){
-      var d = el("div","fb-item");
-      var st = el("div","fb-stars","★".repeat(Math.max(0,Math.min(5,x.rating))) + "☆".repeat(Math.max(0,5-x.rating)));
-      d.appendChild(st);
-      d.appendChild(el("div","fb-txt",x.comment));
-      fb.appendChild(d);
+    head.innerHTML = "<b style='font-size:22px;color:var(--ink)'>" + (f.avg||0) + " / 5</b> &nbsp; from <b>" +
+      fmt(f.count) + "</b> responses";
+    fh.appendChild(head);
+
+    var fd = $("#fbDist"); fd.innerHTML = "";
+    var dist = f.dist || {};
+    var distMax = Math.max(1, dist[1]||0, dist[2]||0, dist[3]||0, dist[4]||0, dist[5]||0);
+    [5,4,3,2,1].forEach(function(n){
+      var v = dist[n] || 0;
+      var row = el("div","sd-row");
+      row.appendChild(el("div","sd-l","★".repeat(n)));
+      var t = el("div","sd-t"); var fl = el("div","sd-f");
+      fl.style.width = "0%"; t.appendChild(fl);
+      setTimeout(function(){ fl.style.width = (v/distMax*100) + "%"; }, 60);
+      row.appendChild(t);
+      row.appendChild(el("div","sd-v", fmt(v)));
+      fd.appendChild(row);
     });
+
+    var fb = $("#fbBox");
+    paginate({
+      items: f.recent || [], perPage: 6, pager: "#fbPager",
+      render: function(list){
+        fb.innerHTML = "";
+        if(!list.length){ fb.appendChild(el("div","empty","No comments yet.")); return; }
+        list.forEach(function(x){
+          var d = el("div","fb-item");
+          d.appendChild(el("div","fb-stars","★".repeat(Math.max(0,Math.min(5,x.rating))) + "☆".repeat(Math.max(0,5-x.rating))));
+          d.appendChild(el("div","fb-txt",x.comment));
+          d.appendChild(el("div","fb-meta",[x.division, x.brand, x.when].filter(Boolean).join(" · ")));
+          fb.appendChild(d);
+        });
+      }
+    });
+  }
+
+  /* Reusable paginator: keeps long lists from becoming infinite pages.
+     renderPage(items, pageIndex) draws one page; this wires the prev/next UI. */
+  function paginate(opts){
+    var state = { page: 0 };
+    var per = opts.perPage || 10;
+    function draw(){
+      var total = opts.items.length;
+      var pages = Math.max(1, Math.ceil(total / per));
+      if(state.page > pages-1) state.page = pages-1;
+      var start = state.page * per;
+      var slice = opts.items.slice(start, start + per);
+      opts.render(slice, start);
+      var pager = $(opts.pager);
+      if(!pager) return;
+      pager.innerHTML = "";
+      if(total === 0){ return; }
+      var info = el("div","pager-info",
+        (start+1) + "\u2013" + Math.min(start+per, total) + " of " + total.toLocaleString("en-US"));
+      var btns = el("div","pager-btns");
+      var prev = el("button","pg","\u2039 Prev");
+      var next = el("button","pg","Next \u203a");
+      prev.disabled = state.page === 0;
+      next.disabled = state.page >= pages-1;
+      prev.onclick = function(){ if(state.page>0){ state.page--; draw(); } };
+      next.onclick = function(){ if(state.page<pages-1){ state.page++; draw(); } };
+      btns.appendChild(prev); btns.appendChild(next);
+      pager.appendChild(info); pager.appendChild(btns);
+    }
+    draw();
+    return { reset: function(items){ opts.items = items; state.page = 0; draw(); } };
   }
 
   function bar(label, val, color, right){
