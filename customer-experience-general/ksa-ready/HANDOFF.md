@@ -76,7 +76,6 @@ ksa-gamification/
   divisions/starbucks.js    ✅ complete (28 Q)
   AppsScript.gs         Google Sheets backend — DEPLOYED. Game data only, no HR data.
   dashboard.html        live management dashboard (play-based). Reads action=stats.
-  completion-report.html OFFLINE completion vs active list. Runs locally, uploads nothing.
   assets/logos/*.png    cx-hub-{color,white}, art-of-{selling,guest-experience,connection}-{color,white}, alshaya-group-{color,white}
   assets/characters/    EMPTY — user adds PNGs
   assets/images/        EMPTY — user adds PNGs
@@ -84,7 +83,9 @@ ksa-gamification/
   README.md, HANDOFF.md
 ```
 
-**Deployment note:** `index.html` + game files go to GitHub → Azure. `dashboard.html` is for management (can be hosted or local). **`completion-report.html` should stay LOCAL** — it's the tool that touches the active list, so it must not be published.
+**Deployment note:** `index.html` + game files go to GitHub → Azure. `dashboard.html` is for management (hosted or local).
+
+**The completion report now ships as a SEPARATE project** at `/mnt/user-data/outputs/completion-report/` (its own folder: `index.html`, `config.js`, `xlsx.min.js`, `README.md`, assets). Ahmed uploads it to his **own private GitHub**, never to the company Azure. It is self-contained and shares nothing with the game folder except the Apps Script URL + token, which are duplicated in its `config.js` (keep both in sync if the script is ever redeployed).
 
 ### Flow
 `init → buildIntake → enterWorld → buildCharacter → intro → playRound → showRoundIntro → beginRound → showResult`
