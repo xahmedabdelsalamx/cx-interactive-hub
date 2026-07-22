@@ -70,8 +70,6 @@
     dlBadge:    { ar: "نزّل شارتك 📥", en: "Download my badge 📥" },
     shareLine:  { ar: "افتخر فيها وشاركها 🔥 نزّل شارتك وخلّ فريقك يشوف إنجازك", en: "Be proud and share it 🔥 Download your badge and let your team see what you achieved" },
     dlFail:     { ar: "ما قدرنا نجهّز الصورة، جرّب من متصفح ثاني", en: "Couldn't create the image, try another browser" },
-    empFound:   { ar: "تم التعرّف عليك", en: "We found you" },
-    empNew:     { ar: "أول مرة معنا؟ كمّل عادي 👍", en: "New with us? Carry on 👍" },
     welcomeBack:{ ar: "مرحباً برجوعك", en: "Welcome back" },
     wbBest:     { ar: "أفضل نتيجة", en: "Best score" },
     wbLast:     { ar: "آخر نتيجة", en: "Last score" },
@@ -230,13 +228,6 @@
     return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { attempts: 0 }; });
   }
 
-  function lookupEmp(empId) {
-    if (!backendReady() || !empId) return Promise.resolve({ found: false });
-    var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
-              "&action=lookup&empId=" + encodeURIComponent(empId);
-    return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { found: false }; });
-  }
-
   function post(payload) {
     if (state.preview) return Promise.resolve({ ok: true, offline: true });  // preview never writes real data
     if (!backendReady()) return Promise.resolve({ ok: true, offline: true });
@@ -268,7 +259,7 @@
   function renderWelcomeBack(box, h) {
     box.className = "welcome-back show";
     box.innerHTML = "";
-    var wname = (state.listMatch && state.listMatch.name) || $("#name").value.trim();
+    var wname = $("#name").value.trim();
     var firstName = wname ? wname.split(/\s+/)[0] : "";
 
     box.appendChild(el("div", "wb-title", "👋 " + u("welcomeBack") + (firstName ? "، " + firstName : "")));
@@ -313,8 +304,6 @@
        typing. This is a courtesy only: it confirms we know them and saves the
        reporting join later. A new hire who doesn't know their ID yet, or who
        isn't on the list, is NEVER blocked. */
-    var empNote = el("div", "emp-note");
-    emp.parentNode.appendChild(empNote);
     var welcomeBack = el("div", "welcome-back");
     emp.parentNode.appendChild(welcomeBack);
     var lastLooked = "";
@@ -322,22 +311,9 @@
       var v = emp.value.trim();
       if (!v || v === lastLooked || !backendReady()) return;
       lastLooked = v;
-      empNote.className = "emp-note show muted-note";
-      empNote.textContent = "…";
       welcomeBack.className = "welcome-back";
-      lookupEmp(v).then(function (r) {
-        if (r && r.found) {
-          state.listMatch = r;
-          empNote.className = "emp-note show ok";
-          empNote.textContent = "✓ " + u("empFound") + ": " + (r.name || "") + (r.brand ? " · " + r.brand : "");
-          if (!$("#name").value.trim() && r.name) $("#name").value = r.name;   // helpful prefill, still editable
-        } else {
-          state.listMatch = null;
-          empNote.className = "emp-note show muted-note";
-          empNote.textContent = u("empNew");
-        }
-      });
-      // separately, check if they've played before -> welcome back with their history
+      // Returning player? Greet them with their own progress. This uses game
+      // data only (their past scores), never any company roster.
       playerHistory(v).then(function (h) {
         if (!h || !h.attempts) return;
         renderWelcomeBack(welcomeBack, h);

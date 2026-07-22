@@ -3,7 +3,7 @@
 **Purpose of this file:** paste it (or upload it) at the start of a new chat, together with `ksa-gamification.zip`, so work can continue with no loss of context.
 
 **Owner:** Ahmed Abdelsalam — Customer Experience Hub team, Alshaya Group (ahmed.abdelsalam@alshaya.com)
-**Last updated:** 18 July 2026 (welcome-back for returning players, mini-game intro screens, + earlier: dashboard, Rapid Match, badge download, preview, backend live, bug fixes)
+**Last updated:** 19 July 2026 (PRIVACY REDESIGN: active list removed from Google Sheets, offline completion-report.html added)
 
 ---
 
@@ -41,8 +41,9 @@ Entry/intake screen uses a vibrant **KSA green `#005430`**.
 | **Result screen** | ✅ Trophy on pass, feedback form on BOTH pass & fail, world-coloured confetti, share line, **downloadable badge PNG** |
 | **Returning players** | ✅ On Emp-ID entry, `action=history` fetches their best/last score + attempts → "welcome back" panel with progress + encouraging message. Unlimited replays. |
 | **Mini-game intros** | ✅ Each brain-break now opens with an intro screen (emoji, name, "cool down" line, how-to-play, "no score impact", Let's play / Skip) so players aren't dropped in cold. |
-| **Live dashboard** | ✅ `dashboard.html` — exec summary, KPIs, per-world donuts, round-difficulty bars, activity sparkline, language split, **store search**, brands, feedback. No chart library (CSS/SVG). |
-| **Backend** | ✅ **DEPLOYED & LIVE.** `CONFIG.scriptUrl` is set. Active-list matching, dual reporting (vs-list + all-players), store completion, stats API. |
+| **Live dashboard** | ✅ `dashboard.html` — play-based only now: exec summary, KPIs, per-world pass-rate donuts, round-difficulty bars, activity sparkline, language split, brands, feedback. No roster/store (those live in completion-report.html). No chart library. |
+| **Backend** | ✅ LIVE, and **privacy-redesigned**: the sheet now stores ONLY game data (EmpID, name, brand, division, gender, scores, feedback). **No active list, no HR export.** Tabs: Scores, Feedback, Summary, _Agg. |
+| **Completion reporting** | ✅ Moved OFFLINE to `completion-report.html` — runs 100% in the browser on Ahmed's machine. Active list is dropped in locally, joined to results, never uploaded. |
 | **Preview shortcut** | ✅ `?preview=pass` / `?preview=fail` (+ `&world=` `&lang=` `&gender=`) jumps to result screen; never writes to backend |
 | **Media (Lottie/PNG)** | ⚙️ All 113 slots wired to Lottie paths; **actual .json files not yet created** (graceful fallback showing) |
 | **Character art** | ⚙️ Slots defined (4 male + 4 female per division); **PNGs not yet created** (fallback showing) |
@@ -62,22 +63,28 @@ Entry/intake screen uses a vibrant **KSA green `#005430`**.
 ```
 ksa-gamification/
   index.html            shell: ALL CSS, screens, one big white "window", footer, favicon
-  engine.js             ALL logic (943 lines)
+  engine.js             ALL logic
+  minigames.js          3 brain-break games (penalty, stack, quick) + emoji/how-to metadata
   lottie-player.js      vendored, never edited
+  xlsx.min.js           vendored SheetJS — used ONLY by completion-report.html (no CDN)
   favicon.png           square CX Hub symbol (cropped from the logo)
-  config/shared.js      CONFIG, BRANDS (30), footer, KSA green
-  config/worlds.js      per-world theme/gradient/floaters/logos/learnUrl/characters
-  media/media-config.js all 80 media slots (key → lottie/png/placeholder)
-  divisions/retail.js   ✅ complete
-  divisions/hospitality.js ✅ complete
-  divisions/starbucks.js   ❌ does not exist yet (script tag commented out in index.html)
-  AppsScript.gs         Google Sheets backend (not deployed)
+  config/shared.js      CONFIG (scriptUrl LIVE, secretToken), BRANDS (30), footer, KSA green
+  config/worlds.js      per-world theme/gradient/floaters/logos/learnUrl/characters (gender-split)
+  media/media-config.js all 113 media slots (key → lottie, with graceful fallback)
+  divisions/retail.js       ✅ complete (38 Q)
+  divisions/hospitality.js  ✅ complete (28 Q)
+  divisions/starbucks.js    ✅ complete (28 Q)
+  AppsScript.gs         Google Sheets backend — DEPLOYED. Game data only, no HR data.
+  dashboard.html        live management dashboard (play-based). Reads action=stats.
+  completion-report.html OFFLINE completion vs active list. Runs locally, uploads nothing.
   assets/logos/*.png    cx-hub-{color,white}, art-of-{selling,guest-experience,connection}-{color,white}, alshaya-group-{color,white}
   assets/characters/    EMPTY — user adds PNGs
   assets/images/        EMPTY — user adds PNGs
   assets/lottie/        EMPTY — user adds .json animations
   README.md, HANDOFF.md
 ```
+
+**Deployment note:** `index.html` + game files go to GitHub → Azure. `dashboard.html` is for management (can be hosted or local). **`completion-report.html` should stay LOCAL** — it's the tool that touches the active list, so it must not be published.
 
 ### Flow
 `init → buildIntake → enterWorld → buildCharacter → intro → playRound → showRoundIntro → beginRound → showResult`
@@ -210,36 +217,34 @@ All in `assets/characters/`. **Transparent PNG, portrait, ~600–900px tall, fac
 
 ---
 
-## 10. Backend + dashboard (Google Sheets via Apps Script)
+## 10. Backend, dashboard & offline reporting
 
-`AppsScript.gs`, `SECRET_TOKEN = "CXHUBKSA"` (matches `secretToken` in `config/shared.js`). **DEPLOYED & LIVE** — `CONFIG.scriptUrl` is set to the `/exec` URL.
+### Privacy model (IMPORTANT — this drove a redesign on 19 July)
+The company active list is HR personal data (30,173 rows: employee names, numbers, **line manager names**, job titles, store locations). Storing it on a personal Google Drive is a governance risk. So:
 
-**Tabs it creates:** `Config` (market filter + pass mark), `Map` (company Division → art division), `ActiveList` (user pastes the 11-column export), `Scores`, `Feedback`, `Completion` (live join), `Summary` (3 views), `Unmatched` (live formulas), `_Agg` (hidden helper).
+- **The Google Sheet holds game data ONLY**: EmpID, Name, Brand, Division, Gender, round scores, total, passed, lang, feedback. Nothing else. No ActiveList tab, no roster, no HR export.
+- **Completion vs the active list is produced OFFLINE** in `completion-report.html`, which runs entirely in the browser on Ahmed's own machine. The list is never uploaded, never saved, gone when the tab closes.
 
-**Scores headers:** Timestamp, Division, Brand, EmpID, Name, Gender, Character, Round1%–Round4%, Bonus%, Energy, Total%, Passed, **Matched**, Lang, ClientTime.
+### `AppsScript.gs` (deployed, `SECRET_TOKEN = "CXHUBKSA"`)
+Tabs: `Scores`, `Feedback`, `Summary` (play-based rollup), `_Agg` (hidden, best score per player).
+Actions: `doGet ?action=check` (pass-once) · `?action=history` (returning player best/last/attempts → welcome-back panel) · `?action=stats` (dashboard JSON, 1-min cache) · `?action=export` (row-level game data for the offline report). `doPost action=score / action=feedback`.
 
-**The core idea — nothing is frozen:** Completion / Summary / Unmatched are live formulas joining Scores → ActiveList on Employee Number. Paste a new active list each period → menu **KSA Game → Refresh** → everything recalculates. Leavers drop out, brand moves follow.
+### `dashboard.html` — live, play-based
+Exec summary, KPI row (unique / attempts / repetition / certified / not-yet-passed / avg score), per-world **pass-rate** donuts, round-difficulty bars, activity sparkline, language split, top brands, latest feedback. CSS/SVG only, no chart library.
 
-**Active-list matching (the ease-the-manual-pivot feature):**
-- The 11-column export: Payroll Name, Employee Number, Brand, Market, Division, Position, Line Manager Name, Employee Name, Job, **Organization (store)**, **Org Type**.
-- `DIV_MAP` rolls company divisions into the 3 art worlds: Apparel + Wellness + H&M + Primark → `retail`; Hospitality Division → `hospitality`; Starbucks → `starbucks`. Verified against user files: retail 1,841 / hospitality 1,843 / starbucks 3,402 = **7,086 KSA** (of 30,173 across 10 markets; filtered to Saudi via `Config`).
-- On Emp-ID blur the game calls `action=lookup`; a match shows a green "✓ we found you", prefills the name (editable). **Never blocks** — unknown IDs still play and land in `Unmatched`, then move to `Completion` automatically when a list containing them is pasted. `normId_()` forgives `0400003`, `400003.0`, `SA-400003`, `" 400003 "`.
+### `completion-report.html` — offline completion vs the active list
+Runs from the local folder (double-click). Vendored `xlsx.min.js` (no CDN) reads .xlsx/.csv.
+1. Drop the active list → parsed in-browser, filtered to Market = Saudi, Division mapped to the 3 art worlds (Apparel + Wellness + H&M + Primark → retail; Hospitality Division → hospitality; Starbucks → starbucks).
+2. Click the results panel → fetches game rows from `action=export` (or drop an exported Scores CSV if offline).
+3. Joins locally on normalised Emp ID and shows: exec summary, KPIs (roster / played / certified / attempts), per-world donuts, **completion by store with live search**, by company division, unmatched players, top brands.
+4. **Download full report (CSV)** for sharing.
+Verified against the real 7,086-row KSA roster (retail 1,841 / hospitality 1,843 / starbucks 3,402).
 
-**Summary has 3 views:** (A) vs active list = true completion of the KSA roster; (B) all players = everyone who played, list or not; (C) by store = completion per location.
+### How replays count (unlimited replays allowed)
+Every play appends ONE row to `Scores`. Reporting de-duplicates by Emp ID: **unique players** = distinct IDs; **attempts** = raw rows (the repetition figure); **certified** = an ID counts once, so retries can only improve status, never double-count.
 
-**How replays count (unlimited replays are allowed):** every play appends ONE row to `Scores`, so 3 plays by the same person = 3 rows. Reporting de-duplicates by Emp ID:
-- **Unique players** = distinct Emp IDs (`COUNTUNIQUEIFS` on the Scores EmpID column). Replays do NOT inflate this.
-- **Total attempts** = raw row count (`COUNTIFS`). This is the "repetition" number.
-- **Completion / Certified** = an Emp ID counts once as "played"/"passed" via the `_Agg` best-score-per-player join, so retries can only *improve* someone's status, never double-count them.
-- Dashboard mirrors all of this from `action=stats`, which folds rows by Emp ID (best score wins) before counting.
-
-**Web-app actions:** `doGet ?action=check` (pass-once), `?action=history` (returning-player best/last/attempts/passed → "welcome back"), `?action=lookup` (Emp match), `?action=stats` (dashboard JSON, 1-min cache). `doPost action=score / action=feedback`.
-
-**Live dashboard — `dashboard.html`:** reads `action=stats` every 60s. Exec summary (auto-written prose), KPI row (unique / attempts / repetition / certified / not-yet-passed / avg score), 3 per-world completion donuts, "where players struggle" round-difficulty bars, activity sparkline (30 days), language split, **Completion-by-store card with live search** (775 KSA stores), top brands, latest feedback. No chart library — all CSS/SVG (corporate-network safe). Title: "Art Series: KSA Ready · Live Dashboard".
-
-**Preview shortcut (for reviewing without playing):** `index.html?preview=pass` or `?preview=fail`, plus optional `&world=retail|hospitality|starbucks &lang=ar|en &gender=male|female &name=`. Jumps to the result screen with sample data (92%=pass, 44%=fail). Sets `state.preview=true`, which guards `post()` so **preview never writes to the backend**.
-
----
+### Preview shortcut
+`index.html?preview=pass` / `?preview=fail` (+ `&world=` `&lang=` `&gender=` `&name=`). Jumps to the result screen with sample data. Sets `state.preview=true`, which guards `post()` so preview **never writes to the backend**.
 
 ## 11. Brands (30, in `config/shared.js`)
 
@@ -265,22 +270,23 @@ All in `assets/characters/`. **Transparent PNG, portrait, ~600–900px tall, fac
 
 **Awaiting user decision:**
 1. **4 mini-games per world** (Bag Drop / Burger Stack / Cup Stack + unique Tag Pop / Order Up / Bean Catch) — proposed, not built. Currently 3 games rotate.
-2. **Exclude "Support" staff** (1,013 non-store rows) from the completion denominator — one-line filter, not applied.
+2. **Exclude "Support" staff** (1,013 non-store rows) from the completion denominator — would now be a filter inside `completion-report.html`, not the sheet.
 3. **Confirm Milano's division** (currently mapped to retail).
 
 **Awaiting external input:**
 4. **Copywriter edits** — `KSA_Game_Questions_Review.docx` is out for review (all options shown, stable IDs like `RET-R1-Q3`). When returned, fold changes into `divisions/*.js` by matching IDs.
 5. **Assets** — Lottie `.json` into `assets/lottie/`, character PNGs into `assets/characters/` (`<div>-male-1..4.png` / `<div>-female-1..4.png`), optional `ksaFlag` file.
 
-**Backend operations (recurring):**
-6. **Each period:** paste the new 11-column active list over the `ActiveList` tab → menu **KSA Game → Refresh**. If backend *code* ever changes, also **Deploy → Manage deployments → Edit → New version**.
-7. **New-joiner filter:** roster = all 7,086 KSA staff, so completion % reads low. If a hire-date/new-joiner column appears, filter the denominator.
+**Operations (recurring):**
+6. **To report completion:** open `completion-report.html` locally → drop the current active list → fetch results → download CSV. **Never paste the active list into the Google Sheet.**
+7. If backend *code* changes: **Deploy → Manage deployments → Edit → New version**.
+8. **New-joiner filter:** roster = all 7,086 KSA staff, so completion % reads low. If a hire-date/new-joiner column appears in the export, filter the denominator in `completion-report.html`.
 
 **Optional polish:**
-8. Expand Hospitality/Starbucks main rounds from 5 → 7 questions to match Retail's depth.
-9. Delete 3 unused legacy media keys (`retailIntro`, `hospIntro`, `sbuxIntro`).
+9. Expand Hospitality/Starbucks main rounds from 5 → 7 questions to match Retail's depth.
+10. Delete 3 unused legacy media keys (`retailIntro`, `hospIntro`, `sbuxIntro`).
 
-**Recently completed (so a new chat doesn't redo them):** Gen Z rewrite of all 94 Qs · Starbucks + `speed` mechanic · Rapid Match (replaced heavy grid) · order rounds trimmed to 4 steps · 3 mini-games wired between rounds · differentiated right/wrong feedback · trophy + feedback-on-both + confetti + downloadable badge PNG · preview shortcut · full backend with active-list matching + store column + dual/store reporting · live dashboard with store search · welcome-back panel for returning players (`action=history`) · mini-game intro screens · bug fixes (phantom "1" in Summary via `COUNTUNIQUEIFS`; empty ClientTime column now sent).
+**Recently completed (so a new chat doesn't redo them):** Gen Z rewrite of all 94 Qs · Starbucks + `speed` mechanic · Rapid Match (replaced heavy grid) · order rounds trimmed to 4 steps · 3 mini-games wired between rounds + intro screens · differentiated right/wrong feedback · trophy + feedback-on-both + confetti + downloadable badge PNG · preview shortcut · welcome-back panel for returning players (`action=history`) · live play-based dashboard · **privacy redesign: active list removed from Google Sheets, offline `completion-report.html` built** · bug fixes (phantom "1" in Summary via `COUNTUNIQUEIFS`; empty ClientTime column now sent).
 
 ---
 

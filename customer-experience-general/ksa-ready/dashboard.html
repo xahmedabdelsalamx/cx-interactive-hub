@@ -136,7 +136,7 @@
 
   <div class="grid g2">
     <div class="card">
-      <h3>Completion against the active list (KSA roster)</h3>
+      <h3>Pass rate by division</h3>
       <div class="bars" id="rosterBars"></div>
       <div class="kpi-note" id="rosterNote"></div>
     </div>
@@ -157,13 +157,6 @@
       <h3>Language</h3>
       <div class="bars" id="langBars"></div>
     </div>
-  </div>
-
-  <div class="card" style="margin-bottom:16px">
-    <h3>Completion by store</h3>
-    <input id="storeSearch" class="store-search" type="text" placeholder="Search a store or location…" autocomplete="off">
-    <div class="store-meta" id="storeMeta"></div>
-    <div class="store-list" id="storeList"></div>
   </div>
 
   <div class="grid g2">
@@ -219,13 +212,8 @@
     $("#sub").textContent = "Updated " + new Date(s.generated).toLocaleString();
     $("#marketPill").textContent = "Market: " + s.market + " · pass " + s.passMark + "%";
 
-    var t = s.totals, r = s.roster || { total:0, worlds:{} };
+    var t = s.totals;
     var passRate = pct(t.passed, t.unique);
-    var rosterPlayed = 0, rosterPassed = 0;
-    Object.keys(WORLDS).forEach(function(w){
-      var x = s.worlds[w] || {};
-      rosterPlayed += x.playedRoster || 0; rosterPassed += x.passedRoster || 0;
-    });
 
     /* ---- executive summary ---- */
     var weakest = ["r1","r2","r3","r4"].reduce(function(a,b){ return (s.rounds[a]<=s.rounds[b])?a:b; });
@@ -237,11 +225,9 @@
       txt = "<b>" + fmt(t.unique) + "</b> people have played (<b>" + fmt(t.attempts) + "</b> attempts, " +
         "averaging <b>" + t.avgAttempts + "</b> tries each). <b>" + fmt(t.passed) + "</b> passed and " +
         "<b>" + fmt(t.failed) + "</b> have not yet, a pass rate of <b>" + passRate + "%</b>. " +
-        "Against the KSA active list of <b>" + fmt(r.total) + "</b>, <b>" + pct(rosterPlayed, r.total) + "%</b> have played " +
-        "and <b>" + pct(rosterPassed, r.total) + "%</b> are certified. " +
         "The average score is <b>" + t.avgScore + "%</b> and the weakest round is <b>" + weakLbl +
         "</b> at <b>" + s.rounds[weakest] + "%</b>. " +
-        (t.unmatchedPlayers ? "<b>" + fmt(t.unmatchedPlayers) + "</b> players are not on the active list yet (new joiners or typos), they still count in All players." : "Every player matched the active list.");
+        "Completion against the company active list is produced separately in completion-report.html.";
     }
     $("#execTxt").innerHTML = txt;
 
@@ -266,30 +252,29 @@
     var wc = $("#worldCards"); wc.innerHTML = "";
     Object.keys(WORLDS).forEach(function(w){
       var d = s.worlds[w] || {}, meta = WORLDS[w];
-      var rp = pct(d.playedRoster||0, d.roster||0);
+      var rp = pct(d.passed||0, d.unique||0);
       var c = el("div","card");
       c.appendChild(el("h3",null,meta.label));
       var don = el("div","donut");
       don.style.setProperty("--p", rp); don.style.setProperty("--c", meta.hex);
       var i = el("i",null,rp + "%"); don.appendChild(i); c.appendChild(don);
       var note = el("div","kpi-note");
-      note.innerHTML = "<b>" + fmt(d.playedRoster||0) + "</b> of <b>" + fmt(d.roster||0) + "</b> on the list played &middot; " +
-        fmt(d.passedRoster||0) + " certified<br>" +
-        fmt(d.unique||0) + " unique players &middot; " + fmt(d.attempts||0) + " attempts &middot; avg " + (d.avgScore||0) + "%";
+      note.innerHTML = "<b>" + fmt(d.passed||0) + "</b> of <b>" + fmt(d.unique||0) + "</b> players certified<br>" +
+        fmt(d.attempts||0) + " attempts &middot; avg score " + (d.avgScore||0) + "%";
       note.style.textAlign = "center";
       c.appendChild(note);
       wc.appendChild(c);
     });
 
-    /* ---- roster bars ---- */
+    /* ---- pass rate bars ---- */
     var rb = $("#rosterBars"); rb.innerHTML = "";
     Object.keys(WORLDS).forEach(function(w){
       var d = s.worlds[w] || {};
-      rb.appendChild(bar(WORLDS[w].short, pct(d.playedRoster||0, d.roster||0), WORLDS[w].hex,
-        fmt(d.playedRoster||0) + "/" + fmt(d.roster||0)));
+      rb.appendChild(bar(WORLDS[w].short, pct(d.passed||0, d.unique||0), WORLDS[w].hex,
+        fmt(d.passed||0) + "/" + fmt(d.unique||0)));
     });
-    $("#rosterNote").innerHTML = "Roster = KSA active list, mapped: Apparel + Wellness + H&amp;M + Primark &rarr; Selling. " +
-      "Update the list and these move by themselves.";
+    $("#rosterNote").innerHTML = "Of the people who played, how many reached the pass mark. " +
+      "Completion against the company active list is produced offline in completion-report.html.";
 
     /* ---- round bars ---- */
     var rr = $("#roundBars"); rr.innerHTML = "";
@@ -310,10 +295,6 @@
     var langTot = (s.lang.ar||0) + (s.lang.en||0);
     lb.appendChild(bar("العربية", pct(s.lang.ar, langTot), "#005430", fmt(s.lang.ar)));
     lb.appendChild(bar("English", pct(s.lang.en, langTot), "#6b7280", fmt(s.lang.en)));
-
-    /* ---- stores (searchable) ---- */
-    ALL_STORES = s.stores || [];
-    renderStores("");
 
     /* ---- brands ---- */
     var tb = $("#brandTbl").querySelector("tbody"); tb.innerHTML = "";
@@ -340,42 +321,6 @@
       fb.appendChild(d);
     });
   }
-
-  var ALL_STORES = [];
-  var WCOLOR = { retail:"#e43c50", hospitality:"#f15a24", starbucks:"#006241" };
-
-  function renderStores(q){
-    var box = $("#storeList"), meta = $("#storeMeta");
-    q = (q||"").trim().toLowerCase();
-    var list = ALL_STORES.filter(function(s){ return !q || s.store.toLowerCase().indexOf(q) > -1; });
-    if(!ALL_STORES.length){ box.innerHTML = '<div class="empty">No roster loaded yet.</div>'; meta.textContent=""; return; }
-    meta.innerHTML = "Showing <b>" + fmt(list.length) + "</b> of <b>" + fmt(ALL_STORES.length) +
-      "</b> stores" + (q ? " matching \u201C" + q + "\u201D" : ", biggest first");
-    box.innerHTML = "";
-    if(!list.length){ box.innerHTML = '<div class="empty">No store matches that search.</div>'; return; }
-    list.slice(0, 200).forEach(function(s){
-      var row = el("div","store-row");
-      var left = el("div");
-      left.appendChild(el("div","store-name",s.store));
-      left.appendChild(el("div","store-sub", fmt(s.played) + "/" + fmt(s.roster) + " played · " + fmt(s.passed) + " certified"));
-      row.appendChild(left);
-      var tr = el("div","store-track");
-      var fl = el("div","store-fill");
-      fl.style.background = WCOLOR[s.world] || "#005430"; fl.style.width = "0%";
-      setTimeout(function(){ fl.style.width = s.playedPct + "%"; }, 40);
-      tr.appendChild(fl); row.appendChild(tr);
-      row.appendChild(el("div","store-pct", s.playedPct + "%"));
-      box.appendChild(row);
-    });
-    if(list.length > 200) box.appendChild(el("div","kpi-note","Showing first 200. Refine your search to narrow it."));
-  }
-
-  var _sd;
-  document.addEventListener("input", function(e){
-    if(e.target && e.target.id === "storeSearch"){
-      clearTimeout(_sd); _sd = setTimeout(function(){ renderStores(e.target.value); }, 120);
-    }
-  });
 
   function bar(label, val, color, right){
     var row = el("div","bar-row");
