@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Completion Report · Art Series: KSA Ready</title>
+<link rel="icon" href="favicon.png">
+<!-- ============================================================
+     OFFLINE COMPLETION REPORT
+     Everything here runs inside YOUR browser on YOUR machine.
+     The active list is read locally and is NEVER uploaded, saved or sent
+     anywhere. Close the tab and it is gone.
+
+     What it does:
+       1. You drop the active list (.xlsx or .csv) onto the page.
+       2. It pulls the game results from the Apps Script web app
+          (Emp ID / name / brand / score only, no HR data).
+       3. It joins them locally and shows completion by division and by store,
+          plus a downloadable CSV report.
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111827; --ink-soft:#6b7280; --line:#e6e9ee; --bg:#f5f7fa; --card:#fff;
+    --retail:#e43c50; --hosp:#f15a24; --sbux:#006241; --ksa:#005430;
+    --ok:#19b36b; --bad:#e43c50; --warn:#f59e0b;
+    --shadow:0 10px 30px -18px rgba(16,24,40,.45);
+    --font:'Cairo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);padding:22px;min-height:100vh}
+  .wrap{max-width:1180px;margin:0 auto}
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+  .logo{height:40px}
+  h1{font-size:21px;font-weight:900}
+  .sub{font-size:12.5px;color:var(--ink-soft);font-weight:700}
+  .spacer{flex:1}
+
+  .privacy{background:linear-gradient(135deg,#00351f,#005430 60%,#00733f);color:#fff;border-radius:16px;
+    padding:16px 18px;margin-bottom:18px;box-shadow:var(--shadow)}
+  .privacy b{color:#ffd24a}
+  .privacy p{font-size:14px;font-weight:700;line-height:1.7}
+
+  .steps{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+  .card h3{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .step-n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;
+    background:var(--ksa);color:#fff;font-size:12px;font-weight:900;margin-inline-end:7px}
+
+  .drop{border:2.5px dashed #cbd5e1;border-radius:14px;padding:26px 16px;text-align:center;cursor:pointer;
+    transition:.15s;background:#fafbfc}
+  .drop:hover,.drop.over{border-color:var(--ksa);background:#f0f7f3}
+  .drop.done{border-style:solid;border-color:var(--ok);background:#f2fbf6}
+  .drop-i{font-size:30px;margin-bottom:6px}
+  .drop-t{font-weight:800;font-size:14px}
+  .drop-s{font-size:12px;color:var(--ink-soft);font-weight:700;margin-top:4px}
+  input[type=file]{display:none}
+
+  button{font-family:var(--font);font-weight:800;font-size:13.5px;border:none;border-radius:11px;
+    padding:11px 18px;cursor:pointer;background:var(--ksa);color:#fff}
+  button:hover{filter:brightness(1.1)}
+  button.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:10px}
+
+  .exec{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .exec h2{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:9px}
+  .exec p{font-size:15px;font-weight:700;line-height:1.75}
+  .exec b{color:var(--ksa)}
+
+  .grid{display:grid;gap:14px;margin-bottom:16px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .kpi{font-size:31px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.05}
+  .kpi small{font-size:14px;color:var(--ink-soft)}
+  .kpi-note{font-size:12px;font-weight:700;color:var(--ink-soft);margin-top:5px}
+
+  .donut{width:124px;height:124px;border-radius:50%;margin:2px auto 8px;display:grid;place-items:center;
+    background:conic-gradient(var(--c) calc(var(--p)*1%), #eef1f5 0)}
+  .donut i{width:92px;height:92px;background:#fff;border-radius:50%;display:grid;place-items:center;
+    font-style:normal;font-weight:900;font-size:22px;font-variant-numeric:tabular-nums}
+
+  .search{width:100%;font-family:var(--font);font-weight:700;font-size:14px;padding:11px 14px;
+    border:1.5px solid var(--line);border-radius:12px;background:#f7f9fb;margin-bottom:8px}
+  .search:focus{outline:none;border-color:var(--ksa)}
+  .list{max-height:360px;overflow-y:auto}
+  .srow{display:grid;grid-template-columns:1fr 140px 52px;align-items:center;gap:10px;
+    padding:9px 4px;border-bottom:1px solid #f1f3f6}
+  .sname{font-size:12.5px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ssub{font-size:10.5px;font-weight:700;color:var(--ink-soft)}
+  .track{height:9px;border-radius:999px;background:#eef1f5;overflow:hidden}
+  .fill{height:100%;border-radius:999px}
+  .pct{font-size:12.5px;font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:start;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-soft);padding:8px 6px;border-bottom:1.5px solid var(--line)}
+  td{padding:9px 6px;border-bottom:1px solid #f1f3f6;font-weight:700}
+  .muted{color:var(--ink-soft);font-weight:700;font-size:13px}
+  .err{background:#fdecef;border:1.5px solid #f6ced6;color:#b02338;border-radius:12px;padding:12px;font-weight:700;font-size:13px;margin-bottom:12px}
+  .okmsg{background:#f2fbf6;border:1.5px solid #bfe8d3;color:#0c7a45;border-radius:12px;padding:12px;font-weight:700;font-size:13px;margin-bottom:12px}
+  .hidden{display:none}
+  footer{text-align:center;color:var(--ink-soft);font-size:11.5px;font-weight:700;margin-top:22px;line-height:1.7}
+  @media(max-width:900px){.steps,.g4,.g3{grid-template-columns:1fr}body{padding:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img class="logo" src="assets/logos/cx-hub-color.png" alt="" onerror="this.style.display='none'">
+    <div>
+      <h1>Completion Report</h1>
+      <div class="sub">Art Series: KSA Ready — runs offline on your machine</div>
+    </div>
+  </header>
+
+  <div class="privacy">
+    <p>🔒 <b>Nothing here is uploaded.</b> The active list you drop below is read inside this browser tab only.
+    It is never sent to Google, never saved to Drive, and disappears when you close the tab.
+    The Google Sheet stores only what players type into the game: Employee ID, name, brand and score.</p>
+  </div>
+
+  <div id="msg"></div>
+
+  <div class="steps">
+    <div class="card">
+      <h3><span class="step-n">1</span> Active list (stays on this computer)</h3>
+      <div class="drop" id="dropList">
+        <div class="drop-i">📄</div>
+        <div class="drop-t">Drop the active list here</div>
+        <div class="drop-s">.xlsx or .csv &nbsp;·&nbsp; or click to choose</div>
+      </div>
+      <input type="file" id="fileList" accept=".xlsx,.xls,.csv">
+      <div class="row"><span class="muted" id="listInfo">No list loaded yet.</span></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="step-n">2</span> Game results</h3>
+      <div class="drop" id="dropScores">
+        <div class="drop-i">🎮</div>
+        <div class="drop-t">Fetch results from the live sheet</div>
+        <div class="drop-s">click here &nbsp;·&nbsp; or drop an exported Scores .csv</div>
+      </div>
+      <input type="file" id="fileScores" accept=".csv,.xlsx,.xls">
+      <div class="row"><span class="muted" id="scoreInfo">No results loaded yet.</span></div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom:16px">
+    <button id="run" disabled>Build the report</button>
+    <button id="dlCsv" class="ghost hidden">Download full report (CSV)</button>
+    <button id="reset" class="ghost">Clear everything</button>
+  </div>
+
+  <div id="report" class="hidden">
+    <div class="exec">
+      <h2>Executive summary</h2>
+      <p id="execTxt"></p>
+    </div>
+
+    <div class="grid g4" id="kpis"></div>
+    <div class="grid g3" id="worldCards"></div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3>Completion by store</h3>
+      <input class="search" id="storeSearch" placeholder="Search a store or location…" autocomplete="off">
+      <div class="muted" id="storeMeta" style="margin-bottom:8px"></div>
+      <div class="list" id="storeList"></div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3>By company division</h3>
+        <table id="divTbl"><thead><tr><th>Division</th><th>Roster</th><th>Played</th><th>%</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="card">
+        <h3>Played but not on the list</h3>
+        <div class="muted" id="unmatchedNote"></div>
+        <div class="list" id="unmatchedList" style="max-height:240px"></div>
+      </div>
+      <div class="card">
+        <h3>Top brands</h3>
+        <table id="brandTbl"><thead><tr><th>Brand</th><th>Played</th><th>Passed</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Customer Experience Hub · Alshaya Group<br>
+    This page never transmits the active list. Refresh to start over.
+  </footer>
+</div>
+
+<script src="xlsx.min.js"></script>
+<script src="config.js"></script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+  function el(t,c,x){ var e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e; }
+  var fmt = function(n){ return (n==null?0:n).toLocaleString("en-US"); };
+  var pct = function(a,b){ return b ? Math.round(a/b*100) : 0; };
+
+  /* company Division -> art division */
+  var DIV_MAP = {
+    "apparel division":"retail", "wellness division":"retail", "h & m":"retail",
+    "h&m":"retail", "primark":"retail",
+    "hospitality division":"hospitality", "starbucks":"starbucks"
+  };
+  var WORLDS = {
+    retail:{ label:"The Art of Selling", hex:"#e43c50" },
+    hospitality:{ label:"The Art of Guest Experience", hex:"#f15a24" },
+    starbucks:{ label:"The Art of Connection", hex:"#006241" }
+  };
+  var MARKET = "Saudi";
+
+  var LIST = null;     // [{id,name,brand,market,division,world,store,manager}]
+  var SCORES = null;   // [{id,w,b,s,p,t,n}]
+  var REPORT = null;
+  var ALL_STORES = [];
+
+  function normId(v){
+    if(v==null) return "";
+    var s = String(v).trim();
+    if(s.indexOf(".")>-1 && !isNaN(Number(s))) s = String(parseInt(Number(s),10));
+    return s.replace(/\D/g,"").replace(/^0+/,"");
+  }
+  function msg(text, kind){
+    $("#msg").innerHTML = text ? '<div class="'+(kind==="err"?"err":"okmsg")+'">'+text+'</div>' : "";
+  }
+
+  /* ---------- file reading (all local) ---------- */
+  function readFile(file, cb){
+    var r = new FileReader();
+    r.onload = function(e){
+      try{
+        var wb = XLSX.read(e.target.result, { type:"array" });
+        var sheet = wb.Sheets[wb.SheetNames[0]];
+        cb(XLSX.utils.sheet_to_json(sheet, { defval:"" }));
+      }catch(err){ msg("Could not read that file. Make sure it is .xlsx or .csv. ("+err.message+")","err"); }
+    };
+    r.onerror = function(){ msg("Could not read that file.","err"); };
+    r.readAsArrayBuffer(file);
+  }
+
+  function col(row, names){
+    var keys = Object.keys(row);
+    for(var i=0;i<names.length;i++){
+      for(var k=0;k<keys.length;k++){
+        if(keys[k].toLowerCase().trim() === names[i]) return row[keys[k]];
+      }
+    }
+    return "";
+  }
+
+  function loadList(rows){
+    if(!rows.length){ msg("That file has no rows.","err"); return; }
+    LIST = rows.map(function(r){
+      var division = String(col(r,["division"])||"");
+      return {
+        id: normId(col(r,["employee number","employee no","emp id","empid"])),
+        name: String(col(r,["employee name","payroll name","name"])||""),
+        brand: String(col(r,["brand"])||""),
+        market: String(col(r,["market"])||""),
+        division: division,
+        world: DIV_MAP[division.toLowerCase().trim()] || "",
+        store: String(col(r,["organization","store"])||""),
+        orgType: String(col(r,["org type","orgtype"])||""),
+        manager: String(col(r,["line manager name","line manager"])||"")
+      };
+    }).filter(function(x){ return x.id; });
+
+    var ksa = LIST.filter(function(x){ return x.market === MARKET; });
+    var unmapped = ksa.filter(function(x){ return !x.world; }).length;
+    $("#dropList").className = "drop done";
+    $("#listInfo").innerHTML = "<b>"+fmt(LIST.length)+"</b> rows loaded · <b>"+fmt(ksa.length)+"</b> in "+MARKET +
+      (unmapped ? " · <span style='color:#b45309'>"+fmt(unmapped)+" rows have an unrecognised Division</span>" : "");
+    checkReady();
+  }
+
+  function loadScoresFromRows(rows){
+    SCORES = rows.map(function(r){
+      return {
+        id: normId(col(r,["empid","emp id","employee number","id"])),
+        w: String(col(r,["division","art division","world"])||""),
+        b: String(col(r,["brand"])||""),
+        n: String(col(r,["name"])||""),
+        s: Number(col(r,["total%","total %","total","score"]))||0,
+        p: String(col(r,["passed"])||"").toLowerCase()==="yes"?1:0,
+        t: String(col(r,["timestamp","date"])||"")
+      };
+    }).filter(function(x){ return x.id; });
+    afterScores();
+  }
+
+  function afterScores(){
+    $("#dropScores").className = "drop done";
+    var uniq = {}; SCORES.forEach(function(r){ uniq[r.id]=1; });
+    $("#scoreInfo").innerHTML = "<b>"+fmt(SCORES.length)+"</b> attempts · <b>"+fmt(Object.keys(uniq).length)+"</b> unique players";
+    checkReady();
+  }
+
+  function fetchScores(){
+    if(!window.CONFIG || !CONFIG.scriptUrl){
+      msg("CONFIG.scriptUrl is empty in config.js, so results can't be fetched. You can drop an exported Scores CSV instead.","err");
+      return;
+    }
+    $("#scoreInfo").textContent = "Fetching…";
+    var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) + "&action=export";
+    fetch(url).then(function(r){ return r.json(); }).then(function(d){
+      if(!d || !d.rows){ throw new Error("no rows"); }
+      SCORES = d.rows.map(function(r){ return { id:normId(r.id), w:r.w, b:r.b, n:r.n, s:r.s, p:r.p, t:r.t }; })
+                     .filter(function(x){ return x.id; });
+      msg("");
+      afterScores();
+    }).catch(function(){
+      $("#scoreInfo").textContent = "Could not fetch.";
+      msg("Could not reach the web app. Check the deployment is set to \u201CAnyone\u201D, or just export the Scores tab as CSV and drop it here.","err");
+    });
+  }
+
+  function checkReady(){ $("#run").disabled = !(LIST && SCORES); }
+
+  /* ---------- the join, done locally ---------- */
+  function build(){
+    var ksa = LIST.filter(function(x){ return x.market === MARKET && x.world; });
+    var played = {}, passedBy = {}, attemptsBy = {};
+    SCORES.forEach(function(r){
+      played[r.id] = true;
+      attemptsBy[r.id] = (attemptsBy[r.id]||0)+1;
+      if(r.p) passedBy[r.id] = true;
+    });
+
+    var roster = {}, storeMap = {}, divMap = {};
+    Object.keys(WORLDS).forEach(function(w){ roster[w] = { total:0, played:0, passed:0 }; });
+
+    ksa.forEach(function(p){
+      var w = p.world;
+      roster[w].total++;
+      var didPlay = !!played[p.id], didPass = !!passedBy[p.id];
+      if(didPlay) roster[w].played++;
+      if(didPass) roster[w].passed++;
+
+      if(p.store){
+        if(!storeMap[p.store]) storeMap[p.store] = { store:p.store, world:w, total:0, played:0, passed:0 };
+        storeMap[p.store].total++;
+        if(didPlay) storeMap[p.store].played++;
+        if(didPass) storeMap[p.store].passed++;
+      }
+      if(!divMap[p.division]) divMap[p.division] = { division:p.division, total:0, played:0 };
+      divMap[p.division].total++;
+      if(didPlay) divMap[p.division].played++;
+    });
+
+    var onList = {}; ksa.forEach(function(p){ onList[p.id]=true; });
+    var unmatched = {};
+    SCORES.forEach(function(r){ if(!onList[r.id]) unmatched[r.id] = r; });
+
+    var brandMap = {};
+    SCORES.forEach(function(r){
+      if(!r.b) return;
+      if(!brandMap[r.b]) brandMap[r.b] = { brand:r.b, players:{}, passed:{} };
+      brandMap[r.b].players[r.id]=1;
+      if(r.p) brandMap[r.b].passed[r.id]=1;
+    });
+
+    REPORT = {
+      ksa: ksa, roster: roster,
+      stores: Object.keys(storeMap).map(function(k){
+        var s = storeMap[k]; s.pct = pct(s.played, s.total); return s;
+      }).sort(function(a,b){ return b.total-a.total; }),
+      divisions: Object.keys(divMap).map(function(k){ return divMap[k]; })
+        .sort(function(a,b){ return b.total-a.total; }),
+      unmatched: Object.keys(unmatched).map(function(k){ return unmatched[k]; }),
+      brands: Object.keys(brandMap).map(function(k){
+        var b = brandMap[k];
+        return { brand:b.brand, players:Object.keys(b.players).length, passed:Object.keys(b.passed).length };
+      }).sort(function(a,b){ return b.players-a.players; }).slice(0,12),
+      uniquePlayers: Object.keys(played).length,
+      attempts: SCORES.length,
+      certified: Object.keys(passedBy).length
+    };
+    render();
+  }
+
+  function render(){
+    var R = REPORT;
+    $("#report").className = "";
+    $("#dlCsv").className = "ghost";
+
+    var totalRoster = 0, totalPlayed = 0, totalPassed = 0;
+    Object.keys(WORLDS).forEach(function(w){
+      totalRoster += R.roster[w].total; totalPlayed += R.roster[w].played; totalPassed += R.roster[w].passed;
+    });
+
+    $("#execTxt").innerHTML =
+      "Of <b>"+fmt(totalRoster)+"</b> people on the KSA active list, <b>"+fmt(totalPlayed)+"</b> have played " +
+      "(<b>"+pct(totalPlayed,totalRoster)+"%</b>) and <b>"+fmt(totalPassed)+"</b> are certified " +
+      "(<b>"+pct(totalPassed,totalRoster)+"%</b>). " +
+      "In total <b>"+fmt(R.uniquePlayers)+"</b> unique people played across <b>"+fmt(R.attempts)+"</b> attempts" +
+      (R.uniquePlayers ? " (<b>"+(R.attempts/R.uniquePlayers).toFixed(2)+"</b> tries each)" : "") + ". " +
+      (R.unmatched.length ? "<b>"+fmt(R.unmatched.length)+"</b> players are not on this active list — new joiners or typos; they still count in the totals above." : "Every player matched the active list.");
+
+    var kpis = [
+      { h:"On active list (KSA)", v:fmt(totalRoster), n:"denominator for completion" },
+      { h:"Played", v:fmt(totalPlayed), n:pct(totalPlayed,totalRoster)+"% of the roster" },
+      { h:"Certified", v:fmt(totalPassed), n:pct(totalPassed,totalRoster)+"% of the roster" },
+      { h:"Attempts", v:fmt(R.attempts), n:fmt(R.uniquePlayers)+" unique players" }
+    ];
+    var box = $("#kpis"); box.innerHTML = "";
+    kpis.forEach(function(k){
+      var c = el("div","card");
+      c.appendChild(el("h3",null,k.h));
+      var v = el("div","kpi"); v.innerHTML = k.v; c.appendChild(v);
+      c.appendChild(el("div","kpi-note",k.n));
+      box.appendChild(c);
+    });
+
+    var wc = $("#worldCards"); wc.innerHTML = "";
+    Object.keys(WORLDS).forEach(function(w){
+      var d = R.roster[w], meta = WORLDS[w], p = pct(d.played,d.total);
+      var c = el("div","card");
+      c.appendChild(el("h3",null,meta.label));
+      var don = el("div","donut");
+      don.style.setProperty("--p",p); don.style.setProperty("--c",meta.hex);
+      don.appendChild(el("i",null,p+"%")); c.appendChild(don);
+      var note = el("div","kpi-note");
+      note.style.textAlign="center";
+      note.innerHTML = "<b>"+fmt(d.played)+"</b> of <b>"+fmt(d.total)+"</b> played · "+fmt(d.passed)+" certified";
+      c.appendChild(note);
+      wc.appendChild(c);
+    });
+
+    ALL_STORES = R.stores;
+    renderStores("");
+
+    var dt = $("#divTbl").querySelector("tbody"); dt.innerHTML="";
+    R.divisions.forEach(function(d){
+      var tr=document.createElement("tr");
+      tr.innerHTML="<td>"+d.division+"</td><td>"+fmt(d.total)+"</td><td>"+fmt(d.played)+"</td><td>"+pct(d.played,d.total)+"%</td>";
+      dt.appendChild(tr);
+    });
+
+    $("#unmatchedNote").textContent = R.unmatched.length ? R.unmatched.length+" players not found on the list" : "Everyone matched.";
+    var ul = $("#unmatchedList"); ul.innerHTML="";
+    R.unmatched.slice(0,200).forEach(function(u){
+      var row=el("div","srow");
+      var left=el("div");
+      left.appendChild(el("div","sname", u.n || "(no name)"));
+      left.appendChild(el("div","ssub","ID "+u.id+" · "+(u.w||"")));
+      row.appendChild(left);
+      row.appendChild(el("div","ssub", u.s+"%"));
+      row.appendChild(el("div","pct", u.p?"✓":"—"));
+      ul.appendChild(row);
+    });
+
+    var bt = $("#brandTbl").querySelector("tbody"); bt.innerHTML="";
+    R.brands.forEach(function(b){
+      var tr=document.createElement("tr");
+      tr.innerHTML="<td>"+b.brand+"</td><td>"+fmt(b.players)+"</td><td>"+fmt(b.passed)+"</td>";
+      bt.appendChild(tr);
+    });
+
+    msg("Report built. Nothing was uploaded — this all happened in your browser.");
+    window.scrollTo({ top: $("#report").offsetTop - 20, behavior:"smooth" });
+  }
+
+  function renderStores(q){
+    var box = $("#storeList");
+    q = (q||"").trim().toLowerCase();
+    var list = ALL_STORES.filter(function(s){ return !q || s.store.toLowerCase().indexOf(q)>-1; });
+    $("#storeMeta").innerHTML = "Showing <b>"+fmt(list.length)+"</b> of <b>"+fmt(ALL_STORES.length)+"</b> stores"+(q?" matching \u201C"+q+"\u201D":", biggest first");
+    box.innerHTML="";
+    if(!list.length){ box.appendChild(el("div","muted","No store matches that search.")); return; }
+    list.slice(0,300).forEach(function(s){
+      var row=el("div","srow");
+      var left=el("div");
+      left.appendChild(el("div","sname",s.store));
+      left.appendChild(el("div","ssub", fmt(s.played)+"/"+fmt(s.total)+" played · "+fmt(s.passed)+" certified"));
+      row.appendChild(left);
+      var tr=el("div","track"); var fl=el("div","fill");
+      fl.style.background = (WORLDS[s.world]||{}).hex || "#005430"; fl.style.width="0%";
+      setTimeout(function(){ fl.style.width = s.pct+"%"; },30);
+      tr.appendChild(fl); row.appendChild(tr);
+      row.appendChild(el("div","pct", s.pct+"%"));
+      box.appendChild(row);
+    });
+  }
+
+  function downloadCsv(){
+    var R = REPORT;
+    var played={}, passedBy={}, attemptsBy={};
+    SCORES.forEach(function(r){ played[r.id]=true; attemptsBy[r.id]=(attemptsBy[r.id]||0)+1; if(r.p) passedBy[r.id]=true; });
+    var lines = [["EmpID","Employee Name","Brand","Company Division","Art division","Store","Org Type","Line Manager","Played","Passed","Attempts"].join(",")];
+    R.ksa.forEach(function(p){
+      lines.push([p.id,q(p.name),q(p.brand),q(p.division),p.world,q(p.store),q(p.orgType),q(p.manager),
+        played[p.id]?"Yes":"No", passedBy[p.id]?"Yes":"No", attemptsBy[p.id]||0].join(","));
+    });
+    function q(s){ s=String(s==null?"":s); return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; }
+    var blob = new Blob(["\ufeff"+lines.join("\n")], { type:"text/csv;charset=utf-8;" });
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download = "ksa-ready-completion-"+new Date().toISOString().slice(0,10)+".csv";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  /* ---------- wiring ---------- */
+  function wireDrop(dropId, inputId, handler){
+    var d = $(dropId), inp = $(inputId);
+    d.onclick = function(){ inp.click(); };
+    inp.onchange = function(){ if(inp.files[0]) readFile(inp.files[0], handler); };
+    ["dragenter","dragover"].forEach(function(ev){
+      d.addEventListener(ev, function(e){ e.preventDefault(); d.classList.add("over"); });
+    });
+    ["dragleave","drop"].forEach(function(ev){
+      d.addEventListener(ev, function(e){ e.preventDefault(); d.classList.remove("over"); });
+    });
+    d.addEventListener("drop", function(e){
+      if(e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0], handler);
+    });
+  }
+  wireDrop("#dropList", "#fileList", loadList);
+  wireDrop("#dropScores", "#fileScores", loadScoresFromRows);
+  $("#dropScores").onclick = function(){ fetchScores(); };
+  $("#dropScores").addEventListener("dblclick", function(){ $("#fileScores").click(); });
+
+  $("#run").onclick = build;
+  $("#dlCsv").onclick = downloadCsv;
+  $("#reset").onclick = function(){ location.reload(); };
+  var sd;
+  $("#storeSearch").addEventListener("input", function(e){
+    clearTimeout(sd); sd = setTimeout(function(){ renderStores(e.target.value); }, 120);
+  });
+})();
+</script>
+</body>
+</html>
