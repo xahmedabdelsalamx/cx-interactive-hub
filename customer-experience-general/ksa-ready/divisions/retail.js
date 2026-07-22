@@ -36,7 +36,7 @@ window.DIVISION_retail = {
           prompt: { ar: "إتش آند إم، الساعة 7 مساء. بنت واقفة قدام نفس الجاكيت من 3 دقايق. تلمسه، تتركه، ترجع تلمسه. ما رفعت راسها ولا مرة.", en: "H&M, 7pm. A girl has been standing at the same jacket for 3 minutes. Touches it, lets go, touches it again. Never looks up." },
           media: "retailR1_q1",
           isOpportunity: true,
-          feedback: { ar: "🔥 عين صقر! التردد الصامت هو طلب مساعدة بدون كلام. لاحظ، واسأل سؤال واحد بدون ضغط، ووجّه. هذا السؤال يسوى بيع.", en: "🔥 Sharp eye! Silent hesitation is a request for help with no words. Notice, ask one low-pressure question, guide. That one question is worth a sale." }
+          feedback: { ar: "🔥 عين صقر! التردد الصامت هو طلب مساعدة بدون كلام. لاحظ، واسأل سؤال واحد بدون ضغط، ووجّه. هذا السؤال ممكن يفتح فرصة بيع.", en: "🔥 Sharp eye! Silent hesitation is a request for help with no words. Notice, ask one low-pressure question, guide. That one question can open a real opportunity." }
         },
         {
           prompt: { ar: "أمريكان إيجل. أنت مع زبون، وزبون ثاني دخل ووقف عند المدخل يدوّر بعينه على أحد يشوفه.", en: "American Eagle. You're with a customer, and another one walks in and scans the room hoping someone sees him." },
@@ -54,7 +54,7 @@ window.DIVISION_retail = {
           prompt: { ar: "نكست. زبونة تسأل: «عندكم هذا بمقاس أصغر؟» وهي ماسكة فستان بيدها.", en: "Next. A customer asks: \"Do you have this in a smaller size?\" holding a dress." },
           media: "retailR1_q4",
           isOpportunity: true,
-          feedback: { ar: "🎯 التقطتها! السؤال عن مقاس هو باب مفتوح. وراه احتياج حقيقي: «استخدام يومي ولا لمناسبة؟» وبتعرف كل شي.", en: "🎯 Nailed it! A size question is an open door. Behind it is a real need: \"everyday or a special occasion?\" and now you know everything." }
+          feedback: { ar: "🎯 التقطتها! السؤال عن مقاس هو باب مفتوح. وراه احتياج حقيقي: «استخدام يومي ولا لمناسبة؟» وبتفهم احتياجها بشكل أفضل.", en: "🎯 Nailed it! A size question is an open door. Behind it is a real need: \"everyday or a special occasion?\" and now you understand what matters most." }
         },
         {
           prompt: { ar: "موجي. زبون داخل بسرعة، على التلفون بمكالمة، ويمشي مباشرة لجوّه بدون ما يلتفت.", en: "MUJI. A customer strides in, mid phone call, heading straight to the back without looking up." },
@@ -69,7 +69,7 @@ window.DIVISION_retail = {
           feedback: { ar: "🔥 وقتها بالضبط! الحيرة = فرصة ذهبية. سؤال واحد يفك العقدة: «تحبين المنعش ولا الدافئ؟» وخلاص وجّهتيها.", en: "🔥 Perfect timing! Torn = golden opportunity. One question unlocks it: \"fresh or warm?\" and now you can guide her." }
         },
         {
-          prompt: { ar: "شارلوت تيلبوري. زبونة جرّبت درجة أحمر شفاه على يدها، طالعتها بالضوء، وكمّلت تتمشى بهدوء وهي تفكر.", en: "Charlotte Tilbury. A customer swatched a lipstick on her hand, checked it in the light, and drifts on quietly, thinking." },
+          prompt: { ar: "شارلوت تيلبوري. زبونة جرّبت درجة أحمر شفاه، طالعتها بالضوء، وبعدين ابتعدت عن الكاونتر وتجنّبت التواصل البصري وكمّلت تقارن بهدوء لحالها.", en: "Charlotte Tilbury. A customer swatched a lipstick, checked it in the light, then stepped away from the counter, avoided eye contact and kept comparing quietly on her own." },
           media: "retailR1_q7",
           isOpportunity: false,
           feedback: { ar: "⭐ نضج! هذي لحظة تفكير، مو لحظة بيع. أعطيها ثانيتين تقرر، وخلّيك قريبة. الضغط هنا يقتل القرار.", en: "⭐ Mature call! This is a thinking moment, not a selling moment. Give her two seconds and stay close. Pressure here kills the decision." }
@@ -108,7 +108,7 @@ window.DIVISION_retail = {
             { left: { ar: "زبون أخذ قميص رسمي", en: "A customer took a dress shirt" }, right: { ar: "ربطة بسيطة تكمّل الرسمي", en: "A simple tie to complete the formal look" } },
             { left: { ar: "زبون أخذ سنيكرز من فوت لوكر", en: "A customer grabbed sneakers at Foot Locker" }, right: { ar: "جوارب مريحة تخلّيه يمشي أطول", en: "Comfy socks so he can walk longer" } }
           ],
-          feedback: { ar: "💚 توصية مرتفعة! ربطتها باختياره، ما كدّستها عليه. القيمة تزيد، والضغط صفر.", en: "💚 Elevated recommendation! You linked it to his choice instead of piling on. Value up, pressure zero." }
+          feedback: { ar: "💚 توصية ذكية ومناسبة! ربطتها باختياره، ما كدّستها عليه. القيمة تزيد، والضغط صفر.", en: "💚 Smart, well-matched recommendation! You linked it to his choice instead of piling on. Value up, pressure zero." }
         },
         {
           instruction: { ar: "خريطة الإغلاق الذكي. وصّل كل خطوة بالجملة اللي تقولها فعلاً.", en: "The smart-close map. Match each step to the line you'd actually say." },
@@ -217,11 +217,11 @@ window.DIVISION_retail = {
           media: "retailR3_q4",
           steps: [
             { ar: "لاحظ إنه يقارن", en: "Notice he's comparing" },
-            { ar: "أعطه خيار: «أيهم تحس يناسبك أكثر؟»", en: "Offer a choice: \"which feels more like you?\"" },
-            { ar: "طمّنه: «هذا من أكثرها طلب»", en: "Reassure: \"this one's a favourite here\"" },
-            { ar: "وجّهه: «أجهّزه لك؟»", en: "Guide: \"shall I get it ready?\"" }
+            { ar: "اسأله وش الأهم له: المقاس ولا اللون ولا التنسيق", en: "Ask what matters most: fit, colour or versatility" },
+            { ar: "وضّح له فرق واحد مهم بينهم", en: "Explain one relevant difference between them" },
+            { ar: "خلّه يختار، وبعدين أكّد وجهّز اختياره", en: "Let him choose, then confirm and prepare it" }
           ],
-          feedback: { ar: "🎯 ذكي! ما اخترت له، خليته يختار. السؤال يحوّل الحيرة لقرار، والقرار له هو مو لك.", en: "🎯 Smart! You didn't choose for him, you let him choose. The question turns confusion into a decision, and it's his decision." }
+          feedback: { ar: "🎯 ذكي! أعطيته أساس يقرر عليه بدل ما تميّله لخيار. افهم، قارن، خلّه يختار، وبعدين أكّد. القرار يبقى قراره.", en: "🎯 Smart! You gave him a reason to decide instead of nudging him to one item. Understand, compare, let him choose, then confirm. The decision stays his." }
         },
         {
           instruction: { ar: "من لحظة القرار لين يطلع من الباب. رتّب الرحلة كاملة.", en: "From the moment he decides to the moment he's out the door. Order the full journey." },
@@ -274,7 +274,7 @@ window.DIVISION_retail = {
           scenario: { ar: "الجمعة، الطابور طويل. زبونة انتظرت 12 دقيقة ووصلت لك وهي واضح إنها متضايقة ومستعجلة.", en: "Friday, long queue. A customer waited 12 minutes and reaches you visibly annoyed and in a hurry." },
           media: "retailR4_q1",
           options: [
-            { ar: "أخلّص طلبها بأقصى سرعة وبدون كلام زايد عشان ما أعطّلها أكثر", en: "Serve her as fast as possible with no extra talk so I don't delay her more" },
+            { ar: "أعتذر باختصار، وأخلّص طلبها بكفاءة، وأنتقل مباشرة للزبون اللي بعدها", en: "Apologize briefly, complete her transaction efficiently, and move straight to the next customer" },
             { ar: "أسمعها، أعتذر عن الانتظار، أخلّص بسرعة، وأشكرها على صبرها", en: "Hear her, apologize for the wait, serve fast, and thank her for waiting" },
             { ar: "أشرح لها إن يوم الجمعة دايم زحمة عشان تتفهم الوضع", en: "Explain that Fridays are always busy so she understands the situation" }
           ],
@@ -285,7 +285,7 @@ window.DIVISION_retail = {
           scenario: { ar: "إتش آند إم. زبونة لقت الفستان اللي تبيه بالضبط، بس مقاسها مو موجود بالفرع.", en: "H&M. A customer found exactly the dress she wants, but her size isn't in this store." },
           media: "retailR4_q2",
           options: [
-            { ar: "أقول لها المقاس خلص وأقترح عليها مقاس ثاني موجود", en: "Tell her it's out of stock and suggest another available size" },
+            { ar: "أتأكد من المخزن، وإذا ما فيه أقترح أقرب مقاس متوفر", en: "Check the stockroom, and if it is not there suggest the closest available size" },
             { ar: "أعتذر وأنصحها تتابع الموقع، ممكن يرجع", en: "Apologize and suggest she watch the website in case it returns" },
             { ar: "أعتذر، وأتحقق من فرع ثاني أو أونلاين، وأوفّر لها حل فعلي", en: "Apologize, check another branch or online, and give her a real solution" }
           ],
@@ -307,7 +307,7 @@ window.DIVISION_retail = {
           scenario: { ar: "أنت مع زبون، وتحس بزبون ثاني واقف من دقيقة ينتظر ويتنهد. بدأ يضيق.", en: "You're with a customer, and you can feel another one waiting for a minute, sighing. He's losing patience." },
           media: "retailR4_q4",
           options: [
-            { ar: "أخلّص مع اللي معي بسرعة عشان أوصل للثاني", en: "Rush the customer I'm with so I can get to the other one" },
+            { ar: "أخلّص مع زبوني عدل، وبعدين أعتذر للثاني عن الانتظار", en: "Finish properly with my customer, then apologize to the second for the wait" },
             { ar: "أعتذر للثاني، أعطيه تواصل بصري، وأقول «معك بعد لحظة»", en: "Acknowledge him, give eye contact, and say \"I'll be with you in a moment\"" },
             { ar: "أكمّل مع اللي معي، حقه يخلص أول", en: "Continue with my customer, he has the right to finish first" }
           ],
@@ -340,7 +340,7 @@ window.DIVISION_retail = {
           scenario: { ar: "زبونة في ألتا بيوتي واقفة قدام التسترات، تبي تجرّب بس مترددة وتقول «ما أدري منو استخدمه قبلي».", en: "A customer at Ulta Beauty hovers over the testers, wanting to try but hesitant: \"I don't know who used this before me.\"" },
           media: "retailR4_q7",
           options: [
-            { ar: "أطمّنها إن التسترات تتنظّف بشكل يومي", en: "Reassure her that the testers are cleaned daily" },
+            { ar: "أطمّنها إن التسترات تتنظّف يومياً وأوريها كيف تجرّبها بنفسها", en: "Reassure her the testers are cleaned daily and show her how to swatch it herself" },
             { ar: "أطمّنها، وأوفّر لها عيّنة نظيفة أو أداة استخدام مرة وحدة", en: "Reassure her and offer a clean sample or a single-use applicator" },
             { ar: "أقترح عليها تشتري وتجرّب بالبيت وترجعه لو ما ضبط", en: "Suggest she buy it, try at home, and return it if it doesn't work" }
           ],
@@ -365,31 +365,31 @@ window.DIVISION_retail = {
       questions: [
         { prompt: { ar: "بداية دوامك بموسم الذروة؟", en: "Your peak-season shift starts?" },
           media: "retailR5_q1",
-          options: [ { ar: "أدخل بطاقة وثقة وابتسامة", en: "Walk in switched on, confident, smiling" }, { ar: "أدخل متوتر وراسي طايح", en: "Walk in tense and low" } ],
+          options: [ { ar: "أدخل بطاقة وثقة وابتسامة", en: "Walk in switched on, confident, smiling" }, { ar: "أدخل بهدوء وأبدأ بمهامي قبل ما أسلّم على الفريق", en: "Walk in quietly and start on tasks before greeting the team" } ],
           correct: 0, feedback: { ar: "⚡ الطاقة اللي تجي فيها هي أول شي يحسه الزبون.", en: "⚡ The energy you bring is the first thing they feel." } },
         { prompt: { ar: "زميلك غرقان بالطابور وأنت فاضي ثانية؟", en: "Teammate is drowning at the till and you're free for a second?" },
           media: "retailR5_q2",
-          options: [ { ar: "أنتظر لين يخلص، هذا قسمه", en: "Wait for him to finish, it's his station" }, { ar: "أفتح صندوق وأساعد فوراً", en: "Open a till and jump in now" } ],
+          options: [ { ar: "أخلّص قسمي أول، وبعدين أروح أساعد", en: "Finish my own section first, then go help" }, { ar: "أفتح صندوق وأساعد فوراً", en: "Open a till and jump in now" } ],
           correct: 1, feedback: { ar: "🔥 نتحرك كفريق واحد. الزبون يحس الإيقاع.", en: "🔥 We move as one team. Customers feel the rhythm." } },
         { prompt: { ar: "زبون داخل والمحل زحمة؟", en: "A customer walks in and it's packed?" },
           media: "retailR5_q3",
-          options: [ { ar: "تواصل بصري وابتسامة خلال 5 ثواني", en: "Eye contact and a smile within 5 seconds" }, { ar: "أكمل شغلي، بيشوف إني مشغول", en: "Keep working, he can see I'm busy" } ],
+          options: [ { ar: "تواصل بصري وابتسامة خلال 5 ثواني", en: "Eye contact and a smile within 5 seconds" }, { ar: "أخدم زبوني الحالي كامل، وبعدين أرحّب فيه", en: "Serve my current customer fully first, then greet him" } ],
           correct: 0, feedback: { ar: "💚 أول 5 ثواني تقول له إنه بالمكان الصح.", en: "💚 The first 5 seconds tell him he's in the right place." } },
         { prompt: { ar: "الضغط طلع براسك بين زبونين؟", en: "Stress spikes between two customers?" },
           media: "retailR5_q4",
-          options: [ { ar: "أكمل بنفس التوتر، الوقت ما يسمح", en: "Push on with the same tension, no time" }, { ar: "نفس، ابتسامة، وإعادة ضبط", en: "One breath, a smile, reset" } ],
+          options: [ { ar: "أكمّل وأرتاح بعد ما تخف الزحمة", en: "Push through and reset after the rush ends" }, { ar: "نفس، ابتسامة، وإعادة ضبط", en: "One breath, a smile, reset" } ],
           correct: 1, feedback: { ar: "⚡ نقود المشاعر، ما نتبعها.", en: "⚡ We lead emotions, we don't follow them." } },
         { prompt: { ar: "وقت الزحمة عند الكاشير؟", en: "Crunch time at the till?" },
           media: "retailR5_q5",
-          options: [ { ar: "أغلّف وأنا أتكلم وأختم بشكر", en: "Bag while talking, finish with a thank-you" }, { ar: "أصير صامت وأستعجل", en: "Go silent and rush" } ],
+          options: [ { ar: "أغلّف وأنا أتكلم وأختم بشكر", en: "Bag while talking, finish with a thank-you" }, { ar: "أشتغل بسرعة وأقلّل الكلام", en: "Work quickly and keep talking to a minimum" } ],
           correct: 0, feedback: { ar: "🔥 نظيف وسريع وبطاقة. كل دفعة تأكّد القيمة.", en: "🔥 Clean, fast, energetic. Every checkout confirms the value." } },
         { prompt: { ar: "صار خطأ بسيط قدام الزبون؟", en: "A small slip in front of the customer?" },
           media: "retailR5_q6",
-          options: [ { ar: "أتجاهله وأكمل بسرعة", en: "Ignore it and move on fast" }, { ar: "أعترف وأصلحه باللحظة", en: "Own it and fix it on the spot" } ],
+          options: [ { ar: "أصلحه بهدوء بدون ما ألفت الانتباه", en: "Fix it quietly without drawing attention to it" }, { ar: "أعترف وأصلحه باللحظة", en: "Own it and fix it on the spot" } ],
           correct: 1, feedback: { ar: "⭐ نحوّل التوتر لنجاح بسرعة التصرّف.", en: "⭐ We turn stress into a win by acting fast." } },
         { prompt: { ar: "عندك منتج البطل بالموسم؟", en: "You've got the season's hero product?" },
           media: "retailR5_q7",
-          options: [ { ar: "أعرفه بجملة وحدة واضحة وحماسية", en: "Know it in one clear, exciting line" }, { ar: "ما أذكره عشان أوفّر وقت", en: "Skip it to save time" } ],
+          options: [ { ar: "أعرفه بجملة وحدة واضحة وحماسية", en: "Know it in one clear, exciting line" }, { ar: "أذكره بس إذا سأل الزبون", en: "Mention it only if the customer asks" } ],
           correct: 0, feedback: { ar: "💚 الفخر بالمنتج يبيع بشكل طبيعي.", en: "💚 Pride in the product sells by itself." } },
         { prompt: { ar: "زبونة حايرة بين عطرين والطابور وراها؟", en: "A customer is torn between two mists and there's a queue behind her?" },
           media: "retailR5_q9",
@@ -401,7 +401,7 @@ window.DIVISION_retail = {
           correct: 0, feedback: { ar: "🔥 حل سريع يحافظ على التجربة.", en: "🔥 A fast fix protects the experience." } },
         { prompt: { ar: "ختام كل تفاعل بموسم الذروة؟", en: "Ending every peak-season interaction?" },
           media: "retailR5_q8",
-          options: [ { ar: "أنهي بسرعة، الطابور طويل", en: "End fast, the queue is long" }, { ar: "فوز واحد، شكر واحد، وابتسامة", en: "One win, one thank-you, one smile" } ],
+          options: [ { ar: "أشكرهم باختصار وأنتقل للزبون اللي بعده", en: "Thank them briefly and move to the next customer" }, { ar: "فوز واحد، شكر واحد، وابتسامة", en: "One win, one thank-you, one smile" } ],
           correct: 1, feedback: { ar: "⭐ الطاقة تنتشر. ودّعهم وهم مبتسمين.", en: "⭐ Energy spreads. Send them out smiling." } }
       ]
     }

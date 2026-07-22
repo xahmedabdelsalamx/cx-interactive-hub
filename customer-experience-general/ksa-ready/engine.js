@@ -267,16 +267,28 @@
   }
 
   /* ---------------- INTAKE ---------------- */
-  /* Match a brand string from the Roster tab to our BRANDS list and select it.
-     Tolerant: ignores case, spaces, punctuation and "&"/"and", so "H&M",
-     "H & M" and "HM" all land on the same entry. Returns true if matched. */
+  /* Resolve a brand value coming from the Roster tab. The company active list
+     uses 3-letter codes (STA, HEN, BAT...), so try the code directory first,
+     then fall back to English/Arabic name matching. Tolerant of case, spaces,
+     punctuation and "&"/"and". Returns true if a game brand was selected. */
   function selectBrandByName(raw) {
     if (!raw) return false;
     var norm = function (s) {
       return String(s).toLowerCase()
         .replace(/&/g, "and").replace(/[^a-z0-9\u0600-\u06FF]/g, "");
     };
-    var want = norm(raw);
+    var txt = String(raw).trim();
+
+    // 1. exact 3-letter company code
+    var codes = window.BRAND_CODES || {};
+    var code = txt.toUpperCase().replace(/[^A-Z]/g, "");
+    if (code.length === 3 && codes[code]) {
+      if (codes[code].internal) return false;         // division/support unit, not a shop
+      txt = codes[code].en;                            // resolve to the full name
+    }
+
+    // 2. match against our playable brands
+    var want = norm(txt);
     if (!want) return false;
     for (var i = 0; i < BRANDS.length; i++) {
       var b = BRANDS[i];

@@ -3,9 +3,10 @@
 **Purpose of this file:** paste it (or upload it) at the start of a new chat, together with `ksa-gamification.zip`, so work can continue with no loss of context.
 
 **Owner:** Ahmed Abdelsalam — Customer Experience Hub team, Alshaya Group (ahmed.abdelsalam@alshaya.com)
-**Last updated:** 22 July 2026 (post-review content corrections, duplicate-feedback fix, roster auto-fill)
+**Last updated:** 22 July 2026 (review round 2 applied, brand-code directory, roster auto-fill, duplicate-feedback fix)
 
-> **Content review status:** an external review (7/10, potential 9/10) was actioned on 22 July. All *verified factual/policy/Arabic* errors are FIXED. Remaining reviewer recommendations that are judgement calls (difficulty balance, distractor realism, HOS-R3 repetition, bonus-round differentiation) are NOT yet done — see section 13.
+> **Content review status:** TWO review rounds actioned (22 July). Round 1 fixed factual/policy/Arabic errors. Round 2 fixed: ~25 distractors rewritten from "obviously careless" to "plausible but incomplete"; exaggerated claims softened (no more "you know everything", "saved a customer for life", "a discount buys silence"); RET-R1-Q7 and SBX-R1-Q5 ambiguity resolved; RET-R3-Q4 sequence made logical; SBX-R2-Q2 pairings given unique context; SBX-R3 true/false made nuanced; HOS-R4-Q4 Pinkberry moved to the counter (Aura before payment); Arabic polish pass.
+> **Still open:** order-round repetition (RET-R3 five similar questions, HOS-R3 four similar) — needs 2-3 questions REPLACED with different moments, not just reworded. Bonus rounds still share a common pattern across divisions.
 
 ---
 
@@ -231,7 +232,7 @@ The company active list is HR personal data (30,173 rows: employee names, number
 ### `AppsScript.gs` (deployed, `SECRET_TOKEN = "CXHUBKSA"`)
 Tabs: `Scores`, `Feedback`, `Summary` (play-based rollup), `_Agg` (hidden, best score per player), **`Roster` (OPTIONAL)**.
 
-**`Roster` tab (optional sign-in convenience):** paste ONLY `EmpID | Name | Brand | Market`, KSA rows only. On Emp-ID blur the game calls `action=lookup` and prefills the name + auto-selects the brand so the player can hit Start immediately. **Name is optional** — paste `EmpID | (blank) | Brand | Market` to hold no names at all and still get brand auto-select. Empty tab = game asks for everything, as before. Never blocks. Brand matching is tolerant (`H&M` / `H & M` / `STA` all resolve).
+**`Roster` tab (optional sign-in convenience):** paste ONLY `EmpID | Name | Brand | Market`, KSA rows only. On Emp-ID blur the game calls `action=lookup` and prefills the name + auto-selects the brand so the player can hit Start immediately. **Name is optional** — paste `EmpID | (blank) | Brand | Market` to hold no names at all and still get brand auto-select. Empty tab = game asks for everything, as before. Never blocks. Brand matching resolves the company's 3-letter codes via `window.BRAND_CODES` in `config/shared.js` (58 codes, e.g. STA→Starbucks, HEN→H&M, BAT→Bath & Body Works, ULT→Ulta Beauty), then falls back to English/Arabic name matching. Codes flagged `internal:true` (APP, WEL, HOS, FNB, LEW, ATE) are divisions/support units — they resolve to a readable name but do NOT auto-pick a world, so the player chooses.
 Actions: `doGet ?action=check` (pass-once) · `?action=history` (returning player best/last/attempts → welcome-back panel) · `?action=stats` (dashboard JSON incl. feedback distribution + up to 120 recent comments, 1-min cache) · `?action=export` (row-level game data **and feedback** for the offline report). `doPost action=score / action=feedback`.
 
 **Pagination:** every growing list is paged, never infinite-scrolled. Dashboard: feedback 6/page, brands 10/page. Completion report: stores 25/page, unmatched 12/page, feedback 8/page. Both files share a small `paginate({items, perPage, pager, render})` helper.

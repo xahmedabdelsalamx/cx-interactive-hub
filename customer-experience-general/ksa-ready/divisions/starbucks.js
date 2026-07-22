@@ -58,10 +58,10 @@ window.DIVISION_starbucks = {
           feedback: { ar: "🎯 باب مفتوح على مصراعيه! السؤال عن الطعم يعني «أقنعني». احكِ قصة المشروب بحماس صادق، أو اعرض عليه عيّنة.", en: "🎯 A wide open door! Asking about taste means \"convince me\". Tell the drink's story with real enthusiasm, or offer a sample." }
         },
         {
-          prompt: { ar: "زبون داخل بسرعة، يطالع ساعته كل ثانيتين. طلب مسبقاً من التطبيق وجاي يستلم بس.", en: "A customer rushes in, checking their watch every two seconds. They ordered ahead on the app and just need to collect." },
+          prompt: { ar: "زبون استلم طلبه من رف الاستلام، وهو ماشي للباب ولابس سماعاته.", en: "A customer collects their mobile order from the pickup shelf, already walking to the door with headphones on." },
           media: "sbuxR1_q5",
           isOpportunity: false,
-          feedback: { ar: "✅ فهمت الزبون! هذا يبي سرعة، مو محادثة. تسليم سريع ودقيق باسمه هو التواصل هنا، ولا تعطّله بكلام زايد.", en: "✅ You get it! He wants speed, not conversation. A fast, accurate hand-off with his name IS the connection here. Do not slow him down with extra chat." }
+          feedback: { ar: "✅ فهمت الزبون! أخذ اللي جاء له وهو طالع. إيماءة ترحيب تكفي. لو وقّفته الحين تكون خدمة لك مو له.", en: "✅ You get it! He has what he came for and is already leaving. A warm nod is enough. Stopping him now would be service for you, not for him." }
         }
       ]
     },
@@ -92,10 +92,10 @@ window.DIVISION_starbucks = {
           instruction: { ar: "وصّل كل مشروب بالاقتران اللي يكمّله بسبب منطقي.", en: "Match each drink to the pairing that completes it for a reason." },
           media: "sbuxR2_q2",
           pairs: [
-            { left: { ar: "قهوة سادة صباحية", en: "A plain morning coffee" }, right: { ar: "كرواسون يكمّل الفطور", en: "A croissant to complete breakfast" } },
-            { left: { ar: "مشروب حلو وغني", en: "A sweet, rich drink" }, right: { ar: "شي مالح خفيف يوازن الحلاوة", en: "Something light and savoury to balance it" } },
-            { left: { ar: "شاي بالمساء", en: "An evening tea" }, right: { ar: "كوكيز خفيفة تناسب الجلسة", en: "A light cookie for the sit-down" } },
-            { left: { ar: "إسبريسو سريع", en: "A quick espresso" }, right: { ar: "قطعة صغيرة تاخذها معك", en: "A small bite to take with you" } }
+            { left: { ar: "قهوة الصباح قبل طريق طويل", en: "Morning coffee before a long commute" }, right: { ar: "كرواسون يكمّل الفطور", en: "A croissant to complete breakfast" } },
+            { left: { ar: "مشروب حلو بعد الغدا", en: "A sweet drink after lunch" }, right: { ar: "شي مالح خفيف يوازن الحلاوة", en: "Something light and savoury to balance it" } },
+            { left: { ar: "شاي بالمساء بجلسة هادية", en: "Evening tea during a relaxed catch-up" }, right: { ar: "كوكيز خفيفة تناسب الجلسة", en: "A light cookie for the sit-down" } },
+            { left: { ar: "إسبريسو لواحد طالع على طول", en: "Espresso for someone leaving immediately" }, right: { ar: "قطعة مغلّفة تاخذها وأنت طالع", en: "A wrapped bite to take on the way out" } }
           ],
           feedback: { ar: "💚 كل اقتران له سبب! لما تشرح «ليش»، تتحوّل التوصية من بيع إلى خدمة. بدون سبب؟ تصير ضغط.", en: "💚 Every pairing has a reason! Explain the why and the suggestion turns from selling into service. No reason? It's pressure." }
         },
@@ -125,7 +125,7 @@ window.DIVISION_starbucks = {
           instruction: { ar: "وصّل رغبة الزبون بخيار التخصيص المناسب.", en: "Match the customer's wish to the right customisation." },
           media: "sbuxR2_q5",
           pairs: [
-            { left: { ar: "«أبيه أقل حلاوة»", en: "\"I want it less sweet\"" }, right: { ar: "نقلّل عدد ضخّات الشراب", en: "Fewer pumps of syrup" } },
+            { left: { ar: "«أبيه أقل حلاوة»", en: "\"I want it less sweet\"" }, right: { ar: "نقلّل عدد ضخّات السيرب", en: "Fewer pumps of syrup" } },
             { left: { ar: "«ما أشرب حليب البقر»", en: "\"I don't drink dairy\"" }, right: { ar: "نبدّله بحليب نباتي", en: "Swap to a plant-based milk" } },
             { left: { ar: "«أبيه أقوى شوي»", en: "\"I want it a bit stronger\"" }, right: { ar: "نضيف جرعة إسبريسو", en: "Add an espresso shot" } },
             { left: { ar: "«أبيه دافي مو حار»", en: "\"I want it warm, not hot\"" }, right: { ar: "نضبط درجة الحرارة له", en: "Adjust the temperature for them" } }
@@ -150,13 +150,13 @@ window.DIVISION_starbucks = {
           statement: { ar: "الهدف من العيّنة إنك تقنع الزبون يشتري المشروب.", en: "The point of a sample is to convince the customer to buy the drink." },
           media: "sbuxR3_q1",
           isTrue: false,
-          feedback: { ar: "الهدف فضول، مو إقناع! العيّنة دعوة يكتشف شي جديد. لو صارت ضغط، ينفر الزبون ويحس إنك تبيع عليه.", en: "The goal is curiosity, not persuasion! A sample is an invitation to discover. Turn it into pressure and they feel sold to." }
+          feedback: { ar: "الهدف إثارة الفضول، مو الإقناع! العيّنة دعوة يكتشف شي جديد. لو صارت ضغط، ينفر الزبون ويحس إنك تبيع عليه.", en: "The goal is curiosity, not persuasion! A sample is an invitation to discover. Turn it into pressure and they feel sold to." }
         },
         {
-          statement: { ar: "تسليم المشروب بالاسم يحوّل التسليم من إجراء إلى لحظة شخصية.", en: "Handing off the drink by name turns a process into a personal moment." },
+          statement: { ar: "وقت الذروة، ممكن نتخطى تأكيد المشروب إذا كان الملصق واضح.", en: "During peak, confirming the drink can be skipped when the label is clearly visible." },
           media: "sbuxR3_q2",
           isTrue: true,
-          feedback: { ar: "بالضبط! الاسم + تواصل بصري + ابتسامة = آخر لحظة يتذكرها. التسليم مو مجرد تسليم كوب.", en: "Exactly! The name plus eye contact plus a smile is the last moment they remember. A hand-off is more than passing a cup." }
+          feedback: { ar: "الملصق يبيّن اللي تحضّر، مو اللي توقعه الزبون. التأكيد بصوت هو آخر فرصة تمسك طلب غلط، وتكلفته ثانيتين.", en: "The label shows what was made, not what they expected. Confirming out loud is the last chance to catch a wrong order, and it costs two seconds." }
         },
         {
           statement: { ar: "وقت الزحمة، الأفضل تسكت وتشتغل بسرعة بدون ما تتكلم مع الزبائن.", en: "When it's busy, it's better to go quiet and work fast without talking to customers." },
@@ -171,10 +171,10 @@ window.DIVISION_starbucks = {
           feedback: { ar: "صح! ثانيتين تأكيد توفّر عليك إعادة تحضير وزبون منزعج. التأكيد أرخص من التصحيح.", en: "True! Two seconds of confirming saves you a remake and an upset customer. Confirming is cheaper than correcting." }
         },
         {
-          statement: { ar: "السرعة الحقيقية تجي من عمل الفريق، مو من إن كل واحد يستعجل لحاله.", en: "Real speed comes from teamwork, not from each partner rushing alone." },
+          statement: { ar: "الزبون اللي لبس سماعاته بعد ما طلب، ما ينفع نكلّمه مرة ثانية.", en: "A customer who put on headphones after ordering should not be approached again." },
           media: "sbuxR3_q5",
           isTrue: true,
-          feedback: { ar: "هذا هو! الاستعجال الفردي يصنع أخطاء. الفريق المنسجم يخلّي الطابور يمشي بهدوء والزبون يحس بالإيقاع.", en: "That's it! Rushing alone creates mistakes. A team in sync keeps the line calm, and customers feel that rhythm." }
+          feedback: { ar: "السماعات تعني «ما أبي دردشة»، مو «لا تخدمني». تسلّم باسمه وتتأكد إن الطلب صح. اقرأ الإشارة، بس لا تختفي.", en: "Headphones mean do not chat, not do not serve. You still hand off by name and check the order is right. Read the signal, do not disappear." }
         }
       ]
     },
@@ -202,7 +202,7 @@ window.DIVISION_starbucks = {
           feedback: { ar: "💚 اعتذر، أعد التحضير، اشكره! الشرح يقول له «ذوقك غلط»، والقسيمة تأجّل المشكلة. الحل الحين هو اللي يبني الثقة.", en: "💚 Apologize, remake, thank! Explaining says \"your taste is wrong\", and a voucher postpones the problem. Fixing it now is what builds trust." }
         },
         {
-          scenario: { ar: "زبون واقف عند ركن الاستلام وطلبه بالتطبيق متأخر، وبدأ ينرفز بشكل واضح.", en: "A customer waits at the pickup area, his mobile order is late, and he's visibly getting angry." },
+          scenario: { ar: "زبون واقف عند ركن الاستلام وطلبه بالتطبيق متأخر، وبدأ ينزعج بشكل واضح.", en: "A customer waits at the pickup area, his mobile order is late, and he's visibly getting angry." },
           media: "sbuxR4_q2",
           options: [
             { ar: "أعتذر، أخبره بوضعه، وأطمّنه إني متابع طلبه", en: "Acknowledge him, tell him where his order is, and reassure him I'm on it" },
@@ -210,7 +210,7 @@ window.DIVISION_starbucks = {
             { ar: "أتجاهله لين يخلص طلبه عشان ما أعطّل الباقي", en: "Leave him until his order is done so I don't slow the others" }
           ],
           correct: 0,
-          feedback: { ar: "🔥 المعلومة تهدّي أكثر من السرعة! الزبون ما ينرفز من الانتظار، ينرفز من إنه ما يدري. جملة وحدة تشيل الغضب.", en: "🔥 Information calms faster than speed! Customers don't rage about waiting, they rage about not knowing. One sentence defuses it." }
+          feedback: { ar: "🔥 المعلومة تهدّي أكثر من السرعة! عدم الوضوح يخلّي الانتظار يحس أطول، وتحديث بسيط يقلّل الانزعاج.", en: "🔥 Information calms faster than speed! Uncertainty makes waiting feel longer, and a clear update reduces the frustration." }
         },
         {
           scenario: { ar: "زبون منزعج ورافع صوته شوي: «كل مرة تنسون التعديل اللي أطلبه!»", en: "An upset customer, voice slightly raised: \"You forget my customisation every single time!\"" },
@@ -243,7 +243,7 @@ window.DIVISION_starbucks = {
             { ar: "أعتذر، أسأله وش كان يتوقع، وأحضّر له بديل يناسب ذوقه", en: "Apologize, ask what he expected, and make him an alternative that suits him" }
           ],
           correct: 2,
-          feedback: { ar: "🔥 أنقذت زبون للأبد! أول زيارة سيئة تعني ما يرجع. سؤال «وش كنت تتوقع؟» + بديل = حوّلت أسوأ لحظة لأفضل انطباع.", en: "🔥 You just saved a customer for life! A bad first visit means no second one. \"What were you expecting?\" plus an alternative turns the worst moment into the best impression." }
+          feedback: { ar: "🔥 يمكن حوّلت زيارة أولى مخيبة إلى ثقة! الزيارة الأولى السيئة ممكن تمنع الثانية، فالتصحيح مهم. سؤال «وش كنت تتوقع؟» + بديل هو اللي ينقذها.", en: "🔥 You may have turned a disappointing first visit into trust! A poor first visit can prevent a second one, so the recovery matters. \"What were you expecting?\" plus an alternative is what rescues it." }
         }
       ]
     },
@@ -263,35 +263,35 @@ window.DIVISION_starbucks = {
       questions: [
         { prompt: { ar: "بداية شفت الذروة؟", en: "Your peak shift starts?" },
           media: "sbuxR5_q1",
-          options: [ { ar: "أدخل حاضر ومركّز على الزبون", en: "Arrive present and customer-focused" }, { ar: "أدخل متوتر ومشتت", en: "Arrive tense and scattered" } ],
+          options: [ { ar: "أدخل حاضر ومركّز على الزبون", en: "Arrive present and customer-focused" }, { ar: "أوصل بالوقت وأبدأ مهامي قبل ما أسلّم على الفريق", en: "Arrive on time and start tasks before greeting the team" } ],
           correct: 0, feedback: { ar: "⚡ طاقتك تنتقل لكل كوب تحضّره.", en: "⚡ Your energy transfers into every cup you make." } },
         { prompt: { ar: "زبون داخل والطابور طويل؟", en: "A customer walks in and the line is long?" },
           media: "sbuxR5_q2",
-          options: [ { ar: "أكمل شغلي، بيشوف الزحمة", en: "Keep working, they can see it's packed" }, { ar: "تواصل بصري وابتسامة خلال 5 ثواني", en: "Eye contact and a smile within 5 seconds" } ],
+          options: [ { ar: "أخلّص المشروب اللي بيدي أول، وبعدين أرحّب فيه", en: "Finish the drink in my hand first, then greet them" }, { ar: "تواصل بصري وابتسامة خلال 5 ثواني", en: "Eye contact and a smile within 5 seconds" } ],
           correct: 1, feedback: { ar: "💚 نظرة وابتسامة تخلّي الانتظار مقبول.", en: "💚 A look and a smile make the wait acceptable." } },
         { prompt: { ar: "زميلك غارق بالطلبات وأنت فاضي ثانية؟", en: "A partner is buried in orders and you're free for a second?" },
           media: "sbuxR5_q3",
-          options: [ { ar: "أدخل أساعد قبل لا يطلب", en: "Step in before they ask" }, { ar: "أنتظر لين يطلب", en: "Wait until they ask" } ],
+          options: [ { ar: "أدخل أساعد قبل لا يطلب", en: "Step in before they ask" }, { ar: "أساعد بعد ما يخف طابوري", en: "Help once my own queue clears" } ],
           correct: 0, feedback: { ar: "🔥 السرعة الحقيقية اسمها فريق.", en: "🔥 Real speed is spelled t-e-a-m." } },
         { prompt: { ar: "التسليم وقت الزحمة؟", en: "Hand-off during the rush?" },
           media: "sbuxR5_q4",
-          options: [ { ar: "أحط الكوب وأنادي رقم الطلب", en: "Put the cup down and call the order number" }, { ar: "الاسم وتواصل بصري وابتسامة", en: "Their name, eye contact, a smile" } ],
+          options: [ { ar: "أنادي الطلب بوضوح وأحطه على الرف", en: "Call the order clearly and set it on the shelf" }, { ar: "الاسم وتواصل بصري وابتسامة", en: "Their name, eye contact, a smile" } ],
           correct: 1, feedback: { ar: "⭐ الاسم يحوّل الكوب للحظة.", en: "⭐ The name turns a cup into a moment." } },
         { prompt: { ar: "الضغط طلع براسك بين زبونين؟", en: "Stress spikes between two customers?" },
           media: "sbuxR5_q5",
-          options: [ { ar: "نفس، ابتسامة، وإعادة ضبط", en: "One breath, a smile, a reset" }, { ar: "أكمل بنفس التوتر", en: "Carry on with the same tension" } ],
+          options: [ { ar: "نفس، ابتسامة، وإعادة ضبط", en: "One breath, a smile, a reset" }, { ar: "أكمّل وأرتاح لما تخف الزحمة", en: "Keep going and reset when the rush ends" } ],
           correct: 0, feedback: { ar: "⚡ نقود المشاعر، ما نتبعها.", en: "⚡ We lead emotions, we don't follow them." } },
         { prompt: { ar: "صار خطأ بمشروب قدام الزبون؟", en: "You make a drink mistake in front of the customer?" },
           media: "sbuxR5_q6",
-          options: [ { ar: "أتجاهله، يمكن ما ينتبه", en: "Ignore it, maybe they won't notice" }, { ar: "أعترف وأعيد تحضيره فوراً", en: "Own it and remake it right away" } ],
+          options: [ { ar: "أعيد تحضيره بدون ما أقول شي", en: "Remake it without saying anything" }, { ar: "أعترف وأعيد تحضيره فوراً", en: "Own it and remake it right away" } ],
           correct: 1, feedback: { ar: "🔥 الاعتراف السريع يقوّي الثقة.", en: "🔥 A fast admission strengthens trust." } },
         { prompt: { ar: "زبون يسأل عن الموسمي الجديد؟", en: "A customer asks about the new seasonal drink?" },
           media: "sbuxR5_q7",
-          options: [ { ar: "أحكي قصته بجملة وحدة حماسية", en: "Tell its story in one exciting line" }, { ar: "أقول «حلو، جرّبه»", en: "Say \"it's nice, try it\"" } ],
+          options: [ { ar: "أحكي قصته بجملة وحدة حماسية", en: "Tell its story in one exciting line" }, { ar: "أقول إنه مطلوب وأكتفي بكذا", en: "Say it is popular and leave it at that" } ],
           correct: 0, feedback: { ar: "💚 الحماس الصادق يبيع بشكل طبيعي.", en: "💚 Real enthusiasm sells by itself." } },
         { prompt: { ar: "ختام كل تفاعل بالذروة؟", en: "Ending every peak interaction?" },
           media: "sbuxR5_q8",
-          options: [ { ar: "أنهي بسرعة، الطابور طويل", en: "End fast, the line is long" }, { ar: "شكر صادق ودعوة يرجع", en: "A sincere thank-you and an invite back" } ],
+          options: [ { ar: "أشكرهم باختصار وأبدأ الطلب اللي بعده", en: "Thank them briefly and start the next order" }, { ar: "شكر صادق ودعوة يرجع", en: "A sincere thank-you and an invite back" } ],
           correct: 1, feedback: { ar: "⭐ كل كوب فرصة إنه يرجع بكرة.", en: "⭐ Every cup is a chance they come back tomorrow." } }
       ]
     }

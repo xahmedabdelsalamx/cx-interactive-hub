@@ -70,7 +70,7 @@ window.DIVISION_hospitality = {
           replies: [
             { ar: "«خذ وقتك، المنيو قدامك»", en: "\"Take your time, the menu's right there\"" },
             { ar: "«تحب أساعدك تختار؟ ودّك شي خفيف ولا شي يشبع أكثر؟»", en: "\"Want a hand choosing? Something light, or more filling?\"" },
-            { ar: "«كل شي عندنا حلو، اختر أي شي»", en: "\"Everything's good here, just pick anything\"" }
+            { ar: "أرشّح أكثر طبق مطلوب بدون ما أسأله وش يحب", en: "Recommend the most popular dish without asking what they like" }
           ],
           correct: 1,
           feedback: { ar: "🎯 سؤال واحد ينقذ الموقف! الضيف الحاير يبي حدود، مو خيارات أكثر. «خفيف ولا يشبع؟» يقلّص المنيو كامل لخيارين.", en: "🎯 One question saves it! A lost guest needs boundaries, not more options. \"Light or filling?\" shrinks the whole menu down to two choices." }
@@ -247,13 +247,13 @@ window.DIVISION_hospitality = {
             { ar: "أعطيه خصم عشان أعوّضه عن الغلطة", en: "Give a discount to compensate for the mistake" }
           ],
           correct: 0,
-          feedback: { ar: "💚 وعد المطعم! اعترف، صلّح، تابع. الشرح يحس فيه الضيف إنك تبرر، والخصم يشتري سكوته مو ثقته. الفعل هو اللي يسترجعها.", en: "💚 The Restaurant Promise! Own it, fix it, follow up. Explaining sounds like excuses, and a discount buys silence, not trust. Action wins it back." }
+          feedback: { ar: "💚 وعد المطعم! اعترف، صلّح، تابع. الشرح يحس فيه الضيف إنك تبرر، والتعويض لحاله ما يعوّض عن المسؤولية والتصرّف والمتابعة.", en: "💚 The Restaurant Promise! Own it, fix it, follow up. Explaining sounds like excuses, and compensation alone does not replace ownership, action and follow-up." }
         },
         {
           scenario: { ar: "ذا تشيزكيك فاكتوري. ضيف ينتظر أكله من 25 دقيقة، وبدأ يلتفت للمطبخ كل شوي.", en: "The Cheesecake Factory. A guest has waited 25 minutes and keeps glancing toward the kitchen." },
           media: "hospR4_q2",
           options: [
-            { ar: "أنتظر لين يشتكي، يمكن ما ينتبه للوقت", en: "Wait until they complain, maybe they won't notice" },
+            { ar: "أنتظر شوي كمان، الطلب لازم يوصل بأي لحظة للوقت", en: "Wait a little longer, the order should arrive any minute" },
             { ar: "أعتذر عن التأخير، أطمّنه إن طلبه جاي، وأتابع معه", en: "Apologize for the wait, reassure them it's coming, and keep them updated" },
             { ar: "أقول له المطبخ مزحوم اليوم وأكمل شغلي", en: "Tell them the kitchen is busy today and carry on" }
           ],
@@ -272,15 +272,15 @@ window.DIVISION_hospitality = {
           feedback: { ar: "⭐ لو مو مثالي، بنصلحه! تشرح له الطبق يعني تقول له «ذوقك غلط». الحل الفعلي يخلّي الشكوى ذكرى حلوة.", en: "⭐ If it's not perfect, we'll fix it! Explaining the dish says \"your taste is wrong\". A real fix turns a complaint into a good memory." }
         },
         {
-          scenario: { ar: "بينكبيري. عائلة خلّصت وكل شي كان ممتاز، وقاعدين يجمعون أغراضهم.", en: "Pinkberry. A family is done, everything went great, and they're gathering their things." },
+          scenario: { ar: "بينكبيري. عائلة وصلت للكاونتر، والأطفال متحمسين لاختياراتهم، وجاهزين يدفعون.", en: "Pinkberry. A family reaches the counter, the children are excited about their choices, and they are ready to pay." },
           media: "hospR4_q4",
           options: [
-            { ar: "أعطيهم الفاتورة وأشكرهم بابتسامة", en: "Bring the bill and thank them with a smile" },
-            { ar: "أشكرهم بشكل شخصي، أساعدهم بأورا، وأدعوهم يرجعون", en: "Thank them personally, help with Aura, and invite them back" },
-            { ar: "أخلّص بسرعة عشان الطاولة مطلوبة", en: "Turn the table fast, it's needed" }
+            { ar: "آخذ الطلب بدقة وأشكرهم بابتسامة", en: "Take the order accurately and thank them with a smile" },
+            { ar: "أأكّد الطلب بترحيب، وأعرض أورا قبل الدفع، وأدعوهم يرجعون", en: "Confirm the order warmly, offer Aura before payment, and invite them back" },
+            { ar: "أخدمهم بسرعة لأن فيه طابور وراهم", en: "Serve them quickly since there is a queue behind" }
           ],
           correct: 1,
-          feedback: { ar: "💚 الامتنان أكثر من «شكراً»! «كان شرف لنا وجودكم معنا اليوم» جملة تكلّف ثانيتين وتبني علاقة سنين.", en: "💚 Gratitude is more than \"thanks\"! \"It was wonderful having your family with us\" costs two seconds and builds a years-long relationship." }
+          feedback: { ar: "💚 التوقيت مع الدفء! أورا لازم تُعرض قبل الدفع، وجملة شخصية وحدة عن الأطفال تحوّل الطلب لذكرى.", en: "💚 Timing plus warmth! Aura has to be offered before payment, and one personal line about the kids turns a transaction into a memory." }
         },
         {
           scenario: { ar: "تشيبوتلي. ضيف نبّهك بهدوء إن الطاولة ما كانت نظيفة وقت ما وصلوا.", en: "Chipotle. A guest quietly mentions the table wasn't clean when they arrived." },
@@ -311,35 +311,35 @@ window.DIVISION_hospitality = {
       questions: [
         { prompt: { ar: "بداية شفت الذروة؟", en: "Your peak shift begins?" },
           media: "hospR5_q1",
-          options: [ { ar: "أدخل متّزن وحاضر ومركّز على الضيف", en: "Arrive centred, present, guest-focused" }, { ar: "أدخل متوتر ومشتت", en: "Arrive tense and scattered" } ],
+          options: [ { ar: "أدخل متّزن وحاضر ومركّز على الضيف", en: "Arrive centred, present, guest-focused" }, { ar: "أوصل بدري وأبدأ التجهيز على طول بدون ما أرتب نفسي", en: "Arrive early and get straight into setup without pausing" } ],
           correct: 0, feedback: { ar: "⚡ تركيزك يحدد طاقة الشفت كله.", en: "⚡ Your focus sets the tone for the whole shift." } },
         { prompt: { ar: "ضيف داخل والمكان مليان؟", en: "A guest walks in and it's packed?" },
           media: "hospR5_q2",
-          options: [ { ar: "أكمل شغلي، بيشوف إن المكان زحمة", en: "Keep working, they can see it's busy" }, { ar: "تواصل بصري وابتسامة وترحيب خلال 5 ثواني", en: "Eye contact, smile, welcome within 5 seconds" } ],
+          options: [ { ar: "أخلّص اللي بيدي أول، وبعدين أرحّب فيهم", en: "Finish what I am carrying first, then greet them" }, { ar: "تواصل بصري وابتسامة وترحيب خلال 5 ثواني", en: "Eye contact, smile, welcome within 5 seconds" } ],
           correct: 1, feedback: { ar: "💚 كل ترحيب يشكّل إحساس الضيف بالمكان.", en: "💚 Every welcome shapes how a guest feels about the place." } },
         { prompt: { ar: "زميلك غارق بقسمه وأنت فاضي؟", en: "A teammate is drowning in their section and you're free?" },
           media: "hospR5_q3",
-          options: [ { ar: "أدخل أساعد قبل لا يطلب", en: "Step in before they have to ask" }, { ar: "أنتظر لين يطلب المساعدة", en: "Wait until they ask for help" } ],
+          options: [ { ar: "أدخل أساعد قبل لا يطلب", en: "Step in before they have to ask" }, { ar: "أعرض المساعدة بعد ما أخلّص قسمي", en: "Offer help once I finish my own section" } ],
           correct: 0, feedback: { ar: "🔥 الانسجام خلف الكواليس يصير هدوء قدّام الضيف.", en: "🔥 Harmony behind the scenes becomes calm in front of the guest." } },
         { prompt: { ar: "الضغط طلع براسك بين طاولتين؟", en: "Stress spikes between two tables?" },
           media: "hospR5_q4",
-          options: [ { ar: "أنقل توتري للطاولة اللي بعدها", en: "Carry the tension to the next table" }, { ar: "نفس، ابتسامة، وإعادة ضبط", en: "One breath, a smile, a reset" } ],
+          options: [ { ar: "أكمّل وأتعامل معه بعد الشفت", en: "Keep going and deal with it after the shift" }, { ar: "نفس، ابتسامة، وإعادة ضبط", en: "One breath, a smile, a reset" } ],
           correct: 1, feedback: { ar: "⚡ الضيف يحس طاقتك قبل ما يذوق أكله.", en: "⚡ Guests feel your energy before they taste the food." } },
         { prompt: { ar: "ضيف يسأل عن توصية اليوم؟", en: "A guest asks what you recommend today?" },
           media: "hospR5_q5",
-          options: [ { ar: "أعرف طبق اليوم وأحكي قصته بثقة", en: "Know today's hero dish and tell its story with confidence" }, { ar: "أقول «كل شي حلو»", en: "Say \"everything's good\"" } ],
-          correct: 0, feedback: { ar: "💚 «كل شي حلو» تعني «ما راح أساعدك».", en: "💚 \"Everything's good\" means \"I won't help you\"." } },
+          options: [ { ar: "أعرف طبق اليوم وأحكي قصته بثقة", en: "Know today's hero dish and tell its story with confidence" }, { ar: "أقول «كل شي حلو، بصراحة»", en: "Say \"everything's good\"" } ],
+          correct: 0, feedback: { ar: "💚 «كل شي حلو» تعني «ما راح أساعدك».", en: "💚 \"Everything is good\" means \"I won't help you\"." } },
         { prompt: { ar: "قسمك وقت الزحمة؟", en: "Your section mid-rush?" },
           media: "hospR5_q6",
-          options: [ { ar: "أنتظر لين يرفعون يدهم", en: "Wait until someone raises a hand" }, { ar: "أمسح القسم وألاحظ الاحتياج قبل ما يطلبونه", en: "Scan the section and spot needs before they're voiced" } ],
+          options: [ { ar: "أمر على القسم كل ما أعدي منه", en: "Check the section whenever I pass by it" }, { ar: "أمسح القسم وألاحظ الاحتياج قبل ما يطلبونه", en: "Scan the section and spot needs before they're voiced" } ],
           correct: 1, feedback: { ar: "⭐ التوقّع دايم أقوى من رد الفعل.", en: "⭐ Anticipation always beats reaction." } },
         { prompt: { ar: "صار خطأ بسيط بالخدمة؟", en: "A small service slip?" },
           media: "hospR5_q7",
-          options: [ { ar: "أعترف وأصلحه باللحظة بنبرة دافئة", en: "Own it and fix it on the spot, warm tone" }, { ar: "أتجاهله، يمكن ما ينتبه", en: "Ignore it, maybe they won't notice" } ],
+          options: [ { ar: "أعترف وأصلحه باللحظة بنبرة دافئة", en: "Own it and fix it on the spot, warm tone" }, { ar: "أصلحه بهدوء وأكمّل بدون ما أذكره", en: "Fix it quietly and carry on without mentioning it" } ],
           correct: 0, feedback: { ar: "🔥 نبرة دافئة أول، تصرّف ثاني، بدون دراما.", en: "🔥 Warm tone first, action second, no drama." } },
         { prompt: { ar: "ختام كل طاولة؟", en: "Closing every table?" },
           media: "hospR5_q8",
-          options: [ { ar: "أرفع الطاولة بصمت", en: "Clear the table in silence" }, { ar: "شكر صادق ودعوة يرجعون", en: "A sincere thank-you and an invite back" } ],
+          options: [ { ar: "أرفع الطاولة بسرعة وأكمّل", en: "Clear the table quickly and move on" }, { ar: "شكر صادق ودعوة يرجعون", en: "A sincere thank-you and an invite back" } ],
           correct: 1, feedback: { ar: "⭐ كل وداع هو بداية الزيارة الجاية.", en: "⭐ Every farewell is the start of their next visit." } }
       ]
     }

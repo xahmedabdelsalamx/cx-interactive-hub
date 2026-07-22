@@ -62,3 +62,72 @@ window.BRANDS = [
   { en:"Raising Cane's",           ar:"رايزينغ كينز",            world:"hospitality" },
   { en:"Shake Shack",              ar:"شيك شاك",                 world:"hospitality" }
 ];
+
+/* ============================================================
+   BRAND CODE DIRECTORY
+   The company active list uses 3-letter codes (STA, AME, HEN...).
+   This maps every code to its full English and Arabic name so the
+   Roster lookup can auto-select the brand from an Emp ID.
+   Codes marked internal:true are divisions/support units, not shops —
+   they still resolve to a readable name but do not pick a game world.
+   ============================================================ */
+window.BRAND_CODES = {
+  STA:{en:"Starbucks",ar:"ستاربكس"},
+  AME:{en:"American Eagle",ar:"أمريكان إيجل"},
+  NEX:{en:"Next",ar:"نكست"},
+  CLA:{en:"Claire's",ar:"كليرز"},
+  NEW:{en:"New Balance",ar:"نيو بالانس"},
+  MIL:{en:"Milano",ar:"ميلانو"},
+  FOO:{en:"Foot Locker",ar:"فوت لوكر"},
+  MUJ:{en:"MUJI",ar:"موجي"},
+  VIF:{en:"Victoria's Secret",ar:"فيكتوريا سيكريت"},
+  HEN:{en:"H&M",ar:"إتش آند إم"},
+  ATE:{en:"Technical Equipment and Coffee Machine Support",ar:"المعدات الفنية ودعم ماكينات القهوة",internal:true},
+  CHE:{en:"The Cheesecake Factory",ar:"ذا تشيزكيك فاكتوري"},
+  PFC:{en:"P.F. Chang's",ar:"بي إف تشانغز"},
+  PIN:{en:"Pinkberry",ar:"بينكبيري"},
+  TEX:{en:"Texas Roadhouse",ar:"تكساس رودهاوس"},
+  ASH:{en:"Asha's",ar:"آشاز"},
+  SHA:{en:"Shake Shack",ar:"شيك شاك"},
+  RAI:{en:"Raising Cane's",ar:"رايزنغ كينز"},
+  BAT:{en:"Bath & Body Works",ar:"باث آند بودي ووركس"},
+  NYX:{en:"NYX Professional Makeup",ar:"نيكس بروفيشنال ميك أب"},
+  CHA:{en:"Charlotte Tilbury",ar:"شارلوت تيلبوري"},
+  BOD:{en:"The Body Shop",ar:"ذا بودي شوب"},
+  MAC:{en:"MAC",ar:"ماك كوزمتكس"},
+  JOM:{en:"Jo Malone London",ar:"جو مالون لندن"},
+  BOO:{en:"Boots",ar:"بوتس"},
+  MOT:{en:"Mothercare",ar:"مذركير"},
+  COL:{en:"COS",ar:"كوس"},
+  HOS:{en:"Hospitality Division",ar:"قطاع الضيافة",internal:true},
+  VAV:{en:"VaVaVoom",ar:"فافافوم"},
+  DIS:{en:"Disney Store",ar:"متجر ديزني"},
+  OTH:{en:"& Other Stories",ar:"آند أذر ستوريز"},
+  CHP:{en:"Chipotle",ar:"تشيبوتلي"},
+  PRM:{en:"Primark",ar:"برايمارك"},
+  DRV:{en:"Dr. Vranjes Firenze",ar:"دكتور فرانجيس فيرينزي"},
+  ALY:{en:"ALO Yoga",ar:"ألو يوغا"},
+  WEL:{en:"Wellness Division",ar:"قطاع العافية",internal:true},
+  FEC:{en:"TEKZONE / Family Entertainment Centre",ar:"تك زون / مركز الترفيه العائلي"},
+  LEW:{en:"Central Food Production Facility",ar:"منشأة الإنتاج الغذائي المركزية",internal:true},
+  LEL:{en:"Le Labo",ar:"لو لابو"},
+  ULT:{en:"Ulta Beauty",ar:"ألتا بيوتي"},
+  FNB:{en:"Food & Beverage Division",ar:"قطاع الأغذية والمشروبات",internal:true},
+  APP:{en:"Apparel Division",ar:"قطاع الأزياء",internal:true},
+  DEB:{en:"Debenhams",ar:"دبنهامز"},
+  PRC:{en:"Princi",ar:"برينشي"},
+  LEP:{en:"Le Pain Quotidien",ar:"لو بان كوتيديان"},
+  HAS:{en:"Harvey Nichols Cosmetics",ar:"هارفي نيكولز لمستحضرات التجميل"},
+  KID:{en:"KidZania Kuwait",ar:"كيدزانيا الكويت"},
+  HAR:{en:"Harvey Nichols Kuwait",ar:"هارفي نيكولز الكويت"},
+  PIZ:{en:"PizzaExpress",ar:"بيتزا إكسبريس"},
+  CLI:{en:"Clinique",ar:"كلينيك"},
+  BBA:{en:"Bebabel",ar:"بي بابل"},
+  BAB:{en:"Babel",ar:"بابل"},
+  EST:{en:"Estée Lauder",ar:"إستي لودر"},
+  AHW:{en:"Ahwet Zeitouna",ar:"قهوة زيتونة"},
+  KUR:{en:"Amiti Noura",ar:"عمتي نورة"},
+  QUE:{en:"QUEST",ar:"كويست"},
+  DDC:{en:"D&D Cafe - Dean & DeLuca",ar:"دي آند دي كافيه - دين آند ديلوكا"},
+  TFO:{en:"Tom Ford Beauty",ar:"توم فورد بيوتي"}
+};
