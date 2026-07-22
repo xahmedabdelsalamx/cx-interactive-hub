@@ -29,7 +29,15 @@
 var SECRET_TOKEN = "CXHUBKSA";
 var PASS_MARK    = 80;        // must match the game
 
-var T_SCORES = "Scores", T_FB = "Feedback", T_SUM = "Summary", T_AGG = "_Agg";
+var T_SCORES = "Scores", T_FB = "Feedback", T_SUM = "Summary", T_AGG = "_Agg",
+    T_ROSTER = "Roster";
+
+/* OPTIONAL lookup roster. Paste ONLY these columns — nothing else.
+   You choose how much to include:
+     EmpID | Brand | Market            -> brand auto-selects, player types their name
+     EmpID | Name  | Brand | Market    -> name also prefills (still personal data, your call)
+   Leave the tab empty and the game simply asks for everything, as before. */
+var ROSTER_HEADERS = ["EmpID", "Name", "Brand", "Market"];
 
 var SCORE_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Gender","Character",
   "Round1%","Round2%","Round3%","Round4%","Bonus%","Energy","Total%","Passed","Lang","ClientTime"];
@@ -42,6 +50,14 @@ function setup() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   ensureTab_(ss, T_SCORES, SCORE_HEADERS);
   ensureTab_(ss, T_FB, FB_HEADERS);
+  var ros = ensureTab_(ss, T_ROSTER, ROSTER_HEADERS);
+  if (ros.getLastRow() <= 1) {
+    ros.getRange("F1").setValue(
+      "OPTIONAL. Paste EmpID / Name / Brand / Market here to speed up sign-in. " +
+      "Include only these columns, KSA rows only. Leave Name out if you prefer to hold no names. " +
+      "Leave the whole tab empty and the game just asks the player for everything."
+    ).setFontColor("#888888");
+  }
   buildReports();
   SpreadsheetApp.getUi().alert(
     "Setup complete.\n\n" +
@@ -128,6 +144,7 @@ function doGet(e) {
 
   if (p.action === "check")   return json_({ passed: hasPassed_(p.empId) });
   if (p.action === "history") return json_(playerHistory_(p.empId));
+  if (p.action === "lookup")  return json_(lookupRoster_(p.empId));
   if (p.action === "stats")   return json_(stats_());
   if (p.action === "export")  return json_(exportRows_());   // feeds completion-report.html
   return json_({ ok: true });
@@ -302,6 +319,38 @@ function stats_() {
 
   cache.put("stats", JSON.stringify(out), 60);
   return out;
+}
+
+/* ================= ROSTER LOOKUP (optional convenience) =================
+   Reads the small Roster tab so a player only has to type their Emp ID.
+   Never blocks: if the tab is empty, or the ID is not there, we just return
+   found:false and the player fills the form normally. */
+function lookupRoster_(rawId) {
+  var id = normId_(rawId);
+  if (!id) return { found: false };
+
+  var cache = CacheService.getScriptCache();
+  var hit = cache.get("ros_" + id);
+  if (hit) { try { return JSON.parse(hit); } catch (e) {} }
+
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_ROSTER);
+  if (!sh || sh.getLastRow() < 2) return { found: false };
+
+  var v = sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues();   // A..D
+  for (var i = 0; i < v.length; i++) {
+    if (normId_(v[i][0]) === id) {
+      var rec = {
+        found: true,
+        name: String(v[i][1] || ""),
+        brand: String(v[i][2] || ""),
+        market: String(v[i][3] || "")
+      };
+      cache.put("ros_" + id, JSON.stringify(rec), 900);
+      return rec;
+    }
+  }
+  cache.put("ros_" + id, JSON.stringify({ found: false }), 900);
+  return { found: false };
 }
 
 /* ================= HELPERS ================= */

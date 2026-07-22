@@ -227,7 +227,9 @@ The company active list is HR personal data (30,173 rows: employee names, number
 - **Completion vs the active list is produced OFFLINE** in `completion-report.html`, which runs entirely in the browser on Ahmed's own machine. The list is never uploaded, never saved, gone when the tab closes.
 
 ### `AppsScript.gs` (deployed, `SECRET_TOKEN = "CXHUBKSA"`)
-Tabs: `Scores`, `Feedback`, `Summary` (play-based rollup), `_Agg` (hidden, best score per player).
+Tabs: `Scores`, `Feedback`, `Summary` (play-based rollup), `_Agg` (hidden, best score per player), **`Roster` (OPTIONAL)**.
+
+**`Roster` tab (optional sign-in convenience):** paste ONLY `EmpID | Name | Brand | Market`, KSA rows only. On Emp-ID blur the game calls `action=lookup` and prefills the name + auto-selects the brand so the player can hit Start immediately. **Name is optional** — paste `EmpID | (blank) | Brand | Market` to hold no names at all and still get brand auto-select. Empty tab = game asks for everything, as before. Never blocks. Brand matching is tolerant (`H&M` / `H & M` / `STA` all resolve).
 Actions: `doGet ?action=check` (pass-once) · `?action=history` (returning player best/last/attempts → welcome-back panel) · `?action=stats` (dashboard JSON incl. feedback distribution + up to 120 recent comments, 1-min cache) · `?action=export` (row-level game data **and feedback** for the offline report). `doPost action=score / action=feedback`.
 
 **Pagination:** every growing list is paged, never infinite-scrolled. Dashboard: feedback 6/page, brands 10/page. Completion report: stores 25/page, unmatched 12/page, feedback 8/page. Both files share a small `paginate({items, perPage, pager, render})` helper.

@@ -82,7 +82,9 @@
     mgNoScore:  { ar: "لا تشيل هم، هذي اللعبة للمتعة بس وما تأثر على نتيجتك", en: "No pressure, this game is just for fun and doesn't affect your score" },
     mgPlay:     { ar: "يلا نلعب", en: "Let's play" },
     mgSkip:     { ar: "تخطّي وكمّل الجولة الجاية", en: "Skip and continue" },
-    mgSkipGame: { ar: "تخطّي، كمّل الجولة الجاية", en: "Skip, next round" }
+    mgSkipGame: { ar: "تخطّي، كمّل الجولة الجاية", en: "Skip, next round" },
+    idFound:    { ar: "جبنا بياناتك", en: "Got your details" },
+    idNew:      { ar: "كمّل تسجيل بياناتك تحت 👇", en: "Just fill in your details below 👇" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -173,8 +175,10 @@
 
   /* ---------------- I18N ---------------- */
   function applyDir() {
+    var d = state.lang === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = state.lang;
-    document.documentElement.dir = state.lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.dir = d;
+    if (document.body) { document.body.dir = d; document.body.lang = state.lang; }
   }
   var rerenderCurrent = function () {};
   function setLang(lang) {
@@ -221,6 +225,13 @@
               "&action=check&empId=" + encodeURIComponent(empId);
     return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { passed: false }; });
   }
+  function rosterLookup(empId) {
+    if (!backendReady() || !empId) return Promise.resolve({ found: false });
+    var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
+              "&action=lookup&empId=" + encodeURIComponent(empId);
+    return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { found: false }; });
+  }
+
   function playerHistory(empId) {
     if (!backendReady() || !empId) return Promise.resolve({ attempts: 0 });
     var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
@@ -256,6 +267,30 @@
   }
 
   /* ---------------- INTAKE ---------------- */
+  /* Match a brand string from the Roster tab to our BRANDS list and select it.
+     Tolerant: ignores case, spaces, punctuation and "&"/"and", so "H&M",
+     "H & M" and "HM" all land on the same entry. Returns true if matched. */
+  function selectBrandByName(raw) {
+    if (!raw) return false;
+    var norm = function (s) {
+      return String(s).toLowerCase()
+        .replace(/&/g, "and").replace(/[^a-z0-9\u0600-\u06FF]/g, "");
+    };
+    var want = norm(raw);
+    if (!want) return false;
+    for (var i = 0; i < BRANDS.length; i++) {
+      var b = BRANDS[i];
+      if (norm(b.en) === want || norm(b.ar) === want ||
+          norm(b.en).indexOf(want) === 0 || want.indexOf(norm(b.en)) === 0) {
+        state.brand = b;
+        var sel = $("#brandSel");
+        if (sel) sel.value = String(i);
+        return true;
+      }
+    }
+    return false;
+  }
+
   function renderWelcomeBack(box, h) {
     box.className = "welcome-back show";
     box.innerHTML = "";
@@ -306,14 +341,36 @@
        isn't on the list, is NEVER blocked. */
     var welcomeBack = el("div", "welcome-back");
     emp.parentNode.appendChild(welcomeBack);
+    var idNote = el("div", "emp-note");
+    emp.parentNode.appendChild(idNote);
     var lastLooked = "";
     emp.addEventListener("blur", function () {
       var v = emp.value.trim();
       if (!v || v === lastLooked || !backendReady()) return;
       lastLooked = v;
       welcomeBack.className = "welcome-back";
-      // Returning player? Greet them with their own progress. This uses game
-      // data only (their past scores), never any company roster.
+      idNote.className = "emp-note show muted-note";
+      idNote.textContent = "…";
+
+      // Optional convenience lookup: if the Roster tab has this ID, prefill the
+      // name and pick the brand so the player can just hit Start. Never blocks.
+      rosterLookup(v).then(function (r) {
+        if (r && r.found) {
+          var bits = [];
+          if (r.name) {
+            var nameEl = $("#name");
+            if (!nameEl.value.trim()) nameEl.value = r.name;
+            bits.push(r.name);
+          }
+          if (r.brand && selectBrandByName(r.brand)) bits.push(L(state.brand));
+          idNote.className = "emp-note show ok";
+          idNote.textContent = "✓ " + u("idFound") + (bits.length ? ": " + bits.join(" · ") : "");
+        } else {
+          idNote.className = "emp-note show muted-note";
+          idNote.textContent = u("idNew");
+        }
+      });
+
       playerHistory(v).then(function (h) {
         if (!h || !h.attempts) return;
         renderWelcomeBack(welcomeBack, h);
