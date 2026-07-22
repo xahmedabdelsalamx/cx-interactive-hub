@@ -36,7 +36,7 @@ window.DIVISION_retail = {
           prompt: { ar: "إتش آند إم، الساعة 7 مساء. بنت واقفة قدام نفس الجاكيت من 3 دقايق. تلمسه، تتركه، ترجع تلمسه. ما رفعت راسها ولا مرة.", en: "H&M, 7pm. A girl has been standing at the same jacket for 3 minutes. Touches it, lets go, touches it again. Never looks up." },
           media: "retailR1_q1",
           isOpportunity: true,
-          feedback: { ar: "🔥 عين صقر! التردد الصامت هو طلب مساعدة بدون كلام. لاحظ، اسأل سؤال واحد، ووجّه. هذي 3 ثواني تسوى بيع.", en: "🔥 Sharp eye! Silent hesitation is a request for help with no words. Notice, ask one question, guide. Those 3 seconds are worth a sale." }
+          feedback: { ar: "🔥 عين صقر! التردد الصامت هو طلب مساعدة بدون كلام. لاحظ، واسأل سؤال واحد بدون ضغط، ووجّه. هذا السؤال يسوى بيع.", en: "🔥 Sharp eye! Silent hesitation is a request for help with no words. Notice, ask one low-pressure question, guide. That one question is worth a sale." }
         },
         {
           prompt: { ar: "أمريكان إيجل. أنت مع زبون، وزبون ثاني دخل ووقف عند المدخل يدوّر بعينه على أحد يشوفه.", en: "American Eagle. You're with a customer, and another one walks in and scans the room hoping someone sees him." },
@@ -144,11 +144,11 @@ window.DIVISION_retail = {
           feedback: { ar: "💚 لاحظت آخر وحدة؟ احترام الرفض يبني ثقة، والثقة ترجّعه لك مرة ثانية. الرفض قرار، مو معركة.", en: "💚 Notice the last one? Respecting a no builds trust, and trust brings him back. A no is a decision, not a battle." }
         },
         {
-          instruction: { ar: "زبونة في باث آند بودي ووركس. وصّل كل مواصفة بالإحساس اللي يخليها تاخذه.", en: "A customer at Bath & Body Works. Match each feature to the feeling that makes her take it." },
+          instruction: { ar: "زبونة في ألتا بيوتي. وصّل كل مواصفة بالإحساس اللي يخليها تاخذه.", en: "A customer at Ulta Beauty. Match each feature to the feeling that makes her take it." },
           media: "retailR2_q6",
           pairs: [
-            { left: { ar: "أحمر شفاه مرطّب", en: "Hydrating lipstick" }, right: { ar: "لون يضل، وشفايف ما تنشف طول اليوم", en: "Colour that stays and lips that never dry out" } },
-            { left: { ar: "كزبونة جسم برائحة فانيلا", en: "Vanilla body cream" }, right: { ar: "دفء يمشي معك من الصبح", en: "A warmth that travels with you all morning" } },
+            { left: { ar: "أحمر شفاه مرطّب", en: "Hydrating lipstick" }, right: { ar: "لون يثبت، وشفايف تحس براحة وقت أطول", en: "Colour that stays and lips that feel comfortable for longer" } },
+            { left: { ar: "كريم جسم برائحة فانيلا", en: "Vanilla body cream" }, right: { ar: "دفء يمشي معك من الصبح", en: "A warmth that travels with you all morning" } },
             { left: { ar: "أساس بتغطية خفيفة", en: "Light-coverage foundation" }, right: { ar: "بشرتك تتنفّس، وكأنك بدون مكياج", en: "Your skin breathes, like you're wearing nothing" } },
             { left: { ar: "عطر حمضيات", en: "Citrus fragrance" }, right: { ar: "أول رشة تفتح يومك", en: "One spray and your day starts" } }
           ],
@@ -158,9 +158,9 @@ window.DIVISION_retail = {
           instruction: { ar: "وصّل اختيار الزبونة بالإضافة اللي تكمّل الروتين، مو اللي تكبّر الفاتورة.", en: "Match her choice to the add-on that completes the routine, not the one that grows the bill." },
           media: "retailR2_q7",
           pairs: [
-            { left: { ar: "زبونة أخذت عطر من باث آند بودي ووركس", en: "A customer took a Bath & Body Works mist" }, right: { ar: "لوشن بنفس الرائحة يثبّتها أطول بمرتين", en: "The matching lotion that makes it last twice as long" } },
-            { left: { ar: "أخذت أحمر شفاه", en: "She took a lipstick" }, right: { ar: "مثبّت يخلّيه يصمد للعشاء", en: "A setter so it survives dinner" } },
-            { left: { ar: "أخذت كزبونة أساس من ألتا بيوتي", en: "She took a foundation at Ulta Beauty" }, right: { ar: "إسفنجة تعطي تطبيق أنعم", en: "A sponge for a smoother finish" } },
+            { left: { ar: "زبونة أخذت عطر من باث آند بودي ووركس", en: "A customer took a Bath & Body Works mist" }, right: { ar: "لوشن بنفس الرائحة يساعدها تثبت وقت أطول", en: "The matching lotion that helps the scent last longer" } },
+            { left: { ar: "أخذت أحمر شفاه", en: "She took a lipstick" }, right: { ar: "محدد شفاه يحافظ على الشكل", en: "A lip liner so the shape stays sharp" } },
+            { left: { ar: "أخذت كريم أساس من ألتا بيوتي", en: "She took a foundation at Ulta Beauty" }, right: { ar: "إسفنجة تعطي تطبيق أنعم", en: "A sponge for a smoother finish" } },
             { left: { ar: "أخذت غسول وجه من بوتس", en: "She took a face wash at Boots" }, right: { ar: "مرطّب يكمّل الروتين", en: "A moisturizer that completes the routine" } }
           ],
           feedback: { ar: "⭐ كل إضافة هنا لها سبب منطقي يخدم الزبونة. هذا الفرق بين «توصية» و«بيع بالضغط».", en: "⭐ Every add-on here has a logical reason that serves her. That's the line between a recommendation and a hard sell." }
@@ -296,12 +296,12 @@ window.DIVISION_retail = {
           scenario: { ar: "زبون عند الكاشير: «السعر على الرف مكتوب 199، وأنت تقول 249؟»", en: "A customer at the till: \"The shelf says 199 and you're saying 249?\"" },
           media: "retailR4_q3",
           options: [
-            { ar: "أتأكد بهدوء، وإذا فيه خطأ أصلحه وأشكره إنه نبّهنا", en: "Calmly verify, fix it if it's our error, and thank him for flagging it" },
+            { ar: "أتأكد بهدوء من سعر الرف، وأعتذر عن اللبس، وأتبع الإجراء المعتمد للتصحيح", en: "Calmly verify the shelf price, apologize for the confusion, and follow the approved correction process" },
             { ar: "أوضّح له إن السعر بالنظام هو المعتمد دايماً", en: "Explain that the system price is always the official one" },
-            { ar: "أنادي المشرف وأخلّيه يتصرّف", en: "Call the supervisor and let them handle it" }
+            { ar: "أقول له إن ملصق الرف قديم وآخذ سعر النظام", en: "Tell him the shelf label must be outdated and charge the system price" }
           ],
           correct: 0,
-          feedback: { ar: "⭐ الهدوء + الحل العادل = ثقة. والشكر يحوّل «شكوى» إلى «خدمة». الهروب للمشرف يخلّي الزبون يحس إنك مو معه.", en: "⭐ Calm plus a fair fix equals trust. The thank-you turns a complaint into service. Passing it to a supervisor makes him feel you're not on his side." }
+          feedback: { ar: "⭐ الهدوء + الإجراء المعتمد = ثقة. الرجوع للمشرف للاعتماد شي عادي، بس تتركه لحاله لا. ولو لمت الملصق، صارت مشكلته مو مشكلتنا.", en: "⭐ Calm plus the approved process equals trust. Escalating for authorization is fine, walking away from him is not. Blaming the label makes it his problem, not ours." }
         },
         {
           scenario: { ar: "أنت مع زبون، وتحس بزبون ثاني واقف من دقيقة ينتظر ويتنهد. بدأ يضيق.", en: "You're with a customer, and you can feel another one waiting for a minute, sighing. He's losing patience." },
@@ -315,26 +315,26 @@ window.DIVISION_retail = {
           feedback: { ar: "🔥 3 ثواني تنقذ زبونين! لا استعجلت الأول ولا تجاهلت الثاني. جملة وحدة تخلّيه يحس مرئي، والانتظار يصير مقبول.", en: "🔥 Three seconds saves two customers! You didn't rush the first or ignore the second. One sentence makes him feel seen, and waiting becomes acceptable." }
         },
         {
-          scenario: { ar: "زبون خلّص شراءه وهو مبسوط، وواقف عند الكاشير ينتظر الكيس.", en: "A customer finished his purchase happy, standing at the till waiting for his bag." },
+          scenario: { ar: "زبون عند الكاشير ومبسوط باختياره، وأنت على وشك تسجّل الطلب.", en: "A customer is at the till, happy with his choice, and you are about to ring it up." },
           media: "retailR4_q5",
           options: [
             { ar: "أعطيه الكيس بابتسامة وأقول «تسلم»", en: "Hand him the bag with a smile and say \"thanks\"" },
-            { ar: "أشكره بصدق، أعرّفه على أورا، وأدعوه يرجع", en: "Thank him sincerely, introduce Aura, and invite him back" },
+            { ar: "أعرض عليه أورا قبل الدفع، وأشكره بصدق، وأدعوه يرجع", en: "Offer Aura before payment, thank him sincerely, and invite him back" },
             { ar: "أخلّص بسرعة عشان الطابور وراه", en: "Wrap up fast because of the queue behind him" }
           ],
           correct: 1,
-          feedback: { ar: "💚 الابتسامة حلوة، بس ضاعت فرصة! هذي اللحظة اللي يتذكرها. شكر + أورا + دعوة ترجع = زبون دايم، مو عملية بيع.", en: "💚 The smile is nice, but you left value on the table! This is the moment he remembers. Thanks + Aura + an invite equals a regular, not a transaction." }
+          feedback: { ar: "💚 التوقيت مهم! أورا لازم تكون قبل الدفع، بعده تصير متأخرة. شكر + أورا + دعوة ترجع = زبون دايم، مو عملية بيع.", en: "💚 Timing matters! Aura has to come before payment, after it is too late. Thanks + Aura + an invite equals a regular, not a transaction." }
         },
         {
-          scenario: { ar: "زبونة رجعت بعد يومين: «كزبونة الأساس اللي أخذته لونه ما ضبط معي أبداً».", en: "A customer returns two days later: \"The foundation I bought doesn't match me at all.\"" },
+          scenario: { ar: "زبونة رجعت بعد يومين: «كريم الأساس اللي أخذته لونه ما ضبط معي أبداً».", en: "A customer returns two days later: \"The foundation I bought doesn't match me at all.\"" },
           media: "retailR4_q6",
           options: [
             { ar: "أشرح لها إن الدرجة تختلف بإضاءة المحل عن البيت", en: "Explain that shades look different in store lighting versus at home" },
             { ar: "أوجّهها لخدمة الزبائن عشان الاستبدال", en: "Direct her to customer service for the exchange" },
-            { ar: "أعتذر، وأساعدها تلاقي الدرجة الصح، وأجرّبها على الفك مو اليد", en: "Apologize, help her find the right shade, and test it on the jaw not the hand" }
+            { ar: "أعتذر، وأتحقق من سياسة الاستبدال المعتمدة، وأساعدها تلاقي الدرجة الأقرب", en: "Apologize, check the approved exchange policy, and help her find a closer shade match" }
           ],
           correct: 2,
-          feedback: { ar: "⭐ حل فعلي + معلومة تفيدها! الاختبار على الفك مو على اليد يمنع تتكرر الغلطة. علّمتيها شي، فصرتي مصدر ثقة مو بائعة.", en: "⭐ A real fix plus something useful! Testing on the jaw not the hand stops it happening again. You taught her something, so now you're a trusted source, not a salesperson." }
+          feedback: { ar: "⭐ السياسة أول، وبعدين المساعدة. لا توعدين باستبدال ما تقدرين تعتمدينه. وتجربة الدرجة على خط الفك تعطي نتيجة أدق من اليد.", en: "⭐ Policy first, then help. Never promise an exchange you cannot approve. Matching the shade on the jawline gives a more reliable result than the hand." }
         },
         {
           scenario: { ar: "زبونة في ألتا بيوتي واقفة قدام التسترات، تبي تجرّب بس مترددة وتقول «ما أدري منو استخدمه قبلي».", en: "A customer at Ulta Beauty hovers over the testers, wanting to try but hesitant: \"I don't know who used this before me.\"" },

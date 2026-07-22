@@ -3,7 +3,9 @@
 **Purpose of this file:** paste it (or upload it) at the start of a new chat, together with `ksa-gamification.zip`, so work can continue with no loss of context.
 
 **Owner:** Ahmed Abdelsalam — Customer Experience Hub team, Alshaya Group (ahmed.abdelsalam@alshaya.com)
-**Last updated:** 19 July 2026 (PRIVACY REDESIGN: active list removed from Google Sheets, offline completion-report.html added)
+**Last updated:** 22 July 2026 (post-review content corrections, duplicate-feedback fix, roster auto-fill)
+
+> **Content review status:** an external review (7/10, potential 9/10) was actioned on 22 July. All *verified factual/policy/Arabic* errors are FIXED. Remaining reviewer recommendations that are judgement calls (difficulty balance, distractor realism, HOS-R3 repetition, bonus-round differentiation) are NOT yet done — see section 13.
 
 ---
 
@@ -271,7 +273,24 @@ Every play appends ONE row to `Scores`. Reporting de-duplicates by Emp ID: **uni
 
 ---
 
+## 12b. Hard-won gotchas (do not repeat these)
+
+1. **NEVER bulk find/replace Arabic substrings.** Removing personal names with a blind `ريم → زبونة` replace silently corrupted `كريم` (cream) into `كزبونة` in 3 places. It survived weeks and was caught by an external reviewer, not by validation. If a replace is unavoidable, anchor on word boundaries and diff the output.
+2. **Adapters must not render their own feedback panel.** The round's `draw()` already creates one and calls `showFb()`. The `speed` adapter created a second `.fb` div, so the explanation appeared twice on screen. Any new mechanic must rely on the round's `fb`.
+3. **Bidi isolation matters.** Names, brands, comments and question text carry `unicode-bidi:isolate` so an Arabic name inside an English UI (or vice versa) does not drag digits/punctuation to the wrong side. All CSS is logical (`text-align:start`, `inset-inline-*`) — never introduce `left:`/`right:`/`margin-left` etc.
+4. **Loyalty (Aura) timing is a recurring content trap.** Points must be offered BEFORE payment. Two questions shipped with scenarios where the customer had already paid but the correct answer said "collect points before payment". Check any new loyalty question against its own timeline.
+5. **Policy-sensitive content needs Ops/Brand sign-off** — returns/exchanges (especially opened cosmetics), price overrides, testers, giveaways, product performance claims. Do not assert what the company may not permit.
+6. **Validate after every content edit**: `node --check` all JS; zero Latin inside `ar:` fields; zero Arabic-Indic digits; no em dashes; retail/starbucks have no `عميل/عملاء`; hospitality has no `زبون/زبائن`; all media keys resolve.
+
 ## 13. Next steps / open items
+
+**Content review follow-ups (NOT yet done — need your call):**
+0a. **Distractor realism** — reviewer is right that many wrong options are obviously careless ("ignore it, maybe they won't notice"). Should be "reasonable but incomplete" instead. Affects ~20-25 questions.
+0b. **Difficulty balance** — currently ~80-85% easy; target 55% easy / 35% medium / 10% stretch.
+0c. **HOS-R3 repetition** — Q1/Q3/Q4/Q5 all teach thank + invite + farewell. Replace 2-3 with different closing moments.
+0d. **Bonus-round differentiation** — the 3 divisions' R5 use near-identical patterns; make them division-specific.
+0e. **SBX-R3 True/False too obvious** — add nuanced statements.
+0f. **Ops/Brand sign-off** required on any question touching returns, price overrides, testers, loyalty timing, product claims.
 
 **Awaiting user decision:**
 1. **4 mini-games per world** (Bag Drop / Burger Stack / Cup Stack + unique Tag Pop / Order Up / Bean Catch) — proposed, not built. Currently 3 games rotate.

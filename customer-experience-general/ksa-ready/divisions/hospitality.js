@@ -43,12 +43,12 @@ window.DIVISION_hospitality = {
           feedback: { ar: "🔥 لحظة ذهبية! الضيف الجديد يقرر إحساسه عن المكان خلال ثواني. الترحيب الحار يشيل التوتر ويخلّيه يحس إنه بالمكان الصح.", en: "🔥 Golden moment! A first-timer decides how they feel about the place in seconds. A warm welcome kills the nerves and says: you're in the right place." }
         },
         {
-          guest: { ar: "بي إف تشانغز. ضيف من الزباين الدايمين دخل، وتعرف وجهه من زيارات كثيرة.", en: "P.F. Chang's. A regular walks in, a face you know from many visits." },
+          guest: { ar: "بي إف تشانغز. ضيف دائم يزورنا باستمرار دخل، وتعرف وجهه من زيارات كثيرة.", en: "P.F. Chang's. A regular walks in, a face you know from many visits." },
           media: "hospR1_q2",
           replies: [
             { ar: "«السلام عليكم، اطلب عادي»", en: "\"Hello, go ahead and order\"" },
             { ar: "«وش تبي اليوم؟»", en: "\"What do you want today?\"" },
-            { ar: "«هلا والله! حمدلله على السلامة، نفس طلبك المعتاد ولا تحب تجرّب جديد؟»", en: "\"Great to see you again! Your usual today, or shall we try something new?\"" }
+            { ar: "«هلا والله، نوّرتنا من جديد! نفس طلبك المعتاد ولا ودّك تجرّب شي جديد؟»", en: "\"Great to see you again! Your usual today, or shall we try something new?\"" }
           ],
           correct: 2,
           feedback: { ar: "💚 هذي اللحظة اللي تصنع الولاء! إنك تتذكره يعني إنه مو رقم. رحّب فيه، واحترم عادته، وافتح له باب للجديد.", en: "💚 This is where loyalty is made! Remembering them says they're not a number. Welcome them, respect the usual, and leave a door open for something new." }
@@ -209,9 +209,9 @@ window.DIVISION_hospitality = {
             { ar: "اشكره إنه دايم يختارنا", en: "Thank them for always choosing us" },
             { ar: "اذكر مزايا أورا أو عروض قادمة", en: "Mention Aura benefits or what's coming up" },
             { ar: "أشعره إن وجوده فرّق معنا", en: "Make them feel their presence mattered" },
-            { ar: "ودّعه: «حمدلله على شرفتنا، ننتظرك المرة الجاية»", en: "Farewell: \"thank you for honouring us, see you next time\"" }
+            { ar: "ودّعه: «شكراً إنك دايم تشرّفنا، ونشوفك على خير»", en: "Farewell: \"thank you for honouring us, see you next time\"" }
           ],
-          feedback: { ar: "🎯 الضيف الدايم ما يبي خصم، يبي يحس إنه مرئي. كلمة «دايم تختارنا» تسوى أكثر من أي عرض.", en: "🎯 A regular doesn't want a discount, they want to feel seen. \"You always choose us\" is worth more than any offer." }
+          feedback: { ar: "🎯 الضيف الدائم ما يبي خصم، يبي يحس إنك متذكره ومقدّره. كلمة «دايم تختارنا» تسوى أكثر من أي عرض.", en: "🎯 A regular doesn't want a discount, they want to feel remembered and valued. \"You always choose us\" is worth more than any offer." }
         },
         {
           instruction: { ar: "من آخر لقمة لين باب المطعم. رتّب الرحلة كاملة.", en: "From the last bite to the door. Order the whole journey." },
@@ -286,7 +286,7 @@ window.DIVISION_hospitality = {
           scenario: { ar: "تشيبوتلي. ضيف نبّهك بهدوء إن الطاولة ما كانت نظيفة وقت ما وصلوا.", en: "Chipotle. A guest quietly mentions the table wasn't clean when they arrived." },
           media: "hospR4_q5",
           options: [
-            { ar: "أقول له إن الفرقة مزحومة اليوم وأنظّفها", en: "Say the team is slammed today, then clean it" },
+            { ar: "أقول له إن الفريق مضغوط اليوم وأنظّفها", en: "Say the team is slammed today, then clean it" },
             { ar: "أنادي زميلي المسؤول عن النظافة", en: "Call the teammate responsible for cleaning" },
             { ar: "أعتذر، أنظّفها فوراً، وأشكره إنه نبّهنا", en: "Apologize, clean it immediately, and thank them for telling us" }
           ],

@@ -553,7 +553,9 @@
         btns.appendChild(no); btns.appendChild(yes); area.appendChild(btns);
       }
     },
-    /* SPEED — quick-fire true/false with instant feedback (Starbucks R3) */
+    /* SPEED — quick-fire true/false. Note: the round's draw() already renders
+       the shared feedback panel via showFb(), so this adapter must NOT create
+       its own, or the explanation appears twice. */
     speed: {
       answered: function (a) { return a === true || a === false; },
       correct: function (q, a) { return a === !!q.isTrue; },
@@ -563,20 +565,17 @@
         var btns = el("div", "speed-btns");
         var no = el("button", "speed-btn no", "✕ " + u("sFalse"));
         var yes = el("button", "speed-btn yes", "✓ " + u("sTrue"));
-        var fb = el("div", "fb");
         function paint(v) {
           if (v == null) return;
-          [no, yes].forEach(function (b) { b.disabled = true; b.classList.remove("sel"); });
+          [no, yes].forEach(function (b) { b.disabled = true; });
           var right = !!q.isTrue;
           (right ? yes : no).classList.add("ok");
           if (v !== right) (v ? yes : no).classList.add("bad");
-          fb.className = "fb show " + (v === right ? "ok" : "no");
-          fb.textContent = fbText(q, "speed", v === right);
         }
         no.onclick = function () { onAnswer(false); paint(false); };
         yes.onclick = function () { onAnswer(true); paint(true); };
         btns.appendChild(no); btns.appendChild(yes);
-        area.appendChild(btns); area.appendChild(fb);
+        area.appendChild(btns);
         if (saved != null) paint(saved);
       }
     },

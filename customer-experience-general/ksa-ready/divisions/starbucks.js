@@ -58,10 +58,10 @@ window.DIVISION_starbucks = {
           feedback: { ar: "🎯 باب مفتوح على مصراعيه! السؤال عن الطعم يعني «أقنعني». احكِ قصة المشروب بحماس صادق، أو اعرض عليه عيّنة.", en: "🎯 A wide open door! Asking about taste means \"convince me\". Tell the drink's story with real enthusiasm, or offer a sample." }
         },
         {
-          prompt: { ar: "زبون داخل بسرعة، يطالع ساعته كل ثانيتين، وطلبه جاهز بالتطبيق.", en: "A customer rushes in, checking their watch every two seconds, with a mobile order already placed." },
+          prompt: { ar: "زبون داخل بسرعة، يطالع ساعته كل ثانيتين. طلب مسبقاً من التطبيق وجاي يستلم بس.", en: "A customer rushes in, checking their watch every two seconds. They ordered ahead on the app and just need to collect." },
           media: "sbuxR1_q5",
           isOpportunity: false,
-          feedback: { ar: "✅ فهمت الزبون! هذا يبي سرعة، مو محادثة. سلّمه طلبه بابتسامة وباسمه، وخلاص. السرعة نفسها هي التواصل هنا.", en: "✅ You get it! He wants speed, not conversation. Hand off the drink with a smile and his name, done. Here, speed IS the connection." }
+          feedback: { ar: "✅ فهمت الزبون! هذا يبي سرعة، مو محادثة. تسليم سريع ودقيق باسمه هو التواصل هنا، ولا تعطّله بكلام زايد.", en: "✅ You get it! He wants speed, not conversation. A fast, accurate hand-off with his name IS the connection here. Do not slow him down with extra chat." }
         }
       ]
     },
@@ -83,7 +83,7 @@ window.DIVISION_starbucks = {
           pairs: [
             { left: { ar: "يبي شي ينبّهه بسرعة", en: "Wants something to wake him up fast" }, right: { ar: "إسبريسو قوي وسريع", en: "A strong, quick espresso" } },
             { left: { ar: "يبي شي خفيف وبارد بالصيف", en: "Wants something light and cold in summer" }, right: { ar: "مشروب مثلّج منعش", en: "An iced, refreshing option" } },
-            { left: { ar: "يبي شي دافئ وهادي بالمساء", en: "Wants something warm and calm in the evening" }, right: { ar: "خيار بدون كافيين", en: "A decaf option" } },
+            { left: { ar: "يبي طعم القهوة بالمساء بدون كافيين", en: "Wants coffee flavour in the evening without the caffeine" }, right: { ar: "خيار بدون كافيين", en: "A decaf option" } },
             { left: { ar: "يبي شي حلو يشبه الحلى", en: "Wants something sweet, dessert-like" }, right: { ar: "فرابتشينو بالكريمة", en: "A frappuccino with cream" } }
           ],
           feedback: { ar: "🔥 اسمع قبل ما ترشّح! التوصية مو تخمين، هي جواب على شي قاله الزبون. هذا الفرق بين شريك ومسجّل طلبات.", en: "🔥 Listen before you recommend! A recommendation isn't a guess, it's an answer to something they told you. That's the gap between a partner and an order-taker." }
@@ -105,7 +105,7 @@ window.DIVISION_starbucks = {
           pairs: [
             { left: { ar: "ابدأ بالاسم", en: "Start with the name" }, right: { ar: "«هذا مشروبنا الموسمي الجديد»", en: "\"This is our new seasonal drink\"" } },
             { left: { ar: "استخدم وصف حسّي", en: "Use sensory words" }, right: { ar: "«كريمي وناعم مع لمسة قرفة دافئة»", en: "\"Creamy and smooth with a warm cinnamon note\"" } },
-            { left: { ar: "وضّح المميز", en: "Say what makes it special" }, right: { ar: "«محضّر بحبوب محمّصة تحميص متوسط»", en: "\"Made with our medium-roast beans\"" } },
+            { left: { ar: "وضّح المميز", en: "Say what makes it special" }, right: { ar: "«له نكهة موسمية مميزة مع توبنق خاص»", en: "\"Finished with a distinctive seasonal flavour and topping\"" } },
             { left: { ar: "ادعه يجرّب", en: "Invite them to try" }, right: { ar: "«تحب تجرّب عيّنة صغيرة؟»", en: "\"Would you like a small sample?\"" } }
           ],
           feedback: { ar: "⭐ اسم، إحساس، سر، دعوة. القصة تخلّي المشروب يستاهل التجربة قبل ما يذوقه.", en: "⭐ Name, feeling, secret, invite. The story makes the drink worth trying before they've tasted it." }
@@ -224,11 +224,11 @@ window.DIVISION_starbucks = {
           feedback: { ar: "⭐ اسمع أول! الزبون الغاضب يبي يحس إنه مسموع قبل ما يبي حل. «أعتذر إن مشروبك ما كان زي ما تتوقع» تفتح الباب، والدفاع يقفله.", en: "⭐ Listen first! An angry customer needs to feel heard before they need a fix. \"I'm sorry your drink wasn't what you expected\" opens the door. Defending shuts it." }
         },
         {
-          scenario: { ar: "زبون دايم، يجي كل صباح، وخلّص طلبه وقاعد ينتظر مشروبه.", en: "A regular who comes every morning has paid and is waiting for his drink." },
+          scenario: { ar: "زبون دايم يجي كل صباح، ووصل للكاشير عشان يطلب طلبه المعتاد.", en: "A regular who comes every morning reaches the till for his usual order." },
           media: "sbuxR4_q4",
           options: [
             { ar: "أسلّمه مشروبه بابتسامة وأقول «تفضل»", en: "Hand him the drink with a smile and say \"here you go\"" },
-            { ar: "أشكره إنه دايم يجينا، وأتأكد إنه جمّع نقاطه قبل الدفع", en: "Thank him for always coming back and make sure he collected his points before payment" },
+            { ar: "أتعرّف عليه، وأأكّد طلبه المعتاد، وأطبّق نقاطه قبل الدفع، وأشكره", en: "Recognise him, confirm his usual, apply his rewards before payment, and thank him" },
             { ar: "أخلّص بسرعة عشان الطابور وراه", en: "Move fast because of the queue behind him" }
           ],
           correct: 1,
@@ -263,7 +263,7 @@ window.DIVISION_starbucks = {
       questions: [
         { prompt: { ar: "بداية شفت الذروة؟", en: "Your peak shift starts?" },
           media: "sbuxR5_q1",
-          options: [ { ar: "أدخل حاضر ومركّز على الزبون", en: "Arrive present and guest-focused" }, { ar: "أدخل متوتر ومشتت", en: "Arrive tense and scattered" } ],
+          options: [ { ar: "أدخل حاضر ومركّز على الزبون", en: "Arrive present and customer-focused" }, { ar: "أدخل متوتر ومشتت", en: "Arrive tense and scattered" } ],
           correct: 0, feedback: { ar: "⚡ طاقتك تنتقل لكل كوب تحضّره.", en: "⚡ Your energy transfers into every cup you make." } },
         { prompt: { ar: "زبون داخل والطابور طويل؟", en: "A customer walks in and the line is long?" },
           media: "sbuxR5_q2",
