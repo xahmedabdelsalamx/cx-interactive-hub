@@ -60,7 +60,28 @@ window.BRANDS = [
   { en:"Asha's",                   ar:"آشاز",                    world:"hospitality" },
   { en:"Chipotle",                 ar:"تشيبوتلي",                world:"hospitality" },
   { en:"Raising Cane's",           ar:"رايزينغ كينز",            world:"hospitality" },
-  { en:"Shake Shack",              ar:"شيك شاك",                 world:"hospitality" }
+  { en:"Shake Shack",              ar:"شيك شاك",                 world:"hospitality" },
+  /* --- added from the company brand directory --- */
+  { en:"Texas Roadhouse", ar:"تكساس رودهاوس", world:"hospitality" },
+  { en:"PizzaExpress", ar:"بيتزا إكسبريس", world:"hospitality" },
+  { en:"Le Pain Quotidien", ar:"لو بان كوتيديان", world:"hospitality" },
+  { en:"Princi", ar:"برينشي", world:"hospitality" },
+  { en:"Babel", ar:"بابل", world:"hospitality" },
+  { en:"Bebabel", ar:"بي بابل", world:"hospitality" },
+  { en:"Ahwet Zeitouna", ar:"قهوة زيتونة", world:"hospitality" },
+  { en:"Amiti Noura", ar:"عمتي نورة", world:"hospitality" },
+  { en:"D&D Cafe - Dean & DeLuca", ar:"دي آند دي كافيه - دين آند ديلوكا", world:"hospitality" },
+  { en:"Debenhams", ar:"دبنهامز", world:"retail" },
+  { en:"VaVaVoom", ar:"فافافوم", world:"retail" },
+  { en:"ALO Yoga", ar:"ألو يوغا", world:"retail" },
+  { en:"Le Labo", ar:"لو لابو", world:"retail" },
+  { en:"Dr. Vranjes Firenze", ar:"دكتور فرانجيس فيرينزي", world:"retail" },
+  { en:"Clinique", ar:"كلينيك", world:"retail" },
+  { en:"Estée Lauder", ar:"إستي لودر", world:"retail" },
+  { en:"Tom Ford Beauty", ar:"توم فورد بيوتي", world:"retail" },
+  { en:"Harvey Nichols Cosmetics", ar:"هارفي نيكولز لمستحضرات التجميل", world:"retail" },
+  { en:"TEKZONE / Family Entertainment Centre", ar:"تك زون / مركز الترفيه العائلي", world:"retail" },
+  { en:"QUEST", ar:"كويست", world:"retail" }
 ];
 
 /* ============================================================

@@ -3,10 +3,13 @@
 **Purpose of this file:** paste it (or upload it) at the start of a new chat, together with `ksa-gamification.zip`, so work can continue with no loss of context.
 
 **Owner:** Ahmed Abdelsalam — Customer Experience Hub team, Alshaya Group (ahmed.abdelsalam@alshaya.com)
-**Last updated:** 22 July 2026 (review round 2 applied, brand-code directory, roster auto-fill, duplicate-feedback fix)
+**Last updated:** 22 July 2026 (review round 3 applied — LAUNCH CANDIDATE. 50 brands, brand-code directory, two true/false answer-key bugs fixed)
 
 > **Content review status:** TWO review rounds actioned (22 July). Round 1 fixed factual/policy/Arabic errors. Round 2 fixed: ~25 distractors rewritten from "obviously careless" to "plausible but incomplete"; exaggerated claims softened (no more "you know everything", "saved a customer for life", "a discount buys silence"); RET-R1-Q7 and SBX-R1-Q5 ambiguity resolved; RET-R3-Q4 sequence made logical; SBX-R2-Q2 pairings given unique context; SBX-R3 true/false made nuanced; HOS-R4-Q4 Pinkberry moved to the counter (Aura before payment); Arabic polish pass.
-> **Still open:** order-round repetition (RET-R3 five similar questions, HOS-R3 four similar) — needs 2-3 questions REPLACED with different moments, not just reworded. Bonus rounds still share a common pattern across divisions.
+> **Round 3 (final):** fixed TWO LAUNCH BLOCKERS — SBX-R3-Q2 and Q5 had `isTrue: true` while their feedback taught the opposite (caused by replacing statement text in round 2 without flipping the answer key). SBX-R3-Q4 replaced (duplicated Q2) and the round rebalanced to 2 true / 3 false so the pattern isn't guessable. Also: RET-R5-Q5 now tests acknowledgement vs silence; RET-R5-Q9 no longer assumes a spare tester exists; HOS-R3-Q1/Q4 step order made causal; remaining absolute claims softened ("can", "often", "helps"); final Arabic polish.
+> **Still open:** order-round repetition (RET-R3 five similar checkout questions, HOS-R3 similar farewells) — needs 2-3 questions REPLACED with genuinely different moments, not reworded. Bonus rounds still share a pattern across divisions. Both are content-authoring jobs best done after piloting.
+>
+> ⚠ **LESSON: when changing a true/false statement, ALWAYS re-check `isTrue`.** Swapping the text without flipping the key silently inverts the answer and the game then punishes the correct behaviour.
 
 ---
 
@@ -254,7 +257,7 @@ Every play appends ONE row to `Scores`. Reporting de-duplicates by Emp ID: **uni
 ### Preview shortcut
 `index.html?preview=pass` / `?preview=fail` (+ `&world=` `&lang=` `&gender=` `&name=`). Jumps to the result screen with sample data. Sets `state.preview=true`, which guards `post()` so preview **never writes to the backend**.
 
-## 11. Brands (30, in `config/shared.js`)
+## 11. Brands (50, in `config/shared.js`)
 
 **Retail (22):** American Eagle, Foot Locker, Victoria's Secret, H&M, Bath & Body Works, Primark, Charlotte Tilbury, & Other Stories, Boots, Claire's, COS, Disney Store, Jo Malone London, MAC, Mothercare, MUJI, New Balance, Next, NYX, The Body Shop, Ulta Beauty, **Milano** ⚠️
 **Hospitality (7):** The Cheesecake Factory, P.F. Chang's, Pinkberry, Asha's, Chipotle, Raising Cane's, Shake Shack
@@ -281,7 +284,8 @@ Every play appends ONE row to `Scores`. Reporting de-duplicates by Emp ID: **uni
 3. **Bidi isolation matters.** Names, brands, comments and question text carry `unicode-bidi:isolate` so an Arabic name inside an English UI (or vice versa) does not drag digits/punctuation to the wrong side. All CSS is logical (`text-align:start`, `inset-inline-*`) — never introduce `left:`/`right:`/`margin-left` etc.
 4. **Loyalty (Aura) timing is a recurring content trap.** Points must be offered BEFORE payment. Two questions shipped with scenarios where the customer had already paid but the correct answer said "collect points before payment". Check any new loyalty question against its own timeline.
 5. **Policy-sensitive content needs Ops/Brand sign-off** — returns/exchanges (especially opened cosmetics), price overrides, testers, giveaways, product performance claims. Do not assert what the company may not permit.
-6. **Validate after every content edit**: `node --check` all JS; zero Latin inside `ar:` fields; zero Arabic-Indic digits; no em dashes; retail/starbucks have no `عميل/عملاء`; hospitality has no `زبون/زبائن`; all media keys resolve.
+6. **True/false answer keys**: changing a `statement` without re-checking `isTrue` inverts the answer. Two questions shipped this way in review round 2 and had to be caught by an external reviewer. After any speed-mechanic edit, assert that the feedback text agrees with `isTrue`.
+7. **Validate after every content edit**: `node --check` all JS; zero Latin inside `ar:` fields; zero Arabic-Indic digits; no em dashes; retail/starbucks have no `عميل/عملاء`; hospitality has no `زبون/زبائن`; all media keys resolve.
 
 ## 13. Next steps / open items
 

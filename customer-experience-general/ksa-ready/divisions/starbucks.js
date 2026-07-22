@@ -155,26 +155,26 @@ window.DIVISION_starbucks = {
         {
           statement: { ar: "وقت الذروة، ممكن نتخطى تأكيد المشروب إذا كان الملصق واضح.", en: "During peak, confirming the drink can be skipped when the label is clearly visible." },
           media: "sbuxR3_q2",
-          isTrue: true,
+          isTrue: false,
           feedback: { ar: "الملصق يبيّن اللي تحضّر، مو اللي توقعه الزبون. التأكيد بصوت هو آخر فرصة تمسك طلب غلط، وتكلفته ثانيتين.", en: "The label shows what was made, not what they expected. Confirming out loud is the last chance to catch a wrong order, and it costs two seconds." }
         },
         {
-          statement: { ar: "وقت الزحمة، الأفضل تسكت وتشتغل بسرعة بدون ما تتكلم مع الزبائن.", en: "When it's busy, it's better to go quiet and work fast without talking to customers." },
+          statement: { ar: "إبقاء الزبون على علم وقت الزحمة يخلّي الانتظار يحس أقصر.", en: "Keeping customers informed during a rush makes the wait feel shorter." },
           media: "sbuxR3_q3",
-          isTrue: false,
-          feedback: { ar: "الصمت هو اللي يطوّل الانتظار! الزبون اللي يعرف وش يصير ينتظر بصبر. خلّهم على علم، ولو بكلمة وحدة.", en: "Silence is what makes the wait feel long! A customer who knows what's happening waits patiently. Keep them informed, even with one word." }
-        },
-        {
-          statement: { ar: "تأكيد كل مشروب قبل التسليم يمنع أغلب الأخطاء والإحباط.", en: "Confirming every beverage before hand-off prevents most mistakes and frustration." },
-          media: "sbuxR3_q4",
           isTrue: true,
-          feedback: { ar: "صح! ثانيتين تأكيد توفّر عليك إعادة تحضير وزبون منزعج. التأكيد أرخص من التصحيح.", en: "True! Two seconds of confirming saves you a remake and an upset customer. Confirming is cheaper than correcting." }
+          feedback: { ar: "صح! عدم الوضوح هو اللي يطوّل الانتظار. كلمة وحدة توضّح الوضع تخفف الانزعاج كثير.", en: "True! Uncertainty is what stretches a wait. One clear word about what is happening often takes the frustration out of it." }
         },
         {
-          statement: { ar: "الزبون اللي لبس سماعاته بعد ما طلب، ما ينفع نكلّمه مرة ثانية.", en: "A customer who put on headphones after ordering should not be approached again." },
+          statement: { ar: "العيّنة تعتبر ناجحة فقط إذا اشترى الزبون المشروب.", en: "A sample is successful only when the customer buys the featured drink." },
+          media: "sbuxR3_q4",
+          isTrue: false,
+          feedback: { ar: "العيّنة تنجح لما تثير الفضول وتصنع لحظة اكتشاف حلوة. البيع ممكن يجي بعدها، بس الضغط مو الهدف.", en: "A sample succeeds when it creates curiosity and a positive discovery moment. A sale may follow, but pressure is not the goal." }
+        },
+        {
+          statement: { ar: "الزبون اللي لابس سماعاته يستاهل تسليم دقيق باسمه، حتى لو ما نبي ندردش معه.", en: "A customer wearing headphones still deserves an accurate hand-off with their name." },
           media: "sbuxR3_q5",
           isTrue: true,
-          feedback: { ar: "السماعات تعني «ما أبي دردشة»، مو «لا تخدمني». تسلّم باسمه وتتأكد إن الطلب صح. اقرأ الإشارة، بس لا تختفي.", en: "Headphones mean do not chat, not do not serve. You still hand off by name and check the order is right. Read the signal, do not disappear." }
+          feedback: { ar: "صح! السماعات تعني «ما أبي دردشة»، مو «لا تخدمني». سلّم الطلب باسمه وتأكد إنه صح. اقرأ الإشارة، بس لا تختفي.", en: "True! Headphones mean do not chat, not do not serve. You still hand off by name and check the order is right. Read the signal, do not disappear." }
         }
       ]
     },

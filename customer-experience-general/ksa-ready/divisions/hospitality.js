@@ -43,7 +43,7 @@ window.DIVISION_hospitality = {
           feedback: { ar: "🔥 لحظة ذهبية! الضيف الجديد يقرر إحساسه عن المكان خلال ثواني. الترحيب الحار يشيل التوتر ويخلّيه يحس إنه بالمكان الصح.", en: "🔥 Golden moment! A first-timer decides how they feel about the place in seconds. A warm welcome kills the nerves and says: you're in the right place." }
         },
         {
-          guest: { ar: "بي إف تشانغز. ضيف دائم يزورنا باستمرار دخل، وتعرف وجهه من زيارات كثيرة.", en: "P.F. Chang's. A regular walks in, a face you know from many visits." },
+          guest: { ar: "بي إف تشانغز. دخل ضيف دائم تعرفه من زياراته المتكررة.", en: "P.F. Chang's. A regular walks in, a face you know from many visits." },
           media: "hospR1_q2",
           replies: [
             { ar: "«السلام عليكم، اطلب عادي»", en: "\"Hello, go ahead and order\"" },
@@ -176,7 +176,7 @@ window.DIVISION_hospitality = {
             { ar: "تأكد إن كل شي كان على ذوقهم", en: "Confirm everything was to their liking" },
             { ar: "اشكرهم بصدق على زيارتهم", en: "Thank them sincerely for visiting" },
             { ar: "ادعهم يرجعون: «نتشرّف بزيارتكم مرة ثانية»", en: "Invite them back: \"we'd love to see you again\"" },
-            { ar: "ودّعهم بابتسامة وتواصل بصري", en: "Send them off with a smile and eye contact" }
+            { ar: "تأكد إنهم ما يحتاجون شي قبل لا يمشون", en: "Check they need nothing else before they leave" }
           ],
           feedback: { ar: "💚 الوداع مو إجراء! هو آخر مشهد، واللي يتذكرونه وهم بالسيارة. اختمه دافئ وصادق.", en: "💚 The farewell isn't admin! It's the closing scene, the bit they replay in the car. Make it warm and sincere." }
         },
@@ -207,8 +207,8 @@ window.DIVISION_hospitality = {
           media: "hospR3_q4",
           steps: [
             { ar: "اشكره إنه دايم يختارنا", en: "Thank them for always choosing us" },
-            { ar: "اذكر مزايا أورا أو عروض قادمة", en: "Mention Aura benefits or what's coming up" },
             { ar: "أشعره إن وجوده فرّق معنا", en: "Make them feel their presence mattered" },
+            { ar: "اذكر مزايا أورا أو عروض قادمة", en: "Mention Aura benefits or what's coming up" },
             { ar: "ودّعه: «شكراً إنك دايم تشرّفنا، ونشوفك على خير»", en: "Farewell: \"thank you for honouring us, see you next time\"" }
           ],
           feedback: { ar: "🎯 الضيف الدائم ما يبي خصم، يبي يحس إنك متذكره ومقدّره. كلمة «دايم تختارنا» تسوى أكثر من أي عرض.", en: "🎯 A regular doesn't want a discount, they want to feel remembered and valued. \"You always choose us\" is worth more than any offer." }
@@ -253,12 +253,12 @@ window.DIVISION_hospitality = {
           scenario: { ar: "ذا تشيزكيك فاكتوري. ضيف ينتظر أكله من 25 دقيقة، وبدأ يلتفت للمطبخ كل شوي.", en: "The Cheesecake Factory. A guest has waited 25 minutes and keeps glancing toward the kitchen." },
           media: "hospR4_q2",
           options: [
-            { ar: "أنتظر شوي كمان، الطلب لازم يوصل بأي لحظة للوقت", en: "Wait a little longer, the order should arrive any minute" },
+            { ar: "أنتظر شوي زيادة، يمكن الطلب يوصل بأي لحظة للوقت", en: "Wait a little longer, the order should arrive any minute" },
             { ar: "أعتذر عن التأخير، أطمّنه إن طلبه جاي، وأتابع معه", en: "Apologize for the wait, reassure them it's coming, and keep them updated" },
             { ar: "أقول له المطبخ مزحوم اليوم وأكمل شغلي", en: "Tell them the kitchen is busy today and carry on" }
           ],
           correct: 1,
-          feedback: { ar: "🔥 لا تنتظر الشكوى! الضيف اللي يعرف وش يصير ينتظر بصبر. الصمت هو اللي يحوّل الانتظار لغضب.", en: "🔥 Don't wait for the complaint! A guest who knows what's happening waits patiently. Silence is what turns waiting into anger." }
+          feedback: { ar: "🔥 لا تنتظر الشكوى! التحديث الواضح غالباً يخلّي الانتظار أسهل تقبّلاً. الصمت هو اللي يحوّل الانتظار لغضب.", en: "🔥 Don't wait for the complaint! A clear update often makes the wait easier to accept. Silence is what turns waiting into anger." }
         },
         {
           scenario: { ar: "بي إف تشانغز. ضيف أكل نص الطبق وقال بهدوء: «طعمه مو زي ما توقّعت».", en: "P.F. Chang's. A guest has eaten half the dish and says quietly: \"This isn't what I expected.\"" },
@@ -276,7 +276,7 @@ window.DIVISION_hospitality = {
           media: "hospR4_q4",
           options: [
             { ar: "آخذ الطلب بدقة وأشكرهم بابتسامة", en: "Take the order accurately and thank them with a smile" },
-            { ar: "أأكّد الطلب بترحيب، وأعرض أورا قبل الدفع، وأدعوهم يرجعون", en: "Confirm the order warmly, offer Aura before payment, and invite them back" },
+            { ar: "أكّد الطلب بترحيب، وأعرض أورا قبل الدفع، وأدعوهم يرجعون", en: "Confirm the order warmly, offer Aura before payment, and invite them back" },
             { ar: "أخدمهم بسرعة لأن فيه طابور وراهم", en: "Serve them quickly since there is a queue behind" }
           ],
           correct: 1,
@@ -311,7 +311,7 @@ window.DIVISION_hospitality = {
       questions: [
         { prompt: { ar: "بداية شفت الذروة؟", en: "Your peak shift begins?" },
           media: "hospR5_q1",
-          options: [ { ar: "أدخل متّزن وحاضر ومركّز على الضيف", en: "Arrive centred, present, guest-focused" }, { ar: "أوصل بدري وأبدأ التجهيز على طول بدون ما أرتب نفسي", en: "Arrive early and get straight into setup without pausing" } ],
+          options: [ { ar: "أدخل متّزن وحاضر ومركّز على الضيف", en: "Arrive centred, present, guest-focused" }, { ar: "أركّز على التجهيز بس بدون ما أتواصل مع الفريق", en: "Focus only on setup without checking in with the team" } ],
           correct: 0, feedback: { ar: "⚡ تركيزك يحدد طاقة الشفت كله.", en: "⚡ Your focus sets the tone for the whole shift." } },
         { prompt: { ar: "ضيف داخل والمكان مليان؟", en: "A guest walks in and it's packed?" },
           media: "hospR5_q2",

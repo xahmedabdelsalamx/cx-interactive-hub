@@ -48,7 +48,7 @@ window.DIVISION_retail = {
           prompt: { ar: "فوت لوكر. زبون قال «بس أتفرّج، مشكور» وأعطاك ظهره وكمّل بين الأرفف.", en: "Foot Locker. A customer says \"just looking, thanks\", turns away and keeps walking the aisles." },
           media: "retailR1_q3",
           isOpportunity: false,
-          feedback: { ar: "⭐ إحساس عالي! لاحقته الحين = خسرته. أعطه مساحة، خلّك ظاهر وقريب. متفرّج اليوم ممكن يكون أوفى زبون بكرة.", en: "⭐ Great instinct! Chase him now and you lose him. Give space, stay visible. Today's browser is tomorrow's regular." }
+          feedback: { ar: "⭐ إحساس عالي! لو لاحقته الحين ممكن تنفّره. أعطه مساحة، خلّك ظاهر وقريب. متفرّج اليوم ممكن يكون أوفى زبون بكرة.", en: "⭐ Great instinct! Chasing him now can push him away. Give space, stay visible. Today's browser is tomorrow's regular." }
         },
         {
           prompt: { ar: "نكست. زبونة تسأل: «عندكم هذا بمقاس أصغر؟» وهي ماسكة فستان بيدها.", en: "Next. A customer asks: \"Do you have this in a smaller size?\" holding a dress." },
@@ -72,7 +72,7 @@ window.DIVISION_retail = {
           prompt: { ar: "شارلوت تيلبوري. زبونة جرّبت درجة أحمر شفاه، طالعتها بالضوء، وبعدين ابتعدت عن الكاونتر وتجنّبت التواصل البصري وكمّلت تقارن بهدوء لحالها.", en: "Charlotte Tilbury. A customer swatched a lipstick, checked it in the light, then stepped away from the counter, avoided eye contact and kept comparing quietly on her own." },
           media: "retailR1_q7",
           isOpportunity: false,
-          feedback: { ar: "⭐ نضج! هذي لحظة تفكير، مو لحظة بيع. أعطيها ثانيتين تقرر، وخلّيك قريبة. الضغط هنا يقتل القرار.", en: "⭐ Mature call! This is a thinking moment, not a selling moment. Give her two seconds and stay close. Pressure here kills the decision." }
+          feedback: { ar: "⭐ نضج! هذي لحظة تفكير، مو لحظة بيع. أعطيها ثانيتين تقرر، وخلّيك قريبة. الضغط هنا ممكن يقطع عليها قرارها.", en: "⭐ Mature call! This is a thinking moment, not a selling moment. Give her two seconds and stay close. Pressure here can interrupt her decision." }
         }
       ]
     },
@@ -210,7 +210,7 @@ window.DIVISION_retail = {
             { ar: "غلّف بعناية", en: "Pack with care" },
             { ar: "ودّعه ودعوة يرجع", en: "Farewell plus an invite back" }
           ],
-          feedback: { ar: "⭐ هنا يضيع أغلب البيع! الكاشير مو محطة إجراءات، هو آخر مشهد بالفيلم. وأورا هي اللي ترجّعه.", en: "⭐ This is where most sales leak! The till isn't a process station, it's the final scene of the film. And Aura is what brings him back." }
+          feedback: { ar: "⭐ هنا يضيع أغلب البيع! الكاشير مو محطة إجراءات، هو آخر مشهد بالفيلم. وأورا غالباً هي اللي ترجّعه.", en: "⭐ This is where most sales leak! The till isn't a process station, it's the final scene of the film. And Aura is often what brings him back." }
         },
         {
           instruction: { ar: "زبون ماسك قطعتين، وحدة بكل يد، ويقارن من دقيقتين. رتّب تصرّفك.", en: "A customer holds two items, one in each hand, comparing for two minutes. Order your response." },
@@ -230,7 +230,7 @@ window.DIVISION_retail = {
             { ar: "رحّب باختياره: «خيار موفّق»", en: "Acknowledge the choice: \"great pick\"" },
             { ar: "اقترح إضافة وحدة طبيعية", en: "Suggest one natural add-on" },
             { ar: "أنهِ الدفع بسلاسة", en: "Complete payment smoothly" },
-            { ar: "ودّعه بطاقة إيجابية", en: "Close with positive energy" }
+            { ar: "ودّعه بروح إيجابية", en: "Close with positive energy" }
           ],
           feedback: { ar: "🔥 إضافة وحدة. وحدة بس. الفرق بين «خدمة» و«إزعاج» هو الرقم 1.", en: "🔥 One add-on. Just one. The difference between service and annoyance is the number 1." }
         },
@@ -312,7 +312,7 @@ window.DIVISION_retail = {
             { ar: "أكمّل مع اللي معي، حقه يخلص أول", en: "Continue with my customer, he has the right to finish first" }
           ],
           correct: 1,
-          feedback: { ar: "🔥 3 ثواني تنقذ زبونين! لا استعجلت الأول ولا تجاهلت الثاني. جملة وحدة تخلّيه يحس مرئي، والانتظار يصير مقبول.", en: "🔥 Three seconds saves two customers! You didn't rush the first or ignore the second. One sentence makes him feel seen, and waiting becomes acceptable." }
+          feedback: { ar: "🔥 3 ثواني تنقذ زبونين! لا استعجلت الأول ولا تجاهلت الثاني. جملة وحدة تخلّيه يحس إنك انتبهت له وقدّرته، والانتظار يصير مقبول.", en: "🔥 Three seconds saves two customers! You didn't rush the first or ignore the second. One sentence makes him feel seen, and waiting becomes acceptable." }
         },
         {
           scenario: { ar: "زبون عند الكاشير ومبسوط باختياره، وأنت على وشك تسجّل الطلب.", en: "A customer is at the till, happy with his choice, and you are about to ring it up." },
@@ -381,8 +381,8 @@ window.DIVISION_retail = {
           correct: 1, feedback: { ar: "⚡ نقود المشاعر، ما نتبعها.", en: "⚡ We lead emotions, we don't follow them." } },
         { prompt: { ar: "وقت الزحمة عند الكاشير؟", en: "Crunch time at the till?" },
           media: "retailR5_q5",
-          options: [ { ar: "أغلّف وأنا أتكلم وأختم بشكر", en: "Bag while talking, finish with a thank-you" }, { ar: "أشتغل بسرعة وأقلّل الكلام", en: "Work quickly and keep talking to a minimum" } ],
-          correct: 0, feedback: { ar: "🔥 نظيف وسريع وبطاقة. كل دفعة تأكّد القيمة.", en: "🔥 Clean, fast, energetic. Every checkout confirms the value." } },
+          options: [ { ar: "أشتغل بدقة، وأخلّيه يحس إني منتبه له، وأختم بشكر", en: "Work accurately, keep him acknowledged, finish with a thank-you" }, { ar: "أشتغل بسرعة وأسكت لين أعطيه الكيس", en: "Work quickly and stay silent until I hand him the bag" } ],
+          correct: 0, feedback: { ar: "🔥 دقيق وسريع وبحيوية. كل دفعة تأكّد القيمة.", en: "🔥 Accurate, fast, present. Acknowledgement is what separates service from processing." } },
         { prompt: { ar: "صار خطأ بسيط قدام الزبون؟", en: "A small slip in front of the customer?" },
           media: "retailR5_q6",
           options: [ { ar: "أصلحه بهدوء بدون ما ألفت الانتباه", en: "Fix it quietly without drawing attention to it" }, { ar: "أعترف وأصلحه باللحظة", en: "Own it and fix it on the spot" } ],
@@ -397,8 +397,8 @@ window.DIVISION_retail = {
           correct: 1, feedback: { ar: "⚡ سؤال واحد يفك الحيرة بثانيتين.", en: "⚡ One question breaks the tie in two seconds." } },
         { prompt: { ar: "التستر خلص قدام الزبونة؟", en: "The tester runs out in front of her?" },
           media: "retailR5_q10",
-          options: [ { ar: "أبدّله بسرعة وأكمل بابتسامة", en: "Swap it fast and carry on with a smile" }, { ar: "أعتذر وأقول ما فيه بديل حالياً", en: "Apologize and say there's no replacement right now" } ],
-          correct: 0, feedback: { ar: "🔥 حل سريع يحافظ على التجربة.", en: "🔥 A fast fix protects the experience." } },
+          options: [ { ar: "أتأكد فوراً من وجود بديل، أو أعرض طريقة ثانية آمنة تجرّبه فيها", en: "Check right away for a fresh one, or offer another safe way to try it" }, { ar: "أعتذر وأقترح عليها ترجع يوم ثاني", en: "Apologize and suggest she come back another day" } ],
+          correct: 0, feedback: { ar: "🔥 تأكد أول، وبعدين اعرض بديل حقيقي. لا توعد بشي ما شفته.", en: "🔥 Check first, then offer a real alternative. Never promise stock you have not seen." } },
         { prompt: { ar: "ختام كل تفاعل بموسم الذروة؟", en: "Ending every peak-season interaction?" },
           media: "retailR5_q8",
           options: [ { ar: "أشكرهم باختصار وأنتقل للزبون اللي بعده", en: "Thank them briefly and move to the next customer" }, { ar: "فوز واحد، شكر واحد، وابتسامة", en: "One win, one thank-you, one smile" } ],
