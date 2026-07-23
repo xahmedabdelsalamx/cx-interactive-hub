@@ -20,6 +20,9 @@ Apps + Microsoft Entra SSO** later. Changes are hand-applied to the live site.
 - **General projects** (AURA Pass, KSA Ready, future ones) are **standalone**: their own
   entry screens and their own Google Sheets/Apps Script. The hub only links to them,
   **filtered by the player's market**. They are NOT part of the journey progress system.
+  ⚠ **`customer-experience-general/` is maintained separately and is deliberately EXCLUDED from
+  packaged zips** — never overwrite that folder. `config.GENERAL` still lists the projects, so
+  keep the existing folder in place on the live site or those tiles will 404.
 - Identity is captured **once**; games only read it. This is what makes SSO a drop-in.
 
 ## Ranks / badges

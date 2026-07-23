@@ -20,7 +20,7 @@ const STR={
    gateEyebrow:"Customer Experience Learning", gateTitle:"Welcome — let's get you set up",
    gateSub:"Enter your details once. Your brand takes you straight to your journey.",
    fName:"Full name", fEid:"Employee ID", fBrand:"Your brand", fMarket:"Your market", choose:"Choose your brand…", chooseMarket:"Choose your market…", enter:"Enter my journey",
-   lkChecking:"Checking your ID…", lkFound:function(n){return "Found you, "+n+" — details filled in.";}, lkMiss:"We couldn't find that ID — just fill in your details below.",
+   lkChecking:"Checking your ID…", lkFound:function(n){return "Found you, "+n+" — details filled in.";}, lkMiss:"We couldn't find that ID — just fill in your details below.", lkOffline:"Couldn't reach the directory — please fill in your details below.",
    ssoNote:"Signed in with your store — just add your name and ID.",
    worldsH:"Your journey", generalTag:"For everyone", generalH:"Customer Experience — General",
    levels:function(n){return n+" levels";}, cleared:function(a,b){return a+" / "+b+" cleared";},
@@ -37,7 +37,7 @@ const STR={
    gateEyebrow:"تعلّم تجربة العملاء", gateTitle:"مرحبًا — لنجهّز حسابك",
    gateSub:"أدخل بياناتك مرة واحدة. علامتك التجارية تنقلك مباشرة إلى رحلتك.",
    fName:"الاسم الكامل", fEid:"الرقم الوظيفي", fBrand:"علامتك التجارية", fMarket:"سوقك", choose:"اختر علامتك…", chooseMarket:"اختر سوقك…", enter:"ادخل رحلتي",
-   lkChecking:"جارٍ التحقق من رقمك…", lkFound:function(n){return "وجدناك يا "+n+" — تم تعبئة بياناتك.";}, lkMiss:"لم نعثر على هذا الرقم — أكمل بياناتك بالأسفل.",
+   lkChecking:"جارٍ التحقق من رقمك…", lkFound:function(n){return "وجدناك يا "+n+" — تم تعبئة بياناتك.";}, lkMiss:"لم نعثر على هذا الرقم — أكمل بياناتك بالأسفل.", lkOffline:"تعذّر الوصول إلى الدليل — أكمل بياناتك بالأسفل.",
    ssoNote:"تم تسجيل الدخول عبر متجرك — أضف اسمك ورقمك الوظيفي فقط.",
    worldsH:"رحلتك", generalTag:"للجميع", generalH:"تجربة العملاء — عام",
    levels:function(n){return n+" مستوى";}, cleared:function(a,b){return a+" / "+b+" مكتمل";},
@@ -129,8 +129,8 @@ function renderGate(){
     '<span class="gate-eyebrow">'+t("gateEyebrow")+'</span>'+
     '<h2>'+t("gateTitle")+'</h2><p class="sub">'+t("gateSub")+'</p>'+
     (isSso?'<div class="sso-note">🔐 '+t("ssoNote")+'</div>':'')+
+    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" autofocus oninput="CXHub.gateChange()" placeholder="e.g. 323999"><div id="g-hint" class="lookup-hint"></div></div>'+
     '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
-    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" oninput="CXHub.gateChange()" placeholder="e.g. 323999"><div id="g-hint" class="lookup-hint"></div></div>'+
     '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.touchBrand();CXHub.gateChange()">'+
       '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
     '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.touchMarket();CXHub.gateChange()">'+
@@ -162,7 +162,9 @@ function runLookup(id){
   hint(t("lkChecking"), "wait");
   CXHubSync.lookup(id).then(function(d){
     if(v("g-eid")!==id) return;                       // they kept typing; ignore a stale answer
-    if(d && d.failed){ lk.last=""; hint(""); return; } // call failed -> clear guard so retyping retries
+    if(d && d.failed){ lk.last=""; hint(t("lkOffline"), "miss");
+      try{ console.warn("[CX Hub] Roster lookup failed — the Apps Script /exec didn't answer. Run CXHub.testLookup('"+id+"') for details."); }catch(e){}
+      return; }
     applyLookup(d);
   });
 }
@@ -416,10 +418,28 @@ function goWorld(){ if(profile&&Object.keys(brands).length){state.screen="world"
 
 function confirmSignOut(){ var msg=LANG==="ar"?"تسجيل الخروج؟":"Sign out?"; if(window.confirm(msg)) signOut(); }
 
+/* Diagnostic: run CXHub.testLookup("102342") in the browser console.
+   Prints the exact URL called and the raw answer, so you can see which step is failing. */
+function testLookup(id){
+  var CFG=window.CXHUB_SYNC||{};
+  var url=(CFG.scriptUrl||"")+"?token="+encodeURIComponent(CFG.secretToken||"")+"&action=lookup&empId="+encodeURIComponent(id||"");
+  console.log("%c[CX Hub] lookup test","font-weight:bold");
+  console.log("  scriptUrl set :", !!CFG.scriptUrl, CFG.scriptUrl||"(EMPTY — set it in cxhub-sync.js)");
+  console.log("  URL           :", url);
+  console.log("  Open that URL in a new tab. Expected: {\"found\":true,...} or {\"found\":false}.");
+  console.log("  If you see \"bad token\"      -> token mismatch with SECRET_TOKEN in AppsScript.gs");
+  console.log("  If you see {\"ok\":true}       -> old code is deployed: Deploy > Manage deployments > New version");
+  console.log("  If you see a Google sign-in  -> deployment access is not 'Anyone'");
+  if(window.CXHubSync&&CXHubSync.lookup){
+    CXHubSync.lookup(id).then(function(d){ console.log("  JSONP answer  :", d); });
+  }
+  return url;
+}
+
 function touchBrand(){ lk.touchedBrand=true; }
 function touchMarket(){ lk.touchedMarket=true; }
 
-window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails, touchBrand:touchBrand, touchMarket:touchMarket,
+window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails, touchBrand:touchBrand, touchMarket:touchMarket, testLookup:testLookup,
   openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld, signOut:signOut, confirmSignOut:confirmSignOut, downloadCert:downloadCert, previewCert:previewCert};
 
 /* footer CX Hub logo -> main hub (header logo stays internal home) */
