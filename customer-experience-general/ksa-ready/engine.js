@@ -434,6 +434,12 @@
     function runLookup(v) {
       if (!v || v === lastLooked || !backendReady()) return;
       lastLooked = v; inFlight = true;
+
+      /* A different ID is being looked up, so anything WE auto-filled for the
+         previous ID is now stale and must go. A value the player typed
+         themselves is left alone. */
+      clearAutoFilled();
+
       welcomeBack.className = "welcome-back";
       idNote.className = "emp-note show muted-note";
       idNote.textContent = u("checkingId");
@@ -446,16 +452,28 @@
       releaseTimer = setTimeout(function () { holdName(false); }, 1800);
 
       rosterLookup(v).then(function (r) {
+        if (v !== lastLooked) return;          // a newer ID was typed, ignore this result
         inFlight = false; clearTimeout(releaseTimer); holdName(false);
         var nameEl = $("#name");
 
         if (r && r.found) {
           var bits = [];
           if (r.name) {
-            if (!nameEl.value.trim()) nameEl.value = r.name;   // never overwrite their typing
+            // fill if empty, or if the current value is one we put there ourselves
+            if (!nameEl.value.trim() || nameEl.value === nameEl.dataset.autoName) {
+              nameEl.value = r.name;
+              nameEl.dataset.autoName = r.name;     // remember that WE set this
+            }
             bits.push(r.name);
           }
-          if (r.brand && selectBrandByName(r.brand)) bits.push(L(state.brand));
+          if (r.brand && !state.brandAuto && state.brand) {
+            // player chose a brand themselves, keep it (their store may have
+            // changed and the roster may be stale) but still confirm the match
+            bits.push(L(state.brand));
+          } else if (r.brand && selectBrandByName(r.brand)) {
+            state.brandAuto = true;                 // remember that WE picked this
+            bits.push(L(state.brand));
+          }
           idNote.className = "emp-note show ok";
           idNote.textContent = "✓ " + u("idFound") + (bits.length ? ": " + bits.join(" · ") : "");
           return;
@@ -475,15 +493,38 @@
       });
 
       playerHistory(v).then(function (h) {
+        if (v !== lastLooked) return;          // stale response for an older ID
         if (!h || !h.attempts) return;
         renderWelcomeBack(welcomeBack, h);
       });
     }
 
+    /* Removes only what the app auto-filled, never what the player typed. */
+    function clearAutoFilled() {
+      var nameEl = $("#name");
+      if (nameEl && nameEl.dataset.autoName && nameEl.value === nameEl.dataset.autoName) {
+        nameEl.value = "";
+      }
+      if (nameEl) delete nameEl.dataset.autoName;
+
+      if (state.brandAuto) {
+        state.brand = null;
+        state.brandAuto = false;
+        var sel = $("#brandSel");
+        if (sel) sel.value = "";
+      }
+      welcomeBack.className = "welcome-back";
+      welcomeBack.innerHTML = "";
+    }
+
     emp.addEventListener("input", function () {
       var v = emp.value.trim();
       clearTimeout(lookupTimer);
-      if (v.length < 3) { idNote.className = "emp-note"; return; }
+      if (v.length < 3) {
+        idNote.className = "emp-note";
+        if (lastLooked) { lastLooked = ""; clearAutoFilled(); }
+        return;
+      }
       lookupTimer = setTimeout(function () { runLookup(v); }, 350);
     });
     // fallback for paste-then-tab, which can skip the debounce window
@@ -516,6 +557,8 @@
     var ph = el("option", null, u("brandPH")); ph.value = ""; sel.appendChild(ph);
     BRANDS.forEach(function (b, i) { var o = el("option", null, L(b)); o.value = String(i); sel.appendChild(o); });
     if (state.brand != null) sel.value = String(BRANDS.indexOf(state.brand));
+    // once the player picks a brand themselves it is theirs, never auto-cleared
+    sel.addEventListener("change", function () { state.brandAuto = false; });
     fb.appendChild(sel); root.appendChild(fb);
 
     var btn = el("button", "btn", u("start"));
