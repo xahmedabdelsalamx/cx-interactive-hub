@@ -27,6 +27,11 @@
    ============================================================ */
 
 var SECRET_TOKEN = "CXHUBKSA";
+
+/* Leave EMPTY if this script lives inside the spreadsheet (Extensions > Apps Script).
+   If you created it as a standalone script instead, paste the spreadsheet ID here —
+   it is the long code in the sheet URL between /d/ and /edit. */
+var SHEET_ID = "";
 var PASS_MARK    = 80;        // must match the game
 
 var T_SCORES = "Scores", T_FB = "Feedback", T_SUM = "Summary", T_AGG = "_Agg",
@@ -45,9 +50,38 @@ var FB_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Rating","Commen
 
 var WORLDS = ["retail", "hospitality", "starbucks"];
 
+/* ================= CONTEXT-SAFE HELPERS =================
+   getUi() and getActiveSpreadsheet() only exist when the script is bound to a
+   spreadsheet AND run from a UI context. These wrappers make every function
+   work from the editor, from a trigger, or as a standalone script, so a
+   cosmetic popup can never abort real work. */
+function ss_() {
+  var ss = null;
+  if (SHEET_ID) {
+    ss = SpreadsheetApp.openById(SHEET_ID);
+  } else {
+    try { ss = SpreadsheetApp.getActiveSpreadsheet(); } catch (e) { ss = null; }
+  }
+  if (!ss) {
+    throw new Error(
+      "No spreadsheet found. Either put this script inside the sheet " +
+      "(open the sheet > Extensions > Apps Script), or set SHEET_ID at the top of this file " +
+      "to the ID in your sheet URL."
+    );
+  }
+  return ss;
+}
+
+/* Shows a popup when a UI is available, otherwise writes to the execution log.
+   Never throws. */
+function say_(msg) {
+  try { SpreadsheetApp.getUi().alert(msg); }
+  catch (e) { Logger.log(msg); }
+}
+
 /* ================= SETUP ================= */
 function setup() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = ss_();
   ensureTab_(ss, T_SCORES, SCORE_HEADERS);
   ensureTab_(ss, T_FB, FB_HEADERS);
   var ros = ensureTab_(ss, T_ROSTER, ROSTER_HEADERS);
@@ -59,7 +93,7 @@ function setup() {
     ).setFontColor("#888888");
   }
   buildReports();
-  SpreadsheetApp.getUi().alert(
+  say_(
     "Setup complete.\n\n" +
     "This sheet stores game results only. No company active list is needed here.\n\n" +
     "Next: Deploy > New deployment > Web app (Execute as: Me, Access: Anyone), " +
@@ -78,7 +112,7 @@ function ensureTab_(ss, name, headers) {
 }
 
 function buildReports() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = ss_();
 
   /* one row per player: EmpID | best% | last played | attempts */
   var agg = ss.getSheetByName(T_AGG) || ss.insertSheet(T_AGG);
@@ -131,10 +165,12 @@ function buildReports() {
 }
 
 function onOpen() {
-  SpreadsheetApp.getUi().createMenu("KSA Game")
-    .addItem("Setup (first time)", "setup")
-    .addItem("Rebuild summary", "buildReports")
-    .addToUi();
+  try {
+    SpreadsheetApp.getUi().createMenu("KSA Game")
+      .addItem("Setup (first time)", "setup")
+      .addItem("Rebuild summary", "buildReports")
+      .addToUi();
+  } catch (e) { /* no UI in this context, menu simply isn't added */ }
 }
 
 /* ================= WEB APP ================= */
@@ -154,7 +190,7 @@ function doPost(e) {
   var d;
   try { d = JSON.parse(e.postData.contents); } catch (err) { return json_({ ok: false, error: "bad json" }); }
   if (d.token !== SECRET_TOKEN) return json_({ ok: false, error: "bad token" });
-  var ss = SpreadsheetApp.getActiveSpreadsheet(), now = new Date();
+  var ss = ss_(), now = new Date();
 
   if (d.action === "feedback") {
     ensureTab_(ss, T_FB, FB_HEADERS).appendRow([
@@ -182,7 +218,7 @@ function doPost(e) {
    Emp ID / name / brand / score the player typed. completion-report.html pulls
    this and joins it to the active list LOCALLY on your machine. */
 function exportRows_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = ss_();
   var sh = ss.getSheetByName(T_SCORES);
   var out = { rows: [], feedback: [], passMark: PASS_MARK, generated: new Date().toISOString() };
 
@@ -236,7 +272,7 @@ function stats_() {
     out.worlds[w] = { attempts: 0, unique: 0, passed: 0, avgScore: 0 };
   });
 
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = ss_();
   var sh = ss.getSheetByName(T_SCORES);
   if (sh && sh.getLastRow() > 1) {
     var rows = sh.getRange(2, 1, sh.getLastRow() - 1, 17).getValues();
@@ -333,7 +369,7 @@ function lookupRoster_(rawId) {
   var hit = cache.get("ros_" + id);
   if (hit) { try { return JSON.parse(hit); } catch (e) {} }
 
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_ROSTER);
+  var sh = ss_().getSheetByName(T_ROSTER);
   if (!sh || sh.getLastRow() < 2) return { found: false };
 
   var v = sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues();   // A..D
@@ -365,7 +401,7 @@ function normId_(v) {
 function playerHistory_(empId) {
   var id = normId_(empId);
   if (!id) return { attempts: 0 };
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_SCORES);
+  var sh = ss_().getSheetByName(T_SCORES);
   if (!sh || sh.getLastRow() < 2) return { attempts: 0 };
   var rows = sh.getRange(2, 1, sh.getLastRow() - 1, 15).getValues();
   var attempts = 0, best = -1, lastTotal = null, lastWhen = null, passed = false, lastDiv = "";
@@ -391,7 +427,7 @@ function playerHistory_(empId) {
 function hasPassed_(empId) {
   var id = normId_(empId);
   if (!id) return false;
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(T_SCORES);
+  var sh = ss_().getSheetByName(T_SCORES);
   if (!sh || sh.getLastRow() < 2) return false;
   var rows = sh.getRange(2, 4, sh.getLastRow() - 1, 12).getValues();
   for (var i = 0; i < rows.length; i++) {
