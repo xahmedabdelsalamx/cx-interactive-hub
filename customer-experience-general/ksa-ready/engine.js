@@ -84,7 +84,9 @@
     mgSkip:     { ar: "تخطّي وكمّل الجولة الجاية", en: "Skip and continue" },
     mgSkipGame: { ar: "تخطّي، كمّل الجولة الجاية", en: "Skip, next round" },
     idFound:    { ar: "جبنا بياناتك", en: "Got your details" },
-    idNew:      { ar: "كمّل تسجيل بياناتك تحت 👇", en: "Just fill in your details below 👇" }
+    idNew:      { ar: "كمّل تسجيل بياناتك تحت 👇", en: "Just fill in your details below 👇" },
+    checkingId: { ar: "نتحقق من رقمك الوظيفي…", en: "Checking your ID…" },
+    fetchingName:{ ar: "جاري جلب اسمك…", en: "Fetching your name…" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -355,23 +357,56 @@
     emp.parentNode.appendChild(welcomeBack);
     var idNote = el("div", "emp-note");
     emp.parentNode.appendChild(idNote);
-    var lastLooked = "";
-    emp.addEventListener("blur", function () {
-      var v = emp.value.trim();
+
+    /* Look the ID up WHILE they are still typing it, not on blur. Blur fires at
+       the exact moment they click into the name field, so the answer always
+       arrived after they had started typing. Debounced so we don't spam the
+       backend on every keystroke.
+       While a lookup is in flight the name field is held read-only with a
+       "fetching" placeholder, and a hard timeout always releases it, so a slow
+       or dead network can never leave the player stuck. */
+    var lastLooked = "", lookupTimer = null, releaseTimer = null, inFlight = false;
+
+    function holdName(on) {
+      var nameEl = $("#name");
+      if (!nameEl) return;
+      if (on) {
+        nameEl.dataset.ph = nameEl.dataset.ph || nameEl.placeholder;
+        nameEl.readOnly = true;
+        nameEl.classList.add("fetching");
+        nameEl.placeholder = u("fetchingName");
+      } else {
+        nameEl.readOnly = false;
+        nameEl.classList.remove("fetching");
+        if (nameEl.dataset.ph) nameEl.placeholder = nameEl.dataset.ph;
+      }
+    }
+
+    function runLookup(v) {
       if (!v || v === lastLooked || !backendReady()) return;
-      lastLooked = v;
+      lastLooked = v; inFlight = true;
       welcomeBack.className = "welcome-back";
       idNote.className = "emp-note show muted-note";
-      idNote.textContent = "…";
+      idNote.textContent = u("checkingId");
+      holdName(true);
 
-      // Optional convenience lookup: if the Roster tab has this ID, prefill the
-      // name and pick the brand so the player can just hit Start. Never blocks.
+      // safety net: never hold the field for more than 2.5s
+      clearTimeout(releaseTimer);
+      releaseTimer = setTimeout(function () {
+        if (!inFlight) return;
+        inFlight = false; holdName(false);
+        idNote.className = "emp-note show muted-note";
+        idNote.textContent = u("idNew");
+      }, 2500);
+
       rosterLookup(v).then(function (r) {
+        if (!inFlight) return;                 // timed out already, leave them alone
+        inFlight = false; clearTimeout(releaseTimer); holdName(false);
+        var nameEl = $("#name");
         if (r && r.found) {
           var bits = [];
           if (r.name) {
-            var nameEl = $("#name");
-            if (!nameEl.value.trim()) nameEl.value = r.name;
+            if (!nameEl.value.trim()) nameEl.value = r.name;   // never overwrite their typing
             bits.push(r.name);
           }
           if (r.brand && selectBrandByName(r.brand)) bits.push(L(state.brand));
@@ -380,6 +415,7 @@
         } else {
           idNote.className = "emp-note show muted-note";
           idNote.textContent = u("idNew");
+          if (nameEl && !nameEl.value.trim()) nameEl.focus();
         }
       });
 
@@ -387,6 +423,18 @@
         if (!h || !h.attempts) return;
         renderWelcomeBack(welcomeBack, h);
       });
+    }
+
+    emp.addEventListener("input", function () {
+      var v = emp.value.trim();
+      clearTimeout(lookupTimer);
+      if (v.length < 3) { idNote.className = "emp-note"; return; }
+      lookupTimer = setTimeout(function () { runLookup(v); }, 350);
+    });
+    // fallback for paste-then-tab, which can skip the debounce window
+    emp.addEventListener("blur", function () {
+      clearTimeout(lookupTimer);
+      runLookup(emp.value.trim());
     });
     var nm = $("#name");
     nm.setAttribute("autocomplete", "off");

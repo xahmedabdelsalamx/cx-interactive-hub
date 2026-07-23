@@ -174,9 +174,9 @@ window.DIVISION_hospitality = {
           media: "hospR3_q1",
           steps: [
             { ar: "تأكد إن كل شي كان على ذوقهم", en: "Confirm everything was to their liking" },
+            { ar: "تأكد إنهم ما يحتاجون شي قبل لا يمشون", en: "Check they need nothing else before they leave" },
             { ar: "اشكرهم بصدق على زيارتهم", en: "Thank them sincerely for visiting" },
-            { ar: "ادعهم يرجعون: «نتشرّف بزيارتكم مرة ثانية»", en: "Invite them back: \"we'd love to see you again\"" },
-            { ar: "تأكد إنهم ما يحتاجون شي قبل لا يمشون", en: "Check they need nothing else before they leave" }
+            { ar: "ودّعهم وادعهم يرجعون بحرارة", en: "Invite them back and send them off warmly" }
           ],
           feedback: { ar: "💚 الوداع مو إجراء! هو آخر مشهد، واللي يتذكرونه وهم بالسيارة. اختمه دافئ وصادق.", en: "💚 The farewell isn't admin! It's the closing scene, the bit they replay in the car. Make it warm and sincere." }
         },
@@ -222,7 +222,7 @@ window.DIVISION_hospitality = {
             { ar: "اشكرهم على الزيارة بصدق", en: "Thank them sincerely for the visit" },
             { ar: "ودّعهم بدعوة يرجعون", en: "Send them off with an invite back" }
           ],
-          feedback: { ar: "🔥 كل وداع هو بداية الزيارة الجاية. آخر 30 ثانية عندك تقرر إذا بيرجعون ولا لا.", en: "🔥 Every farewell starts the next visit. Your last 30 seconds decide whether they come back." }
+          feedback: { ar: "🔥 كل وداع هو بداية الزيارة الجاية. آخر 30 ثانية عندك ممكن تأثر على رجوعهم.", en: "🔥 Every farewell starts the next visit. Your last 30 seconds can influence whether they come back." }
         }
       ]
     },
@@ -253,7 +253,7 @@ window.DIVISION_hospitality = {
           scenario: { ar: "ذا تشيزكيك فاكتوري. ضيف ينتظر أكله من 25 دقيقة، وبدأ يلتفت للمطبخ كل شوي.", en: "The Cheesecake Factory. A guest has waited 25 minutes and keeps glancing toward the kitchen." },
           media: "hospR4_q2",
           options: [
-            { ar: "أنتظر شوي زيادة، يمكن الطلب يوصل بأي لحظة للوقت", en: "Wait a little longer, the order should arrive any minute" },
+            { ar: "أنتظر شوي زيادة، يمكن الطلب يوصل بأي لحظة", en: "Wait a little longer, the order should arrive any minute" },
             { ar: "أعتذر عن التأخير، أطمّنه إن طلبه جاي، وأتابع معه", en: "Apologize for the wait, reassure them it's coming, and keep them updated" },
             { ar: "أقول له المطبخ مزحوم اليوم وأكمل شغلي", en: "Tell them the kitchen is busy today and carry on" }
           ],

@@ -159,16 +159,16 @@ window.DIVISION_starbucks = {
           feedback: { ar: "الملصق يبيّن اللي تحضّر، مو اللي توقعه الزبون. التأكيد بصوت هو آخر فرصة تمسك طلب غلط، وتكلفته ثانيتين.", en: "The label shows what was made, not what they expected. Confirming out loud is the last chance to catch a wrong order, and it costs two seconds." }
         },
         {
-          statement: { ar: "إبقاء الزبون على علم وقت الزحمة يخلّي الانتظار يحس أقصر.", en: "Keeping customers informed during a rush makes the wait feel shorter." },
+          statement: { ar: "إبقاء الزبائن على اطلاع وقت الزحمة يخفف إحساسهم بطول الانتظار.", en: "Keeping customers informed during a rush makes the wait feel shorter." },
           media: "sbuxR3_q3",
           isTrue: true,
           feedback: { ar: "صح! عدم الوضوح هو اللي يطوّل الانتظار. كلمة وحدة توضّح الوضع تخفف الانزعاج كثير.", en: "True! Uncertainty is what stretches a wait. One clear word about what is happening often takes the frustration out of it." }
         },
         {
-          statement: { ar: "العيّنة تعتبر ناجحة فقط إذا اشترى الزبون المشروب.", en: "A sample is successful only when the customer buys the featured drink." },
+          statement: { ar: "العيّنة تكون أقوى مع وصف حسّي قصير، مو شرح بيع طويل.", en: "A sample works best with one short sensory description, not a long sales pitch." },
           media: "sbuxR3_q4",
-          isTrue: false,
-          feedback: { ar: "العيّنة تنجح لما تثير الفضول وتصنع لحظة اكتشاف حلوة. البيع ممكن يجي بعدها، بس الضغط مو الهدف.", en: "A sample succeeds when it creates curiosity and a positive discovery moment. A sale may follow, but pressure is not the goal." }
+          isTrue: true,
+          feedback: { ar: "جملة وحدة واضحة تثير الفضول. الشرح الطويل يبطّئ اللحظة وممكن يحس الزبون بالضغط.", en: "One clear line creates curiosity. A long pitch slows the moment and can feel like pressure." }
         },
         {
           statement: { ar: "الزبون اللي لابس سماعاته يستاهل تسليم دقيق باسمه، حتى لو ما نبي ندردش معه.", en: "A customer wearing headphones still deserves an accurate hand-off with their name." },
@@ -228,7 +228,7 @@ window.DIVISION_starbucks = {
           media: "sbuxR4_q4",
           options: [
             { ar: "أسلّمه مشروبه بابتسامة وأقول «تفضل»", en: "Hand him the drink with a smile and say \"here you go\"" },
-            { ar: "أتعرّف عليه، وأأكّد طلبه المعتاد، وأطبّق نقاطه قبل الدفع، وأشكره", en: "Recognise him, confirm his usual, apply his rewards before payment, and thank him" },
+            { ar: "أتعرّف عليه، وأتأكد من طلبه المعتاد، وأطبّق نقاطه قبل الدفع، وأشكره", en: "Recognise him, confirm his usual, apply his rewards before payment, and thank him" },
             { ar: "أخلّص بسرعة عشان الطابور وراه", en: "Move fast because of the queue behind him" }
           ],
           correct: 1,

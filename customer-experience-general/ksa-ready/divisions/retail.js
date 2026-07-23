@@ -25,10 +25,10 @@ window.DIVISION_retail = {
     {
       id: "r1",
       mechanic: "swipe",
-      title: { ar: "وضع الرادار: أول 7 ثواني", en: "Radar Mode: The First 7 Seconds" },
+      title: { ar: "وضع الرادار: اقرأ اللحظة", en: "Radar Mode: Read the Moment" },
       intro: {
-        ar: "عندك 7 ثواني. 93% من انطباع الزبون يجي من لغة جسدك ونبرتك، مو من كلامك.\nمهمتك: اقرأ اللحظة. اسحب يمين لو فيها فرصة تواصل، ويسار لو الأذكى تعطيه مساحة.\nخلّ رادارك شغّال.",
-        en: "You've got 7 seconds. 93% of the impression comes from your body language and tone, not your words.\nYour mission: read the moment. Swipe right if it's a chance to connect, left if the smart move is space.\nRadar on."
+        ar: "الانطباع الأول ينبني بسرعة. 93% من انطباع الزبون يجي من لغة جسدك ونبرتك، مو من كلامك.\nمهمتك: اقرأ اللحظة. اسحب يمين لو فيها فرصة تواصل، ويسار لو الأذكى تعطيه مساحة.\nخلّ رادارك شغّال.",
+        en: "First impressions form fast. 93% of the impression comes from your body language and tone, not your words.\nYour mission: read the moment. Swipe right if it's a chance to connect, left if the smart move is space.\nRadar on."
       },
       media: "retailR1_intro",
       questions: [
@@ -97,7 +97,7 @@ window.DIVISION_retail = {
             { left: { ar: "لون محايد", en: "Neutral colour" }, right: { ar: "ينسّق مع كل شي بخزانتك، بدون تفكير", en: "Goes with everything you own, zero thinking" } },
             { left: { ar: "مقاوم للماء", en: "Water-resistant" }, right: { ar: "المطر ينزل وأنت ماشي عادي", en: "Rain starts and you just keep walking" } }
           ],
-          feedback: { ar: "🔥 هذا هو الفرق! المواصفة معلومة، الإحساس قرار. الزبون يشتري حياته، مو المنتج.", en: "🔥 That's the difference! A feature is information. A feeling is a decision. They buy their life, not the product." }
+          feedback: { ar: "🔥 هذا هو الفرق! المواصفة معلومة، الإحساس قرار. الزبون يشتري كيف المنتج يناسب حياته، مو المنتج بحد ذاته.", en: "🔥 That's the difference! A feature is information. A feeling is a decision. They buy how the product fits their life, not just the product itself." }
         },
         {
           instruction: { ar: "كل زبون اختار قطعة. وصّل اختياره بالإضافة الوحدة اللي تكمّله بشكل طبيعي.", en: "Each customer picked something. Match their choice to the one add-on that naturally completes it." },
@@ -185,10 +185,10 @@ window.DIVISION_retail = {
           steps: [
             { ar: "رحّب باختياره: «خيار موفّق»", en: "Acknowledge the choice: \"great pick\"" },
             { ar: "أكّد المنتج بهدوء", en: "Confirm the item calmly" },
-            { ar: "غلّفه بعناية", en: "Pack it with care" },
+            { ar: "أنهِ الدفع وغلّفه بعناية", en: "Complete payment and pack with care" },
             { ar: "ودّعه بحرارة", en: "Send him off warmly" }
           ],
-          feedback: { ar: "🔥 سلس وإنساني! لاحظ إنك بدأت بتأكيد اختياره. هذي الجملة تشيل الشك اللي في راسه قبل ما يدفع.", en: "🔥 Smooth and human! Notice you started by validating his choice. That line kills the doubt in his head before he pays." }
+          feedback: { ar: "🔥 سلس وإنساني! لاحظ إنك بدأت بتأكيد اختياره. هذي الجملة تساعد تشيل التردد الأخير قبل الدفع.", en: "🔥 Smooth and human! Notice you started by validating his choice. That line helps remove last-minute doubt before payment." }
         },
         {
           instruction: { ar: "زبون واقف ساكت، يطالع القطعة ويحرّك رجله. مو مقتنع، ومو رافض. رتّب حركتك.", en: "A customer stands silent, staring at the item, foot tapping. Not sold, not saying no. Order your move." },
@@ -205,10 +205,10 @@ window.DIVISION_retail = {
           instruction: { ar: "آخر 30 ثانية بالكامل. رتّبها زي المحترفين.", en: "The full last 30 seconds. Order it like a pro." },
           media: "retailR3_q3",
           steps: [
-            { ar: "رحّب فيه من جديد عند الكاشير", en: "Greet him again at the till" },
-            { ar: "اذكر مزايا أورا", en: "Mention Aura benefits" },
-            { ar: "غلّف بعناية", en: "Pack with care" },
-            { ar: "ودّعه ودعوة يرجع", en: "Farewell plus an invite back" }
+            { ar: "رحّب فيه من جديد عند الكاشير", en: "Welcome him at the till" },
+            { ar: "اذكر مزايا أورا قبل الدفع", en: "Mention Aura before payment" },
+            { ar: "أنهِ الدفع وغلّف بعناية", en: "Complete payment and pack with care" },
+            { ar: "اشكره وادعه يرجع", en: "Thank him and invite him back" }
           ],
           feedback: { ar: "⭐ هنا يضيع أغلب البيع! الكاشير مو محطة إجراءات، هو آخر مشهد بالفيلم. وأورا غالباً هي اللي ترجّعه.", en: "⭐ This is where most sales leak! The till isn't a process station, it's the final scene of the film. And Aura is often what brings him back." }
         },
@@ -243,7 +243,7 @@ window.DIVISION_retail = {
             { ar: "اذكر مزايا أورا", en: "Mention Aura benefits" },
             { ar: "ودّعه بحرارة", en: "Send him off warmly" }
           ],
-          feedback: { ar: "💚 لاحظ: هو ما يشتري عطر، يشتري لحظة بيعطيها لأحد يحبه. التغليف مو خدمة، هو جزء من الهدية.", en: "💚 Notice: he isn't buying a fragrance, he's buying a moment he'll hand to someone he loves. Wrapping isn't a service, it's part of the gift." }
+          feedback: { ar: "💚 لاحظ: هو ما يشتري عطر، يشتري لحظة بيعطيها لأحد يحبه. التغليف مو مجرد خدمة إضافية، يصير جزء من تجربة الهدية.", en: "💚 Notice: he isn't buying a fragrance, he's buying a moment he'll hand to someone he loves. Wrapping is not just an extra service, it becomes part of the gift experience." }
         },
         {
           instruction: { ar: "زبونة تسأل عن روتين بشرة بسيط في بوتس وتقول «ما أفهم بهالأشياء». رتّب توصيتك.", en: "A customer at Boots asks for a simple skincare routine and says \"I don't get this stuff\". Order your recommendation." },
@@ -381,8 +381,8 @@ window.DIVISION_retail = {
           correct: 1, feedback: { ar: "⚡ نقود المشاعر، ما نتبعها.", en: "⚡ We lead emotions, we don't follow them." } },
         { prompt: { ar: "وقت الزحمة عند الكاشير؟", en: "Crunch time at the till?" },
           media: "retailR5_q5",
-          options: [ { ar: "أشتغل بدقة، وأخلّيه يحس إني منتبه له، وأختم بشكر", en: "Work accurately, keep him acknowledged, finish with a thank-you" }, { ar: "أشتغل بسرعة وأسكت لين أعطيه الكيس", en: "Work quickly and stay silent until I hand him the bag" } ],
-          correct: 0, feedback: { ar: "🔥 دقيق وسريع وبحيوية. كل دفعة تأكّد القيمة.", en: "🔥 Accurate, fast, present. Acknowledgement is what separates service from processing." } },
+          options: [ { ar: "أشتغل بدقة، وأخلّيه يحس إني منتبه له، وأختم بشكر", en: "Work accurately, keep him feeling acknowledged, and finish with a thank-you" }, { ar: "أشتغل بسرعة وأسكت لين أعطيه الكيس", en: "Work quickly and stay silent until I hand him the bag" } ],
+          correct: 0, feedback: { ar: "🔥 دقيق وسريع وحاضر. اهتمامك بالزبون هو اللي يفرّق بين الخدمة ومجرد تنفيذ العملية.", en: "🔥 Accurate, fast, present. Acknowledgement is what separates service from processing." } },
         { prompt: { ar: "صار خطأ بسيط قدام الزبون؟", en: "A small slip in front of the customer?" },
           media: "retailR5_q6",
           options: [ { ar: "أصلحه بهدوء بدون ما ألفت الانتباه", en: "Fix it quietly without drawing attention to it" }, { ar: "أعترف وأصلحه باللحظة", en: "Own it and fix it on the spot" } ],
