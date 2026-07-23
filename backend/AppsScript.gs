@@ -57,6 +57,7 @@ function doGet(e){
   }
   if (p.token !== SECRET_TOKEN) return out({ error: "bad token" });
   if (p.action === "warm") return out({ ok: true });                          // wakes the container, no work
+  if (p.action === "rosterinfo") return out(rosterInfo());                    // diagnostic
   if (p.action === "lookup" && p.empId) return out(rosterLookup(p.empId));
   if (p.action === "results" && p.empId) return out({ known: profileExists(p.empId), results: getResults(p.empId) });
   return out({ ok: true });
@@ -140,22 +141,43 @@ function rosterLookup(empId){
   var cache = CacheService.getScriptCache(), key = "rl_" + q;
   try { var hit = cache.get(key); if (hit) return JSON.parse(hit); } catch (e) {}
 
-  var out = { found: false };
+  var t0 = new Date().getTime(), out = { found: false }, row = 0;
   try {
     var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Roster");
     if (sh && sh.getLastRow() > 1){
-      var ids = sh.getRange(2, 1, sh.getLastRow()-1, 1).getValues();     // one column read = fast
-      for (var i = 0; i < ids.length; i++){
-        if (normId_(ids[i][0]) === q){
-          var r = sh.getRange(i+2, 1, 1, 4).getValues()[0];
-          out = { found: true, name: String(r[1]||"").trim(), brand: String(r[2]||"").trim(), market: String(r[3]||"").trim() };
-          break;
-        }
+      var last = sh.getLastRow(), col = sh.getRange(2, 1, last-1, 1);
+
+      // FAST PATH: native search, no 30k-row read into JavaScript
+      var f = col.createTextFinder(q).matchEntireCell(true).matchCase(false).findNext();
+      if (f) row = f.getRow();
+
+      // FALLBACK: only if the fast path missed (e.g. IDs stored with stray formatting)
+      if (!row){
+        var ids = col.getValues();
+        for (var i = 0; i < ids.length; i++){ if (normId_(ids[i][0]) === q){ row = i+2; break; } }
+      }
+      if (row){
+        var r = sh.getRange(row, 1, 1, 4).getValues()[0];
+        out = { found:true, name:String(r[1]||"").trim(), brand:String(r[2]||"").trim(), market:String(r[3]||"").trim() };
       }
     }
-  } catch (e) { return { found: false }; }                                // never block sign-in
-  try { cache.put(key, JSON.stringify(out), 21600); } catch (e) {}        // 6h
+  } catch (e) { return { found:false }; }                                   // never block sign-in
+
+  out.ms = new Date().getTime() - t0;
+  // cache hits for 6h; cache misses only 10min so a newly-added roster row appears quickly
+  try { cache.put(key, JSON.stringify(out), out.found ? 21600 : 600); } catch (e) {}
   return out;
+}
+
+/* Diagnostic: ...?token=…&action=rosterinfo — confirms the tab is readable and how fast it is. */
+function rosterInfo(){
+  var t0 = new Date().getTime();
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Roster");
+  if (!sh) return { ok:false, error:"No tab named 'Roster'" };
+  var last = sh.getLastRow();
+  var head = last ? sh.getRange(1, 1, 1, 4).getValues()[0] : [];
+  var sample = last > 1 ? String(sh.getRange(2, 1).getValue()) : "";
+  return { ok:true, rows:Math.max(0, last-1), headers:head, firstId:sample, ms:new Date().getTime()-t0 };
 }
 
 function profileExists(empId){

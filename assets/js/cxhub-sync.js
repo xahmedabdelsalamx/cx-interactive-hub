@@ -35,10 +35,10 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     return fetch(CFG.scriptUrl, { method:"POST", mode:"no-cors",
       headers:{ "Content-Type":"text/plain;charset=utf-8" }, body: JSON.stringify(p) });
   }
-  function jsonp(url){   // read via JSONP (Apps Script sends no CORS headers, so fetch-reads are blocked cross-origin)
+  function jsonp(url, ms){   // read via JSONP (Apps Script sends no CORS headers, so fetch-reads are blocked cross-origin)
     return new Promise(function(resolve){
       var cb="cxhubcb_"+Date.now()+"_"+Math.floor(Math.random()*1e6), s=document.createElement("script"), done=false;
-      var timer=setTimeout(function(){ finish(null); }, 9000);
+      var timer=setTimeout(function(){ finish(null); }, ms||9000);
       function finish(d){ if(done)return; done=true; try{ delete window[cb]; }catch(e){ window[cb]=undefined; } if(s.parentNode)s.parentNode.removeChild(s); clearTimeout(timer); resolve(d); }
       window[cb]=function(d){ finish(d); };
       s.onerror=function(){ finish(null); };
@@ -114,11 +114,18 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     }).catch(function(){ return {read:false, known:true, changed:false}; });
   }
 
-  /* Roster lookup for the entry screen. Resolves {found,name,brand,market}; never rejects. */
+  /* Roster lookup for the entry screen. Resolves {found,name,brand,market}; never rejects.
+     Apps Script queues executions, so the first call after idle can be slow: generous
+     timeout, then ONE automatic retry before we tell the user to type it in themselves. */
   function lookup(empId){
     if(!CFG.scriptUrl || !empId) return Promise.resolve({found:false});
     var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=lookup&empId="+encodeURIComponent(empId);
-    return jsonp(url).then(function(d){ return (d&&typeof d==="object") ? d : {found:false, failed:true}; });
+    return jsonp(url, 15000).then(function(d){
+      if(d && typeof d==="object") return d;
+      return jsonp(url, 15000).then(function(d2){                    // retry once
+        return (d2 && typeof d2==="object") ? d2 : {found:false, failed:true};
+      });
+    });
   }
   /* Wake the Apps Script container so the first real lookup isn't stuck behind a ~5s cold start. */
   function warm(){
