@@ -45,8 +45,8 @@ var T_SCORES = "Scores", T_FB = "Feedback", T_SUM = "Summary", T_AGG = "_Agg",
 var ROSTER_HEADERS = ["EmpID", "Name", "Brand", "Market"];
 
 var SCORE_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Gender","Character",
-  "Round1%","Round2%","Round3%","Round4%","Bonus%","Energy","Total%","Passed","Lang","ClientTime"];
-var FB_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Rating","Comment","Lang","ClientTime"];
+  "Round1%","Round2%","Round3%","Round4%","Bonus%","Energy","Total%","Passed","Lang","ClientTime","BrandCode"];
+var FB_HEADERS = ["Timestamp","Division","Brand","EmpID","Name","Rating","Comment","Lang","ClientTime","BrandCode"];
 
 var WORLDS = ["retail", "hospitality", "starbucks"];
 
@@ -195,7 +195,7 @@ function doPost(e) {
   if (d.action === "feedback") {
     ensureTab_(ss, T_FB, FB_HEADERS).appendRow([
       now, d.division || "", d.brand || "", d.empId || "", d.name || "",
-      num_(d.rating), d.comment || "", d.lang || "", d.clientTime || ""
+      num_(d.rating), d.comment || "", d.lang || "", d.clientTime || "", d.brandCode || ""
     ]);
     return json_({ ok: true });
   }
@@ -206,7 +206,7 @@ function doPost(e) {
       d.gender || "", d.character || "",
       num_(s[0]), num_(s[1]), num_(s[2]), num_(s[3]), num_(d.bonus), num_(d.energy),
       num_(d.total), (String(d.passed).toLowerCase() === "yes" ? "Yes" : "No"),
-      d.lang || "", d.clientTime || ""
+      d.lang || "", d.clientTime || "", d.brandCode || ""
     ]);
     return json_({ ok: true });
   }

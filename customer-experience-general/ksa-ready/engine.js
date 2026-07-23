@@ -332,6 +332,28 @@
     return false;
   }
 
+  /* Reporting must never see the same brand under two names. The UI still shows
+     the player their own language, but what we SAVE is always the canonical
+     English name plus the company's 3-letter code, so one brand is one row in
+     every pivot regardless of the language the player chose. */
+  function brandCanonical() {
+    if (!state.brand) return "";
+    return state.brand.en || "";
+  }
+  function brandCode() {
+    var codes = window.BRAND_CODES || {};
+    var norm = function (x) {
+      return String(x || "").toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]/g, "");
+    };
+    var want = norm(state.brand && state.brand.en);
+    if (!want) return "";
+    var keys = Object.keys(codes);
+    for (var i = 0; i < keys.length; i++) {
+      if (norm(codes[keys[i]].en) === want) return keys[i];
+    }
+    return "";
+  }
+
   function renderWelcomeBack(box, h) {
     box.className = "welcome-back show";
     box.innerHTML = "";
@@ -1188,7 +1210,7 @@
     c.appendChild(bd);
 
     var saveP = post({
-      action: "score", division: state.division.id, brand: L(state.brand),
+      action: "score", division: state.division.id, brand: brandCanonical(), brandCode: brandCode(),
       empId: state.empId, name: state.name, gender: state.gender || "", character: state.character,
       scores: state.scores, total: total, passed: passed ? "yes" : "no", lang: state.lang,
       bonus: state.bonus ? state.bonus.score : "", energy: state.bonus ? state.bonus.energy : "",
@@ -1419,7 +1441,7 @@
     var ta = el("textarea", "fbk-area"); ta.placeholder = u("fbPH"); box.appendChild(ta);
     var send = el("button", "btn", u("sendFb"));
     send.onclick = function () {
-      post({ action: "feedback", division: state.division.id, brand: L(state.brand),
+      post({ action: "feedback", division: state.division.id, brand: brandCanonical(), brandCode: brandCode(),
         empId: state.empId, name: state.name, rating: rating, comment: ta.value.trim(),
         lang: state.lang, clientTime: new Date().toISOString() });
       box.innerHTML = ""; box.appendChild(el("h3", "h3", u("thanks")));
