@@ -86,7 +86,8 @@
     idFound:    { ar: "جبنا بياناتك", en: "Got your details" },
     idNew:      { ar: "كمّل تسجيل بياناتك تحت 👇", en: "Just fill in your details below 👇" },
     checkingId: { ar: "نتحقق من رقمك الوظيفي…", en: "Checking your ID…" },
-    fetchingName:{ ar: "جاري جلب اسمك…", en: "Fetching your name…" }
+    fetchingName:{ ar: "جاري جلب اسمك…", en: "Fetching your name…" },
+    idRetry:    { ar: "ما قدرنا نتصل بالنظام، اكتب بياناتك أو جرّب رقمك مرة ثانية", en: "Couldn't reach the system, enter your details or try your ID again" }
   };
 
   /* ---------------- HELPERS ---------------- */
@@ -227,18 +228,44 @@
               "&action=check&empId=" + encodeURIComponent(empId);
     return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { passed: false }; });
   }
+  /* Google Apps Script goes cold after a period of inactivity, and the first
+     request then takes several seconds while Google spins the container up.
+     So: give each attempt a generous timeout and retry once before giving up. */
+  function fetchJson(url, ms) {
+    return new Promise(function (resolve) {
+      var done = false;
+      var t = setTimeout(function () { if (!done) { done = true; resolve(null); } }, ms || 8000);
+      fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+        if (done) return; done = true; clearTimeout(t); resolve(j);
+      }).catch(function () { if (done) return; done = true; clearTimeout(t); resolve(null); });
+    });
+  }
+
   function rosterLookup(empId) {
     if (!backendReady() || !empId) return Promise.resolve({ found: false });
     var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
               "&action=lookup&empId=" + encodeURIComponent(empId);
-    return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { found: false }; });
+    return fetchJson(url, 8000).then(function (r) {
+      if (r) return r;
+      return fetchJson(url, 8000).then(function (r2) {   // one retry, backend may have been cold
+        return r2 || { found: false, failed: true };
+      });
+    });
+  }
+
+  /* Fired once on load so the Apps Script container is already warm by the time
+     the player finishes typing their Emp ID. Costs nothing, result ignored. */
+  function warmBackend() {
+    if (!backendReady()) return;
+    var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) + "&action=check&empId=0";
+    fetch(url).catch(function () {});
   }
 
   function playerHistory(empId) {
     if (!backendReady() || !empId) return Promise.resolve({ attempts: 0 });
     var url = CONFIG.scriptUrl + "?token=" + encodeURIComponent(CONFIG.secretToken) +
               "&action=history&empId=" + encodeURIComponent(empId);
-    return fetch(url).then(function (r) { return r.json(); }).catch(function () { return { attempts: 0 }; });
+    return fetchJson(url, 8000).then(function (r) { return r || { attempts: 0 }; });
   }
 
   function post(payload) {
@@ -390,19 +417,16 @@
       idNote.textContent = u("checkingId");
       holdName(true);
 
-      // safety net: never hold the field for more than 2.5s
+      /* Release the name field after a short hold so nobody is ever blocked,
+         but DO NOT cancel the request. If it lands later we still fill in any
+         field the player has not typed into yet. */
       clearTimeout(releaseTimer);
-      releaseTimer = setTimeout(function () {
-        if (!inFlight) return;
-        inFlight = false; holdName(false);
-        idNote.className = "emp-note show muted-note";
-        idNote.textContent = u("idNew");
-      }, 2500);
+      releaseTimer = setTimeout(function () { holdName(false); }, 1800);
 
       rosterLookup(v).then(function (r) {
-        if (!inFlight) return;                 // timed out already, leave them alone
         inFlight = false; clearTimeout(releaseTimer); holdName(false);
         var nameEl = $("#name");
+
         if (r && r.found) {
           var bits = [];
           if (r.name) {
@@ -412,11 +436,20 @@
           if (r.brand && selectBrandByName(r.brand)) bits.push(L(state.brand));
           idNote.className = "emp-note show ok";
           idNote.textContent = "✓ " + u("idFound") + (bits.length ? ": " + bits.join(" · ") : "");
+          return;
+        }
+
+        // Couldn't reach the backend at all: allow another attempt on this ID,
+        // otherwise the player has to reload the page to retry.
+        if (r && r.failed) {
+          lastLooked = "";
+          idNote.className = "emp-note show muted-note";
+          idNote.textContent = u("idRetry");
         } else {
           idNote.className = "emp-note show muted-note";
           idNote.textContent = u("idNew");
-          if (nameEl && !nameEl.value.trim()) nameEl.focus();
         }
+        if (nameEl && !nameEl.value.trim()) nameEl.focus();
       });
 
       playerHistory(v).then(function (h) {
@@ -1442,6 +1475,7 @@
     $("#langBtn").onclick = function () { setLang(state.lang === "ar" ? "en" : "ar"); };
     $("#langLabel").textContent = state.lang === "ar" ? "EN" : "ع";
     buildFooter();
+    warmBackend();          // wake the Apps Script container before it's needed
     if (devPreview()) return;
     buildIntake();
   }
