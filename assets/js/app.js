@@ -139,7 +139,19 @@ function renderGate(){
   '</div></div></section></div>';
 }
 /* ---- roster lookup (entry screen convenience; a miss never blocks anyone) ---- */
-var lk = { timer:null, last:"", touchedName:false, touchedBrand:false, touchedMarket:false };
+var lk = { timer:null, last:"", touchedName:false, touchedBrand:false, touchedMarket:false,
+           autoName:"", autoBrand:"", autoMarket:"" };
+/* Lock the name box while we look the ID up, so nobody starts typing over the answer. */
+function setNameLocked(on){ var n=document.getElementById("g-name");
+  if(n){ n.disabled=!!on; n.classList[on?"add":"remove"]("is-waiting"); } }
+/* Clear anything the PREVIOUS lookup filled in (but never what the person typed themselves). */
+function clearAuto(){
+  var n=document.getElementById("g-name"), b=document.getElementById("g-brand"), m=document.getElementById("g-market");
+  if(n && lk.autoName && n.value===lk.autoName){ n.value=""; state.gate.name=""; lk.touchedName=false; }
+  if(b && lk.autoBrand && b.value===lk.autoBrand){ b.selectedIndex=0; state.gate.brand=""; lk.touchedBrand=false; }
+  if(m && lk.autoMarket && m.value===lk.autoMarket){ m.selectedIndex=0; state.gate.market=""; lk.touchedMarket=false; }
+  lk.autoName=""; lk.autoBrand=""; lk.autoMarket="";
+}
 function hint(msg, cls){ var h=document.getElementById("g-hint"); if(h){ h.className="lookup-hint "+(cls||""); h.textContent=msg||""; } }
 function norm_(s){ return String(s||"").toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]/g,""); }
 function matchBrand(v){ var t=norm_(v); if(!t) return "";
@@ -147,13 +159,14 @@ function matchBrand(v){ var t=norm_(v); if(!t) return "";
 function matchMarket(v){ var t=norm_(v); if(!t) return "";
   for(var i=0;i<(C.MARKETS||[]).length;i++){ if(norm_(C.MARKETS[i].en)===t) return C.MARKETS[i].en; } return ""; }
 function applyLookup(d){
+  setNameLocked(false);                                   // always give the box back
   if(!d || d.found!==true){ hint(t("lkMiss"), "miss"); return; }
   var nEl=document.getElementById("g-name");
-  if(d.name && nEl && !lk.touchedName && !nEl.value.trim()){ nEl.value=d.name; state.gate.name=d.name; }
-  var br=matchBrand(d.brand);
-  if(br && !lk.touchedBrand){ var bEl=document.getElementById("g-brand"); if(bEl){ bEl.value=br; state.gate.brand=br; } }
-  var mk=matchMarket(d.market);
-  if(mk && !lk.touchedMarket){ var mEl=document.getElementById("g-market"); if(mEl){ mEl.value=mk; state.gate.market=mk; } }
+  if(d.name && nEl && !lk.touchedName){ nEl.value=d.name; state.gate.name=d.name; lk.autoName=d.name; }
+  var br=matchBrand(d.brand), bEl=document.getElementById("g-brand");
+  if(br && bEl && !lk.touchedBrand){ bEl.value=br; state.gate.brand=br; lk.autoBrand=br; }
+  var mk=matchMarket(d.market), mEl=document.getElementById("g-market");
+  if(mk && mEl && !lk.touchedMarket){ mEl.value=mk; state.gate.market=mk; lk.autoMarket=mk; }
   hint(t("lkFound")(d.name||""), "found");
   var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid();
 }
@@ -162,20 +175,25 @@ function runLookup(id){
   hint(t("lkChecking"), "wait");
   CXHubSync.lookup(id).then(function(d){
     if(v("g-eid")!==id) return;                       // they kept typing; ignore a stale answer
-    if(d && d.failed){ lk.last=""; hint(t("lkOffline"), "miss");
+    if(d && d.failed){ lk.last=""; setNameLocked(false); hint(t("lkOffline"), "miss");
       try{ console.warn("[CX Hub] Roster lookup failed — the Apps Script /exec didn't answer. Run CXHub.testLookup('"+id+"') for details."); }catch(e){}
       return; }
     applyLookup(d);
   });
 }
 function gateChange(){ state.gate.brand=v("g-brand"); state.gate.market=v("g-market");
-  var el=document.getElementById("g-name"); if(el&&!el.disabled){ var nv=el.value.replace(/[0-9]/g,""); if(nv!==el.value)el.value=nv; if(nv.trim())lk.touchedName=true; state.gate.name=nv.trim(); }
+  var el=document.getElementById("g-name"); if(el&&!el.disabled){ var nv=el.value.replace(/[0-9]/g,""); if(nv!==el.value)el.value=nv;
+    if(nv.trim() && nv!==lk.autoName) lk.touchedName=true;          // only THEIR typing counts as "touched"
+    state.gate.name=nv.trim(); }
   var e2=document.getElementById("g-eid"); if(e2&&!e2.disabled){ var ev=e2.value.replace(/\D/g,""); if(ev!==e2.value)e2.value=ev; state.gate.eid=ev.trim(); }
   var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid();
   var id=state.gate.eid||"";
-  if(id.length>=4 && id!==lk.last){                   // debounced input (never on blur)
-    lk.last=id; clearTimeout(lk.timer); lk.timer=setTimeout(function(){ runLookup(id); }, 350);
-  } else if(id.length<4){ lk.last=""; hint(""); clearTimeout(lk.timer); } }
+  if(id!==lk.lastSeen){ lk.lastSeen=id; clearAuto(); }               // ID changed -> drop the previous person's details
+  if(id.length>=4 && id!==lk.last){                                  // debounced input (never on blur)
+    lk.last=id; clearTimeout(lk.timer);
+    setNameLocked(true); hint(t("lkChecking"), "wait");               // lock the name box while we check
+    lk.timer=setTimeout(function(){ runLookup(id); }, 350);
+  } else if(id.length<4){ lk.last=""; setNameLocked(false); hint(""); clearTimeout(lk.timer); } }
 function gateValid(){ return state.gate.name && state.gate.eid && state.gate.brand && state.gate.market && BRAND2DIV[state.gate.brand]; }
 function gateSubmit(){ gateChange(); if(!gateValid())return;
   profile={eid:state.gate.eid, name:state.gate.name, market:state.gate.market};

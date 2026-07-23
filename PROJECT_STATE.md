@@ -1,157 +1,181 @@
 # CX Interactive Hub — Project State (read me first)
 
-This file is the single source of truth for what this project is and how it works.
-If you're resuming in a **fresh AI chat**, attach the project zip and paste the
-"Resume prompt" at the bottom — that plus this file reconstructs everything.
+Single source of truth for this project. If you are resuming in a **fresh AI chat**, attach the
+project zip and paste the **Resume prompt** at the bottom — this file plus the zip reconstructs
+everything without losing detail.
+
+Owner: Ahmed (Customer Experience team, Alshaya Group).
 
 ---
 
-## What it is
-A gamified, **bilingual (EN/AR + full RTL)** learning platform for Alshaya customer
-experience staff across **Retail, Hospitality, and Starbucks**. Static site
-(HTML/CSS/JS), hosted on **GitHub Pages** today, planned move to **Azure Static Web
-Apps + Microsoft Entra SSO** later. Changes are hand-applied to the live site.
+## 1. What it is
+A gamified, **bilingual (EN/AR + full RTL)** learning platform for Alshaya customer-experience
+staff across **Retail, Hospitality and Starbucks**. Plain static site (HTML/CSS/JS), hosted on
+**GitHub Pages** today, with a planned move to **Azure Static Web Apps + Microsoft Entra SSO**.
+Ahmed hand-applies changes to the live site.
 
-## Core model (important)
-- **One identity gate** at the hub root captures **Name · Employee ID · Brand · Market**
-  (no gender/character). The brand routes the player straight to their **division
-  journey** (Foot Locker → retail, Raising Cane's → hospitality, Starbucks → starbucks).
-- **Journeys** = the three division worlds, each a vertical trail of **levels** (games).
-- **General projects** (AURA Pass, KSA Ready, future ones) are **standalone**: their own
-  entry screens and their own Google Sheets/Apps Script. The hub only links to them,
-  **filtered by the player's market**. They are NOT part of the journey progress system.
-  ⚠ **`customer-experience-general/` is maintained separately and is deliberately EXCLUDED from
-  packaged zips** — never overwrite that folder. `config.GENERAL` still lists the projects, so
-  keep the existing folder in place on the live site or those tiles will 404.
-- Identity is captured **once**; games only read it. This is what makes SSO a drop-in.
+## 2. Core model
+- **One entry gate** captures **Employee ID · Full name · Brand · Market** (no gender/character).
+  Brand routes the player to their **division journey** (Foot Locker → retail, Raising Cane's →
+  hospitality, Starbucks → starbucks). Each person belongs to exactly one division.
+- **Journeys** = the three division worlds, each a vertical trail of levels (games).
+- **General projects** (AURA Pass, KSA Ready…) are **standalone**: own entry screens, own Google
+  Sheet + Apps Script. The hub only links to them, filtered by the player's market.
+  ⚠ **`customer-experience-general/` is maintained separately by Ahmed and is deliberately
+  EXCLUDED from packaged zips.** Never overwrite it; unzip *over* the existing folder.
+  `config.GENERAL` still lists the projects, so the folder must stay on the live site.
+- Identity is captured **once**; games only ever read it. That is what makes SSO a drop-in later.
 
-## Ranks / badges
-- Each division has its own staff; a player only ever sees their own division journey.
-- The world screen shows a **rank card + badge ladder** based on **journey completion %**
-  = completed levels ÷ that division's total levels (Retail /9, Hospitality /4, Starbucks /4).
-- Tiers live in `config.RANKS` (Beginner 0% → Explorer 20% → Achiever 40% → Expert 60% →
-  Master 80% → Champion 100%), each with a bilingual name and a swappable icon media spec
-  (`assets/badges/*.png`, or a Lottie/emoji). Purely client-side (derived from progress) —
-  no backend involvement. Games do nothing extra; finishing levels advances the rank.
+## 3. Entry gate behaviour (current)
+Field order is **Employee ID first** (auto-focused), then Full name, Brand, Market — because the
+ID drives the auto-fill of everything below it.
 
-## World-screen extras (all client-side, no backend)
-- **Welcome-back popup**: a returning player (had a saved profile from a previous visit)
-  gets a modal on load — greeting + rank badge + *levels done / progress % / stars* — shown
-  **once per browser session**. First-time sign-ups don't see it. (`showWelcome()` in app.js.)
-- **Certificate**: at 100% completion a gold button downloads an **A4-landscape PNG**
-  (2480×1754) — world artwork + a wavy divide on the left, a **world-coloured** cream panel
-  on the right with the CX Hub logo, name, employee ID, the Art-of-X logo, a per-world
-  message (`config.CERT[division]`), a coloured **seal**, the last-module date, "Customer
-  Experience Team", and the **Alshaya logo**. All text is drawn on canvas (never taken from
-  images); logos are the official PNGs in `assets/logos/`. Download filename =
-  `[Name] [EmpID] [World].png`. Canvas export only works on the **hosted https site**.
-  Preview anytime in the browser console: `CXHub.previewCert()`. All positions are plain
-  numbers in `buildCertificate()` (app.js) — easy to nudge.
-- **"Learn more" cards**: each world links to its CX Hub page (`config.WORLDS[x].hubUrl`).
-- **CX Hub logos**: the **header** logo is internal Home; the **footer** logo opens the main
-  CX Hub site (`config.LINKS.cxHub`).
-- **Fancy START / FINISH** markers (checkered racing tape) bookend the level trail.
+- **Input rules**: name strips digits as they type; Employee ID strips non-digits and uses the
+  numeric keypad on mobile (`inputmode="numeric"`); placeholder `e.g. 323999`.
+- **Roster lookup**: typing an ID fires a **debounced (350 ms)** `action=lookup` call over JSONP.
+  On a hit it fills name, brand and market and shows a green "Found you, {name} — details filled in."
+- **Name box locks** (greyed, shimmering) while the lookup runs, so nobody types over the answer;
+  it unlocks on any outcome — found, miss, or failure.
+- **Changing the ID replaces the previous person's details.** The gate remembers which values it
+  auto-filled (`lk.autoName/autoBrand/autoMarket`); when the ID changes, those are cleared. Values
+  the person typed themselves are never overwritten or cleared.
+- **A miss never blocks**: "We couldn't find that ID — just fill in your details below."
+- **A failed call is visible** ("Couldn't reach the directory…") and clears the guard so retyping
+  retries. Never triggered on `blur`.
+- Console diagnostic: **`CXHub.testLookup("100086")`** prints the URL called, the raw answer, and
+  what each failure mode means.
 
-## Roster lookup (entry screen convenience)
-- Optional **`Roster`** tab in the journeys Sheet: `EmpID | Name | Brand | Market` — nothing else.
-  This is the deliberate privacy ceiling; the full HR active list (payroll name, line manager,
-  position, job, store, org type) **never goes in the cloud** — it is only read locally by an
-  offline completion-report tool if one is built.
-- Typing an Employee ID on the gate triggers a **debounced (350ms) `action=lookup`** call over
-  JSONP; on a hit it prefills name, brand and market. Built-in safeguards: backend is **warmed**
-  when the gate opens (Apps Script cold start ~5s), a **miss never blocks** anyone, a **failed
-  call clears the guard** so retyping retries, and it **never overwrites a field the person has
-  already filled**. Lookup is never triggered on `blur`.
-- IDs are normalised on both sides (digits only, leading zeros stripped). Verified on the real
-  30,173-row list: 0 duplicates, 0 blanks.
-- The HR list stores **3-letter brand codes** (STA, HEN, BAT…). The supplied roster extract
-  already resolves the 21 Hub brands to canonical English names; the rest stay as codes and the
-  person simply picks their brand manually (~87% of staff auto-resolve).
-- Markets are normalised to Hub naming (`UAE`→United Arab Emirates, `Saudi`→Saudi Arabia).
-  **Morocco exists in the HR list but is not in the Hub's 9 markets** — add it to config or those
-  staff pick their market by hand.
+## 4. Roster (sign-in convenience)
+- Optional **`Roster`** tab in the journeys Sheet: **`EmpID | Name | Brand | Market`** — nothing
+  else. That is the deliberate privacy ceiling. The full HR active list (payroll name, line
+  manager, position, job, store, org type) **never goes to the cloud**.
+- Source: `FilteredActiveList_P6_Full.xlsx` → extract `Roster_AllMarkets.csv` (**30,173 rows, all
+  markets, all divisions**). Verified: 0 duplicate IDs, 0 blanks. IDs are 5–6 digits.
+- The HR list stores **3-letter brand codes** (STA, HEN, BAT…). The extract already resolves the
+  **21 hub brands** to canonical English names (~**87%** of staff); the rest keep their code and
+  the person simply picks their brand manually. `brand-codes.js` holds the code directory.
+- Markets normalised to hub naming (`UAE`→United Arab Emirates, `Saudi`→Saudi Arabia).
+  **Morocco (129 staff) exists in HR but is NOT in the hub's 9 markets** — add it to config or
+  those people pick their market by hand.
 - Leave the Roster tab empty and the gate behaves exactly as before.
-- ⚠ **Never commit the roster file into this repo / the hosted site.** It goes only into the
-  Google Sheet.
+- ⚠ **Never commit the roster file to the repo / hosted site.** Sheet only.
 
-## Where things live
+## 5. Where things live
 ```
-index.html                      hub shell (topbar, #app, modal, footer)
-assets/js/config.js             ★ EDIT THIS: SSO flag, LINKS (CX Hub URL), CERT messages, worlds (+hubUrl), levels, brands, markets, general games, ranks/badges, icons
-assets/js/app.js                engine (gate, routing, world map, modal, hydrate, sign-out)
+index.html                      shell: topbar (logo = internal Home), #app, modal, footer (logo -> CX Hub site)
+assets/js/config.js             ★ EDIT THIS: SSO flag, LINKS, CERT messages, worlds (+hubUrl), levels,
+                                  brands, markets, general games, ranks/badges, icons
+assets/js/app.js                engine: gate + roster lookup, routing, world map, ranks, certificate,
+                                  welcome popup, modal, hydrate, sign-out
 assets/js/cxhub-sync.js         ★ journeys backend bridge — holds scriptUrl + secretToken
 assets/css/styles.css           all styling + animated backgrounds
-assets/logos|icons|worlds|characters|lottie/   assets (media specs support img/lottie/emoji)
+assets/logos|icons|worlds|badges|lottie/   media (official CX Hub / Art-of / Alshaya logos live here)
 backend/AppsScript.gs           journeys Google Apps Script (paste into the Sheet)
 backend/README.md               backend setup steps
 GAME_BUILDER_PROMPT.md          paste into a new chat to build a journey game
-sync-test.html                  open on live site to verify Sheet round-trip
+PROJECT_STATE.md                this file
+sync-test.html                  open on the live site to verify the Sheet round-trip
 <world-folder>/<level-id>/index.html    each journey game (17 placeholders scaffolded)
-customer-experience-general/aura-pass|ksa-ready/   standalone General projects
 ```
-World folders: retail → `art-of-selling-retail`, hospitality → `art-of-guest-experience`,
-starbucks → `art-of-connection`, general → `customer-experience-general`.
+World folders: retail → `art-of-selling-retail` (9 levels), hospitality → `art-of-guest-experience`
+(4), starbucks → `art-of-connection` (4), general → `customer-experience-general` (excluded).
 
-## Data / storage contract (shared localStorage on the same origin)
+## 6. Storage contract (shared localStorage, same origin)
 - `cxhub_profile`  = `{ eid, name, market }`
-- `cxhub_brands`   = `{ "<division>": "<brand>" }`  (one entry — the player's brand)
-- `cxhub_progress` = `{ "<world>:<levelId>": {stars, score, date} }` (best-of, shown by hub)
+- `cxhub_brands`   = `{ "<division>": "<brand>" }` (one entry — the player's brand)
+- `cxhub_progress` = `{ "<world>:<levelId>": {stars, score, date} }` (best-of, what the hub shows)
 - `cxhub_outbox`   = queued Sheet writes (offline safety)
 
-## Journeys backend (central Google Sheet + Apps Script)
-- Tabs: **Profiles** (one row per employee, upsert by EmpID), **Results** (one row per
-  attempt — appended), **Feedback**, plus the optional **Roster** (see above).
-- `cxhub-sync.js` API: `getProfile()`, `register(division)`, `saveResult(world,levelId,{score,stars,passed})`,
-  `sendFeedback()`, `hydrate()`, `flush()`.
-- **Writes** use `fetch(..., {mode:"no-cors"})` — fire-and-forget, so a blocked CORS read
-  never causes a retry/duplicate row.
-- **Reads** use **JSONP** (`doGet` returns `callback(...)`), because Apps Script sends no
-  CORS headers.
-- **hydrate()** on load: flushes pending → reads the player's results → **rebuilds progress
-  authoritatively** (deleting a Results row resets that level). If the player's **Profiles**
-  row is gone → **signs them out** to the gate (only when confirmed, not while writes pend).
-- **Attempt number** is computed server-side (counts prior tries) — games don't send it.
+## 7. Journeys backend (one Google Sheet + Apps Script)
+- Tabs: **Profiles** (one row per employee, upsert by EmpID, duplicates auto-removed),
+  **Results** (one row per attempt — appended), **Feedback**, optional **Roster**.
+- `cxhub-sync.js` API: `getProfile()`, `register(division)`, `saveResult(world, levelId, {score,
+  stars, passed})`, `sendFeedback()`, `hydrate()`, `flush()`, `lookup(empId)`, `warm()`.
+- **Writes** use `fetch(..., {mode:"no-cors"})` — fire-and-forget, so a blocked CORS read can
+  never cause a retry and duplicate rows. A **flush lock + FIFO drain** prevents double-sends.
+- **Reads** use **JSONP** (`doGet` answers `callback(...)`), because Apps Script sends no CORS
+  headers. Client timeout **15 s with one retry**, plus an in-session memo so re-typing an ID
+  costs nothing.
+- **`hydrate()`** on load: flush → read the player's results → **rebuild progress authoritatively**
+  (a Results row deleted in the Sheet resets that level). If the player's **Profiles** row is gone
+  → **sign out** to the gate (only when confirmed, never while writes are pending).
+- **Attempt number** is computed server-side (counts prior tries) — games never send it.
+- **`rosterLookup`** uses native **TextFinder** (no 30k-row read), with a normalising fallback scan
+  only if that misses. Results cached **6 h** for a hit, **10 min** for a miss. The response
+  includes **`ms`** (server time) — if `ms` is absent, an OLD version is deployed.
+- **`action=warm`** wakes the container; the hub pings it when the gate opens (cold start ~5-10 s).
 - Token + URL live in `cxhub-sync.js` (`CXHUB_SYNC`) and must match `SECRET_TOKEN` in
-  `AppsScript.gs`. AURA/KSA have their **own** separate token+URL (do not touch).
+  `AppsScript.gs`. Current: `…AKfycbzkwewEo806PQv7IZCXgbM9L…/exec`, token `cxinteractivehub2030`.
+  AURA/KSA have their **own** separate URL + token — never touch those.
 
-## SSO (future)
-- `config.js` has `SSO: false`. While false the hub never calls `/.auth/me` and just shows
-  the form. When Azure/Entra is live, set `SSO: true` and map the two claim names in
-  `app.js` → `resolveIdentity()`.
-- Because store staff share a **store login**, SSO fills **brand + market** (store-level)
-  and locks them; the person still enters **name + employee ID**. Full steps in the Word
-  doc `CX_Hub_SSO_Migration_Guide.docx`.
+## 8. Ranks / badges
+Per-division completion % (completed ÷ that division's total: retail 9, hospitality 4, starbucks 4)
+maps to `config.RANKS`: Beginner 0 → Explorer 20 → Achiever 40 → Expert 60 → Master 80 →
+Champion 100. Shown as a rank card + connected badge ladder. Icons are swappable
+(`assets/badges/*.png`, or `{lottie:…}` / `{emoji:…}`). Purely client-side.
 
-## Building a new journey game
-Fill `GAME_BUILDER_PROMPT.md` and paste into a new chat. Rules: self-contained
-`index.html` in the level folder, never asks for identity (reads the saved profile), EN/AR
-+ RTL, and on finish calls once:
-`CXHubSync.saveResult("<world>","<level-id>",{score:0-100, stars:0-3, passed:true})`.
-Then set that level's `released:true` in `config.js`. **No limit** on question count or
-interaction type; only the final `score`/`stars` matter. Suggested convention: pass at 80,
-2★ at pass, 3★ at 90+.
+## 9. Certificate
+At 100% a gold button downloads an **A4-landscape PNG (2480×1754)**: world artwork + wavy divide on
+the left; world-coloured cream panel on the right with the CX Hub logo, name, employee ID, the
+Art-of-X logo, the per-world message (`config.CERT[division]`), a coloured seal (lower-left),
+completion date, "Customer Experience Team", and the **Alshaya logo**. All text is drawn on canvas
+(never lifted from images). Filename: **`[Name] [EmpID] [World].png`**. Canvas export only works on
+the **hosted https site**. Preview anytime: **`CXHub.previewCert()`**. All positions are plain
+numbers inside `buildCertificate()`.
 
-## When the backend (AppsScript.gs) changes
-Paste new code → (if schema changed, delete the 3 tabs and run `setup()`) →
-**Deploy → Manage deployments → New version → Deploy** (URL stays the same).
+## 10. Other world-screen features
+- **Welcome-back popup** for returning players (rank badge + levels done / progress % / stars),
+  once per browser session; first-time sign-ups don't see it.
+- **"Learn more" card** per world → that world's CX Hub page (`WORLDS[x].hubUrl`).
+- Header logo = internal Home; **footer logo** → main CX Hub (`config.LINKS.cxHub`).
+- Fancy **START / FINISH** markers (checkered racing tape), animated per-division backgrounds.
 
-## Working style
+## 11. SSO (future, behind a flag)
+`config.SSO:false` today → the hub never calls `/.auth/me`. Store staff share ONE store login, so
+SSO fills **brand + market** (store-level, locked) while the person still enters **name + employee
+ID**. When Azure/Entra is live: set `SSO:true` and map two claim names in `resolveIdentity()`.
+Full instructions: `CX_Hub_SSO_Migration_Guide.docx` (delivered separately).
+
+## 12. Building a new journey game
+Fill in `GAME_BUILDER_PROMPT.md` and paste it into a new chat. Contract: self-contained
+`index.html` in the level folder, never asks for identity (reads `cxhub_profile` /
+`cxhub_brands`), bilingual EN/AR + RTL, and on finish calls once:
+```js
+CXHubSync.saveResult("<world>", "<level-id>", { score: 0-100, stars: 0-3, passed: true });
+```
+Then set that level's `released:true` in `config.js`. **No limit** on question count or interaction
+type — only the final `score`/`stars` matter. Suggested convention: pass at 80, 2★ at pass, 3★ at 90+.
+Players can **replay unlimited times**; each attempt appends a Results row (full history) and the
+hub always shows their **best**. Nothing extra is needed per level or per division.
+
+## 13. Deploy checklist (whenever `AppsScript.gs` changes)
+1. Paste the new code into the Apps Script editor → **Save**.
+2. If the schema changed: delete the affected tabs and run **`setup()`** once.
+3. **Deploy → Manage deployments → ✏️ → Version: New version → Deploy** (URL stays the same).
+4. Verify: open `…/exec?token=<TOKEN>&action=lookup&empId=100086` — the answer must contain **`ms`**.
+5. On the site, **hard-refresh** (Ctrl/Cmd+Shift+R) so the new JS loads.
+
+## 14. Working style
 - Deliver **only the changed files with exact paths** (not the whole zip) unless asked for
-  everything.
-- On any `AppsScript.gs` change, remind to redeploy.
+  everything. Multiple files with the same basename → a small zip preserving paths.
+- On any `AppsScript.gs` change, always remind about the redeploy.
 - Keep it config-driven, bilingual, mobile-first, plug-and-play.
+- Verify changes headlessly (playwright) before delivering; sandbox blocks `script.google.com` and
+  Google Fonts, so those console errors are expected and not real bugs.
 
-## Known long-term notes (by design, not bugs)
-- JSONP read puts token + empId in the URL — fine for internal use, but keep the Sheet
-  access-restricted.
-- `Results` keeps one row per attempt (full history); the hub shows best-of. Use a pivot
-  for "best per person per level".
+## 15. Known notes (by design, not bugs)
+- The JSONP read puts the token + empId in the URL — fine internally, but keep the Sheet restricted.
+- `Results` keeps one row per attempt; use a pivot for "best per person per level".
+- A Kuwait player sees **no** General tiles (AURA is UAE-only, KSA Ready is Saudi-only) — that is
+  the market gating working.
+- The certificate cannot export from `file://` (tainted canvas) — hosted site only.
 
 ---
 
 ## Resume prompt (paste into a new chat, attach the zip)
-> I'm continuing the **CX Interactive Hub** project (attached zip). Please read
-> `PROJECT_STATE.md` at the root first — it describes the whole architecture, data
-> contract, backend, and conventions. Follow the working style in it (give me only the
-> changed files with exact paths, remind me to redeploy when `AppsScript.gs` changes).
-> Today I want to: [your task].
+> I'm continuing the **CX Interactive Hub** project (zip attached). Read **`PROJECT_STATE.md`** at
+> the root first — it describes the architecture, the entry gate + roster lookup, the storage
+> contract, the backend, the certificate, and the conventions. Follow the working style in it:
+> give me only the changed files with exact paths, and remind me to redeploy when
+> `AppsScript.gs` changes. Note that `customer-experience-general/` is maintained separately and is
+> not in the zip — never overwrite it. Today I want to: **[your task]**.

@@ -117,13 +117,17 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
   /* Roster lookup for the entry screen. Resolves {found,name,brand,market}; never rejects.
      Apps Script queues executions, so the first call after idle can be slow: generous
      timeout, then ONE automatic retry before we tell the user to type it in themselves. */
+  var lkMemo={};
   function lookup(empId){
     if(!CFG.scriptUrl || !empId) return Promise.resolve({found:false});
-    var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=lookup&empId="+encodeURIComponent(empId);
+    var id=String(empId).replace(/\D/g,"").replace(/^0+/,"");
+    if(lkMemo[id]) return Promise.resolve(lkMemo[id]);               // same ID again -> no network
+    var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=lookup&empId="+encodeURIComponent(id);
     return jsonp(url, 15000).then(function(d){
-      if(d && typeof d==="object") return d;
+      if(d && typeof d==="object"){ lkMemo[id]=d; return d; }
       return jsonp(url, 15000).then(function(d2){                    // retry once
-        return (d2 && typeof d2==="object") ? d2 : {found:false, failed:true};
+        if(d2 && typeof d2==="object"){ lkMemo[id]=d2; return d2; }
+        return {found:false, failed:true};                           // not memoised, so retyping retries
       });
     });
   }

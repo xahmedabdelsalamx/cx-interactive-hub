@@ -572,3 +572,8 @@ html[dir="rtl"] .lm-arr{transform:scaleX(-1)}
 .lookup-hint.wait{color:var(--ink-soft);opacity:.8}
 .lookup-hint.found{color:#12894f}
 .lookup-hint.miss{color:var(--ink-soft)}
+
+/* name box locked while the employee ID is being looked up */
+.field input:disabled{opacity:.55;cursor:progress}
+.field input.is-waiting{background-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 50%,transparent 100%);
+  background-size:200% 100%;animation:sweep 1.1s linear infinite}
