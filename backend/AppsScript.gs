@@ -27,11 +27,14 @@ var PROFILE_HEADERS  = ["Timestamp","EmpID","Name","Market","Brand","Division","
 var RESULT_HEADERS   = ["Timestamp","EmpID","Name","Market","Brand","Division","World","LevelID","Score","Stars","Passed","Attempt","DurationSec","Lang","ClientTime","Meta"];
 var FEEDBACK_HEADERS = ["Timestamp","EmpID","Name","Market","Brand","Division","World","LevelID","Rating","Comment","Lang","ClientTime"];
 
+var ROSTER_HEADERS   = ["EmpID","Name","Brand","Market"];
+
 function setup(){
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   ensureTab(ss, "Profiles", PROFILE_HEADERS);
   ensureTab(ss, "Results",  RESULT_HEADERS);
   ensureTab(ss, "Feedback", FEEDBACK_HEADERS);
+  ensureTab(ss, "Roster",   ROSTER_HEADERS);   // optional sign-in convenience; paste the extract here
 }
 
 function ensureTab(ss, name, headers){
@@ -53,6 +56,8 @@ function doGet(e){
     return json(obj);
   }
   if (p.token !== SECRET_TOKEN) return out({ error: "bad token" });
+  if (p.action === "warm") return out({ ok: true });                          // wakes the container, no work
+  if (p.action === "lookup" && p.empId) return out(rosterLookup(p.empId));
   if (p.action === "results" && p.empId) return out({ known: profileExists(p.empId), results: getResults(p.empId) });
   return out({ ok: true });
 }
@@ -120,6 +125,37 @@ function attemptNumber(ss, empId, world, levelId){
     if (String(rows[i][ei])===String(empId) && String(rows[i][wi])===String(world) && String(rows[i][li])===String(levelId)) n++;
   }
   return n + 1;
+}
+
+/* ---- Roster lookup (optional Roster tab: EmpID | Name | Brand | Market) ----
+   A miss is never an error — the player just fills the form in themselves. */
+function normId_(v){
+  var s = String(v == null ? "" : v).trim();
+  if (s.indexOf(".") > -1 && !isNaN(Number(s))) s = String(parseInt(Number(s), 10));
+  return s.replace(/\D/g, "").replace(/^0+/, "");
+}
+function rosterLookup(empId){
+  var q = normId_(empId);
+  if (!q) return { found: false };
+  var cache = CacheService.getScriptCache(), key = "rl_" + q;
+  try { var hit = cache.get(key); if (hit) return JSON.parse(hit); } catch (e) {}
+
+  var out = { found: false };
+  try {
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Roster");
+    if (sh && sh.getLastRow() > 1){
+      var ids = sh.getRange(2, 1, sh.getLastRow()-1, 1).getValues();     // one column read = fast
+      for (var i = 0; i < ids.length; i++){
+        if (normId_(ids[i][0]) === q){
+          var r = sh.getRange(i+2, 1, 1, 4).getValues()[0];
+          out = { found: true, name: String(r[1]||"").trim(), brand: String(r[2]||"").trim(), market: String(r[3]||"").trim() };
+          break;
+        }
+      }
+    }
+  } catch (e) { return { found: false }; }                                // never block sign-in
+  try { cache.put(key, JSON.stringify(out), 21600); } catch (e) {}        // 6h
+  return out;
 }
 
 function profileExists(empId){

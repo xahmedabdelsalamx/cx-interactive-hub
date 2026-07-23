@@ -20,6 +20,7 @@ const STR={
    gateEyebrow:"Customer Experience Learning", gateTitle:"Welcome — let's get you set up",
    gateSub:"Enter your details once. Your brand takes you straight to your journey.",
    fName:"Full name", fEid:"Employee ID", fBrand:"Your brand", fMarket:"Your market", choose:"Choose your brand…", chooseMarket:"Choose your market…", enter:"Enter my journey",
+   lkChecking:"Checking your ID…", lkFound:function(n){return "Found you, "+n+" — details filled in.";}, lkMiss:"We couldn't find that ID — just fill in your details below.",
    ssoNote:"Signed in with your store — just add your name and ID.",
    worldsH:"Your journey", generalTag:"For everyone", generalH:"Customer Experience — General",
    levels:function(n){return n+" levels";}, cleared:function(a,b){return a+" / "+b+" cleared";},
@@ -36,6 +37,7 @@ const STR={
    gateEyebrow:"تعلّم تجربة العملاء", gateTitle:"مرحبًا — لنجهّز حسابك",
    gateSub:"أدخل بياناتك مرة واحدة. علامتك التجارية تنقلك مباشرة إلى رحلتك.",
    fName:"الاسم الكامل", fEid:"الرقم الوظيفي", fBrand:"علامتك التجارية", fMarket:"سوقك", choose:"اختر علامتك…", chooseMarket:"اختر سوقك…", enter:"ادخل رحلتي",
+   lkChecking:"جارٍ التحقق من رقمك…", lkFound:function(n){return "وجدناك يا "+n+" — تم تعبئة بياناتك.";}, lkMiss:"لم نعثر على هذا الرقم — أكمل بياناتك بالأسفل.",
    ssoNote:"تم تسجيل الدخول عبر متجرك — أضف اسمك ورقمك الوظيفي فقط.",
    worldsH:"رحلتك", generalTag:"للجميع", generalH:"تجربة العملاء — عام",
    levels:function(n){return n+" مستوى";}, cleared:function(a,b){return a+" / "+b+" مكتمل";},
@@ -128,18 +130,50 @@ function renderGate(){
     '<h2>'+t("gateTitle")+'</h2><p class="sub">'+t("gateSub")+'</p>'+
     (isSso?'<div class="sso-note">🔐 '+t("ssoNote")+'</div>':'')+
     '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
-    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" oninput="CXHub.gateChange()" placeholder="e.g. 323999"></div>'+
-    '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.gateChange()">'+
+    '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" oninput="CXHub.gateChange()" placeholder="e.g. 323999"><div id="g-hint" class="lookup-hint"></div></div>'+
+    '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.touchBrand();CXHub.gateChange()">'+
       '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
-    '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.gateChange()">'+
+    '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.touchMarket();CXHub.gateChange()">'+
       '<option value="" disabled '+(!g.market?'selected':'')+'>'+t("chooseMarket")+'</option>'+markets+'</select></div>'+
     '<button class="cta" id="gCta" style="background:var(--g-cx)" '+(gateValid()?'':'disabled')+' onclick="CXHub.gateSubmit()">'+t("enter")+' ›</button>'+
   '</div></div></section></div>';
 }
+/* ---- roster lookup (entry screen convenience; a miss never blocks anyone) ---- */
+var lk = { timer:null, last:"", touchedName:false, touchedBrand:false, touchedMarket:false };
+function hint(msg, cls){ var h=document.getElementById("g-hint"); if(h){ h.className="lookup-hint "+(cls||""); h.textContent=msg||""; } }
+function norm_(s){ return String(s||"").toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]/g,""); }
+function matchBrand(v){ var t=norm_(v); if(!t) return "";
+  for(var d in C.BRANDS){ for(var i=0;i<C.BRANDS[d].length;i++){ if(norm_(C.BRANDS[d][i])===t) return C.BRANDS[d][i]; } } return ""; }
+function matchMarket(v){ var t=norm_(v); if(!t) return "";
+  for(var i=0;i<(C.MARKETS||[]).length;i++){ if(norm_(C.MARKETS[i].en)===t) return C.MARKETS[i].en; } return ""; }
+function applyLookup(d){
+  if(!d || d.found!==true){ hint(t("lkMiss"), "miss"); return; }
+  var nEl=document.getElementById("g-name");
+  if(d.name && nEl && !lk.touchedName && !nEl.value.trim()){ nEl.value=d.name; state.gate.name=d.name; }
+  var br=matchBrand(d.brand);
+  if(br && !lk.touchedBrand){ var bEl=document.getElementById("g-brand"); if(bEl){ bEl.value=br; state.gate.brand=br; } }
+  var mk=matchMarket(d.market);
+  if(mk && !lk.touchedMarket){ var mEl=document.getElementById("g-market"); if(mEl){ mEl.value=mk; state.gate.market=mk; } }
+  hint(t("lkFound")(d.name||""), "found");
+  var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid();
+}
+function runLookup(id){
+  if(!window.CXHubSync || !CXHubSync.lookup) return;
+  hint(t("lkChecking"), "wait");
+  CXHubSync.lookup(id).then(function(d){
+    if(v("g-eid")!==id) return;                       // they kept typing; ignore a stale answer
+    if(d && d.failed){ lk.last=""; hint(""); return; } // call failed -> clear guard so retyping retries
+    applyLookup(d);
+  });
+}
 function gateChange(){ state.gate.brand=v("g-brand"); state.gate.market=v("g-market");
-  var el=document.getElementById("g-name"); if(el&&!el.disabled){ var nv=el.value.replace(/[0-9]/g,""); if(nv!==el.value)el.value=nv; state.gate.name=nv.trim(); }
+  var el=document.getElementById("g-name"); if(el&&!el.disabled){ var nv=el.value.replace(/[0-9]/g,""); if(nv!==el.value)el.value=nv; if(nv.trim())lk.touchedName=true; state.gate.name=nv.trim(); }
   var e2=document.getElementById("g-eid"); if(e2&&!e2.disabled){ var ev=e2.value.replace(/\D/g,""); if(ev!==e2.value)e2.value=ev; state.gate.eid=ev.trim(); }
-  var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid(); }
+  var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid();
+  var id=state.gate.eid||"";
+  if(id.length>=4 && id!==lk.last){                   // debounced input (never on blur)
+    lk.last=id; clearTimeout(lk.timer); lk.timer=setTimeout(function(){ runLookup(id); }, 350);
+  } else if(id.length<4){ lk.last=""; hint(""); clearTimeout(lk.timer); } }
 function gateValid(){ return state.gate.name && state.gate.eid && state.gate.brand && state.gate.market && BRAND2DIV[state.gate.brand]; }
 function gateSubmit(){ gateChange(); if(!gateValid())return;
   profile={eid:state.gate.eid, name:state.gate.name, market:state.gate.market};
@@ -382,7 +416,10 @@ function goWorld(){ if(profile&&Object.keys(brands).length){state.screen="world"
 
 function confirmSignOut(){ var msg=LANG==="ar"?"تسجيل الخروج؟":"Sign out?"; if(window.confirm(msg)) signOut(); }
 
-window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails,
+function touchBrand(){ lk.touchedBrand=true; }
+function touchMarket(){ lk.touchedMarket=true; }
+
+window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails, touchBrand:touchBrand, touchMarket:touchMarket,
   openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld, signOut:signOut, confirmSignOut:confirmSignOut, downloadCert:downloadCert, previewCert:previewCert};
 
 /* footer CX Hub logo -> main hub (header logo stays internal home) */
@@ -406,7 +443,7 @@ function signOut(){
 }
 function decideAndRender(){
   if(profile && Object.keys(brands).length){ state.division=BRAND2DIV[myBrand()]||"retail"; state.screen="world"; }
-  else { state.screen="gate"; }
+  else { state.screen="gate"; if(window.CXHubSync&&CXHubSync.warm) CXHubSync.warm(); }   // beat the cold start
   render();
 }
 resolveIdentity().then(function(sso){

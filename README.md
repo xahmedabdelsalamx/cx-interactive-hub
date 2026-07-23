@@ -79,6 +79,16 @@ preview.)
 - **"Learn more" / CX Hub links** — each world links to its CX Hub page (`WORLDS[x].hubUrl`);
   the footer logo opens the main CX Hub (`config.LINKS.cxHub`).
 
+
+## Roster lookup (optional, speeds up sign-in)
+
+Add a **`Roster`** tab to the journeys Google Sheet with exactly `EmpID | Name | Brand | Market`
+and paste in the supplied extract. Staff then type their Employee ID on the entry screen and
+their name, brand and market fill in automatically. A miss never blocks anyone — they just fill
+the form in themselves. Leave the tab empty and nothing changes.
+
+**Never commit the roster file to this repo or the hosted site** — it belongs only in the Sheet.
+
 ## How to build a new game (mini-game inside a journey)
 
 The easiest path: open **`GAME_BUILDER_PROMPT.md`** in this project, fill in the short

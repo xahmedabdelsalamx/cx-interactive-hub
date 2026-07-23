@@ -49,6 +49,28 @@ Apps + Microsoft Entra SSO** later. Changes are hand-applied to the live site.
   CX Hub site (`config.LINKS.cxHub`).
 - **Fancy START / FINISH** markers (checkered racing tape) bookend the level trail.
 
+## Roster lookup (entry screen convenience)
+- Optional **`Roster`** tab in the journeys Sheet: `EmpID | Name | Brand | Market` — nothing else.
+  This is the deliberate privacy ceiling; the full HR active list (payroll name, line manager,
+  position, job, store, org type) **never goes in the cloud** — it is only read locally by an
+  offline completion-report tool if one is built.
+- Typing an Employee ID on the gate triggers a **debounced (350ms) `action=lookup`** call over
+  JSONP; on a hit it prefills name, brand and market. Built-in safeguards: backend is **warmed**
+  when the gate opens (Apps Script cold start ~5s), a **miss never blocks** anyone, a **failed
+  call clears the guard** so retyping retries, and it **never overwrites a field the person has
+  already filled**. Lookup is never triggered on `blur`.
+- IDs are normalised on both sides (digits only, leading zeros stripped). Verified on the real
+  30,173-row list: 0 duplicates, 0 blanks.
+- The HR list stores **3-letter brand codes** (STA, HEN, BAT…). The supplied roster extract
+  already resolves the 21 Hub brands to canonical English names; the rest stay as codes and the
+  person simply picks their brand manually (~87% of staff auto-resolve).
+- Markets are normalised to Hub naming (`UAE`→United Arab Emirates, `Saudi`→Saudi Arabia).
+  **Morocco exists in the HR list but is not in the Hub's 9 markets** — add it to config or those
+  staff pick their market by hand.
+- Leave the Roster tab empty and the gate behaves exactly as before.
+- ⚠ **Never commit the roster file into this repo / the hosted site.** It goes only into the
+  Google Sheet.
+
 ## Where things live
 ```
 index.html                      hub shell (topbar, #app, modal, footer)
@@ -75,7 +97,7 @@ starbucks → `art-of-connection`, general → `customer-experience-general`.
 
 ## Journeys backend (central Google Sheet + Apps Script)
 - Tabs: **Profiles** (one row per employee, upsert by EmpID), **Results** (one row per
-  attempt — appended), **Feedback**.
+  attempt — appended), **Feedback**, plus the optional **Roster** (see above).
 - `cxhub-sync.js` API: `getProfile()`, `register(division)`, `saveResult(world,levelId,{score,stars,passed})`,
   `sendFeedback()`, `hydrate()`, `flush()`.
 - **Writes** use `fetch(..., {mode:"no-cors"})` — fire-and-forget, so a blocked CORS read

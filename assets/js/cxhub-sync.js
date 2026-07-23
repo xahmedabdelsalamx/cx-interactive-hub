@@ -114,7 +114,21 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     }).catch(function(){ return {read:false, known:true, changed:false}; });
   }
 
+  /* Roster lookup for the entry screen. Resolves {found,name,brand,market}; never rejects. */
+  function lookup(empId){
+    if(!CFG.scriptUrl || !empId) return Promise.resolve({found:false});
+    var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=lookup&empId="+encodeURIComponent(empId);
+    return jsonp(url).then(function(d){ return (d&&typeof d==="object") ? d : {found:false, failed:true}; });
+  }
+  /* Wake the Apps Script container so the first real lookup isn't stuck behind a ~5s cold start. */
+  function warm(){
+    if(!CFG.scriptUrl) return;
+    try{ jsonp(CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=warm"); }catch(e){}
+  }
+
   window.CXHubSync = {
+    lookup: lookup,
+    warm: warm,
     hydrate: hydrate,
     config: CFG,
 
