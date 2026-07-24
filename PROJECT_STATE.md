@@ -45,6 +45,24 @@ ID drives the auto-fill of everything below it.
 - Console diagnostic: **`CXHub.testLookup("100086")`** prints the URL called, the raw answer, and
   what each failure mode means.
 
+### Who counts as a "returning player"
+**Anyone with a Profiles row — not only someone who has finished a level.** Signing in writes a
+**Profiles** row; finishing a level writes a **Results** row. With most journey levels still
+placeholders, almost every real test ID has the first and none of the second, so gating the
+welcome-back box on completed levels meant it never appeared. The `results` response already
+carries **`known`** (`profileExists`), and that is now what decides:
+
+| state | gate box | popup |
+|---|---|---|
+| has Results rows | full stats (levels / progress / stars / rank) | full stats |
+| Profiles row, nothing cleared | "You're already registered — no level cleared yet." | "Ready to start" variant |
+| never signed in | hidden | none |
+
+`gsum.known` is tracked **separately from** `gsum.data`, because a brand-new person and a failed
+read both produce `data:null` — only the first may suppress the greeting. A new sign-up is marked
+welcomed immediately so `register()` writing their Profiles row can't make hydrate greet them
+"back" seconds later.
+
 ### Returning players (gate + sign-in)
 Typing a known ID fires **two reads in parallel**: `action=lookup` (roster) and `action=results`
 (their history). The results call powers three things at once:
@@ -209,6 +227,10 @@ the **hosted https site**. Preview anytime: **`CXHub.previewCert()`**. All posit
 numbers inside `buildCertificate()`.
 
 ## 10. Other world-screen features
+- **Names are stripped of honorifics** (`cleanName()` / `firstNameOf()`): HR records carry titles
+  like "Mr. Emmanuel Ilagan Salva", which made the player chip read "Mr. · 200221" as if that were
+  the person's name. Titles are removed EN + AR, at the moment the roster fills the form, so the
+  Sheet stores the clean name too.
 - **Welcome-back popup** for returning players (rank badge + levels done / progress % / stars),
   once per browser session. It now also fires for someone signing in on a fresh browser whose
   **Employee ID already has results in the Sheet**; genuinely new sign-ups still don't see it.

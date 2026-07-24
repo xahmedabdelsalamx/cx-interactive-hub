@@ -654,3 +654,8 @@ html[dir="rtl"] .gwb-card{text-align:center}
   .gate-card .field{margin-top:15px}
   .gate-card .field.group-start{margin-top:20px}
 }
+/* welcome-back popup, "registered but nothing cleared yet" variant */
+.wb-none{color:var(--ink-soft);font-size:.9rem;line-height:1.55;margin:14px 4px 4px;text-align:center}
+.gwb-card.gwb-slim{padding:15px 16px 14px}
+.gwb-card.gwb-slim .gwb-world{margin-top:5px;font-size:.8rem}
+.gwb-card.gwb-slim .gwb-tip{margin-top:6px}
