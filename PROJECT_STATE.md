@@ -45,6 +45,24 @@ ID drives the auto-fill of everything below it.
 - Console diagnostic: **`CXHub.testLookup("100086")`** prints the URL called, the raw answer, and
   what each failure mode means.
 
+### Returning players (gate + sign-in)
+Typing a known ID fires **two reads in parallel**: `action=lookup` (roster) and `action=results`
+(their history). The results call powers three things at once:
+1. a **"welcome back" box under the ID field** — division, levels done / total, progress %, stars,
+   rank, last-activity date and total attempts. Collapsed to zero height until data arrives, so the
+   card never jumps; cleared the moment the ID changes.
+2. **`cxhub_progress` is pre-seeded at sign-in**, so the world map paints the right numbers on its
+   FIRST frame.
+3. **name / brand / market fallback** from their most recent attempt when the Roster tab misses.
+
+Sign-in waits up to **2.6 s** for that call if it's still in flight (the button shows "Loading your
+progress…"), then renders once. `hydrateAndRefresh()` afterwards compares the new progress to the
+current one and **only repaints when something actually changed** — and keeps the scroll position
+when it does. Before this, the world rendered empty and snapped to the real numbers a second later,
+which looked like the page refreshing itself. Anyone whose ID has history gets the **welcome-back
+popup** (~420 ms after the map appears), even on a brand-new browser. Session-limited as before.
+No AppsScript change was needed for any of it.
+
 ## 4. Roster (sign-in convenience)
 - Optional **`Roster`** tab in the journeys Sheet: **`EmpID | Name | Brand | Market`** — nothing
   else. That is the deliberate privacy ceiling. The full HR active list (payroll name, line
@@ -146,7 +164,8 @@ numbers inside `buildCertificate()`.
 
 ## 10. Other world-screen features
 - **Welcome-back popup** for returning players (rank badge + levels done / progress % / stars),
-  once per browser session; first-time sign-ups don't see it.
+  once per browser session. It now also fires for someone signing in on a fresh browser whose
+  **Employee ID already has results in the Sheet**; genuinely new sign-ups still don't see it.
 - **"Learn more" card** per world → that world's CX Hub page (`WORLDS[x].hubUrl`).
 - Header logo = internal Home; **footer logo** → main CX Hub (`config.LINKS.cxHub`).
 - Fancy **START / FINISH** markers (checkered racing tape), animated per-division backgrounds.

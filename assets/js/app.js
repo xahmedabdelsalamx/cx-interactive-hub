@@ -32,6 +32,9 @@ const STR={
    learnTitle:"Want to go deeper?", learnSub:function(nm){return "Explore "+nm+" on the CX Hub";},
    downloadCert:"Download your certificate", certLocked:"Finish all levels to unlock your certificate 🎓",
    welcomeBack:"Welcome back", wbLevels:"Levels done", wbProgress:"Progress", wbStars:"Stars earned", wbContinue:"Continue my journey",
+   gwbHi:function(n){return "Welcome back, "+n+"!";}, gwbAnon:"Welcome back!", gwbTip:"Sign in and pick up where you left off.",
+   gwbRank:"Rank", gwbLast:function(d){return "Last activity "+d;}, gwbAttempts:function(n){return n+(n===1?" attempt":" attempts");},
+   gwbDone:"All levels complete — your certificate is waiting 🎓", signingIn:"Loading your progress…",
    certRewardTitle:"Your certificate awaits", certRewardSub:function(n){return n<=0?"You're one step away!":"Finish "+n+" more "+(n===1?"level":"levels")+" to unlock";}},
  ar:{brand:"مركز تجربة العملاء التفاعلي", f_dev:"تم التطوير بواسطة فريق تجربة العملاء", f_q:"أي استفسارات؟", f_contact:"تواصل هنا",
    gateEyebrow:"تعلّم تجربة العملاء", gateTitle:"مرحبًا — لنجهّز حسابك",
@@ -49,6 +52,9 @@ const STR={
    learnTitle:"هل تريد التعمّق أكثر؟", learnSub:function(nm){return "استكشف "+nm+" على منصّة CX Hub";},
    downloadCert:"حمّل شهادتك", certLocked:"أكمل جميع المستويات لفتح شهادتك 🎓",
    welcomeBack:"أهلاً بعودتك", wbLevels:"مستويات مكتملة", wbProgress:"التقدّم", wbStars:"النجوم", wbContinue:"متابعة رحلتي",
+   gwbHi:function(n){return "أهلاً بعودتك يا "+n+"!";}, gwbAnon:"أهلاً بعودتك!", gwbTip:"سجّل الدخول وتابع من حيث توقفت.",
+   gwbRank:"الرتبة", gwbLast:function(d){return "آخر نشاط "+d;}, gwbAttempts:function(n){return n===1?"محاولة واحدة":(n===2?"محاولتان":(n<11?n+" محاولات":n+" محاولة"));},
+   gwbDone:"أكملت جميع المستويات — شهادتك بانتظارك 🎓", signingIn:"جارٍ تحميل تقدّمك…",
    certRewardTitle:"شهادتك بانتظارك", certRewardSub:function(n){return n<=0?"بقيت خطوة واحدة!":"أكمل "+n+" مستوى إضافي للفتح";}}
 };
 
@@ -111,7 +117,7 @@ function resolveIdentity(){
 }
 
 /* ============================ ROUTER ============================ */
-function render(){
+function render(keepScroll){
   document.documentElement.lang=LANG; document.documentElement.dir=LANG==="ar"?"rtl":"ltr";
   document.getElementById("btn-en").classList.toggle("active",LANG==="en");
   document.getElementById("btn-ar").classList.toggle("active",LANG==="ar");
@@ -125,7 +131,7 @@ function render(){
 
   if(state.screen==="gate") renderGate(); else renderWorld();
   document.querySelectorAll("[data-t]").forEach(function(el){var k=el.getAttribute("data-t");if(STR[LANG][k])el.textContent=STR[LANG][k];});
-  window.scrollTo(0,0);
+  if(!keepScroll) window.scrollTo(0,0);          // background refreshes must not yank the page to the top
 }
 
 /* ---------------------------- IDENTITY GATE ---------------------------- */
@@ -146,6 +152,7 @@ function renderGate(){
     '<h2>'+t("gateTitle")+'</h2><p class="sub">'+t("gateSub")+'</p>'+
     (isSso?'<div class="sso-note">🔐 '+t("ssoNote")+'</div>':'')+
     '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" autofocus oninput="CXHub.gateChange()" placeholder="e.g. 323999"><div id="g-hint" class="lookup-hint"></div></div>'+
+    '<div id="g-wb" class="gwb-slot"></div>'+
     '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
     '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.touchBrand();CXHub.gateChange()">'+
       '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
@@ -153,6 +160,7 @@ function renderGate(){
       '<option value="" disabled '+(!g.market?'selected':'')+'>'+t("chooseMarket")+'</option>'+markets+'</select></div>'+
     '<button class="cta" id="gCta" style="background:var(--g-cx)" '+(gateValid()?'':'disabled')+' onclick="CXHub.gateSubmit()">'+t("enter")+' ›</button>'+
   '</div></div></section></div>';
+  paintGateWelcome();          // keep the returning-player box across re-renders (e.g. language switch)
 }
 /* ---- roster lookup (entry screen convenience; a miss never blocks anyone) ---- */
 var lk = { timer:null, last:"", touchedName:false, touchedBrand:false, touchedMarket:false,
@@ -203,6 +211,105 @@ function runLookup(id){
     applyLookup(d);
   });
 }
+
+/* ============================================================================
+   RETURNING PLAYER — "welcome back" on the ENTRY screen
+   ----------------------------------------------------------------------------
+   As soon as a known Employee ID is typed we also pull that person's Results
+   rows (action=results, same read the hub uses on load). Three things fall out
+   of that one call:
+     1. a brief progress box under the ID field, before they even sign in,
+     2. cxhub_progress can be PRE-SEEDED at sign-in, so the world map paints
+        with the right numbers on its FIRST frame — that removes the flash that
+        looked like the page refreshing itself,
+     3. name/brand/market fallback when the person isn't in the Roster tab but
+        has played before.
+   Nothing here needs an AppsScript change.
+============================================================================ */
+var gsum={ id:"", data:null };
+
+function rankFor(pct){ var R=C.RANKS||[], idx=0;
+  for(var i=0;i<R.length;i++){ if(pct>=R[i].min) idx=i; } return R[idx]||{}; }
+
+/* Rows -> best-of progress map + the headline numbers for one division. */
+function buildSummary(rows){
+  if(!rows || !rows.length) return null;
+  var prog={}, counts={}, attempts=0, lastTs=0, lastRow=null;
+  rows.forEach(function(r){
+    var world=r.World||r.world, lid=r.LevelID||r.levelId; if(!world || !lid) return;
+    var score=parseInt(r.Score!=null?r.Score:r.score,10)||0;
+    var stars=parseInt(r.Stars!=null?r.Stars:r.stars,10)||0;
+    var date=r.Timestamp||r.ClientTime||"";
+    var key=world+":"+lid, prev=prog[key];
+    if(!prev || score>prev.score) prog[key]={stars:stars, score:score, date:date||new Date().toISOString()};
+    counts[world]=(counts[world]||0)+1; attempts++;
+    var ts=Date.parse(date); if(!isNaN(ts) && ts>lastTs){ lastTs=ts; lastRow=r; }
+  });
+  var division="", top=-1;                                     // the division they actually played
+  for(var w in counts){ if(WORLDS[w] && counts[w]>top){ top=counts[w]; division=w; } }
+  if(!division) return null;
+  var L=WORLDS[division].levels, done=0, stars=0;
+  L.forEach(function(l){ var d=prog[division+":"+l.id]; if(d){ done++; stars+=(d.stars||0); } });
+  var lr=lastRow||rows[rows.length-1]||{};
+  return { prog:prog, division:division, done:done, total:L.length,
+           pct:L.length?Math.round(done/L.length*100):0, stars:stars, attempts:attempts,
+           name:lr.Name||lr.name||"", brand:lr.Brand||lr.brand||"", market:lr.Market||lr.market||"",
+           lastTs:lastTs };
+}
+
+/* Fill blanks from their last attempt — only used when the Roster lookup missed. */
+function fillFromSummary(sum){
+  var nEl=document.getElementById("g-name");
+  if(sum.name && nEl && !lk.touchedName && !nEl.value){ nEl.value=sum.name; state.gate.name=sum.name; lk.autoName=sum.name; }
+  var br=matchBrand(sum.brand), bEl=document.getElementById("g-brand");
+  if(br && bEl && !lk.touchedBrand && !bEl.value){ bEl.value=br; state.gate.brand=br; lk.autoBrand=br; }
+  var mk=matchMarket(sum.market), mEl=document.getElementById("g-market");
+  if(mk && mEl && !lk.touchedMarket && !mEl.value){ mEl.value=mk; state.gate.market=mk; lk.autoMarket=mk; }
+  var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid();
+}
+
+function gateWelcomeHTML(sum){
+  var w=WORLDS[sum.division]||{}, rank=rankFor(sum.pct);
+  var first=((sum.name||"").trim().split(/\s+/)[0])||"";
+  var dateStr="";
+  if(sum.lastTs){ try{ dateStr=new Date(sum.lastTs).toLocaleDateString(LANG==="ar"?"ar-EG":"en-GB",
+    {day:"numeric", month:"short", year:"numeric"}); }catch(e){} }
+  var foot=[ rank[LANG]?t("gwbRank")+": "+rank[LANG]:"", dateStr?t("gwbLast")(dateStr):"", t("gwbAttempts")(sum.attempts) ]
+             .filter(Boolean).join("  ·  ");
+  return '<div class="gwb-card" style="--wc:'+(w.color||"#c11d77")+';--wg:'+(w.grad||"var(--g-cx)")+'">'+
+    '<div class="gwb-hi"><span class="gwb-wave">👋</span>'+(first?t("gwbHi")(first):t("gwbAnon"))+'</div>'+
+    '<div class="gwb-world">'+((w.name&&w.name[LANG])||"")+'</div>'+
+    '<div class="gwb-stats">'+
+      '<div class="gwb-s"><b>'+sum.done+'/'+sum.total+'</b><span>'+t("wbLevels")+'</span></div>'+
+      '<div class="gwb-s"><b>'+sum.pct+'%</b><span>'+t("wbProgress")+'</span></div>'+
+      '<div class="gwb-s"><b>'+sum.stars+'</b><span>'+t("wbStars")+'</span></div>'+
+    '</div>'+
+    '<div class="gwb-bar"><i style="width:'+sum.pct+'%"></i></div>'+
+    (foot?'<div class="gwb-foot">'+foot+'</div>':'')+
+    '<div class="gwb-tip">'+(sum.pct>=100?t("gwbDone"):t("gwbTip"))+'</div>'+
+  '</div>';
+}
+
+/* Paint (or clear) the box. Animates in via .show so the card never jumps. */
+function paintGateWelcome(){
+  var slot=document.getElementById("g-wb"); if(!slot) return;
+  var sum=(gsum.id && gsum.id===v("g-eid")) ? gsum.data : null;
+  if(!sum || !sum.done){ slot.classList.remove("show"); slot.innerHTML=""; return; }
+  slot.innerHTML=gateWelcomeHTML(sum);
+  if(window.requestAnimationFrame) requestAnimationFrame(function(){ slot.classList.add("show"); });
+  else slot.classList.add("show");
+}
+
+function runSummary(id){
+  if(!window.CXHubSync || !CXHubSync.summary) return;
+  CXHubSync.summary(id).then(function(res){
+    if(v("g-eid")!==id) return;                       // they kept typing; ignore a stale answer
+    gsum={ id:id, data: res ? buildSummary(res.results) : null };
+    paintGateWelcome();
+    if(gsum.data) fillFromSummary(gsum.data);
+  });
+}
+
 function gateChange(){ state.gate.brand=v("g-brand"); state.gate.market=v("g-market");
   var el=document.getElementById("g-name"); if(el&&!el.disabled){ var nv=el.value.replace(/[0-9]/g,""); if(nv!==el.value)el.value=nv;
     if(nv.trim() && nv!==lk.autoName) lk.touchedName=true;          // only THEIR typing counts as "touched"
@@ -210,20 +317,45 @@ function gateChange(){ state.gate.brand=v("g-brand"); state.gate.market=v("g-mar
   var e2=document.getElementById("g-eid"); if(e2&&!e2.disabled){ var ev=e2.value.replace(/\D/g,""); if(ev!==e2.value)e2.value=ev; state.gate.eid=ev.trim(); }
   var c=document.getElementById("gCta"); if(c)c.disabled=!gateValid();
   var id=state.gate.eid||"";
-  if(id!==lk.lastSeen){ lk.lastSeen=id; clearAuto(); }               // ID changed -> drop the previous person's details
+  if(id!==lk.lastSeen){ lk.lastSeen=id; clearAuto();                 // ID changed -> drop the previous person's details
+    gsum={ id:"", data:null }; paintGateWelcome(); }                 //              and their progress box
   if(id.length>=4 && id!==lk.last){                                  // debounced input (never on blur)
     lk.last=id; clearTimeout(lk.timer);
     setNameLocked(true); hint(t("lkChecking"), "wait");               // lock the name box while we check
-    lk.timer=setTimeout(function(){ runLookup(id); }, 350);
+    lk.timer=setTimeout(function(){ runLookup(id); runSummary(id); }, 350);   // roster + progress, in parallel
   } else if(id.length<4){ lk.last=""; setNameLocked(false); hint(""); clearTimeout(lk.timer); } }
 function gateValid(){ return state.gate.name && state.gate.eid && state.gate.brand && state.gate.market && BRAND2DIV[state.gate.brand]; }
+/* Sign-in is deliberately NOT instant when we're still fetching their history: we wait up
+   to ~2.6 s for it (button shows a loading label), then paint the world map ONCE with the
+   correct progress. Before this, the map rendered empty and snapped to the real numbers a
+   second or two later — the "strange refresh" glitch. */
 function gateSubmit(){ gateChange(); if(!gateValid())return;
+  var id=state.gate.eid;
+  if(gsum.id===id || !(window.CXHubSync && CXHubSync.summary)) return finishSignIn();
+  var btn=document.getElementById("gCta");
+  if(btn){ btn.disabled=true; btn.classList.add("is-loading"); btn.textContent=t("signingIn"); }
+  var done=false, go=function(){ if(done)return; done=true; finishSignIn(); };
+  setTimeout(go, 2600);                                  // never make anyone wait longer than this
+  CXHubSync.summary(id).then(function(res){
+    if(!done) gsum={ id:id, data: res ? buildSummary(res.results) : null };
+    go();
+  });
+}
+function finishSignIn(){
+  var sum=(gsum.id===state.gate.eid) ? gsum.data : null;
   profile={eid:state.gate.eid, name:state.gate.name, market:state.gate.market};
   var div=BRAND2DIV[state.gate.brand];
   brands={}; brands[div]=state.gate.brand;              // one player = one brand/division
   save("cxhub_profile",profile); save("cxhub_brands",brands);
+  if(sum && sum.attempts>0 && sum.prog){                // seed BEFORE the first paint -> no flash
+    progress=sum.prog; save("cxhub_progress", progress);
+  }
   if(window.CXHubSync) CXHubSync.register(div);         // log roster to the Sheet
   state.division=div; state.screen="world"; render();
+  if(sum && sum.done>0){                                // known player -> greet them, smoothly
+    try{ sessionStorage.setItem("cxhub_welcomed","1"); }catch(e){}
+    setTimeout(showWelcome, 420);
+  }
   hydrateAndRefresh(false);
 }
 function editDetails(){ if(!profile)return; state.gate={name:profile.name, eid:profile.eid, market:profile.market||"", brand:myBrand()}; state.screen="gate"; render(); }
@@ -431,8 +563,7 @@ function openLevel(i){
 function closeModal(){document.getElementById("modalBack").classList.remove("show");}
 function showWelcome(){
   if(!profile || state.screen!=="world" || !state.division) return;
-  var w=WORLDS[state.division], pr=worldProgress(state.division), RANKS=C.RANKS||[];
-  var idx=0; for(var i=0;i<RANKS.length;i++){ if(pr.pct>=RANKS[i].min) idx=i; } var rank=RANKS[idx]||{};
+  var w=WORLDS[state.division], pr=worldProgress(state.division), rank=rankFor(pr.pct);
   var stars=0; w.levels.forEach(function(l){ var d=progress[state.division+":"+l.id]; if(d)stars+=(d.stars||0); });
   var first=((profile.name||"").trim().split(/\s+/)[0])||profile.name;
   document.getElementById("modal").innerHTML=
@@ -503,7 +634,11 @@ function hydrateAndRefresh(allowSignout){
     CXHubSync.hydrate().then(function(r){
       if(!r) return;
       if(allowSignout && r.read && r.known===false){ signOut(); return; }   // deleted from Sheet -> sign out
-      if(r.changed){ progress=load("cxhub_progress",{}); render(); }
+      if(!r.changed) return;
+      var fresh=load("cxhub_progress",{});
+      var same=false; try{ same=JSON.stringify(fresh)===JSON.stringify(progress); }catch(e){}
+      if(same) return;                          // identical data -> DON'T repaint (this was the sign-in "glitch")
+      progress=fresh; render(true);             // real change -> repaint, but keep the scroll position
     });
   }
 }

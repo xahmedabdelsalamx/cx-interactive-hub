@@ -578,3 +578,37 @@ html[dir="rtl"] .lm-arr{transform:scaleX(-1)}
 .field input:disabled{opacity:.55;cursor:progress}
 .field input.is-waiting{background-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 50%,transparent 100%);
   background-size:200% 100%;animation:sweep 1.1s linear infinite}
+
+/* ---- returning player: brief progress box on the ENTRY screen -------------------
+   Collapsed to zero height until we actually have data, then it expands smoothly —
+   so the sign-in card never jumps while the lookup is still running. ------------- */
+.gwb-slot{max-height:0;opacity:0;overflow:hidden;transform:translateY(-6px);
+  transition:max-height .45s cubic-bezier(.2,.8,.2,1),opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),margin .45s ease}
+.gwb-slot.show{max-height:340px;opacity:1;transform:none;margin:14px 0 4px}
+.gwb-card{--wc:#c11d77;border:1.5px solid color-mix(in srgb,var(--wc) 28%,transparent);
+  background:color-mix(in srgb,var(--wc) 7%,#fff);border-radius:20px;padding:16px 15px 14px;color:var(--ink);text-align:center}
+@supports not (color:color-mix(in srgb,red 50%,blue)){
+  .gwb-card{border-color:rgba(0,0,0,.12);background:#f6f7fb}
+}
+.gwb-hi{font-family:var(--display);font-weight:700;font-size:1.12rem;line-height:1.2;color:var(--wc);
+  display:flex;align-items:center;justify-content:center;gap:8px}
+.gwb-wave{display:inline-block;transform-origin:70% 80%;animation:gwbwave 2.6s ease-in-out infinite}
+@keyframes gwbwave{0%,60%,100%{transform:rotate(0)}70%{transform:rotate(16deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(12deg)}}
+.gwb-world{font-size:.78rem;color:var(--ink-soft);margin-top:2px}
+.gwb-stats{display:flex;gap:8px;margin:12px 0 10px}
+.gwb-s{flex:1;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:14px;padding:10px 4px;
+  box-shadow:0 6px 16px -12px rgba(0,0,0,.5)}
+.gwb-s b{display:block;font-family:var(--display);font-weight:800;font-size:1.35rem;line-height:1;color:var(--ink)}
+.gwb-s span{display:block;font-size:.64rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-top:5px}
+.gwb-bar{height:8px;border-radius:99px;background:rgba(0,0,0,.08);overflow:hidden}
+.gwb-bar i{display:block;height:100%;width:0;border-radius:99px;background:var(--wc);
+  animation:gwbfill .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes gwbfill{from{width:0}}
+.gwb-foot{font-size:.7rem;color:var(--ink-soft);margin-top:9px;line-height:1.4}
+.gwb-tip{font-size:.78rem;font-weight:600;color:var(--wc);margin-top:7px}
+html[dir="rtl"] .gwb-card{text-align:center}
+/* sign-in button while we wait for their history */
+.cta.is-loading{opacity:.75;cursor:progress}
+@media (prefers-reduced-motion:reduce){
+  .gwb-slot,.gwb-bar i,.gwb-wave{transition:none;animation:none}
+}

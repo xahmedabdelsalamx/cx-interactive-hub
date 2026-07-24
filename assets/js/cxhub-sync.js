@@ -170,6 +170,32 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     }).catch(function(){ return {read:false, known:true, changed:false}; });
   }
 
+  /* Results summary for an employee ID — used by the entry screen to greet returning
+     players BEFORE they sign in, and to pre-seed cxhub_progress so the world map is
+     correct on its very first paint (no "empty then snap" flash).
+     Same shape as hydrate()'s read; memoised per session, and de-duplicated while in
+     flight so the debounced gate can ask repeatedly for free. Never rejects. */
+  var sumMemo={}, sumInflight={};
+  function summary(empId){
+    if(!CFG.scriptUrl || !empId) return Promise.resolve(null);
+    var id=String(empId).replace(/\D/g,"").replace(/^0+/,"");
+    if(sumMemo[id]) return Promise.resolve(sumMemo[id]);
+    if(sumInflight[id]) return sumInflight[id];
+    var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=results&empId="+encodeURIComponent(id);
+    var p=read(url, 15000).then(function(d){
+      delete sumInflight[id];
+      if(!d || !Array.isArray(d.results)) return null;                 // read failed -> don't memoise, retry later
+      sumMemo[id]={ known:(d.known!==false), results:d.results };
+      return sumMemo[id];
+    }).catch(function(){ delete sumInflight[id]; return null; });
+    sumInflight[id]=p; return p;
+  }
+  /* true while a summary call for this ID is still on the wire (gate waits on it briefly) */
+  function summaryPending(empId){
+    var id=String(empId||"").replace(/\D/g,"").replace(/^0+/,"");
+    return !!sumInflight[id];
+  }
+
   /* Roster lookup for the entry screen. Resolves {found,name,brand,market}; never rejects.
      Apps Script queues executions, so the first call after idle can be slow: generous
      timeout, then ONE automatic retry before we tell the user to type it in themselves. */
@@ -195,6 +221,8 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
 
   window.CXHubSync = {
     lookup: lookup,
+    summary: summary,               // results for an EmpID, for the gate's "welcome back" box
+    summaryPending: summaryPending,
     warm: warm,
     hydrate: hydrate,
     config: CFG,
