@@ -57,9 +57,25 @@ function load(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){re
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 var profile=load("cxhub_profile",null), brands=load("cxhub_brands",{}), progress=load("cxhub_progress",{});
 
+/* Lottie player is self-hosted (assets/js/lottie-player.js) and injected only the first
+   time a config icon actually uses {lottie:"..."} — 0 KB for everyone else, and no CDN
+   request for ad blockers / corporate CSP to strip. */
+var lottieAsked=false;
+var LOTTIE_SRC=(function(){                     // resolved now, while document.currentScript is still valid
+  var me=(document.currentScript&&document.currentScript.src)||"";
+  return me ? me.replace(/app\.js(\?.*)?$/,"lottie-player.js") : "assets/js/lottie-player.js";
+})();
+function ensureLottie(){
+  if(lottieAsked || (window.customElements && customElements.get("lottie-player"))) return;
+  lottieAsked=true;
+  var s=document.createElement("script"); s.src=LOTTIE_SRC; s.async=true;
+  (document.head||document.documentElement).appendChild(s);
+}
+
 /* media {img|lottie|emoji} */
 function media(spec,cls){ if(!spec)return"";
-  if(spec.lottie)return '<lottie-player src="'+spec.lottie+'" background="transparent" speed="1" loop autoplay class="'+(cls||'')+'"></lottie-player>';
+  if(spec.lottie){ ensureLottie();
+    return '<lottie-player src="'+spec.lottie+'" background="transparent" speed="1" loop autoplay class="'+(cls||'')+'"></lottie-player>'; }
   if(spec.img)return '<img src="'+spec.img+'" alt="" class="'+(cls||'')+'">';
   if(spec.emoji)return '<span class="emoji-ico '+(cls||'')+'">'+spec.emoji+'</span>'; return ""; }
 
@@ -176,7 +192,13 @@ function runLookup(id){
   CXHubSync.lookup(id).then(function(d){
     if(v("g-eid")!==id) return;                       // they kept typing; ignore a stale answer
     if(d && d.failed){ lk.last=""; setNameLocked(false); hint(t("lkOffline"), "miss");
-      try{ console.warn("[CX Hub] Roster lookup failed — the Apps Script /exec didn't answer. Run CXHub.testLookup('"+id+"') for details."); }catch(e){}
+      try{
+        if(d.blocked) console.warn("[CX Hub] Roster lookup was BLOCKED by a Content-Security-Policy "+
+          "injected on this page (typically AdGuard / uBlock / a corporate proxy — look for "+
+          "\"local.adguard.org\" in the CSP error above). The hub already retries over fetch(); if that "+
+          "is blocked too, pause the blocker for this site. Run CXHub.testLookup('"+id+"') for details.");
+        else console.warn("[CX Hub] Roster lookup failed — the Apps Script /exec didn't answer. Run CXHub.testLookup('"+id+"') for details.");
+      }catch(e){}
       return; }
     applyLookup(d);
   });
@@ -448,8 +470,19 @@ function testLookup(id){
   console.log("  If you see \"bad token\"      -> token mismatch with SECRET_TOKEN in AppsScript.gs");
   console.log("  If you see {\"ok\":true}       -> old code is deployed: Deploy > Manage deployments > New version");
   console.log("  If you see a Google sign-in  -> deployment access is not 'Anyone'");
+  console.log("  Two transports are tried in order: fetch() (CORS), then JSONP (<script>).");
   if(window.CXHubSync&&CXHubSync.lookup){
-    CXHubSync.lookup(id).then(function(d){ console.log("  JSONP answer  :", d); });
+    CXHubSync.lookup(id).then(function(d){
+      var net=(window.CXHubSync&&CXHubSync.net)||{};
+      console.log("  answer        :", d);
+      console.log("  transport used:", net.mode || "(none — both blocked or timed out)");
+      console.log("  last error    :", net.lastError || "(none)");
+      if(net.cspBlocked) console.warn("  ⚠ A Content-Security-Policy on this page blocked the JSONP <script> to "+
+        "script.google.com. That is an extension/proxy (e.g. AdGuard), not the hub. The fetch() transport "+
+        "usually still works; if the answer above is null, pause the blocker for this site and retry.");
+      if(d && d.ms===undefined && d.found!==undefined) console.warn("  ⚠ No 'ms' field in the answer — an OLD "+
+        "AppsScript.gs is deployed. Deploy > Manage deployments > New version.");
+    });
   }
   return url;
 }

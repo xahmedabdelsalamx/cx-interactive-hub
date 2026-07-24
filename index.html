@@ -7,12 +7,15 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <meta name="theme-color" content="#0e1020">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Fonts are SELF-HOSTED (assets/fonts) — Poppins for English, Cairo for Arabic.
+     Nothing is fetched from Google, so ad blockers / corporate CSP can't strip the typography. -->
+<link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/styles.css">
-<!-- Lottie player: lets any icon/image be a Lottie animation via {lottie:"..."} in config.js -->
-<script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+<!-- Lottie player is self-hosted too and loaded ON DEMAND by app.js, only if a config
+     icon uses {lottie:"..."}. See assets/js/lottie-player.js -->
 </head>
 <body>
 

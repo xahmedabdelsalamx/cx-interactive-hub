@@ -4,27 +4,29 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Art of Driving Conversion · CX Interactive Hub</title>
 <link rel="icon" type="image/png" href="../../assets/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Self-hosted fonts (Poppins EN / Cairo AR) — no Google request, so ad blockers
+     and corporate CSP cannot strip the typography. -->
+<link rel="stylesheet" href="../../assets/css/fonts.css">
 <script src="../../assets/js/cxhub-sync.js"></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Inter',system-ui,sans-serif;color:#fff;min-height:100dvh;display:grid;place-items:center;padding:24px;
+  body{font-family:'Poppins','Cairo',system-ui,sans-serif;color:#fff;min-height:100dvh;display:grid;place-items:center;padding:24px;
     background:linear-gradient(135deg,#ff6f81,#E94858 48%,#c1273f);background-size:200% 200%;animation:bg 14s ease infinite;text-align:center}
   @keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
   .card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);border-radius:26px;
     backdrop-filter:blur(8px);padding:34px 26px;max-width:440px;width:100%;box-shadow:0 30px 70px -30px rgba(0,0,0,.6)}
-  .tag{font-family:'Fredoka';font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
-  h1{font-family:'Fredoka';font-weight:700;font-size:1.7rem;margin:10px 0 6px;line-height:1.2}
+  .tag{font-family:'Poppins','Cairo',system-ui,sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+  h1{font-family:'Poppins','Cairo',system-ui,sans-serif;font-weight:700;font-size:1.7rem;margin:10px 0 6px;line-height:1.2}
   p{opacity:.9;line-height:1.6;font-size:.96rem}
   .emoji{font-size:3rem;margin-bottom:6px}
   .btns{display:flex;flex-direction:column;gap:10px;margin-top:22px}
-  a.btn,button.btn{font-family:'Fredoka';font-weight:600;font-size:1rem;padding:13px;border-radius:14px;cursor:pointer;border:0;text-decoration:none;display:block}
+  a.btn,button.btn{font-family:'Poppins','Cairo',system-ui,sans-serif;font-weight:600;font-size:1rem;padding:13px;border-radius:14px;cursor:pointer;border:0;text-decoration:none;display:block}
   .btn.primary{background:#fff;color:#111}
   .btn.primary:disabled{opacity:.6;cursor:default}
   .btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3)}
   .note{margin-top:18px;font-size:.76rem;opacity:.7;line-height:1.5}
   code{background:rgba(0,0,0,.25);padding:2px 6px;border-radius:6px;font-size:.72rem}
-  #saved{margin-top:12px;font-family:'Fredoka';font-weight:600;font-size:.9rem;opacity:0;transition:opacity .3s}
+  #saved{margin-top:12px;font-family:'Poppins','Cairo',system-ui,sans-serif;font-weight:600;font-size:.9rem;opacity:0;transition:opacity .3s}
   #saved.show{opacity:1}
 </style>
 </head>

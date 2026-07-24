@@ -35,7 +35,51 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     return fetch(CFG.scriptUrl, { method:"POST", mode:"no-cors",
       headers:{ "Content-Type":"text/plain;charset=utf-8" }, body: JSON.stringify(p) });
   }
-  function jsonp(url, ms){   // read via JSONP (Apps Script sends no CORS headers, so fetch-reads are blocked cross-origin)
+  /* --------------------------------------------------------------------------
+     READS — two transports, because either one can be blocked in the wild.
+
+       1. fetch()  : Apps Script /exec 302-redirects to script.googleusercontent.com,
+                     which DOES send Access-Control-Allow-Origin:*, so a plain CORS
+                     GET works and is the fastest path. doGet() returns raw JSON when
+                     no ?callback is present.
+       2. JSONP    : <script> fallback for anything that blocks the fetch.
+
+     Why both: ad/tracker blockers (AdGuard, uBlock…), some VPN/DNS clients and
+     corporate proxies inject a Content-Security-Policy of
+         script-src 'self' 'unsafe-inline' local.adguard.org
+     which silently KILLS the JSONP <script> tag — the old roster lookup then timed
+     out and showed "Couldn't reach the directory". Those policies almost never set
+     connect-src, so fetch() still gets through. Trying fetch first fixes that case;
+     keeping JSONP covers the reverse case (connect-src locked, script-src open).
+  -------------------------------------------------------------------------- */
+  var NET = { mode:"", cspBlocked:false, lastUrl:"", lastError:"" };
+  try{   // remember if the browser (or an extension) refused to load our script tag
+    window.addEventListener("securitypolicyviolation", function(e){
+      if(String(e.blockedURI||"").indexOf("script.google") >= 0) NET.cspBlocked = true;
+    });
+  }catch(e){}
+
+  function fetchJSON(url, ms){   // CORS read; resolves the parsed object or null, never rejects
+    return new Promise(function(resolve){
+      if(typeof fetch!=="function") return resolve(null);
+      var done=false, ctl=null;
+      try{ ctl = (typeof AbortController!=="undefined") ? new AbortController() : null; }catch(e){}
+      var timer=setTimeout(function(){ try{ ctl && ctl.abort(); }catch(e){} finish(null,"timeout"); }, ms||15000);
+      function finish(d,err){ if(done)return; done=true; clearTimeout(timer); if(err)NET.lastError=err; resolve(d); }
+      try{
+        fetch(url, { method:"GET", redirect:"follow", credentials:"omit", cache:"no-store",
+                     signal: ctl ? ctl.signal : undefined })
+          .then(function(r){ return r.ok ? r.text() : null; })
+          .then(function(txt){
+            if(!txt) return finish(null,"http");
+            try{ finish(JSON.parse(txt)); }catch(e2){ finish(null,"parse"); }
+          })
+          .catch(function(e3){ finish(null, (e3 && e3.message) || "fetch"); });
+      }catch(e){ finish(null,"throw"); }
+    });
+  }
+
+  function jsonp(url, ms){   // <script> read — Apps Script answers callback(...) when ?callback= is present
     return new Promise(function(resolve){
       var cb="cxhubcb_"+Date.now()+"_"+Math.floor(Math.random()*1e6), s=document.createElement("script"), done=false;
       var timer=setTimeout(function(){ finish(null); }, ms||9000);
@@ -44,6 +88,18 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
       s.onerror=function(){ finish(null); };
       s.src=url+(url.indexOf("?")<0?"?":"&")+"callback="+cb;
       (document.head||document.documentElement).appendChild(s);
+    });
+  }
+
+  /* One read = fetch first, JSONP second. Records which transport worked (CXHubSync.net). */
+  function read(url, ms){
+    NET.lastUrl=url;
+    return fetchJSON(url, ms).then(function(d){
+      if(d && typeof d==="object"){ NET.mode="fetch"; return d; }
+      return jsonp(url, ms).then(function(d2){
+        if(d2 && typeof d2==="object"){ NET.mode="jsonp"; return d2; }
+        NET.mode=""; return null;
+      });
     });
   }
   var flushing=false;
@@ -93,7 +149,7 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
       return new Promise(function(res){ setTimeout(res, 1000); });   // let the write settle
     }).then(function(){
       var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=results&empId="+encodeURIComponent(pr.eid);
-      return jsonp(url).then(function(d){
+      return read(url, 15000).then(function(d){
         if(!d || !Array.isArray(d.results)) return {read:false, known:true, changed:false};   // read failed -> keep local
         if(d.known===false){
           if(hadPending) return {read:false, known:true, changed:false};                      // inconclusive (writes settling) -> keep local
@@ -123,18 +179,18 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     var id=String(empId).replace(/\D/g,"").replace(/^0+/,"");
     if(lkMemo[id]) return Promise.resolve(lkMemo[id]);               // same ID again -> no network
     var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=lookup&empId="+encodeURIComponent(id);
-    return jsonp(url, 15000).then(function(d){
+    return read(url, 15000).then(function(d){
       if(d && typeof d==="object"){ lkMemo[id]=d; return d; }
-      return jsonp(url, 15000).then(function(d2){                    // retry once
+      return read(url, 15000).then(function(d2){                     // retry once (cold container / flaky wifi)
         if(d2 && typeof d2==="object"){ lkMemo[id]=d2; return d2; }
-        return {found:false, failed:true};                           // not memoised, so retyping retries
+        return {found:false, failed:true, blocked:NET.cspBlocked};   // not memoised, so retyping retries
       });
     });
   }
   /* Wake the Apps Script container so the first real lookup isn't stuck behind a ~5s cold start. */
   function warm(){
     if(!CFG.scriptUrl) return;
-    try{ jsonp(CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=warm"); }catch(e){}
+    try{ read(CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=warm", 12000); }catch(e){}
   }
 
   window.CXHubSync = {
@@ -142,6 +198,8 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     warm: warm,
     hydrate: hydrate,
     config: CFG,
+    net: NET,                 // {mode:"fetch"|"jsonp", cspBlocked, lastUrl, lastError} — for CXHub.testLookup()
+    read: read,               // raw read helper (fetch -> JSONP), exposed for diagnostics
 
     /* returns the saved player, so a game never has to re-ask */
     getProfile: function(){

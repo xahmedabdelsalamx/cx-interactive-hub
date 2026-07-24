@@ -8,10 +8,11 @@
   --g-connection:linear-gradient(135deg,#12b874,#007042 50%,#004d2e);
   --g-cx:linear-gradient(135deg,#e43c50,#c11d77 50%,#7a2bb0);
   --gold:#ffb92e; --live:#2fd58a;
-  --display:'Fredoka',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+  --display:'Poppins','Cairo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Poppins','Cairo',system-ui,-apple-system,'Segoe UI',sans-serif;
   --radius:24px; --shadow:0 22px 60px -26px rgba(0,0,0,.6);
 }
-html[dir="rtl"]{ --display:'Cairo',sans-serif; --body:'Cairo',sans-serif; }
+html[dir="rtl"]{ --display:'Cairo','Poppins',system-ui,sans-serif; --body:'Cairo','Poppins',system-ui,sans-serif; }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--body);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100dvh;

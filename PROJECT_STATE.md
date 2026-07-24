@@ -68,6 +68,9 @@ assets/js/config.js             ★ EDIT THIS: SSO flag, LINKS, CERT messages, w
 assets/js/app.js                engine: gate + roster lookup, routing, world map, ranks, certificate,
                                   welcome popup, modal, hydrate, sign-out
 assets/js/cxhub-sync.js         ★ journeys backend bridge — holds scriptUrl + secretToken
+assets/js/lottie-player.js      self-hosted Lottie web component, injected on demand by app.js
+assets/css/fonts.css            @font-face rules for the self-hosted fonts (link this from games too)
+assets/fonts/*.woff2            Poppins (latin) + Cairo (arabic & latin), weights 400-800
 assets/css/styles.css           all styling + animated backgrounds
 assets/logos|icons|worlds|badges|lottie/   media (official CX Hub / Art-of / Alshaya logos live here)
 backend/AppsScript.gs           journeys Google Apps Script (paste into the Sheet)
@@ -79,6 +82,20 @@ sync-test.html                  open on the live site to verify the Sheet round-
 ```
 World folders: retail → `art-of-selling-retail` (9 levels), hospitality → `art-of-guest-experience`
 (4), starbucks → `art-of-connection` (4), general → `customer-experience-general` (excluded).
+
+## 5b. Fonts & third-party scripts (all self-hosted)
+Nothing is loaded from a CDN any more — **no `fonts.googleapis.com`, no `unpkg.com`**.
+- **English / LTR → Poppins**, **Arabic / RTL → Cairo**, woff2 only, weights 400-800, in
+  `assets/fonts/`, declared in `assets/css/fonts.css`. Font stacks live in two CSS variables at
+  the top of `styles.css` (`--display`, `--body`) plus the `html[dir="rtl"]` override — change a
+  typeface in those three places and the whole hub follows.
+- Games link the same sheet: `<link rel="stylesheet" href="../../assets/css/fonts.css">`.
+- The certificate is drawn in Georgia on canvas and is unaffected.
+- **Why**: AdGuard / uBlock / Zscaler-style tools inject `style-src 'self'` + `script-src 'self'`
+  Content-Security-Policies. Those silently blocked the Google Fonts sheet (site fell back to
+  Times New Roman) and the JSONP roster lookup. Everything is now same-origin, so `'self'` passes.
+- `lottie-player.js` is vendored (2.0.8) and injected **on demand** — only the first time a
+  `config.js` icon actually uses `{lottie:"..."}`.
 
 ## 6. Storage contract (shared localStorage, same origin)
 - `cxhub_profile`  = `{ eid, name, market }`
@@ -93,9 +110,13 @@ World folders: retail → `art-of-selling-retail` (9 levels), hospitality → `a
   stars, passed})`, `sendFeedback()`, `hydrate()`, `flush()`, `lookup(empId)`, `warm()`.
 - **Writes** use `fetch(..., {mode:"no-cors"})` — fire-and-forget, so a blocked CORS read can
   never cause a retry and duplicate rows. A **flush lock + FIFO drain** prevents double-sends.
-- **Reads** use **JSONP** (`doGet` answers `callback(...)`), because Apps Script sends no CORS
-  headers. Client timeout **15 s with one retry**, plus an in-session memo so re-typing an ID
-  costs nothing.
+- **Reads** try **two transports in order**: `fetch()` first (the /exec 302 lands on
+  `script.googleusercontent.com`, which does send `Access-Control-Allow-Origin:*`), then **JSONP**
+  (`doGet` answers `callback(...)`). Either transport alone can be blocked in the wild — ad
+  blockers and corporate proxies inject `script-src 'self'` CSPs that kill the JSONP `<script>`,
+  while a locked-down `connect-src` would kill the fetch. Trying both makes the lookup survive
+  either. Client timeout **15 s with one retry**, plus an in-session memo so re-typing an ID
+  costs nothing. `CXHubSync.net` reports `{mode, cspBlocked, lastUrl, lastError}`.
 - **`hydrate()`** on load: flush → read the player's results → **rebuild progress authoritatively**
   (a Results row deleted in the Sheet resets that level). If the player's **Profiles** row is gone
   → **sign out** to the gate (only when confirmed, never while writes are pending).
@@ -139,7 +160,8 @@ Full instructions: `CX_Hub_SSO_Migration_Guide.docx` (delivered separately).
 ## 12. Building a new journey game
 Fill in `GAME_BUILDER_PROMPT.md` and paste it into a new chat. Contract: self-contained
 `index.html` in the level folder, never asks for identity (reads `cxhub_profile` /
-`cxhub_brands`), bilingual EN/AR + RTL, and on finish calls once:
+`cxhub_brands`), bilingual EN/AR + RTL, links the local font sheet
+(`../../assets/css/fonts.css` — Poppins EN / Cairo AR, never Google Fonts), and on finish calls once:
 ```js
 CXHubSync.saveResult("<world>", "<level-id>", { score: 0-100, stars: 0-3, passed: true });
 ```
@@ -156,8 +178,11 @@ hub always shows their **best**. Nothing extra is needed per level or per divisi
 5. On the site, **hard-refresh** (Ctrl/Cmd+Shift+R) so the new JS loads.
 
 ## 14. Working style
-- Deliver **only the changed files with exact paths** (not the whole zip) unless asked for
-  everything. Multiple files with the same basename → a small zip preserving paths.
+- Deliver the **full project zip every time** (root folder `cx-interactive-hub/`, exact paths
+  preserved) — Ahmed replaces the whole folder on a second copy of the site, not just the deltas.
+  Still list the changed files in the reply so he knows what actually moved.
+- ⚠ The zip must **never** contain `customer-experience-general/` — that folder is maintained
+  separately and lives only on the live site. Always unzip *over* the existing folder.
 - On any `AppsScript.gs` change, always remind about the redeploy.
 - Keep it config-driven, bilingual, mobile-first, plug-and-play.
 - Verify changes headlessly (playwright) before delivering; sandbox blocks `script.google.com` and
@@ -169,6 +194,9 @@ hub always shows their **best**. Nothing extra is needed per level or per divisi
 - A Kuwait player sees **no** General tiles (AURA is UAE-only, KSA Ready is Saudi-only) — that is
   the market gating working.
 - The certificate cannot export from `file://` (tainted canvas) — hosted site only.
+- If a lookup still fails on a specific machine, it is almost always a local blocker/proxy, not the
+  hub: run `CXHub.testLookup("100086")` — it prints which transport worked and warns explicitly when
+  a Content-Security-Policy blocked the call (look for `local.adguard.org` in the console).
 
 ---
 

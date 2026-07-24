@@ -29,7 +29,14 @@ so it plugs into the hub with no changes on the hub side.
   - world folders: retail → `art-of-selling-retail`, hospitality → `art-of-guest-experience`, starbucks → `art-of-connection`, general → `customer-experience-general`.
 - Bilingual **English + Arabic** with a language toggle and full **RTL** for Arabic.
 - Themed with the world's brand accent colour (above); mobile-first; works offline.
-- CSP-friendly (no eval, no remote script except optional Google Fonts / lottie CDN).
+- **Fonts: local only — never link Google Fonts.** Use the hub's sheet:
+  `<link rel="stylesheet" href="../../assets/css/fonts.css">` and the stacks
+  `'Poppins','Cairo',system-ui,sans-serif` for English / `'Cairo','Poppins',system-ui,sans-serif`
+  for Arabic (weights 400-800 available). Ad blockers and corporate proxies inject a
+  `style-src 'self'` CSP that silently strips Google Fonts and drops the page to Times New Roman.
+- **Strictly CSP-friendly**: no `eval`, and **no remote scripts or stylesheets at all** — every
+  asset must be same-origin. (The hub self-hosts its Lottie player at `assets/js/lottie-player.js`
+  if you need it.)
 
 **Player identity — NEVER show an entry/intake screen.**
 The hub captures the player ONCE at its front door (name · employee ID · brand) and
