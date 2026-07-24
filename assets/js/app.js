@@ -15,6 +15,10 @@ const C=window.CXHUB_CONFIG, WORLDS=C.WORLDS, GENERAL=C.GENERAL, BRANDS=C.BRANDS
 const BRAND2DIV={}; Object.keys(BRANDS).forEach(function(div){ BRANDS[div].forEach(function(b){ BRAND2DIV[b]=div; }); });
 const DIV_LABEL={ retail:{en:"Retail",ar:"التجزئة"}, hospitality:{en:"Hospitality",ar:"الضيافة"}, starbucks:{en:"Starbucks",ar:"ستاربكس"} };
 
+/* Bump when you ship. Printed in the console so you can confirm the live site is
+   running the build you just uploaded (browser caching hides this more often than you'd think). */
+var BUILD="2026-07-24";
+
 const STR={
  en:{brand:"CX Interactive Hub", f_dev:"Developed by the Customer Experience team", f_q:"Any queries?", f_contact:"contact here",
    gateEyebrow:"Customer Experience Learning", gateTitle:"Welcome — let's get you set up",
@@ -154,10 +158,12 @@ function renderGate(){
     '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" autofocus oninput="CXHub.gateChange()" placeholder="e.g. 323999"><div id="g-hint" class="lookup-hint"></div></div>'+
     '<div id="g-wb" class="gwb-slot"></div>'+
     '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
-    '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.touchBrand();CXHub.gateChange()">'+
-      '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
-    '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.touchMarket();CXHub.gateChange()">'+
-      '<option value="" disabled '+(!g.market?'selected':'')+'>'+t("chooseMarket")+'</option>'+markets+'</select></div>'+
+    '<div class="field-row">'+
+      '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.touchBrand();CXHub.gateChange()">'+
+        '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
+      '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.touchMarket();CXHub.gateChange()">'+
+        '<option value="" disabled '+(!g.market?'selected':'')+'>'+t("chooseMarket")+'</option>'+markets+'</select></div>'+
+    '</div>'+
     '<button class="cta" id="gCta" style="background:var(--g-cx)" '+(gateValid()?'':'disabled')+' onclick="CXHub.gateSubmit()">'+t("enter")+' ›</button>'+
   '</div></div></section></div>';
   paintGateWelcome();          // keep the returning-player box across re-renders (e.g. language switch)
@@ -339,15 +345,37 @@ function paintGateWelcome(){
    (that's the whole point); holds numbers only — no name, no brand, no market. */
 function seenCache(){ return load("cxhub_seen", {}); }
 function rememberSummary(id, sum){
-  try{ var c=seenCache();
-    c[id]={ w:sum.division, d:sum.done, t:sum.total, p:sum.pct, s:sum.stars, a:sum.attempts, l:sum.lastTs||0 };
+  try{ var c=seenCache(), prev=c[id]||{};
+    c[id]={ w:sum.division, d:sum.done, t:sum.total, p:sum.pct, s:sum.stars, a:sum.attempts,
+            l:sum.lastTs||prev.l||0, g:sum.prog||prev.g||null };
+    save("cxhub_seen", c);
+  }catch(e){}
+}
+/* Snapshot the CURRENT player's progress under their EmpID.
+   signOut() wipes cxhub_progress, so without this a returning player on the very same device has
+   nothing local and the whole welcome-back flow depends on the Sheet answering in time. With it,
+   the box and the popup work with no network at all, and hydrate() still corrects everything
+   afterwards (the Sheet stays authoritative). */
+function archiveProgress(){
+  try{
+    if(!profile || !profile.eid) return;
+    var div=state.division || BRAND2DIV[myBrand()] || "";
+    if(!div || !WORLDS[div]) return;
+    var L=WORLDS[div].levels, done=0, stars=0, last=0, k;
+    L.forEach(function(l){ var d=progress[div+":"+l.id];
+      if(d){ done++; stars+=(d.stars||0); var ts=Date.parse(d.date||""); if(!isNaN(ts)&&ts>last)last=ts; } });
+    if(!done) return;                                     // nothing worth remembering yet
+    var snap={}; for(k in progress) snap[k]=progress[k];
+    var c=seenCache(), prev=c[profile.eid]||{};
+    c[profile.eid]={ w:div, d:done, t:L.length, p:Math.round(done/L.length*100), s:stars,
+                     a:Math.max(prev.a||0, done), l:last||prev.l||0, g:snap };
     save("cxhub_seen", c);
   }catch(e){}
 }
 function recallSummary(id){
   var c=seenCache()[id];
   if(!c || !WORLDS[c.w] || !c.d) return null;
-  return { prog:null, division:c.w, done:c.d, total:c.t, pct:c.p, stars:c.s, attempts:c.a,
+  return { prog:c.g||null, division:c.w, done:c.d, total:c.t, pct:c.p, stars:c.s, attempts:c.a||c.d,
            name:"", brand:"", market:"", lastTs:c.l||0, cached:true };
 }
 
@@ -407,11 +435,11 @@ function finishSignIn(){
   var div=BRAND2DIV[state.gate.brand];
   brands={}; brands[div]=state.gate.brand;              // one player = one brand/division
   save("cxhub_profile",profile); save("cxhub_brands",brands);
-  if(sum && sum.attempts>0 && sum.prog){                // seed BEFORE the first paint -> no flash
-    progress=sum.prog; save("cxhub_progress", progress);
-  }
+  var seed=(sum && sum.prog && Object.keys(sum.prog).length) ? sum.prog : null;
+  if(seed){ progress=seed; save("cxhub_progress", progress); }   // seed BEFORE the first paint -> no flash
   if(window.CXHubSync) CXHubSync.register(div);         // log roster to the Sheet
   state.division=div; state.screen="world"; render();
+  archiveProgress();
   maybeShowWelcome(420);                                // instant when progress was pre-seeded...
   hydrateAndRefresh(false, true);                       // ...and again once the Sheet answers, if not
 }
@@ -692,11 +720,37 @@ function testLookup(id){
   return url;
 }
 
+/* Diagnostic for the welcome-back box: CXHub.testSummary("100086") in the console.
+   Shows every step, so a failure points straight at the cause instead of a blank box. */
+function testSummary(id){
+  id=String(id||"").replace(/\D/g,"");
+  console.log("%c[CX Hub] welcome-back test · build "+BUILD,"font-weight:bold");
+  console.log("  cached locally:", seenCache()[id] || "(nothing for this ID on this device)");
+  if(!(window.CXHubSync && CXHubSync.summary)) return console.warn("  CXHubSync.summary missing — OLD app build is cached. Hard-refresh (Ctrl/Cmd+Shift+R).");
+  console.log("  asking the Sheet…");
+  CXHubSync.summary(id).then(function(res){
+    var net=(window.CXHubSync&&CXHubSync.net)||{};
+    console.log("  transport     :", net.mode || "(none — fetch AND JSONP both failed)");
+    console.log("  last error    :", net.lastError || "(none)");
+    if(!res) return console.warn("  ✗ No answer. Open this in a tab to check the deployment:\n     "+
+      (CXHubSync.config.scriptUrl||"")+"?token="+(CXHubSync.config.secretToken||"")+"&action=results&empId="+id);
+    console.log("  rows returned :", (res.results||[]).length);
+    var sum=buildSummary(res.results);
+    if(!sum) return console.warn("  ✗ Rows came back but none map to a world in config.js — check the World / LevelID columns.");
+    console.log("  ✓ division/done/total/stars:", sum.division, sum.done+"/"+sum.total, sum.stars);
+    if(!sum.done) console.warn("  ✗ 0 levels matched config.WORLDS[...].levels ids — that is why the box stays hidden.");
+  });
+  return "running…";
+}
+
 function touchBrand(){ lk.touchedBrand=true; }
 function touchMarket(){ lk.touchedMarket=true; }
 
-window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails, touchBrand:touchBrand, touchMarket:touchMarket, testLookup:testLookup,
+window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDetails, touchBrand:touchBrand, touchMarket:touchMarket,
+  testLookup:testLookup, testSummary:testSummary, build:BUILD,
   openLevel:openLevel, closeModal:closeModal, setLang:setLang, goWorld:goWorld, signOut:signOut, confirmSignOut:confirmSignOut, downloadCert:downloadCert, previewCert:previewCert};
+
+try{ console.log("%c[CX Hub] build "+BUILD+" — CXHub.testLookup(id) / CXHub.testSummary(id) for diagnostics","color:#c11d77"); }catch(e){}
 
 /* footer CX Hub logo -> main hub (header logo stays internal home) */
 (function(){ var cx=(C.LINKS&&C.LINKS.cxHub)||"#";
@@ -713,11 +767,13 @@ function hydrateAndRefresh(allowSignout, thenWelcome){
         var same=false; try{ same=JSON.stringify(fresh)===JSON.stringify(progress); }catch(e){}
         if(!same){ progress=fresh; render(true); }   // identical data -> DON'T repaint (the sign-in "glitch")
       }
+      archiveProgress();
       if(thenWelcome) maybeShowWelcome(250);      // progress has landed -> greet them, no manual refresh needed
     });
   }
 }
 function signOut(){
+  archiveProgress();                                             // remember it BEFORE we clear it
   profile=null; brands={}; progress={};
   resetGateLookup();                                             // same ID must be re-lookup-able
   try{ sessionStorage.removeItem("cxhub_welcomed"); }catch(e){}   // next person to sign in gets greeted too
@@ -725,7 +781,7 @@ function signOut(){
   state.division=null; state.gate={}; state.screen="gate"; render();
 }
 function decideAndRender(){
-  if(profile && Object.keys(brands).length){ state.division=BRAND2DIV[myBrand()]||"retail"; state.screen="world"; }
+  if(profile && Object.keys(brands).length){ state.division=BRAND2DIV[myBrand()]||"retail"; state.screen="world"; archiveProgress(); }
   else { state.screen="gate"; if(window.CXHubSync&&CXHubSync.warm) CXHubSync.warm(); }   // beat the cold start
   render();
 }

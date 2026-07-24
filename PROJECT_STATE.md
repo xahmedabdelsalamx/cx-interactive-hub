@@ -61,9 +61,18 @@ the results read behind the lookup (and behind any cold start), where it burned 
 returned nothing. That one missing retry was why the box never appeared and why progress wasn't
 pre-seeded.
 
-The gate also keeps a same-device cache, **`cxhub_seen`** (numbers only — no name, brand or market),
-so the box paints **instantly** on a repeat visit and still paints when the Sheet is slow or
-unreachable. It deliberately survives sign-out.
+**The Sheet is now an enhancement, not a dependency.** `signOut()` wipes `cxhub_progress`, so a
+returning player on the very same device had nothing local and the whole flow rested on the Sheet
+answering in time. `archiveProgress()` snapshots that player's progress under their EmpID into
+**`cxhub_seen`** first — the full progress map, not just the headline numbers — so the box paints
+**instantly**, sign-in restores their levels, and the popup fires **with the network completely
+dead**. `hydrate()` still corrects everything afterwards; the Sheet stays authoritative. The
+archive is written on sign-out, on sign-in, on load and after every hydrate.
+
+Two diagnostics: **`CXHub.testSummary("100086")`** walks the whole chain (local cache → transport →
+rows returned → derived division → why the box would hide), and the console prints the **build
+stamp** (`BUILD` in `app.js`) on every load — bump it when you ship so you can tell at a glance
+whether the live site is running the file you just uploaded, rather than a cached one.
 
 ⚠ **The gate is re-shown without a page reload** (sign out, "edit details"), so the debounce guard
 `lk.last` survives with it. Re-typing the *same* ID then matched the guard and fired nothing at all —
@@ -146,8 +155,9 @@ Nothing is loaded from a CDN any more — **no `fonts.googleapis.com`, no `unpkg
 - `cxhub_brands`   = `{ "<division>": "<brand>" }` (one entry — the player's brand)
 - `cxhub_progress` = `{ "<world>:<levelId>": {stars, score, date} }` (best-of, what the hub shows)
 - `cxhub_outbox`   = queued Sheet writes (offline safety)
-- `cxhub_seen`     = `{ "<empId>": {w,d,t,p,s,a,l} }` — per-ID progress numbers for the gate's
-  welcome-back box. Numbers only, same device, **kept across sign-out** by design.
+- `cxhub_seen`     = `{ "<empId>": {w,d,t,p,s,a,l,g} }` — per-ID archive for the gate's welcome-back
+  box and for restoring progress at sign-in. `g` is the full progress map. Same device only,
+  **kept across sign-out** by design — that is what makes the returning-player flow work offline.
 
 ## 7. Journeys backend (one Google Sheet + Apps Script)
 - Tabs: **Profiles** (one row per employee, upsert by EmpID, duplicates auto-removed),
@@ -197,6 +207,10 @@ numbers inside `buildCertificate()`.
 - **"Learn more" card** per world → that world's CX Hub page (`WORLDS[x].hubUrl`).
 - Header logo = internal Home; **footer logo** → main CX Hub (`config.LINKS.cxHub`).
 - Fancy **START / FINISH** markers (checkered racing tape), animated per-division backgrounds.
+- **Gate layout**: card is 620px max (556px rendered) with a reduced type scale — heading 1.45rem
+  on one line, labels .78rem in `--ink-soft`, inputs .95rem — and **brand + market share one row**
+  above 560px, stacking below it. Body copy is capped at ~46ch so the extra width never hurts line
+  length. All of it lives in the last block of `styles.css`.
 
 ## 11. SSO (future, behind a flag)
 `config.SSO:false` today → the hub never calls `/.auth/me`. Store staff share ONE store login, so
