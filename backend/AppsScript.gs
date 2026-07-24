@@ -22,6 +22,13 @@
    ============================================================================ */
 
 var SECRET_TOKEN = "cxinteractivehub2030";   // matches scriptUrl/secretToken in cxhub-sync.js
+var API_VERSION  = "2026-07-24";             // returned by doGet as "v" so the site can prove what's deployed
+
+/* Employee IDs arrive from several places — typed at the gate, read back from a saved profile,
+   stored by Sheets as a number, sometimes with a leading zero or a stray space. Compare them
+   normalised everywhere, or a row that plainly exists simply never matches. */
+function normId(x){ return String(x==null?"":x).replace(/\D/g,"").replace(/^0+/,""); }
+function sameId(a,b){ var A=normId(a); return A!=="" && A===normId(b); }
 
 var PROFILE_HEADERS  = ["Timestamp","EmpID","Name","Market","Brand","Division","Lang","ClientTime"];
 var RESULT_HEADERS   = ["Timestamp","EmpID","Name","Market","Brand","Division","World","LevelID","Score","Stars","Passed","Attempt","DurationSec","Lang","ClientTime","Meta"];
@@ -52,6 +59,7 @@ function doGet(e){
   var p = e.parameter || {};
   var cb = p.callback;
   function out(obj){
+    if (obj && typeof obj === "object") obj.v = API_VERSION;    // lets the site detect an old deployment
     if (cb) return ContentService.createTextOutput(cb + "(" + JSON.stringify(obj) + ")").setMimeType(ContentService.MimeType.JAVASCRIPT);
     return json(obj);
   }
@@ -105,7 +113,7 @@ function upsertProfile(ss, d, now){
   var matches = [];
   if (last > 1){
     var ids = sh.getRange(2, idCol+1, last-1, 1).getValues();
-    for (var i=0; i<ids.length; i++){ if (String(ids[i][0]) === String(d.empId)) matches.push(i+2); }
+    for (var i=0; i<ids.length; i++){ if (sameId(ids[i][0], d.empId)) matches.push(i+2); }
   }
   var vals = [now, d.empId||"", d.name||"", d.market||"", d.brand||"", d.division||"", d.lang||"", d.clientTime||""];
   if (matches.length){
@@ -123,7 +131,7 @@ function attemptNumber(ss, empId, world, levelId){
   var rows = sh.getRange(2, 1, sh.getLastRow()-1, RESULT_HEADERS.length).getValues();
   var n = 0;
   for (var i=0; i<rows.length; i++){
-    if (String(rows[i][ei])===String(empId) && String(rows[i][wi])===String(world) && String(rows[i][li])===String(levelId)) n++;
+    if (sameId(rows[i][ei], empId) && String(rows[i][wi])===String(world) && String(rows[i][li])===String(levelId)) n++;
   }
   return n + 1;
 }
@@ -185,7 +193,7 @@ function profileExists(empId){
   if (!sh || sh.getLastRow() < 2) return false;
   var idCol = PROFILE_HEADERS.indexOf("EmpID");
   var ids = sh.getRange(2, idCol+1, sh.getLastRow()-1, 1).getValues();
-  for (var i=0; i<ids.length; i++){ if (String(ids[i][0]) === String(empId)) return true; }
+  for (var i=0; i<ids.length; i++){ if (sameId(ids[i][0], empId)) return true; }
   return false;
 }
 
@@ -196,7 +204,7 @@ function getResults(empId){
   var ei = RESULT_HEADERS.indexOf("EmpID");
   var out = [];
   for (var i=0; i<rows.length; i++){
-    if (String(rows[i][ei]) === String(empId)){
+    if (sameId(rows[i][ei], empId)){
       var o = {}; for (var c=0; c<RESULT_HEADERS.length; c++) o[RESULT_HEADERS[c]] = rows[i][c];
       out.push(o);
     }

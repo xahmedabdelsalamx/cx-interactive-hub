@@ -178,7 +178,12 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
   var sumMemo={}, sumInflight={};
   function summary(empId){
     if(!CFG.scriptUrl || !empId) return Promise.resolve(null);
-    var id=String(empId).replace(/\D/g,"").replace(/^0+/,"");
+    /* Ask with the id EXACTLY as typed (digits only). hydrate() sends the raw saved eid, and the
+       Sheet rows were written from that same value — stripping leading zeros here meant an ID like
+       023456 was looked up as 23456 and matched nothing, so the box silently stayed hidden while
+       hydrate kept working. The hardened AppsScript.gs normalises both sides now; this keeps the
+       client correct against an older deployment too. */
+    var id=String(empId).replace(/\D/g,"");
     if(sumMemo[id]) return Promise.resolve(sumMemo[id]);
     if(sumInflight[id]) return sumInflight[id];
     var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=results&empId="+encodeURIComponent(id);
@@ -191,8 +196,13 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
       return attempt();
     }).then(function(d){
       delete sumInflight[id];
+      if(d && typeof d==="object" && !Array.isArray(d.results)){       // answered, but not with results
+        try{ console.warn("[CX Hub] The deployed Apps Script answered '"+JSON.stringify(d).slice(0,80)+
+          "' instead of a results array. That is an OLD deployment — redeploy backend/AppsScript.gs "+
+          "(Deploy > Manage deployments > edit > New version)."); }catch(e){}
+      }
       if(!d || !Array.isArray(d.results)) return null;                 // still nothing -> don't memoise, retry later
-      sumMemo[id]={ known:(d.known!==false), results:d.results };
+      sumMemo[id]={ known:(d.known!==false), results:d.results, v:d.v||"" };
       return sumMemo[id];
     }).catch(function(){ delete sumInflight[id]; return null; });
     sumInflight[id]=p; return p;

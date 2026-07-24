@@ -17,13 +17,13 @@ const DIV_LABEL={ retail:{en:"Retail",ar:"التجزئة"}, hospitality:{en:"Hos
 
 /* Bump when you ship. Printed in the console so you can confirm the live site is
    running the build you just uploaded (browser caching hides this more often than you'd think). */
-var BUILD="2026-07-24";
+var BUILD="2026-07-24b";
 
 const STR={
  en:{brand:"CX Interactive Hub", f_dev:"Developed by the Customer Experience team", f_q:"Any queries?", f_contact:"contact here",
    gateEyebrow:"Customer Experience Learning", gateTitle:"Welcome — let's get you set up",
    gateSub:"Enter your details once. Your brand takes you straight to your journey.",
-   fName:"Full name", fEid:"Employee ID", fBrand:"Your brand", fMarket:"Your market", choose:"Choose your brand…", chooseMarket:"Choose your market…", enter:"Enter my journey",
+   fName:"Full name", fEid:"Employee ID", fBrand:"Your brand", fMarket:"Your market", choose:"Choose your brand", chooseMarket:"Choose your market", enter:"Enter my journey",
    lkChecking:"Checking your ID…", lkFound:function(n){return "Found you, "+n+" — details filled in.";}, lkMiss:"We couldn't find that ID — just fill in your details below.", lkOffline:"Couldn't reach the directory — please fill in your details below.",
    ssoNote:"Signed in with your store — just add your name and ID.",
    worldsH:"Your journey", generalTag:"For everyone", generalH:"Customer Experience — General",
@@ -43,7 +43,7 @@ const STR={
  ar:{brand:"مركز تجربة العملاء التفاعلي", f_dev:"تم التطوير بواسطة فريق تجربة العملاء", f_q:"أي استفسارات؟", f_contact:"تواصل هنا",
    gateEyebrow:"تعلّم تجربة العملاء", gateTitle:"مرحبًا — لنجهّز حسابك",
    gateSub:"أدخل بياناتك مرة واحدة. علامتك التجارية تنقلك مباشرة إلى رحلتك.",
-   fName:"الاسم الكامل", fEid:"الرقم الوظيفي", fBrand:"علامتك التجارية", fMarket:"سوقك", choose:"اختر علامتك…", chooseMarket:"اختر سوقك…", enter:"ادخل رحلتي",
+   fName:"الاسم الكامل", fEid:"الرقم الوظيفي", fBrand:"علامتك التجارية", fMarket:"سوقك", choose:"اختر علامتك التجارية", chooseMarket:"اختر سوقك", enter:"ادخل رحلتي",
    lkChecking:"جارٍ التحقق من رقمك…", lkFound:function(n){return "وجدناك يا "+n+" — تم تعبئة بياناتك.";}, lkMiss:"لم نعثر على هذا الرقم — أكمل بياناتك بالأسفل.", lkOffline:"تعذّر الوصول إلى الدليل — أكمل بياناتك بالأسفل.",
    ssoNote:"تم تسجيل الدخول عبر متجرك — أضف اسمك ورقمك الوظيفي فقط.",
    worldsH:"رحلتك", generalTag:"للجميع", generalH:"تجربة العملاء — عام",
@@ -158,12 +158,10 @@ function renderGate(){
     '<div class="field"><label>'+t("fEid")+'</label><input id="g-eid" value="'+(g.eid||"")+'" inputmode="numeric" autofocus oninput="CXHub.gateChange()" placeholder="e.g. 323999"><div id="g-hint" class="lookup-hint"></div></div>'+
     '<div id="g-wb" class="gwb-slot"></div>'+
     '<div class="field"><label>'+t("fName")+'</label><input id="g-name" value="'+(g.name||"")+'" oninput="CXHub.gateChange()" placeholder="'+t("fName")+'"></div>'+
-    '<div class="field-row">'+
-      '<div class="field"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.touchBrand();CXHub.gateChange()">'+
-        '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
-      '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.touchMarket();CXHub.gateChange()">'+
-        '<option value="" disabled '+(!g.market?'selected':'')+'>'+t("chooseMarket")+'</option>'+markets+'</select></div>'+
-    '</div>'+
+    '<div class="field group-start"><label>'+t("fBrand")+'</label><select id="g-brand" '+(lockBrand?'disabled':'')+' onchange="CXHub.touchBrand();CXHub.gateChange()">'+
+      '<option value="" disabled '+(!g.brand?'selected':'')+'>'+t("choose")+'</option>'+groups+'</select></div>'+
+    '<div class="field"><label>'+t("fMarket")+'</label><select id="g-market" '+(lockMarket?'disabled':'')+' onchange="CXHub.touchMarket();CXHub.gateChange()">'+
+      '<option value="" disabled '+(!g.market?'selected':'')+'>'+t("chooseMarket")+'</option>'+markets+'</select></div>'+
     '<button class="cta" id="gCta" style="background:var(--g-cx)" '+(gateValid()?'':'disabled')+' onclick="CXHub.gateSubmit()">'+t("enter")+' ›</button>'+
   '</div></div></section></div>';
   paintGateWelcome();          // keep the returning-player box across re-renders (e.g. language switch)
@@ -423,7 +421,7 @@ function gateSubmit(){ gateChange(); if(!gateValid())return;
   var btn=document.getElementById("gCta");
   if(btn){ btn.disabled=true; btn.classList.add("is-loading"); btn.textContent=t("signingIn"); }
   var done=false, go=function(){ if(done)return; done=true; finishSignIn(); };
-  setTimeout(go, 2600);                                  // never make anyone wait longer than this
+  setTimeout(go, 6000);                                  // never make anyone wait longer than this
   CXHubSync.summary(id).then(function(res){
     if(!done) gsum={ id:id, data: res ? buildSummary(res.results) : null };
     go();
@@ -734,6 +732,7 @@ function testSummary(id){
     console.log("  last error    :", net.lastError || "(none)");
     if(!res) return console.warn("  ✗ No answer. Open this in a tab to check the deployment:\n     "+
       (CXHubSync.config.scriptUrl||"")+"?token="+(CXHubSync.config.secretToken||"")+"&action=results&empId="+id);
+    console.log("  deployed API  :", res.v || "(no version field — OLD AppsScript.gs is deployed, redeploy it)");
     console.log("  rows returned :", (res.results||[]).length);
     var sum=buildSummary(res.results);
     if(!sum) return console.warn("  ✗ Rows came back but none map to a world in config.js — check the World / LevelID columns.");

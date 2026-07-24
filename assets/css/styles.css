@@ -614,39 +614,43 @@ html[dir="rtl"] .gwb-card{text-align:center}
 }
 
 /* ============================================================================
-   GATE — wider card, calmer type scale, more air
+   GATE — one calm column, wider card, smaller type
    ----------------------------------------------------------------------------
-   The card was 480px with a 1.75rem heading, so the title wrapped to two lines
-   and every field sat on top of the next. Wider container + a smaller, more
-   separated type scale + bigger gaps = the same content, far less squeezed.
-   Measure of restraint: the body copy is capped at ~46ch so the extra width
-   improves the layout without hurting line length.
+   Selects run FULL WIDTH: a half-width dropdown clipped long options ("The
+   Cheesecake Factory", "United Arab Emirates") and native <select> gives you no
+   control over how that truncation looks. Width is capped at 560px so the single
+   column still reads as a form, not a stretched banner.
+   Rhythm: identity fields (ID, name) sit close together; a larger gap opens
+   before the context fields (brand, market) so the eye reads two groups, not
+   four identical rows.
 ============================================================================ */
-.gate-hero .window-wrap{max-width:620px;padding:0 14px}
-.gate-card{padding:36px 34px 32px}
-.gate-logo{margin-bottom:14px}
-.gate-logo img{height:44px}
+/* .gate-hero is `display:grid; place-items:center`, so justify-items:center makes this wrap
+   size to its CONTENT and quietly ignore max-width. width:100% is what actually widens the card. */
+.gate-hero .window-wrap{width:100%;max-width:560px;padding:0 14px}
+.gate-card{padding:34px 32px 30px}
+.gate-logo{margin-bottom:13px}
+.gate-logo img{height:42px}
 .gate-eyebrow{font-size:.62rem;letter-spacing:.2em;margin-bottom:9px;opacity:.85}
-.gate-card h2{font-size:1.45rem;line-height:1.25;letter-spacing:-.008em}
-.gate-card .sub{font-size:.87rem;line-height:1.6;margin-top:9px;max-width:46ch}
-.gate-card .field{margin-top:19px;gap:7px}
-.gate-card .field label{font-size:.78rem;font-weight:600;color:var(--ink-soft)}
+.gate-card h2{font-size:1.38rem;line-height:1.25;letter-spacing:-.008em}
+.gate-card .sub{font-size:.85rem;line-height:1.6;margin-top:8px;max-width:44ch;margin-inline:auto}
+.gate-card .field{margin-top:17px;gap:7px}
+.gate-card .field.group-start{margin-top:23px}
+.gate-card .field label{font-size:.77rem;font-weight:600;color:var(--ink-soft)}
 .gate-card .field input,
-.gate-card .field select{font-size:.95rem;padding:13px 15px;border-radius:13px}
+.gate-card .field select{font-size:.94rem;padding:13px 15px;border-radius:13px;text-overflow:ellipsis}
+.gate-card .field select{padding-inline-end:44px}
 .gate-card .field input::placeholder{color:#9aa1b4}
-.gate-card .cta{font-size:1rem;padding:15px;border-radius:14px;margin-top:26px}
+.gate-card .cta{font-size:.98rem;padding:15px;border-radius:14px;margin-top:25px}
 .gate-card .lookup-hint{font-size:.76rem;margin-top:8px}
 .gate-card .sso-note{font-size:.8rem}
-/* brand + market pair up once there's room for them — halves the vertical run */
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
-.field-row .field{margin-top:19px}
+/* the welcome-back box breathes with the card */
+.gate-card .gwb-card{padding:17px 17px 15px}
+.gate-card .gwb-stats{gap:9px;margin:13px 0 10px}
+.gate-card .gwb-s b{font-size:1.32rem}
 @media (max-width:559px){
-  .field-row{grid-template-columns:1fr;gap:0}
-  .gate-card{padding:30px 22px 28px}
-  .gate-card h2{font-size:1.32rem}
   .gate-hero .window-wrap{padding:0 10px}
+  .gate-card{padding:29px 21px 27px}
+  .gate-card h2{font-size:1.3rem}
+  .gate-card .field{margin-top:15px}
+  .gate-card .field.group-start{margin-top:20px}
 }
-/* the welcome-back box breathes with the wider card */
-.gate-card .gwb-card{padding:18px 18px 16px}
-.gate-card .gwb-stats{gap:10px;margin:14px 0 11px}
-.gate-card .gwb-s b{font-size:1.4rem}

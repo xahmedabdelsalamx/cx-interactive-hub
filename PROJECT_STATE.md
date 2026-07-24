@@ -61,6 +61,14 @@ the results read behind the lookup (and behind any cold start), where it burned 
 returned nothing. That one missing retry was why the box never appeared and why progress wasn't
 pre-seeded.
 
+⚠ **ID matching.** `hydrate()` sends the saved `eid` exactly as typed; `summary()` used to strip
+leading zeros first, so an ID like `023456` was looked up as `23456`, matched no rows, and the box
+silently hid while hydrate kept working. Both now send digits-only with zeros intact, and
+`AppsScript.gs` compares **normalised** IDs everywhere (`sameId()` / `normId()`) so stray spaces,
+leading zeros and number-vs-text cells can't cause a miss. **This one needs a redeploy** — see §13.
+`doGet` now also returns **`v`** (API version); `CXHub.testSummary()` prints it, and a missing `v`
+means an old deployment is live.
+
 **The Sheet is now an enhancement, not a dependency.** `signOut()` wipes `cxhub_progress`, so a
 returning player on the very same device had nothing local and the whole flow rested on the Sheet
 answering in time. `archiveProgress()` snapshots that player's progress under their EmpID into
@@ -207,10 +215,15 @@ numbers inside `buildCertificate()`.
 - **"Learn more" card** per world → that world's CX Hub page (`WORLDS[x].hubUrl`).
 - Header logo = internal Home; **footer logo** → main CX Hub (`config.LINKS.cxHub`).
 - Fancy **START / FINISH** markers (checkered racing tape), animated per-division backgrounds.
-- **Gate layout**: card is 620px max (556px rendered) with a reduced type scale — heading 1.45rem
-  on one line, labels .78rem in `--ink-soft`, inputs .95rem — and **brand + market share one row**
-  above 560px, stacking below it. Body copy is capped at ~46ch so the extra width never hurts line
-  length. All of it lives in the last block of `styles.css`.
+- **Gate layout**: single column, card 560px max (532px rendered), heading 1.38rem on one line,
+  labels .77rem in `--ink-soft`, inputs .94rem. Selects run **full width** — a half-width dropdown
+  clipped long options ("The Cheesecake Factory") and native `<select>` gives no control over how
+  that truncation looks. Placeholders no longer end in "…" for the same reason. Identity fields
+  (ID, name) sit close; `.field.group-start` opens a larger gap before brand/market so the eye
+  reads two groups rather than four identical rows.
+  ⚠ `.gate-hero` is `display:grid; place-items:center`, so `justify-items:center` makes
+  `.window-wrap` size to its **content** and ignore `max-width` entirely — it needs `width:100%`
+  to widen. Two rounds of max-width changes did nothing until that was found.
 
 ## 11. SSO (future, behind a flag)
 `config.SSO:false` today → the hub never calls `/.auth/me`. Store staff share ONE store login, so
@@ -232,6 +245,9 @@ Players can **replay unlimited times**; each attempt appends a Results row (full
 hub always shows their **best**. Nothing extra is needed per level or per division.
 
 ## 13. Deploy checklist (whenever `AppsScript.gs` changes)
+> 🔴 **A redeploy is outstanding right now** — `AppsScript.gs` gained normalised ID matching and the
+> `v` version field. Until it's deployed, employee IDs with leading zeros or odd cell formatting
+> won't match their Results rows.
 1. Paste the new code into the Apps Script editor → **Save**.
 2. If the schema changed: delete the affected tabs and run **`setup()`** once.
 3. **Deploy → Manage deployments → ✏️ → Version: New version → Deploy** (URL stays the same).
