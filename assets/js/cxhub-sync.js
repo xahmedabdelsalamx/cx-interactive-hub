@@ -182,9 +182,16 @@ window.CXHUB_SYNC = window.CXHUB_SYNC || {
     if(sumMemo[id]) return Promise.resolve(sumMemo[id]);
     if(sumInflight[id]) return sumInflight[id];
     var url=CFG.scriptUrl+"?token="+encodeURIComponent(CFG.secretToken)+"&action=results&empId="+encodeURIComponent(id);
-    var p=read(url, 15000).then(function(d){
+    function attempt(){ return read(url, 20000); }
+    /* Retry once, exactly like lookup(). Apps Script SERIALISES executions per user, so this
+       call queues behind the roster lookup (and behind any cold start) — a single window is
+       not enough and a miss here is what silently killed the gate's welcome-back box. */
+    var p=attempt().then(function(d){
+      if(d && Array.isArray(d.results)) return d;
+      return attempt();
+    }).then(function(d){
       delete sumInflight[id];
-      if(!d || !Array.isArray(d.results)) return null;                 // read failed -> don't memoise, retry later
+      if(!d || !Array.isArray(d.results)) return null;                 // still nothing -> don't memoise, retry later
       sumMemo[id]={ known:(d.known!==false), results:d.results };
       return sumMemo[id];
     }).catch(function(){ delete sumInflight[id]; return null; });

@@ -47,9 +47,21 @@ window.CXHUB_CONFIG = {
   /* Brand lists per division — edit the rosters freely.
      Brand → division routing is derived from these lists automatically. */
   BRANDS: {
-    retail:      ["alo","American Eagle","Bath & Body Works","Boots","COS","Foot Locker","H&M","Mothercare","Next","Primark","Ulta Beauty","Victoria's Secret"],
+    retail:      ["alo","American Eagle","Bath & Body Works","Boots","COS","Foot Locker","H&M","Milano","Mothercare","Next","Primark","Ulta Beauty","Victoria's Secret"],
     hospitality: ["The Cheesecake Factory","Chipotle","P.F. Chang's","Pinkberry","Princi","Raising Cane's","Shake Shack","Texas Roadhouse"],
     starbucks:   ["Starbucks"]
+  },
+
+  /* HR brand codes -> hub brand names.
+     The HR active list stores 3-letter codes (MIL, HEN, STA…). The roster extract resolves most
+     of them, but anything it can't is passed through raw and the gate has to translate it, or the
+     brand dropdown stays empty for that person.
+     The gate ALSO auto-resolves a code when it uniquely prefixes exactly one brand above
+     (STA -> Starbucks, MOT -> Mothercare, FOO -> Foot Locker…), so only ambiguous or unguessable
+     codes need listing here. PRI is genuinely ambiguous (Primark vs Princi) — leave it out unless
+     you know which one your HR list means. Add new pairs as you spot them. */
+  BRAND_CODES: {
+    MIL: "Milano"
   },
 
   /* Markets (bilingual). Stored value = English name. Edit/add freely. */

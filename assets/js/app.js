@@ -165,6 +165,17 @@ function renderGate(){
 /* ---- roster lookup (entry screen convenience; a miss never blocks anyone) ---- */
 var lk = { timer:null, last:"", touchedName:false, touchedBrand:false, touchedMarket:false,
            autoName:"", autoBrand:"", autoMarket:"" };
+/* The gate is re-shown WITHOUT a page reload (sign out, "edit details"), so this guard state
+   survives — and `lk.last` still holding the previous ID made re-typing that SAME ID a dead
+   input: no lookup, no auto-fill, no welcome-back box. Anything that re-opens the gate must
+   wipe it first. */
+function resetGateLookup(){
+  clearTimeout(lk.timer);
+  lk.timer=null; lk.last=""; lk.lastSeen=undefined;
+  lk.touchedName=false; lk.touchedBrand=false; lk.touchedMarket=false;
+  lk.autoName=""; lk.autoBrand=""; lk.autoMarket="";
+  gsum={ id:"", data:null };
+}
 /* Lock the name box while we look the ID up, so nobody starts typing over the answer. */
 function setNameLocked(on){ var n=document.getElementById("g-name");
   if(n){ n.disabled=!!on; n.classList[on?"add":"remove"]("is-waiting"); } }
@@ -178,8 +189,28 @@ function clearAuto(){
 }
 function hint(msg, cls){ var h=document.getElementById("g-hint"); if(h){ h.className="lookup-hint "+(cls||""); h.textContent=msg||""; } }
 function norm_(s){ return String(s||"").toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]/g,""); }
-function matchBrand(v){ var t=norm_(v); if(!t) return "";
-  for(var d in C.BRANDS){ for(var i=0;i<C.BRANDS[d].length;i++){ if(norm_(C.BRANDS[d][i])===t) return C.BRANDS[d][i]; } } return ""; }
+/* Resolve whatever the roster gives us to a brand in config.BRANDS:
+     1. exact name match ("Foot Locker"),
+     2. an HR code listed in config.BRAND_CODES (MIL -> Milano),
+     3. a short code that uniquely prefixes ONE brand (STA -> Starbucks, MOT -> Mothercare).
+   Step 3 deliberately refuses ambiguous codes — PRI matches both Primark and Princi, so that
+   person picks their brand by hand rather than being silently put in the wrong division. */
+function allBrands(){ var out=[]; for(var d in C.BRANDS) out=out.concat(C.BRANDS[d]); return out; }
+function matchBrand(v){
+  var t=norm_(v); if(!t) return "";
+  var list=allBrands(), i;
+  for(i=0;i<list.length;i++){ if(norm_(list[i])===t) return list[i]; }          // 1. exact
+  var codes=C.BRAND_CODES||{};                                                   // 2. explicit code map
+  for(var k in codes){ if(norm_(k)===t){ var hit=""; 
+    for(i=0;i<list.length;i++){ if(norm_(list[i])===norm_(codes[k])) hit=list[i]; }
+    if(hit) return hit; } }
+  if(t.length>=2 && t.length<=4){                                                // 3. unique prefix
+    var found="", n=0;
+    for(i=0;i<list.length;i++){ if(norm_(list[i]).indexOf(t)===0){ found=list[i]; n++; } }
+    if(n===1) return found;
+  }
+  return "";
+}
 function matchMarket(v){ var t=norm_(v); if(!t) return "";
   for(var i=0;i<(C.MARKETS||[]).length;i++){ if(norm_(C.MARKETS[i].en)===t) return C.MARKETS[i].en; } return ""; }
 function applyLookup(d){
@@ -197,7 +228,9 @@ function applyLookup(d){
 function runLookup(id){
   if(!window.CXHubSync || !CXHubSync.lookup) return;
   hint(t("lkChecking"), "wait");
+  runSummary(id);                                     // paints instantly from cache if we've seen this ID here
   CXHubSync.lookup(id).then(function(d){
+    runSummaryLive(id);                               // ...then ask the Sheet, once the roster call is off the wire
     if(v("g-eid")!==id) return;                       // they kept typing; ignore a stale answer
     if(d && d.failed){ lk.last=""; setNameLocked(false); hint(t("lkOffline"), "miss");
       try{
@@ -270,7 +303,8 @@ function fillFromSummary(sum){
 
 function gateWelcomeHTML(sum){
   var w=WORLDS[sum.division]||{}, rank=rankFor(sum.pct);
-  var first=((sum.name||"").trim().split(/\s+/)[0])||"";
+  var nm=(sum.name||v("g-name")||state.gate.name||"").trim();
+  var first=(nm.split(/\s+/)[0])||"";
   var dateStr="";
   if(sum.lastTs){ try{ dateStr=new Date(sum.lastTs).toLocaleDateString(LANG==="ar"?"ar-EG":"en-GB",
     {day:"numeric", month:"short", year:"numeric"}); }catch(e){} }
@@ -300,13 +334,39 @@ function paintGateWelcome(){
   else slot.classList.add("show");
 }
 
+/* Same-device memory of what each ID's progress looked like, so the box appears INSTANTLY on a
+   repeat visit and still appears if the Sheet is slow or unreachable. Survives sign-out on purpose
+   (that's the whole point); holds numbers only — no name, no brand, no market. */
+function seenCache(){ return load("cxhub_seen", {}); }
+function rememberSummary(id, sum){
+  try{ var c=seenCache();
+    c[id]={ w:sum.division, d:sum.done, t:sum.total, p:sum.pct, s:sum.stars, a:sum.attempts, l:sum.lastTs||0 };
+    save("cxhub_seen", c);
+  }catch(e){}
+}
+function recallSummary(id){
+  var c=seenCache()[id];
+  if(!c || !WORLDS[c.w] || !c.d) return null;
+  return { prog:null, division:c.w, done:c.d, total:c.t, pct:c.p, stars:c.s, attempts:c.a,
+           name:"", brand:"", market:"", lastTs:c.l||0, cached:true };
+}
+
+/* Paint from the local cache immediately (no waiting on the network). */
 function runSummary(id){
+  var c=recallSummary(id);
+  if(c && !(gsum.id===id && gsum.data && !gsum.data.cached)){ gsum={ id:id, data:c }; paintGateWelcome(); }
+}
+/* Then get the authoritative version from the Sheet. */
+function runSummaryLive(id){
   if(!window.CXHubSync || !CXHubSync.summary) return;
   CXHubSync.summary(id).then(function(res){
     if(v("g-eid")!==id) return;                       // they kept typing; ignore a stale answer
-    gsum={ id:id, data: res ? buildSummary(res.results) : null };
+    var sum=res ? buildSummary(res.results) : null;
+    if(!sum){ return; }                               // read failed -> keep whatever the cache painted
+    gsum={ id:id, data:sum };
+    rememberSummary(id, sum);
     paintGateWelcome();
-    if(gsum.data) fillFromSummary(gsum.data);
+    fillFromSummary(sum);
   });
 }
 
@@ -322,7 +382,7 @@ function gateChange(){ state.gate.brand=v("g-brand"); state.gate.market=v("g-mar
   if(id.length>=4 && id!==lk.last){                                  // debounced input (never on blur)
     lk.last=id; clearTimeout(lk.timer);
     setNameLocked(true); hint(t("lkChecking"), "wait");               // lock the name box while we check
-    lk.timer=setTimeout(function(){ runLookup(id); runSummary(id); }, 350);   // roster + progress, in parallel
+    lk.timer=setTimeout(function(){ runLookup(id); }, 350);           // roster first, progress right after
   } else if(id.length<4){ lk.last=""; setNameLocked(false); hint(""); clearTimeout(lk.timer); } }
 function gateValid(){ return state.gate.name && state.gate.eid && state.gate.brand && state.gate.market && BRAND2DIV[state.gate.brand]; }
 /* Sign-in is deliberately NOT instant when we're still fetching their history: we wait up
@@ -352,13 +412,16 @@ function finishSignIn(){
   }
   if(window.CXHubSync) CXHubSync.register(div);         // log roster to the Sheet
   state.division=div; state.screen="world"; render();
-  if(sum && sum.done>0){                                // known player -> greet them, smoothly
-    try{ sessionStorage.setItem("cxhub_welcomed","1"); }catch(e){}
-    setTimeout(showWelcome, 420);
-  }
-  hydrateAndRefresh(false);
+  maybeShowWelcome(420);                                // instant when progress was pre-seeded...
+  hydrateAndRefresh(false, true);                       // ...and again once the Sheet answers, if not
 }
-function editDetails(){ if(!profile)return; state.gate={name:profile.name, eid:profile.eid, market:profile.market||"", brand:myBrand()}; state.screen="gate"; render(); }
+function editDetails(){ if(!profile)return;
+  resetGateLookup();
+  state.gate={name:profile.name, eid:profile.eid, market:profile.market||"", brand:myBrand()};
+  state.screen="gate"; render();
+  var id=state.gate.eid||"";                                     // show their own progress box straight away
+  if(id.length>=4){ lk.last=id; lk.lastSeen=id; runSummary(id); runSummaryLive(id); }
+}
 
 /* ---------------------------- WORLD / DIVISION JOURNEY ---------------------------- */
 function marketAllows(g){
@@ -561,6 +624,17 @@ function openLevel(i){
   document.getElementById("modalBack").classList.add("show");
 }
 function closeModal(){document.getElementById("modalBack").classList.remove("show");}
+function welcomedThisSession(){ try{ return sessionStorage.getItem("cxhub_welcomed")==="1"; }catch(e){ return false; } }
+function markWelcomed(){ try{ sessionStorage.setItem("cxhub_welcomed","1"); }catch(e){} }
+/* Show the welcome-back popup if this player has progress and hasn't been greeted this session.
+   Called on load, right after sign-in, AND again once hydrate() lands — that last one is what
+   makes the popup appear without the player having to refresh the page manually. */
+function maybeShowWelcome(delay){
+  if(welcomedThisSession() || !profile || state.screen!=="world" || !state.division) return;
+  if(worldProgress(state.division).done<=0) return;      // brand-new player -> nothing to welcome back to
+  markWelcomed();
+  setTimeout(showWelcome, delay||350);
+}
 function showWelcome(){
   if(!profile || state.screen!=="world" || !state.division) return;
   var w=WORLDS[state.division], pr=worldProgress(state.division), rank=rankFor(pr.pct);
@@ -629,21 +703,24 @@ window.CXHub={gateChange:gateChange, gateSubmit:gateSubmit, editDetails:editDeta
   var fl=document.getElementById("footerLogo"); if(fl)fl.href=cx; })();
 
 /* ---------------------------- INIT ---------------------------- */
-function hydrateAndRefresh(allowSignout){
+function hydrateAndRefresh(allowSignout, thenWelcome){
   if(profile && window.CXHubSync && CXHubSync.hydrate){
     CXHubSync.hydrate().then(function(r){
       if(!r) return;
       if(allowSignout && r.read && r.known===false){ signOut(); return; }   // deleted from Sheet -> sign out
-      if(!r.changed) return;
-      var fresh=load("cxhub_progress",{});
-      var same=false; try{ same=JSON.stringify(fresh)===JSON.stringify(progress); }catch(e){}
-      if(same) return;                          // identical data -> DON'T repaint (this was the sign-in "glitch")
-      progress=fresh; render(true);             // real change -> repaint, but keep the scroll position
+      if(r.changed){
+        var fresh=load("cxhub_progress",{});
+        var same=false; try{ same=JSON.stringify(fresh)===JSON.stringify(progress); }catch(e){}
+        if(!same){ progress=fresh; render(true); }   // identical data -> DON'T repaint (the sign-in "glitch")
+      }
+      if(thenWelcome) maybeShowWelcome(250);      // progress has landed -> greet them, no manual refresh needed
     });
   }
 }
 function signOut(){
   profile=null; brands={}; progress={};
+  resetGateLookup();                                             // same ID must be re-lookup-able
+  try{ sessionStorage.removeItem("cxhub_welcomed"); }catch(e){}   // next person to sign in gets greeted too
   try{ localStorage.removeItem("cxhub_profile"); localStorage.removeItem("cxhub_brands"); localStorage.removeItem("cxhub_progress"); }catch(e){}
   state.division=null; state.gate={}; state.screen="gate"; render();
 }
@@ -654,13 +731,9 @@ function decideAndRender(){
 }
 resolveIdentity().then(function(sso){
   state.sso=sso;
-  var returning = !!profile;   // had a saved profile before this load
   if(!profile && sso){ if(sso.brand)state.gate.brand=sso.brand; if(sso.market)state.gate.market=sso.market; }
   decideAndRender();
-  hydrateAndRefresh(true);
-  if(returning && state.screen==="world"){
-    var seen=false; try{ seen=sessionStorage.getItem("cxhub_welcomed")==="1"; }catch(e){}
-    if(!seen){ try{ sessionStorage.setItem("cxhub_welcomed","1"); }catch(e){} setTimeout(showWelcome, 350); }
-  }
+  maybeShowWelcome(350);          // local progress already known -> greet straight away
+  hydrateAndRefresh(true, true);  // otherwise greet as soon as the Sheet answers
 }).catch(decideAndRender);
 })();

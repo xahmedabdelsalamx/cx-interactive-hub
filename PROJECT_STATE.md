@@ -55,13 +55,33 @@ Typing a known ID fires **two reads in parallel**: `action=lookup` (roster) and 
    FIRST frame.
 3. **name / brand / market fallback** from their most recent attempt when the Roster tab misses.
 
+The `results` call **retries once** exactly like the roster lookup, and now runs *after* the roster
+call rather than beside it — Apps Script serialises executions per user, so firing both together put
+the results read behind the lookup (and behind any cold start), where it burned its single window and
+returned nothing. That one missing retry was why the box never appeared and why progress wasn't
+pre-seeded.
+
+The gate also keeps a same-device cache, **`cxhub_seen`** (numbers only — no name, brand or market),
+so the box paints **instantly** on a repeat visit and still paints when the Sheet is slow or
+unreachable. It deliberately survives sign-out.
+
+⚠ **The gate is re-shown without a page reload** (sign out, "edit details"), so the debounce guard
+`lk.last` survives with it. Re-typing the *same* ID then matched the guard and fired nothing at all —
+no lookup, no auto-fill, no box. `resetGateLookup()` now wipes that state on every route back into
+the gate. Anything added to `lk` must be cleared there too.
+
 Sign-in waits up to **2.6 s** for that call if it's still in flight (the button shows "Loading your
 progress…"), then renders once. `hydrateAndRefresh()` afterwards compares the new progress to the
 current one and **only repaints when something actually changed** — and keeps the scroll position
 when it does. Before this, the world rendered empty and snapped to the real numbers a second later,
 which looked like the page refreshing itself. Anyone whose ID has history gets the **welcome-back
 popup** (~420 ms after the map appears), even on a brand-new browser. Session-limited as before.
-No AppsScript change was needed for any of it.
+
+The popup no longer depends on that pre-seed landing in time: `hydrateAndRefresh(…, thenWelcome)`
+calls `maybeShowWelcome()` again once the Sheet answers, so a player whose device knows no progress
+yet is still greeted **without having to refresh the page**. `maybeShowWelcome()` is the single
+gate — session flag, on the world screen, and at least one level done. No AppsScript change was
+needed for any of it.
 
 ## 4. Roster (sign-in convenience)
 - Optional **`Roster`** tab in the journeys Sheet: **`EmpID | Name | Brand | Market`** — nothing
@@ -70,8 +90,14 @@ No AppsScript change was needed for any of it.
 - Source: `FilteredActiveList_P6_Full.xlsx` → extract `Roster_AllMarkets.csv` (**30,173 rows, all
   markets, all divisions**). Verified: 0 duplicate IDs, 0 blanks. IDs are 5–6 digits.
 - The HR list stores **3-letter brand codes** (STA, HEN, BAT…). The extract already resolves the
-  **21 hub brands** to canonical English names (~**87%** of staff); the rest keep their code and
-  the person simply picks their brand manually. `brand-codes.js` holds the code directory.
+  **21 hub brands** to canonical English names (~**87%** of staff); the rest arrive as a raw code.
+  `matchBrand()` in `app.js` now resolves those in three steps: exact name → **`config.BRAND_CODES`**
+  (currently `MIL → Milano`) → a short code that **uniquely** prefixes one brand (STA → Starbucks,
+  MOT → Mothercare, FOO → Foot Locker). Ambiguous codes are refused on purpose — `PRI` matches both
+  Primark and Princi, so that person picks by hand rather than landing in the wrong division.
+  Add pairs to `BRAND_CODES` as you spot them.
+- **`Milano` was missing from `config.BRANDS` entirely**, so `MIL` could never resolve. It is now
+  listed under **retail** — move it if that's the wrong division.
 - Markets normalised to hub naming (`UAE`→United Arab Emirates, `Saudi`→Saudi Arabia).
   **Morocco (129 staff) exists in HR but is NOT in the hub's 9 markets** — add it to config or
   those people pick their market by hand.
@@ -120,6 +146,8 @@ Nothing is loaded from a CDN any more — **no `fonts.googleapis.com`, no `unpkg
 - `cxhub_brands`   = `{ "<division>": "<brand>" }` (one entry — the player's brand)
 - `cxhub_progress` = `{ "<world>:<levelId>": {stars, score, date} }` (best-of, what the hub shows)
 - `cxhub_outbox`   = queued Sheet writes (offline safety)
+- `cxhub_seen`     = `{ "<empId>": {w,d,t,p,s,a,l} }` — per-ID progress numbers for the gate's
+  welcome-back box. Numbers only, same device, **kept across sign-out** by design.
 
 ## 7. Journeys backend (one Google Sheet + Apps Script)
 - Tabs: **Profiles** (one row per employee, upsert by EmpID, duplicates auto-removed),
