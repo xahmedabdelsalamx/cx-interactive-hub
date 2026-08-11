@@ -271,6 +271,34 @@
       }
     },
     {
+      "id": "cs-why",
+      "keywords_en": "why culinary storytelling matters purpose flavour stories feel connection confidence desire everyday orders memorable return overview what is",
+      "keywords_ar": "لماذا سرد قصة الطبق الهدف قصص نكهة شعور تواصل ثقة رغبة طلبات يومية تُذكر عودة نظرة عامة ما هو ضيف زبون",
+      "en": {
+        "title": "What culinary storytelling is all about",
+        "body": "Culinary storytelling is turning dishes into flavour stories guests can feel. Guests don't just choose food, they choose an experience, and the way we describe a dish can create excitement, inspire curiosity and help guests discover something they wouldn't have chosen alone. Done well, it builds connection, confidence and desire, and turns an everyday order into a moment guests remember and return for. It isn't about selling more, it's about helping guests enjoy more."
+      },
+      "ar": {
+        "title": "ما هو جوهر سرد قصة الطبق",
+        "body": "سرد قصة الطبق هو تحويل الأطباق إلى قصص نكهة يشعر بها الضيف. فالضيوف لا يختارون طعاماً فحسب، بل يختارون تجربة، وطريقة وصفنا للطبق قادرة على صنع الحماس وإثارة الفضول ومساعدة الضيف على اكتشاف ما لم يكن ليختاره وحده. وحين يُتقن، يبني التواصل والثقة والرغبة، ويحوّل طلباً عادياً إلى لحظة يتذكّرها الضيف ويعود لأجلها. إنه ليس بيع المزيد، بل مساعدة الضيف على الاستمتاع أكثر."
+      },
+      "source": {
+        "en": "Culinary Storytelling & Thoughtful Pairings",
+        "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+      },
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821",
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ]
+    },
+    {
       "id": "cs-story",
       "keywords_en": "every dish story ingredients flavours freshness cooking style texture signature chicken burger describe",
       "keywords_ar": "كل طبق قصة مكونات نكهات طزاجة طريقة طهي قوام مميز وصف ضيف ضيوف زبون عميل",
@@ -285,7 +313,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-enthusiasm",
@@ -302,7 +341,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-understand",
@@ -319,7 +369,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-match",
@@ -336,7 +397,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-signature",
@@ -353,7 +425,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-pairings",
@@ -370,7 +453,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-purpose",
@@ -387,7 +481,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-premium",
@@ -404,7 +509,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "cs-mistakes",
@@ -421,7 +537,18 @@
       "source": {
         "en": "Culinary Storytelling & Thoughtful Pairings",
         "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
-      }
+      },
+      "videos": [
+        {
+          "type": "link",
+          "url": "https://connectnow.alshaya.com/sites/customer-experience-hub/videos/287420/the-art-of-culinary-storytelling-and-thoughtful-pairings",
+          "title": {
+            "en": "The Art of Culinary Storytelling & Thoughtful Pairings",
+            "ar": "فن سرد قصة الطبق والاقتراحات المتناغمة"
+          }
+        }
+      ],
+      "link": "https://connectnow.alshaya.com/sites/customer-experience-hub/SitePageModern/285635/the-art-of-culinary-storytelling-thoughtful-pairings?channelId=238821"
     },
     {
       "id": "mm-moments",
